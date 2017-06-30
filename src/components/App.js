@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
 import { BrowserRouter as Router, Route, Link} from 'react-router-dom'
-import Home from './Home';
-import Search from './Search';
-import Details from './Details';;
+import { browserHistory } from 'react-router'
+import Home from './containers/Home';
+import Search from './containers/Search';
+import Details from './containers/Details';
 
 class App extends Component {
   render() {
