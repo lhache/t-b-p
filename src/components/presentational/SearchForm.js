@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
+import TagAutocomplete from './TagAutocomplete'
 
-const SearchForm = ({ term, triggerSearch, dispatch }) => {
+const SearchForm = ({ term, triggerSearch, props }) => {
   let input
-
+debugger;
   return (
     <div>
       <div>
@@ -11,14 +12,18 @@ const SearchForm = ({ term, triggerSearch, dispatch }) => {
 
       <form
         onSubmit={e => {
-          e.preventDefault()
-          if (!input.value.trim()) {
-            return
-          }
+          // e.preventDefault()
+          // if (!input.value.trim()) {
+          //   return
+          // }
           triggerSearch(input.value)
-          input.value = ''
+          // input.value = ''
         }}
       >
+        <div>
+          <TagAutocomplete />
+        </div>
+
         <input ref={node => { input = node}}/>
         <button type="submit">Search</button>
       </form>
