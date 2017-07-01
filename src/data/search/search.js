@@ -10,7 +10,6 @@ const initialState = {
 
 // actions
 export const triggerSearch = term => {
-  debugger
   return {
     type: TRIGGER_SEARCH,
     term: term
@@ -21,7 +20,6 @@ export const triggerSearch = term => {
 export const searchReducer = (state = initialState, action) => {
   switch (action.type) {
     case TRIGGER_SEARCH:
-      debugger
       return Object.assign({}, initialState, {
         term: action.term
       })

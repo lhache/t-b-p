@@ -8,9 +8,9 @@ class Home extends Component {
     return (
       <div className="Home">
         <ul>
-          <li><Link to="/">Home</Link></li>
+          {/* <li><Link to="/">Home</Link></li>
           <li><Link to="/search">Search</Link></li>
-          <li><Link to="/details">Details</Link></li>
+          <li><Link to="/details">Details</Link></li> */}
         </ul>
 
         <Search/>

@@ -38,7 +38,7 @@ class TagAutocomplete extends React.Component {
         suggestions={this.state.suggestions}
         handleDelete={this.handleDelete.bind(this)}
         handleAddition={this.handleAddition.bind(this)}
-        minQueryLength="1"
+        minQueryLength={1}
       />
     )
   }

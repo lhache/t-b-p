@@ -6,14 +6,33 @@ import './Search.css';
 import SearchForm from '../presentational/SearchForm'
 import {triggerSearch} from '../../data/search/search'
 
-const SearchContainer = ({ term, triggerSearch }) => (
-  <div className="SearchContainer">
-    <SearchForm
-      term={term}
-      triggerSearch={triggerSearch}
-    />
-  </div>
-)
+
+class SearchContainer extends Component {
+
+
+  handleSubmit() {
+    const history = this.props.history;
+    history.push(`/results?q=${this.props.term}`)
+  }
+
+  handleChange(term) {
+    this.props.triggerSearch(term)
+  }
+
+  render() {
+    const {term, triggerSearch} = this.props
+
+    return (
+      <div className="SearchContainer">
+        <SearchForm
+          term={term}
+          onChange={this.handleChange.bind(this)}
+          onSubmit={this.handleSubmit.bind(this)}
+        />
+      </div>
+    )
+  }
+}
 
 SearchContainer.propTypes = {
   term: PropTypes.string.isRequired,

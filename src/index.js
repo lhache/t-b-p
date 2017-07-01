@@ -1,3 +1,4 @@
+import 'babel-polyfill'
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { createStore, combineReducers, applyMiddleware } from 'redux'
@@ -9,6 +10,7 @@ import createHistory from 'history/createBrowserHistory'
 
 // reducers
 import { searchReducer } from './data/search/search'
+import { resultsReducer } from './data/results/results'
 // root component of App
 import Root from './components/Root';
 // main style
@@ -26,6 +28,7 @@ if (process.env.NODE_ENV !== 'production') {
 // reducers
 const reducers = combineReducers({
   search: searchReducer,
+  results: resultsReducer,
   routing: routerReducer
 })
 
