@@ -18,8 +18,14 @@ import Root from './components/Root';
 // main style
 import './index.css';
 
+import { registerTranslations } from './data/translations/translations.js';
+
+
 // set history to browser history
 const history = createHistory()
+
+// load translations
+registerTranslations();
 
 // middlewares
 const middlewares = [ thunk, routerMiddleware(history) ];

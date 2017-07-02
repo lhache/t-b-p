@@ -4,15 +4,18 @@
   "private": true,
   "dependencies": {
     "babel-polyfill": "^6.23.0",
+    "counterpart": "^0.18.1",
     "history": "^4.6.3",
     "isomorphic-fetch": "^2.2.1",
     "lodash": "^4.17.4",
     "react": "^15.6.1",
     "react-dom": "^15.6.1",
+    "react-interpolate-component": "^0.11.0",
     "react-redux": "^5.0.5",
     "react-router-dom": "^4.1.1",
     "react-router-redux": "^5.0.0-alpha.6",
     "react-tag-autocomplete": "^5.4.0",
+    "react-translate-component": "^0.14.0",
     "redux": "^3.7.1",
     "redux-logger": "^3.0.6",
     "redux-thunk": "^2.2.0"
