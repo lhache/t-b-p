@@ -6,6 +6,17 @@ import './Results.css';
 import {fetchResults} from '../../data/modules/results'
 import { Link} from 'react-router-dom'
 
+const showLoader = isFetching => (isFetching && <p>loading...</p>)
+
+const showResults = (results, isFetching) => (!isFetching && (
+  <div>
+    {results.map(res => (
+      <div key={res.id}>
+        <Link to={`/details/${res.id}`}>{res.name}</Link>
+      </div>
+    ))}
+  </div>
+))
 
 class ResultsContainer extends Component {
 
@@ -31,9 +42,8 @@ class ResultsContainer extends Component {
 
     return (
       <div className="ResultsContainer">
-        {results.map(res => (
-          <li key={res.id}><Link to={`/details/${res.id}`}>{res.name}</Link></li>
-        ))}
+        { showLoader(this.props.isFetching) }
+        { showResults(this.props.results, this.props.isFetching) }
       </div>
     )
   }
@@ -46,7 +56,8 @@ ResultsContainer.propTypes = {
 
 const mapStateToProps = state => {
   return {
-    results: state.results.results
+    results: state.results.results,
+    isFetching: state.results.isFetching
   }
 }
 

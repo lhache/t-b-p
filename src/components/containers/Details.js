@@ -7,6 +7,17 @@ import {fetchDetails} from '../../data/modules/details'
 import { Link} from 'react-router-dom'
 import _last from 'lodash/last'
 
+const showLoader = isFetching => (isFetching && <p>loading...</p>)
+
+const showDetails = (details, isFetching) => (!isFetching && (
+  <div>
+    <p>{details.name}</p>
+    <p>{details.shopName}</p>
+    <p>{details.ratings}</p>
+    <p>{details.description}</p>
+    <p>{details.name}</p>
+  </div>
+))
 
 class DetailsContainer extends Component {
 
@@ -16,28 +27,21 @@ class DetailsContainer extends Component {
   }
 
   render() {
-    const {details, fetchDetails} = this.props
+    const {details, isFetching, fetchDetails} = this.props
 
     return (
       <div className="DetailsContainer">
-        <p>{details.name}</p>
-        <p>{details.shopName}</p>
-        <p>{details.ratings} stars rating</p>
-        <p>{details.description}</p>
-        <p>{details.name}</p>
+        { showLoader(this.props.isFetching) }
+        { showDetails(this.props.details, this.props.isFetching) }
       </div>
     )
   }
 }
 
-DetailsContainer.propTypes = {
-  id: PropTypes.string,
-  fetchDetails: PropTypes.func.isRequired
-}
-
 const mapStateToProps = state => {
   return {
-    details: state.details.details
+    details: state.details.details,
+    isFetching: state.details.isFetching
   }
 }
 
