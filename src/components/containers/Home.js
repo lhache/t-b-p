@@ -8,6 +8,7 @@ class Home extends Component {
   render() {
     return (
       <div className="Home">
+        <h1>Toy project</h1>
         <Translate content="title" />
 
         <Search/>
