@@ -3,7 +3,8 @@ import { connect } from 'react-redux'
 import { withRouter } from 'react-router-dom'
 import PropTypes from 'prop-types'
 import './Results.css';
-import {fetchResults} from '../../data/results/results'
+import {fetchResults} from '../../data/modules/results'
+import { Link} from 'react-router-dom'
 
 
 class ResultsContainer extends Component {
@@ -31,7 +32,7 @@ class ResultsContainer extends Component {
     return (
       <div className="ResultsContainer">
         {results.map(res => (
-          <div>{res.name}</div>
+          <li key={res.id}><Link to={`/details/${res.id}`}>{res.name}</Link></li>
         ))}
       </div>
     )

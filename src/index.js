@@ -9,8 +9,10 @@ import registerServiceWorker from './registerServiceWorker';
 import createHistory from 'history/createBrowserHistory'
 
 // reducers
-import { searchReducer } from './data/search/search'
-import { resultsReducer } from './data/results/results'
+import { searchReducer } from './data/modules/search'
+import { resultsReducer } from './data/modules/results'
+import { detailsReducer } from './data/modules/details'
+
 // root component of App
 import Root from './components/Root';
 // main style
@@ -29,6 +31,7 @@ if (process.env.NODE_ENV !== 'production') {
 const reducers = combineReducers({
   search: searchReducer,
   results: resultsReducer,
+  details: detailsReducer,
   routing: routerReducer
 })
 

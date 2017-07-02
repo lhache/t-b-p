@@ -1,7 +1,7 @@
 
 
 // action constant
-const TRIGGER_SEARCH = 'TRIGGER_SEARCH'
+const STORE_TERM = 'STORE_TERM'
 
 // set initial state
 const initialState = {
@@ -9,9 +9,9 @@ const initialState = {
 }
 
 // actions
-export const triggerSearch = term => {
+export const storeTerm = term => {
   return {
-    type: TRIGGER_SEARCH,
+    type: STORE_TERM,
     term: term
   }
 }
@@ -19,7 +19,7 @@ export const triggerSearch = term => {
 // reducer
 export const searchReducer = (state = initialState, action) => {
   switch (action.type) {
-    case TRIGGER_SEARCH:
+    case STORE_TERM:
       return Object.assign({}, initialState, {
         term: action.term
       })

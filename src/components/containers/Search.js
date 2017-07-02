@@ -4,7 +4,7 @@ import { withRouter } from 'react-router-dom'
 import PropTypes from 'prop-types'
 import './Search.css';
 import SearchForm from '../presentational/SearchForm'
-import {triggerSearch} from '../../data/search/search'
+import {storeTerm} from '../../data/modules/search'
 
 
 class SearchContainer extends Component {
@@ -16,11 +16,11 @@ class SearchContainer extends Component {
   }
 
   handleChange(term) {
-    this.props.triggerSearch(term)
+    this.props.storeTerm(term)
   }
 
   render() {
-    const {term, triggerSearch} = this.props
+    const {term, } = this.props
 
     return (
       <div className="SearchContainer">
@@ -36,7 +36,7 @@ class SearchContainer extends Component {
 
 SearchContainer.propTypes = {
   term: PropTypes.string.isRequired,
-  triggerSearch: PropTypes.func.isRequired
+  storeTerm: PropTypes.func.isRequired
 }
 
 const mapStateToProps = state => {
@@ -47,8 +47,8 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
   return {
-    triggerSearch: term => {
-      dispatch(triggerSearch(term))
+    storeTerm: term => {
+      dispatch(storeTerm(term))
     }
   }
 }
