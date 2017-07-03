@@ -5,14 +5,14 @@ export const FETCH_DETAILS_SUCCESS = 'FETCH_DETAILS_SUCCESS'
 export const FETCH_DETAILS_FAILURE = 'FETCH_DETAILS_FAILURE'
 
 
-function requestDetails(id) {
+export const requestDetails = id => {
   return {
     type: FETCH_DETAILS,
     id
   }
 }
 
-function receiveDetails(id, json) {
+export const receiveDetails = (id, json) => {
   return {
     type: FETCH_DETAILS_SUCCESS,
     id,

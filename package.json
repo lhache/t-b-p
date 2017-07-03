@@ -4,6 +4,7 @@
   "private": true,
   "dependencies": {
     "babel-polyfill": "^6.23.0",
+    "babel-preset-react": "^6.24.1",
     "counterpart": "^0.18.1",
     "history": "^4.6.3",
     "isomorphic-fetch": "^2.2.1",
@@ -21,13 +22,21 @@
     "redux-thunk": "^2.2.0"
   },
   "devDependencies": {
-    "react-scripts": "1.0.7"
+    "babel-cli": "^6.24.1",
+    "babel-jest": "^20.0.3",
+    "babel-preset-es2015": "^6.24.1",
+    "jest": "^20.0.4",
+    "jest-cli": "^20.0.4",
+    "react-scripts": "1.0.7",
+    "regenerator-runtime": "^0.10.5"
   },
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject",
+    "test-redux": "jest",
+    "test:watch": "npm test -- --watch",
     "deploy-surge": "yarn build && surge --project ./build --domain t-b-p.surge.sh"
   }
 }

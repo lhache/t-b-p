@@ -5,7 +5,7 @@ export const FETCH_RESULTS_SUCCESS = 'FETCH_RESULTS_SUCCESS'
 export const FETCH_RESULTS_FAILURE = 'FETCH_RESULTS_FAILURE'
 
 
-function requestResults(term) {
+export const requestResults = term => {
   return {
     type: FETCH_RESULTS,
     term
@@ -13,7 +13,7 @@ function requestResults(term) {
 }
 
 // results: json.data.children.map(child => child.data),
-function receiveResults(term, json) {
+export const receiveResults = (term, json) => {
   return {
     type: FETCH_RESULTS_SUCCESS,
     term,

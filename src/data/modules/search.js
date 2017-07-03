@@ -1,7 +1,7 @@
 
 
 // action constant
-const STORE_TERM = 'STORE_TERM'
+export const STORE_TERM = 'STORE_TERM'
 
 // set initial state
 const initialState = {
