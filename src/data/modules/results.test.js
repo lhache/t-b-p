@@ -5,8 +5,20 @@ import {
   FETCH_RESULTS_FAILURE,
   requestResults,
   receiveResults,
+  fetchResults,
   resultsReducer
 } from './results'
+
+// import for testing async action creators
+import configureMockStore from 'redux-mock-store'
+import thunk from 'redux-thunk'
+import nock from 'nock'
+import expect from 'expect'
+import mockData from '../../../public/results.json'
+
+const middlewares = [thunk]
+const mockStore = configureMockStore(middlewares)
+
 
 describe('actions', () => {
   it('should create an action to request results', () => {
@@ -82,5 +94,30 @@ describe('reducer', () => {
         isFetching: true,
         hasFailedFetching: false
     })
+  })
+})
+
+describe('async actions', () => {
+  afterEach(() => {
+    nock.cleanAll()
+  })
+
+  it('creates FETCH_RESULTS_SUCCESS when fetching results has been done', () => {
+    nock('')
+      .get('results.json')
+      .query({q: 'term'})
+      .reply(200, { body: mockData })
+
+    const expectedActions = [
+      { type: FETCH_RESULTS },
+      { type: FETCH_RESULTS_SUCCESS, results: mockData }
+    ]
+    const store = mockStore(initialState)
+
+    return store.dispatch(fetchResults('term'))
+      .then(() => {
+        // return of async actions
+        expect(store.getActions()).toEqual(expectedActions)
+      })
   })
 })
