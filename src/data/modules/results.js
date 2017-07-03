@@ -24,7 +24,7 @@ export const receiveResults = (term, json) => {
 
 // TODO action for failure
 
-const initialState = {
+export const initialState = {
   results: [],
   isFetching: false,
   hasFailedFetching: false

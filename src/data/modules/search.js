@@ -4,8 +4,8 @@
 export const STORE_TERM = 'STORE_TERM'
 
 // set initial state
-const initialState = {
-  term: ""
+export const initialState = {
+  term: ''
 }
 
 // actions

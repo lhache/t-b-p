@@ -1,9 +1,11 @@
 import {
+  initialState,
   FETCH_RESULTS,
   FETCH_RESULTS_SUCCESS,
   FETCH_RESULTS_FAILURE,
   requestResults,
-  receiveResults
+  receiveResults,
+  resultsReducer
 } from './results'
 
 describe('actions', () => {
@@ -30,5 +32,55 @@ describe('actions', () => {
       receivedAt: Date.now()
     }
     expect(receiveResults(term, results)).toEqual(expectedAction)
+  })
+})
+
+describe('reducer', () => {
+  it('should return the initial state', () => {
+    expect(resultsReducer(undefined, {})).toEqual(initialState)
+  })
+
+  it('should handle FETCH_RESULTS', () => {
+
+    // test with empty state
+    expect(
+      resultsReducer([], {
+        type: FETCH_RESULTS,
+        term: 'term'
+      })
+    ).toEqual({
+      isFetching: true,
+      hasFailedFetching: false
+    })
+
+    // test with initial state
+    expect(
+      resultsReducer(initialState, {
+        type: FETCH_RESULTS,
+        term: 'term'
+      })
+    ).toEqual({
+      results: [],
+      isFetching: true,
+      hasFailedFetching: false
+    })
+
+    // test with already altered state
+    expect(
+      resultsReducer({
+          results: [1: {}],
+          isFetching: true,
+          hasFailedFetching: false
+        },
+        {
+          type: FETCH_RESULTS,
+          term: 'term'
+        }
+      )
+    ).toEqual({
+        results: [1: {}],
+        isFetching: true,
+        hasFailedFetching: false
+    })
   })
 })

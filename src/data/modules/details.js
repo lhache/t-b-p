@@ -23,7 +23,7 @@ export const receiveDetails = (id, json) => {
 
 // TODO action for failure
 
-const initialState = {
+export const initialState = {
   details: {},
   isFetching: false
 }
