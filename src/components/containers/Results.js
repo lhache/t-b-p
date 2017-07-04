@@ -38,8 +38,8 @@ class ResultsContainer extends Component {
   }
 
   render() {
-    const {results, fetchResults} = this.props
-
+    const {results, fetchResults, term} = this.props
+debugger
     return (
       <div className="ResultsContainer">
         { showLoader(this.props.isFetching) }
@@ -56,6 +56,7 @@ ResultsContainer.propTypes = {
 
 const mapStateToProps = state => {
   return {
+    term: state.search.term,
     results: state.results.results,
     isFetching: state.results.isFetching
   }

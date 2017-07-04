@@ -20,8 +20,8 @@ class SearchContainer extends Component {
   }
 
   render() {
-    const {term, } = this.props
-
+    const {term} = this.props
+    
     return (
       <div className="SearchContainer">
         <SearchForm

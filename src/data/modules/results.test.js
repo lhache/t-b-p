@@ -105,7 +105,7 @@ describe('async actions', () => {
   it('creates FETCH_RESULTS_SUCCESS when fetching results has been done', () => {
     const term = 'luliz'
 
-    fetchMock.once(
+    fetchMock.mock(
       `/results.json?q=${term}`,
       { body: mockData, status: 200 }
     )

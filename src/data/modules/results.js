@@ -24,6 +24,7 @@ export const receiveResults = (term, json) => {
 // TODO action for failure
 
 export const initialState = {
+  term: 'lol',
   results: [],
   isFetching: false,
   hasFailedFetching: false
@@ -33,18 +34,22 @@ export const initialState = {
 export const resultsReducer = (state = initialState, action) => {
   switch (action.type) {
     case FETCH_RESULTS:
+    debugger;
       return Object.assign({}, state, {
+        term: action.term,
         isFetching: true,
         hasFailedFetching: false
       })
     case FETCH_RESULTS_SUCCESS:
       return Object.assign({}, state, {
+        term: action.term,
         isFetching: false,
         results: action.results,
         hasFailedFetching: false
       })
       case FETCH_RESULTS_FAILURE:
         return Object.assign({}, state, {
+          term: action.term,
           isFetching: false,
           hasFailedFetching: true
         })
