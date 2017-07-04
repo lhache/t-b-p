@@ -1,4 +1,4 @@
-import fetch from 'isomorphic-fetch'
+import 'isomorphic-fetch'
 
 export const FETCH_DETAILS = 'FETCH_DETAILS'
 export const FETCH_DETAILS_SUCCESS = 'FETCH_DETAILS_SUCCESS'
@@ -16,8 +16,7 @@ export const receiveDetails = (id, json) => {
   return {
     type: FETCH_DETAILS_SUCCESS,
     id,
-    details: json.details,
-    receivedAt: Date.now()
+    details: json.details
   }
 }
 

@@ -17,8 +17,7 @@ export const receiveResults = (term, json) => {
   return {
     type: FETCH_RESULTS_SUCCESS,
     term,
-    results: json.results,
-    receivedAt: Date.now()
+    results: json.results
   }
 }
 

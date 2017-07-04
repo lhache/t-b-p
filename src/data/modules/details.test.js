@@ -5,8 +5,20 @@ import {
   FETCH_DETAILS_FAILURE,
   requestDetails,
   receiveDetails,
+  fetchDetails,
   detailsReducer
 } from './details'
+
+// import for testing async action creators
+import 'isomorphic-fetch'
+import fetchMock from 'fetch-mock';
+import configureMockStore from 'redux-mock-store'
+import thunk from 'redux-thunk'
+import expect from 'expect'
+import mockData from '../../../public/details.json'
+
+const middlewares = [thunk]
+const mockStore = configureMockStore(middlewares)
 
 describe('actions', () => {
   it('should create an action to request details', () => {
@@ -32,8 +44,7 @@ describe('actions', () => {
     const expectedAction = {
       type: FETCH_DETAILS_SUCCESS,
       id,
-      details: details.details,
-      receivedAt: Date.now()
+      details: details.details
     }
     expect(receiveDetails(id, details)).toEqual(expectedAction)
   })
@@ -82,5 +93,32 @@ describe('reducer', () => {
       details: {a: 1},
       isFetching: true
     })
+  })
+})
+
+describe('async actions', () => {
+  afterEach(() => {
+    fetchMock.reset()
+  })
+
+  it('creates FETCH_DETAILS_SUCCESS when fetching details has been done', () => {
+    const id = 1
+
+    fetchMock.mock(
+      `/details.json?q=${id}`,
+      { body: mockData, status: 200 }
+    )
+
+    const expectedActions = [
+      { type: FETCH_DETAILS, id },
+      { type: FETCH_DETAILS_SUCCESS, details: mockData.details, id }
+    ]
+    const store = mockStore(initialState)
+
+    return store.dispatch(fetchDetails(id))
+      .then(() => {
+        // return of async actions
+        expect(store.getActions()).toEqual(expectedActions)
+      })
   })
 })

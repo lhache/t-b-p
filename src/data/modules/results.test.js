@@ -10,9 +10,10 @@ import {
 } from './results'
 
 // import for testing async action creators
+import 'isomorphic-fetch'
+import fetchMock from 'fetch-mock';
 import configureMockStore from 'redux-mock-store'
 import thunk from 'redux-thunk'
-import nock from 'nock'
 import expect from 'expect'
 import mockData from '../../../public/results.json'
 
@@ -40,8 +41,7 @@ describe('actions', () => {
     const expectedAction = {
       type: FETCH_RESULTS_SUCCESS,
       term,
-      results: results.results,
-      receivedAt: Date.now()
+      results: results.results
     }
     expect(receiveResults(term, results)).toEqual(expectedAction)
   })
@@ -99,22 +99,24 @@ describe('reducer', () => {
 
 describe('async actions', () => {
   afterEach(() => {
-    nock.cleanAll()
+    fetchMock.reset()
   })
 
   it('creates FETCH_RESULTS_SUCCESS when fetching results has been done', () => {
-    nock('')
-      .get('results.json')
-      .query({q: 'term'})
-      .reply(200, { body: mockData })
+    const term = 'luliz'
+
+    fetchMock.once(
+      `/results.json?q=${term}`,
+      { body: mockData, status: 200 }
+    )
 
     const expectedActions = [
-      { type: FETCH_RESULTS },
-      { type: FETCH_RESULTS_SUCCESS, results: mockData }
+      { type: FETCH_RESULTS, term },
+      { type: FETCH_RESULTS_SUCCESS, results: mockData.results, term }
     ]
     const store = mockStore(initialState)
 
-    return store.dispatch(fetchResults('term'))
+    return store.dispatch(fetchResults(term))
       .then(() => {
         // return of async actions
         expect(store.getActions()).toEqual(expectedActions)
