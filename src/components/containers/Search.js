@@ -4,7 +4,7 @@ import { withRouter } from 'react-router-dom'
 import PropTypes from 'prop-types'
 import './Search.css';
 import SearchForm from '../presentational/SearchForm'
-import {storeTerm} from '../../data/modules/search'
+import { storeTerm } from '../../data/modules/searchResults'
 
 
 class SearchContainer extends Component {
@@ -21,7 +21,7 @@ class SearchContainer extends Component {
 
   render() {
     const {term} = this.props
-    
+
     return (
       <div className="SearchContainer">
         <SearchForm
@@ -41,7 +41,7 @@ SearchContainer.propTypes = {
 
 const mapStateToProps = state => {
   return {
-    term: state.search.term
+    term: state.searchResults.term
   }
 }
 

@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import Translate from 'react-translate-component'
+import { Link } from 'react-router-dom'
 import './Header.css'
 
 const Header = () => {
@@ -7,8 +8,9 @@ const Header = () => {
 
   return (
     <div>
-      <h1>Toy project</h1>
-      <Translate content="title" />
+      <Link to="/">
+        <h1><Translate content="title" /></h1>
+      </Link>
     </div>
   )
 }

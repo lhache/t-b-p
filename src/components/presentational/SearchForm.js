@@ -24,7 +24,7 @@ const SearchForm = ({ term, onChange, onSubmit }) => {
           {/* <TagAutocomplete /> */}
         </div>
 
-        <input ref={node => { input = node}}/>
+        <input ref={node => { input = node}} value={term} />
         <button type="submit">Search</button>
       </form>
     </div>)

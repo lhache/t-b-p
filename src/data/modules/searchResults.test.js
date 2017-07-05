@@ -1,13 +1,15 @@
 import {
   initialState,
+  STORE_TERM,
   FETCH_RESULTS,
   FETCH_RESULTS_SUCCESS,
   FETCH_RESULTS_FAILURE,
+  storeTerm,
   requestResults,
   receiveResults,
   fetchResults,
-  resultsReducer
-} from './results'
+  searchResultsReducer
+} from './searchResults'
 
 // import for testing async action creators
 import 'isomorphic-fetch'
@@ -22,6 +24,16 @@ const mockStore = configureMockStore(middlewares)
 
 
 describe('actions', () => {
+
+  it('should create an action to store a term', () => {
+    const term = 'searched term'
+    const expectedAction = {
+      type: STORE_TERM,
+      term
+    }
+    expect(storeTerm(term)).toEqual(expectedAction)
+  })
+
   it('should create an action to request results', () => {
     const term = 'searched term'
     const expectedAction = {
@@ -49,29 +61,68 @@ describe('actions', () => {
 
 describe('reducer', () => {
   it('should return the initial state', () => {
-    expect(resultsReducer(undefined, {})).toEqual(initialState)
+    expect(searchResultsReducer(undefined, {})).toEqual(initialState)
+  })
+
+  it('should handle STORE_TERM', () => {
+
+    // test with empty state
+    expect(
+      searchResultsReducer([], {
+        type: STORE_TERM,
+        term: 'term'
+      })
+    ).toEqual(Object.assign({}, initialState, {
+      term: 'term'
+    }))
+
+    // test with initial state
+    expect(
+      searchResultsReducer(initialState, {
+        type: STORE_TERM,
+        term: 'term'
+      })
+    ).toEqual(Object.assign({}, initialState, {
+      term: 'term'
+    }))
+
+    // test with already altered state
+    expect(
+      searchResultsReducer({
+          term: 'term1'
+        },
+        {
+          type: STORE_TERM,
+          term: 'term2'
+        }
+      )
+    ).toEqual(Object.assign({}, initialState, {
+      term: 'term2'
+    }))
   })
 
   it('should handle FETCH_RESULTS', () => {
 
     // test with empty state
     expect(
-      resultsReducer([], {
+      searchResultsReducer([], {
         type: FETCH_RESULTS,
         term: 'term'
       })
     ).toEqual({
+      term: 'term',
       isFetching: true,
       hasFailedFetching: false
     })
 
     // test with initial state
     expect(
-      resultsReducer(initialState, {
+      searchResultsReducer(initialState, {
         type: FETCH_RESULTS,
         term: 'term'
       })
     ).toEqual({
+      term: 'term',
       results: [],
       isFetching: true,
       hasFailedFetching: false
@@ -79,7 +130,7 @@ describe('reducer', () => {
 
     // test with already altered state
     expect(
-      resultsReducer({
+      searchResultsReducer({
           results: [1: {}],
           isFetching: true,
           hasFailedFetching: false
@@ -90,6 +141,7 @@ describe('reducer', () => {
         }
       )
     ).toEqual({
+        term: 'term',
         results: [1: {}],
         isFetching: true,
         hasFailedFetching: false

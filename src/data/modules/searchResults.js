@@ -1,9 +1,17 @@
 import 'isomorphic-fetch'
 
+export const STORE_TERM = 'STORE_TERM'
 export const FETCH_RESULTS = 'FETCH_RESULTS'
 export const FETCH_RESULTS_SUCCESS = 'FETCH_RESULTS_SUCCESS'
 export const FETCH_RESULTS_FAILURE = 'FETCH_RESULTS_FAILURE'
 
+// ADD store term
+export const storeTerm = term => {
+  return {
+    type: STORE_TERM,
+    term: term
+  }
+}
 
 export const requestResults = term => {
   return {
@@ -12,7 +20,6 @@ export const requestResults = term => {
   }
 }
 
-// results: json.data.children.map(child => child.data),
 export const receiveResults = (term, json) => {
   return {
     type: FETCH_RESULTS_SUCCESS,
@@ -24,17 +31,20 @@ export const receiveResults = (term, json) => {
 // TODO action for failure
 
 export const initialState = {
-  term: 'lol',
+  term: '',
   results: [],
   isFetching: false,
   hasFailedFetching: false
 }
 
 // reducer
-export const resultsReducer = (state = initialState, action) => {
+export const searchResultsReducer = (state = initialState, action) => {
   switch (action.type) {
+    case STORE_TERM:
+      return Object.assign({}, initialState, {
+        term: action.term
+      })
     case FETCH_RESULTS:
-    debugger;
       return Object.assign({}, state, {
         term: action.term,
         isFetching: true,
@@ -42,14 +52,12 @@ export const resultsReducer = (state = initialState, action) => {
       })
     case FETCH_RESULTS_SUCCESS:
       return Object.assign({}, state, {
-        term: action.term,
         isFetching: false,
         results: action.results,
         hasFailedFetching: false
       })
       case FETCH_RESULTS_FAILURE:
         return Object.assign({}, state, {
-          term: action.term,
           isFetching: false,
           hasFailedFetching: true
         })
@@ -74,6 +82,10 @@ export function fetchResults(term) {
         error => console.log('An error occured.', error)
       )
       .then(json => {
+
+        //
+        // dispatch(storeTerm) ??
+
         // We can dispatch many times!
         // Here, we update the app state with the results of the API call.
         dispatch(receiveResults(term, json))

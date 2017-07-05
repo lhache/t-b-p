@@ -9,8 +9,7 @@ import registerServiceWorker from './registerServiceWorker';
 import createHistory from 'history/createBrowserHistory'
 
 // reducers
-import { searchReducer } from './data/modules/search'
-import { resultsReducer } from './data/modules/results'
+import { searchResultsReducer } from './data/modules/searchResults'
 import { detailsReducer } from './data/modules/details'
 
 // root component of App
@@ -35,8 +34,7 @@ if (process.env.NODE_ENV !== 'production') {
 
 // reducers
 const reducers = combineReducers({
-  search: searchReducer,
-  results: resultsReducer,
+  searchResults: searchResultsReducer,
   details: detailsReducer,
   routing: routerReducer
 })

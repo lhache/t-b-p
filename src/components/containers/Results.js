@@ -3,7 +3,7 @@ import { connect } from 'react-redux'
 import { withRouter } from 'react-router-dom'
 import PropTypes from 'prop-types'
 import './Results.css';
-import {fetchResults} from '../../data/modules/results'
+import { fetchResults}  from '../../data/modules/searchResults'
 import { Link} from 'react-router-dom'
 
 const showLoader = isFetching => (isFetching && <p>loading...</p>)
@@ -39,7 +39,7 @@ class ResultsContainer extends Component {
 
   render() {
     const {results, fetchResults, term} = this.props
-debugger
+
     return (
       <div className="ResultsContainer">
         { showLoader(this.props.isFetching) }
@@ -50,15 +50,14 @@ debugger
 }
 
 ResultsContainer.propTypes = {
-  term: PropTypes.string,
+  results: PropTypes.array.isRequired,
   fetchResults: PropTypes.func.isRequired
 }
 
 const mapStateToProps = state => {
   return {
-    term: state.search.term,
-    results: state.results.results,
-    isFetching: state.results.isFetching
+    results: state.searchResults.results,
+    isFetching: state.searchResults.isFetching
   }
 }
 
