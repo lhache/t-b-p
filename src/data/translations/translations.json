@@ -1,8 +1,16 @@
 {
   "de": {
-    "title": "The Better Play"
+    "title": "The Better Play",
+    "product": {
+      "goToDetails": "Go to product",
+      "hoverImage": "See more"
+    }
   },
   "en": {
-    "title": "The Better Play"
+    "title": "The Better Play",
+    "product": {
+      "goToDetails": "Go to product",
+      "hoverImage": "See more"
+    }
   }
 }

@@ -1,14 +1,14 @@
 import React from 'react';
 import Translate from 'react-translate-component'
-import './Footer.css'
+// import './Price.css'
 
-const Footer = () => {
+const Price = ({price}) => {
   return (
     <div>
-      Footer
+      {(price/100).toFixed(2)}
     </div>
   )
 }
 
 
-export default Footer;
+export default Price;

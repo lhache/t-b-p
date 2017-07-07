@@ -1,14 +1,14 @@
 import React from 'react';
 import Translate from 'react-translate-component'
-import './Footer.css'
+// import './Ratings.css'
 
-const Footer = () => {
+const Ratings = ({ratings}) => {
   return (
     <div>
-      Footer
+      {ratings} stars
     </div>
   )
 }
 
 
-export default Footer;
+export default Ratings;

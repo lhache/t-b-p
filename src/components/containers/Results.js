@@ -2,20 +2,23 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux'
 import { withRouter } from 'react-router-dom'
 import PropTypes from 'prop-types'
-import './Results.css';
 import { fetchResults}  from '../../data/modules/searchResults'
-import { Link} from 'react-router-dom'
+import Product from '../presentational/Product'
+import { Grid, Row, Col } from 'react-flexbox-grid'
+import './Results.css';
 
 const showLoader = isFetching => (isFetching && <p>loading...</p>)
 
 const showResults = (results, isFetching) => (!isFetching && (
-  <div>
-    {results.map(res => (
-      <div key={res.id}>
-        <Link to={`/details/${res.id}`}>{res.name}</Link>
-      </div>
-    ))}
-  </div>
+  <Grid fluid>
+    <Row>
+      {results.map(result => (
+        <Col key={result.id} xs={6} sm={6} md={4} lg={3} >
+          <Product product={result} />
+        </Col>
+      ))}
+    </Row>
+  </Grid>
 ))
 
 class ResultsContainer extends Component {
