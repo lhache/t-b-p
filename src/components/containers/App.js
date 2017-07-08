@@ -6,13 +6,14 @@ import Results from './Results'
 import Details from './Details'
 import Header from '../presentational/Header'
 import Footer from '../presentational/Footer'
+import { Grid, Row, Col } from 'react-flexbox-grid'
 
 import USP from '../presentational/USP'
 
 class App extends Component {
   render() {
     return (
-      <div className="App">
+      <Grid fluid className="App AppFluid">
         <Header />
         <USP />
 
@@ -23,7 +24,7 @@ class App extends Component {
         <Route exact path="/details/:id" component={Details}/>
 
         <Footer />
-      </div>
+      </Grid>
     );
   }
 }

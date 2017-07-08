@@ -22,3 +22,13 @@
   color: white;
   margin: 5px;
 }
+
+.USPSub {
+  font-size: 14px;
+}
+
+@media (max-width: 960px) {
+  .USPContainer {
+    display: none;
+  }
+}
