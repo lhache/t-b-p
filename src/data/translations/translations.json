@@ -1,6 +1,14 @@
 {
   "de": {
     "title": "The Better Play",
+    "USP": {
+      "quality": "Quality",
+      "qualitySub": "Good for the kids & the environment",
+      "trust": "Trusted",
+      "trustSub": "4 & 5 stars only",
+      "easy": "Easy",
+      "easySub": "Stop searching & start finding"
+    },
     "product": {
       "goToDetails": "Go to product",
       "hoverImage": "See more"
@@ -8,6 +16,14 @@
   },
   "en": {
     "title": "The Better Play",
+    "USP": {
+      "quality": "Quality",
+      "qualitySub": "Good for the kids & the environment",
+      "trust": "Trusted",
+      "trustSub": "4 & 5 stars only",
+      "easy": "Quality",
+      "easySub": "Stop searching & start finding"
+    },
     "product": {
       "goToDetails": "Go to product",
       "hoverImage": "See more"

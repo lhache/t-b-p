@@ -7,13 +7,16 @@ import Details from './Details'
 import Header from '../presentational/Header'
 import Footer from '../presentational/Footer'
 
+import USP from '../presentational/USP'
+
 class App extends Component {
   render() {
     return (
       <div className="App">
         <Header />
+        <USP />
 
-        <Route path="/" component={Search}/>
+        <Route path="/" component={Search} />
 
         <Route path="/results" component={Results}/>
 

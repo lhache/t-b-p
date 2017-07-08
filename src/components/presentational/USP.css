@@ -1,0 +1,24 @@
+.USPContainer {
+  height: 80px;
+	opacity: 0.25;
+	background-color: #20282f;
+  text-align: center;
+}
+
+.USP {
+  max-width: 960px;
+  margin: 0 auto;
+}
+
+.USPUnit {
+  margin-top: 10px;
+}
+
+.USPHeader {
+  font-weight: bold;
+}
+
+.USP p {
+  color: white;
+  margin: 5px;
+}
