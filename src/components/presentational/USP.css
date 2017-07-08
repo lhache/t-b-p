@@ -1,7 +1,6 @@
 .USPContainer {
   height: 80px;
-	opacity: 0.25;
-	background-color: #20282f;
+	background-color: rgba(32, 40, 47, 0.25);
   text-align: center;
 }
 

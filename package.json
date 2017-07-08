@@ -16,6 +16,7 @@
     "react-redux": "^5.0.5",
     "react-router-dom": "^4.1.1",
     "react-router-redux": "^5.0.0-alpha.6",
+    "react-svg": "^2.1.21",
     "react-tag-autocomplete": "^5.4.0",
     "react-translate-component": "^0.14.0",
     "redux": "^3.7.1",

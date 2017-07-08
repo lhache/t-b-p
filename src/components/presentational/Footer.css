@@ -1,0 +1,29 @@
+.FooterContainer {
+  min-height: 200px;
+	background-color: #20282f;
+}
+
+.Footer {
+  max-width: 960px;
+  margin: 40px auto;
+  color: rgba(255, 255, 255, 0.5);
+}
+
+.FooterLogo {
+  width: 180px;
+}
+
+.FooterSocial {
+  margin: 20px 0;
+}
+
+.FooterSocialIcon {
+  width: 24px;
+  object-fit: contain;
+}
+
+.FooterLinks a {
+  font-size: 14px;
+	color: #00cbe2;
+  text-decoration: none;
+}

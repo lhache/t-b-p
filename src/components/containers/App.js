@@ -8,14 +8,11 @@ import Header from '../presentational/Header'
 import Footer from '../presentational/Footer'
 import { Grid, Row, Col } from 'react-flexbox-grid'
 
-import USP from '../presentational/USP'
-
 class App extends Component {
   render() {
     return (
       <Grid fluid className="App AppFluid">
         <Header />
-        <USP />
 
         <Route path="/" component={Search} />
 
