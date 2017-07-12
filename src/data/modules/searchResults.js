@@ -1,11 +1,12 @@
 import 'isomorphic-fetch'
 
 export const STORE_TERM = 'STORE_TERM'
+export const STORE_SEARCHED_TERM = 'STORE_SEARCHED_TERM'
 export const FETCH_RESULTS = 'FETCH_RESULTS'
 export const FETCH_RESULTS_SUCCESS = 'FETCH_RESULTS_SUCCESS'
 export const FETCH_RESULTS_FAILURE = 'FETCH_RESULTS_FAILURE'
 
-// ADD store term
+// store term
 export const storeTerm = term => {
   return {
     type: STORE_TERM,
@@ -13,10 +14,19 @@ export const storeTerm = term => {
   }
 }
 
+// store searchedTerm
+export const storeSearchedTerm = term => {
+  return {
+    type: STORE_SEARCHED_TERM,
+    searchedTerm: term
+  }
+}
+
 export const requestResults = term => {
   return {
     type: FETCH_RESULTS,
-    term
+    term,
+    searchedTerm: term
   }
 }
 
@@ -32,6 +42,7 @@ export const receiveResults = (term, json) => {
 
 export const initialState = {
   term: '',
+  searchedTerm: '',
   results: [],
   isFetching: false,
   hasFailedFetching: false
@@ -41,12 +52,17 @@ export const initialState = {
 export const searchResultsReducer = (state = initialState, action) => {
   switch (action.type) {
     case STORE_TERM:
-      return Object.assign({}, initialState, {
+      return Object.assign({}, state, {
         term: action.term
+      })
+    case STORE_SEARCHED_TERM:
+      return Object.assign({}, state, {
+        searchedTerm: action.searchedTerm
       })
     case FETCH_RESULTS:
       return Object.assign({}, state, {
         term: action.term,
+        searchedTerm: action.searchedTerm,
         isFetching: true,
         hasFailedFetching: false
       })

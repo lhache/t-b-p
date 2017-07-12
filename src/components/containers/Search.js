@@ -4,15 +4,19 @@ import { withRouter } from 'react-router-dom'
 import PropTypes from 'prop-types'
 import './Search.css';
 import SearchForm from '../presentational/SearchForm'
-import { storeTerm } from '../../data/modules/searchResults'
+import { storeTerm, storeSearchedTerm } from '../../data/modules/searchResults'
 
 
 class SearchContainer extends Component {
 
 
-  handleSubmit() {
+  handleSubmit(term) {
     const history = this.props.history;
-    history.push(`/results?q=${this.props.term}`)
+    history.push({
+      pathname: '/results',
+      search: `?q=${term}`,
+      state: { term }
+    })
   }
 
   handleChange(term) {
@@ -49,6 +53,9 @@ const mapDispatchToProps = dispatch => {
   return {
     storeTerm: term => {
       dispatch(storeTerm(term))
+    },
+    storeSearchedTerm: term => {
+      dispatch(storeSearchedTerm(term))
     }
   }
 }

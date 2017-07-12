@@ -13,7 +13,7 @@ const SearchForm = ({ term, onChange, onSubmit }) => {
       <form
         onSubmit={e => {
           e.preventDefault()
-          onSubmit()
+          onSubmit(term)
         }}
 
         onChange={e => {
