@@ -7,26 +7,37 @@ import logo from '../../images/logo.svg'
 import './Header.css'
 import USP from './USP'
 
-const Header = () => {
+const renderSubtitle = condition => {
+  if (condition) {
+    return (
+      <Translate content="subtitle" className="HeaderSubtitle"/>
+    )
+  }
+}
+
+const Header = ({type}) => {
   return (
     <Row className="HeaderContainer" center="xs">
       <Col md={12}>
         <Row className="Header">
           <Col className="HeaderLogoContainer">
-            <Link to="/">
+            <Link to="/" className="HeaderLogoLink">
               <ReactSVG
                 path={logo}
                 className="HeaderLogo"
               />
             </Link>
+            <h3 className="HeaderSubtitleOneLine">
+              {renderSubtitle(type === 'oneline')}
+            </h3>
           </Col>
           <Col md={12}>
-            <Translate content="subtitle" component="h1" className="HeaderSubtitle"/>
+            <h1>
+              {renderSubtitle(type !== 'oneline')}
+            </h1>
+
           </Col>
         </Row>
-      </Col>
-      <Col md={12}>
-        <USP />
       </Col>
     </Row>
   )

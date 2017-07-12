@@ -1,6 +1,4 @@
-.HeaderContainer {
-  background-image: linear-gradient(to top, #ff4572, #2a079b);
-}
+.HeaderContainer {}
 
 .Header {
   max-width: 960px;
@@ -11,8 +9,17 @@
   width: 200px;
 }
 
+.HeaderLogoLink {
+  display: inline-block;
+}
+
 .HeaderSubtitle {
   color: white;
+}
+
+.HeaderSubtitleOneLine {
+  display: inline-block;
+  margin: 0;
 }
 
 @media (max-width: 960px) {

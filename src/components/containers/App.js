@@ -4,23 +4,26 @@ import './App.css';
 import Search from './Search'
 import Results from './Results'
 import Details from './Details'
-import Header from '../presentational/Header'
-import Footer from '../presentational/Footer'
+import HomePage from '../pages/HomePage'
+import ResultsPage from '../pages/ResultsPage'
+import LandingPage from '../pages/LandingPage'
 import { Grid, Row, Col } from 'react-flexbox-grid'
+
+
 
 class App extends Component {
   render() {
     return (
       <Grid fluid className="App AppFluid">
-        <Header />
 
-        <Route path="/" component={Search} />
+        <Route exact path="/" component={HomePage} />
 
-        <Route path="/results" component={Results}/>
+        <Route path="/results" component={ResultsPage}/>
 
-        <Route exact path="/details/:id" component={Details}/>
+        <Route path="/details/:id" component={Details}/>
 
-        <Footer />
+        <Route path="/landing" component={LandingPage}/>
+
       </Grid>
     );
   }
