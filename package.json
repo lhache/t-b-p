@@ -6,6 +6,7 @@
     "babel-polyfill": "^6.23.0",
     "babel-preset-react": "^6.24.1",
     "counterpart": "^0.18.1",
+    "flexbox-react": "^4.4.0",
     "history": "^4.6.3",
     "isomorphic-fetch": "^2.2.1",
     "lodash": "^4.17.4",

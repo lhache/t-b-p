@@ -6,13 +6,14 @@ import HomePage from '../pages/HomePage'
 import ResultsPage from '../pages/ResultsPage'
 import LandingPage from '../pages/LandingPage'
 import { Grid } from 'react-flexbox-grid'
+import Flexbox from 'flexbox-react';
 
 
 
 class App extends Component {
   render() {
     return (
-      <Grid fluid className="App AppFluid">
+      <Flexbox flex="flex" flexDirection="row" flexWrap="wrap" className="App">
 
         <Route exact path="/" component={HomePage} />
 
@@ -22,7 +23,7 @@ class App extends Component {
 
         <Route path="/landing" component={LandingPage}/>
 
-      </Grid>
+      </Flexbox>
     );
   }
 }

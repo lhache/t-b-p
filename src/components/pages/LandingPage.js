@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import Flexbox from 'flexbox-react';
 import Results from '../containers/Results'
 import Search from '../containers/Search'
 import Header from '../presentational/Header'
@@ -11,16 +12,16 @@ class LandingPage extends Component {
 
   render() {
     return (
-      <div className="LandingPageContainer">
-        <div className="HeaderBackground">
+      <Flexbox flex="flex" flexBasis="100%" flexWrap="wrap" className="LandingPageContainer">
+        <Flexbox flex="flex" flexBasis="100%" flexWrap="wrap" className="HeaderBackground">
             <Header />
             <Search />
             <USP />
-        </div>
+        </Flexbox>
 
         <Results />
         <Footer />
-      </div>
+      </Flexbox>
     )
   }
 }
