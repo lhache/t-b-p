@@ -3,7 +3,7 @@ import { Route } from 'react-router-dom'
 import './App.css';
 import Search from './Search'
 import Results from './Results'
-import Details from './Details'
+import DetailsPage from '../pages/DetailsPage'
 import HomePage from '../pages/HomePage'
 import ResultsPage from '../pages/ResultsPage'
 import LandingPage from '../pages/LandingPage'
@@ -20,7 +20,7 @@ class App extends Component {
 
         <Route path="/results" component={ResultsPage}/>
 
-        <Route path="/details/:id" component={Details}/>
+        <Route path="/details/:id" component={DetailsPage}/>
 
         <Route path="/landing" component={LandingPage}/>
 
