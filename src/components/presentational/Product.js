@@ -1,5 +1,5 @@
 import React from 'react'
-import { Row, Col } from 'react-flexbox-grid'
+import Flexbox from 'flexbox-react';
 import { Link} from 'react-router-dom'
 import './Product.css'
 import Translate from 'react-translate-component'
@@ -10,29 +10,27 @@ import ProductImage from './ProductImage'
 
 const Product = ({product}) => {
   return (
-    <Row className="Product">
-      <Col xs={12} lg={12}>
-        <Row center="xs">
-          <ProductImage />
-        </Row>
-      </Col>
-      <Col xs={12} lg={12}>
-        <Row center="xs">
-          <p>{product.name}</p>
-        </Row>
-      </Col>
-      <Col xs={12} lg={6}>
-          <Price price={product.price} />
-      </Col>
-      <Col xs={12} lg={6}>
-          <Ratings ratings={product.ratings} />
-      </Col>
-      <Col xs={12} lg={12}>
-        <Row center="xs">
+    <Flexbox flexBasis="100%" justifyContent="center" padding="10px" className="Product">
+      <Flexbox flexBasis="90%" flexWrap="wrap" >
+        <Flexbox flexBasis="100%" justifyContent="center">
+          <Flexbox flexBasis="90%" justifyContent="center">
+            <ProductImage />
+          </Flexbox>
+        </Flexbox>
+        <Flexbox flexBasis="100%">
+            <p>{product.name}</p>
+        </Flexbox>
+        <Flexbox flexBasis="50%" justifyContent="flex-start">
+            <Price price={product.price} />
+        </Flexbox>
+        <Flexbox flexBasis="50%" justifyContent="flex-end">
+            <Ratings ratings={product.ratings} />
+        </Flexbox>
+        <Flexbox flexBasis="100%" justifyContent="center">
           <ProductButton link={`/details/${product.id}`} />
-        </Row>
-      </Col>
-    </Row>
+        </Flexbox>
+      </Flexbox>
+    </Flexbox>
   );
 }
 

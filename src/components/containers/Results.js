@@ -5,22 +5,20 @@ import PropTypes from 'prop-types'
 import { fetchResults, storeSearchedTerm }  from '../../data/modules/searchResults'
 import ResultsHeadline from '../presentational/ResultsHeadline'
 import Product from '../presentational/Product'
-import { Grid, Row, Col } from 'react-flexbox-grid'
+import Flexbox from 'flexbox-react';
 import { parseQueryString } from '../../data/utils'
 import './Results.css';
 
 const showLoader = isFetching => (isFetching && <p>loading...</p>)
 
 const showResults = (results, isFetching) => (!isFetching && (
-  <Grid fluid>
-    <Row>
+  <Flexbox maxWidth="100%">
       {results.map(result => (
-        <Col key={result.id} xs={6} sm={6} md={4} lg={3} >
+        <Flexbox key={result.id} flexWrap="wrap" justifyContent="space-around">
           <Product product={result} />
-        </Col>
+        </Flexbox>
       ))}
-    </Row>
-  </Grid>
+  </Flexbox>
 ))
 
 class ResultsContainer extends Component {
@@ -47,11 +45,11 @@ class ResultsContainer extends Component {
     const {searchedTerm, results, fetchResults} = this.props
 
     return (
-      <div className="ResultsContainer">
+      <Flexbox flexWrap="wrap" className="ResultsContainer" maxWidth="100%">
         <ResultsHeadline type="results" term={this.props.searchedTerm} />
         { showLoader(this.props.isFetching) }
         { showResults(this.props.results, this.props.isFetching) }
-      </div>
+      </Flexbox>
     )
   }
 }
