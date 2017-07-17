@@ -1,0 +1,7 @@
+.react-rater .is-disabled.is-active, .react-rater .is-disabled.is-active-half {
+  color: yellow;
+}
+
+.react-rater, .is-disabled {
+  color: white;
+}

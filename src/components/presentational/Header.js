@@ -5,7 +5,6 @@ import ReactSVG from 'react-svg'
 import { Link } from 'react-router-dom'
 import logo from '../../images/logo.svg'
 import './Header.css'
-import USP from './USP'
 
 const renderSubtitle = condition => {
   if (condition) {

@@ -30,7 +30,7 @@ const Footer = () => {
           <Col xs={12} mdOffset={4} md={4}>
             <Row className="FooterSocial" center="xs">
               <Col mdOffset={3} md={2}>
-                <a href="https://www.facebook.com/thebetterplay" target="_blank">
+                <a href="https://www.facebook.com/thebetterplay" target="_blank" rel="noopener noreferrer">
                   <ReactSVG
                     path={iconFacebook}
                     className="FooterSocialIcon"
@@ -38,7 +38,7 @@ const Footer = () => {
                 </a>
               </Col>
               <Col md={2} xsOffset={1}>
-                <a href="https://www.twitter.com/thebetterplay" target="_blank">
+                <a href="https://www.twitter.com/thebetterplay" target="_blank" rel="noopener noreferrer">
                   <ReactSVG
                     path={iconTwitter}
                     className="FooterSocialIcon"
@@ -46,7 +46,7 @@ const Footer = () => {
                 </a>
               </Col>
               <Col md={2} xsOffset={1}>
-                <a href="https://www.instagram.com/thebetterplay" target="_blank">
+                <a href="https://www.instagram.com/thebetterplay" target="_blank" rel="noopener noreferrer">
                   <ReactSVG
                     path={iconInstagram}
                     className="FooterSocialIcon"

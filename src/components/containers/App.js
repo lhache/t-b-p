@@ -1,13 +1,11 @@
 import React, { Component } from 'react';
 import { Route } from 'react-router-dom'
 import './App.css';
-import Search from './Search'
-import Results from './Results'
 import DetailsPage from '../pages/DetailsPage'
 import HomePage from '../pages/HomePage'
 import ResultsPage from '../pages/ResultsPage'
 import LandingPage from '../pages/LandingPage'
-import { Grid, Row, Col } from 'react-flexbox-grid'
+import { Grid } from 'react-flexbox-grid'
 
 
 
