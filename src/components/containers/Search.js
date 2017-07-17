@@ -39,7 +39,7 @@ class SearchContainer extends Component {
 }
 
 SearchContainer.propTypes = {
-  term: PropTypes.string.isRequired,
+  term: PropTypes.array.isRequired,
   storeTerm: PropTypes.func.isRequired
 }
 

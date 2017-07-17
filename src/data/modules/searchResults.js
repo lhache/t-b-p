@@ -41,8 +41,8 @@ export const receiveResults = (term, json) => {
 // TODO action for failure
 
 export const initialState = {
-  term: '',
-  searchedTerm: '',
+  term: [],
+  searchedTerm: [],
   results: [],
   isFetching: false,
   hasFailedFetching: false

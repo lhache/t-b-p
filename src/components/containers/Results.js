@@ -57,7 +57,7 @@ class ResultsContainer extends Component {
 }
 
 ResultsContainer.propTypes = {
-  searchedTerm : PropTypes.string.isRequired,
+  searchedTerm : PropTypes.array.isRequired,
   results: PropTypes.array.isRequired,
   fetchResults: PropTypes.func.isRequired
 }

@@ -28,13 +28,14 @@ class TagAutocomplete extends React.Component {
   handleAddition (tag) {
     const tags = [].concat(this.state.tags, tag)
     this.setState({ tags })
+    this.props.onChange(tag)
   }
 
   render () {
     return (
       <ReactTags
         placeholder="Search for toys"
-        tags={this.state.tags}
+        tags={this.props.term}
         suggestions={this.state.suggestions}
         handleDelete={this.handleDelete.bind(this)}
         handleAddition={this.handleAddition.bind(this)}
