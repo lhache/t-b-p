@@ -6,7 +6,7 @@ import { Link } from 'react-router-dom'
 
 const FooterLinks = () => {
   return (
-    <Flexbox className="FooterLinks" justifyContent="flex-end">
+    <Flexbox className="FooterLinks">
       <Flexbox marginLeft="10px">
         <Link to="/privacy">
           <Translate content="pages.privacy" />

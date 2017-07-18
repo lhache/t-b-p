@@ -1,6 +1,5 @@
 import React from 'react';
 import Flexbox from 'flexbox-react';
-import Translate from 'react-translate-component'
 import ReactSVG from 'react-svg'
 import iconFacebook from '../../images/icon-f.svg'
 import iconTwitter from '../../images/icon-t.svg'
@@ -9,7 +8,7 @@ import iconInstagram from '../../images/icon-insta.svg'
 
 const FooterSocial = () => {
   return (
-    <Flexbox className="FooterSocial" justifyContent="flex-end">
+    <Flexbox className="FooterSocial">
       <Flexbox marginLeft="10px">
         <a href="https://www.facebook.com/thebetterplay" className="FooterSocialIcon" target="_blank" rel="noopener noreferrer">
           <ReactSVG path={iconFacebook} />

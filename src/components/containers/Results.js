@@ -12,9 +12,9 @@ import './Results.css';
 const showLoader = isFetching => (isFetching && <p>loading...</p>)
 
 const showResults = (results, isFetching) => (!isFetching && (
-  <Flexbox maxWidth="100%">
+  <Flexbox maxWidth="100%" flexWrap="wrap" justifyContent="space-around">
       {results.map(result => (
-        <Flexbox key={result.id} flexWrap="wrap" justifyContent="space-around">
+            <Flexbox key={result.id}>
           <Product product={result} />
         </Flexbox>
       ))}
@@ -55,7 +55,7 @@ class ResultsContainer extends Component {
 }
 
 ResultsContainer.propTypes = {
-  searchedTerm : PropTypes.string.isRequired,
+  searchedTerm : PropTypes.array.isRequired,
   results: PropTypes.array.isRequired,
   fetchResults: PropTypes.func.isRequired
 }
