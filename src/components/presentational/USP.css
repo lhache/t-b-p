@@ -25,9 +25,3 @@
 .USPSub {
   font-size: 14px;
 }
-
-@media (max-width: 960px) {
-  .USPContainer {
-    display: none;
-  }
-}

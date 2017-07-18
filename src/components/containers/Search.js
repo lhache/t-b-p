@@ -4,6 +4,7 @@ import { withRouter } from 'react-router-dom'
 import PropTypes from 'prop-types'
 import './Search.css';
 import SearchForm from '../presentational/SearchForm'
+import Flexbox from 'flexbox-react';
 import { storeTerm, storeSearchedTerm } from '../../data/modules/searchResults'
 
 
@@ -27,13 +28,13 @@ class SearchContainer extends Component {
     const {term} = this.props
 
     return (
-      <div className="SearchContainer">
+      <Flexbox flexBasis="100%" flexWrap="wrap" className="SearchContainer">
         <SearchForm
           term={term}
           onChange={this.handleChange.bind(this)}
           onSubmit={this.handleSubmit.bind(this)}
         />
-      </div>
+      </Flexbox>
     )
   }
 }

@@ -12,9 +12,9 @@ import './Results.css';
 const showLoader = isFetching => (isFetching && <p>loading...</p>)
 
 const showResults = (results, isFetching) => (!isFetching && (
-  <Flexbox maxWidth="100%" flexWrap="wrap" justifyContent="space-around">
-      {results.map(result => (
-            <Flexbox key={result.id}>
+  <Flexbox maxWidth="100%" flexWrap="wrap" justifyContent="center">
+      {results.map((result, idx) => (
+        <Flexbox key={result.id} order={idx} maxWidth="220px">
           <Product product={result} />
         </Flexbox>
       ))}

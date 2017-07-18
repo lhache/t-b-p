@@ -3,14 +3,12 @@
 .Header {
   max-width: 960px;
   margin: 0 auto;
+  text-align: center;
 }
 
 .HeaderLogo {
   width: 200px;
-}
-
-.HeaderLogoLink {
-  display: inline-block;
+  min-height: 70px;
 }
 
 .HeaderSubtitle {
@@ -18,16 +16,12 @@
 }
 
 .HeaderSubtitleOneLine {
-  display: inline-block;
   margin: 0;
+  font-size: 0.9em;
 }
 
 @media (max-width: 960px) {
   .HeaderLogoContainer {
     width: 100%;
-  }
-
-  .HeaderSubtitle {
-    display: none;
   }
 }

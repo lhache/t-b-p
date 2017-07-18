@@ -60,8 +60,6 @@ const Footer = () => {
   return (
     <Flexbox flex="flex" flexBasis="100%" className="FooterContainer">
       {isDeviceConsideredMobile() ? showMobileFooter() : showDesktopFooter()}
-      {/* {showMobileFooter()} */}
-      {/* {showDesktopFooter()} */}
     </Flexbox>
   )
 }

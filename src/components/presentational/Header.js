@@ -17,21 +17,23 @@ const renderSubtitle = condition => {
 const Header = ({type}) => {
   return (
     <Flexbox flex="flex" flexBasis="100%" className="HeaderContainer">
-      <Flexbox className="Header">
+      <Flexbox className="Header" flexBasis="100%" flexWrap="wrap">
 
-        <Flexbox flex="flex" className="HeaderLogoContainer">
+        <Flexbox flex="flex" flexBasis="100%" className="HeaderLogoContainer" alignItems="baseline">
           <Link to="/" className="HeaderLogoLink">
             <ReactSVG
               path={logo}
               className="HeaderLogo"
             />
           </Link>
-          <h3 className="HeaderSubtitleOneLine">
-            {renderSubtitle(type === 'oneline')}
-          </h3>
+          <Flexbox flex="flex" flexBasis="100%"  justifyContent="flex-start">
+            <h3 className="HeaderSubtitleOneLine">
+              {renderSubtitle(type === 'oneline')}
+            </h3>
+          </Flexbox>
         </Flexbox>
 
-        <Flexbox flex="flex">
+        <Flexbox flex="flex" flexBasis="100%"  justifyContent="center">
           <h1>
             {renderSubtitle(type !== 'oneline')}
           </h1>

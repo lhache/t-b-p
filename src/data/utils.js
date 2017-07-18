@@ -13,7 +13,5 @@ export const parseQueryString = (str = "") => {
 
 export const isDeviceConsideredMobile = () => {
   var md = new MobileDetect(window.navigator.userAgent);
-  console.log(md.mobile())
-  console.log(!(md.mobile() === null))
   return !(md.mobile() === null)
 }

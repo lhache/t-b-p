@@ -35,6 +35,30 @@
       "name": "item #6 from API",
       "price": 12000,
       "ratings": 3
+    },
+    {
+      "id": 7,
+      "name": "item #7 from API",
+      "price": 12000,
+      "ratings": 3.9
+    },
+    {
+      "id": 8,
+      "name": "item #8 from API",
+      "price": 12000,
+      "ratings": 5
+    },
+    {
+      "id": 9,
+      "name": "item #9 from API",
+      "price": 12000,
+      "ratings": 2.4
+    },
+    {
+      "id": 10,
+      "name": "item #10 from API",
+      "price": 12000,
+      "ratings": 3
     }
   ]
 }

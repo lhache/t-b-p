@@ -1,6 +1,6 @@
 .ProductButton {
-  background-color: white;
-  border: solid 1px #dcdcdf;
+  background-color: #ff4572;
+  border: solid 1px #ff4572;
   border-radius: 100px;
   width: 176px;
 	height: 32px;
@@ -19,10 +19,10 @@
 
 .ProductButtonLink {
   text-decoration: none;
-  color: #ff4572;
+  color: white;
   font-size: 14px;
 	font-weight: bold;
-	line-height: 2.29;
+	line-height: 2;
 	text-align: center;
   width: 100%;
 }

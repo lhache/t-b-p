@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import TagAutocomplete from './TagAutocomplete'
 import ReactTags from 'react-tag-autocomplete'
+import Flexbox from 'flexbox-react';
+import './SearchForm.css'
 
 const suggestions = [
   { name: "Green toy" },
@@ -15,12 +17,13 @@ const SearchForm = ({ term, onChange, onSubmit }) => {
   let input
 
   return (
-    <div>
-      <div>
-        searched term: {term}
-      </div>
+    <Flexbox flexBasis="100%">
+      <Flexbox>
+        {/* searched term: {term} */}
+      </Flexbox>
 
       <form
+        className="SearchForm"
         onSubmit={e => {
           e.preventDefault()
           onSubmit(term)
@@ -30,7 +33,7 @@ const SearchForm = ({ term, onChange, onSubmit }) => {
           onChange(e.target.value)
         }}
       >
-        {/* <div>
+        {/* <Flexbox>
           <ReactTags
             placeholder="Search for toys"
             tags={term}
@@ -39,12 +42,18 @@ const SearchForm = ({ term, onChange, onSubmit }) => {
             handleAddition={this.handleAddition.bind(this)}
             minQueryLength={1}
           />
-        </div> */}
+        </Flexbox> */}
+        <Flexbox flexBasis="100%">
+          <Flexbox flexBasis="90%">
+          <input className="SearchInput" ref={node => { input = node}} value={term} />
+          </Flexbox>
+          <Flexbox flexBasis="10%">
+            <button type="submit">Search</button>
+          </Flexbox>
+        </Flexbox>
 
-        <input ref={node => { input = node}} value={term} />
-        <button type="submit">Search</button>
       </form>
-    </div>)
+    </Flexbox>)
   }
 
 
