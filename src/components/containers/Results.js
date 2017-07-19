@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux'
 import { withRouter } from 'react-router-dom'
 import PropTypes from 'prop-types'
-import { fetchResults, storeSearchedTerm }  from '../../data/modules/searchResults'
+import { fetchResults, storeTerm, storeSearchedTerm }  from '../../data/modules/searchResults'
 import ResultsHeadline from '../presentational/ResultsHeadline'
 import Product from '../presentational/Product'
 import Flexbox from 'flexbox-react';
@@ -26,23 +26,29 @@ class ResultsContainer extends Component {
   componentDidMount() {
     // set searchedTerm and fetch results at page load
     const queries = parseQueryString(this.props.history.location.search);
-    const term = queries['q'];
-    this.props.storeSearchedTerm(term)
+    let term = queries['q'];
+    term = term.split(',')
+    // this.props.storeTerm(term)
+    // this.props.storeSearchedTerm(term)
     this.props.fetchResults(term)
   }
 
   componentWillReceiveProps(nextProps) {
-    // set searchedTerm and fetch results after from submitted again
-    if (this.props.searchedTerm !== '' && this.props.searchedTerm !== nextProps.searchedTerm) {
-      const queries = parseQueryString(this.props.history.location.search);
-      const term = queries['q'];
-      this.props.storeSearchedTerm(term)
-      this.props.fetchResults(term)
+    // set searchedTerm and fetch results at form submission
+    if (this.props.searchedTerm !== nextProps.searchedTerm) {
+      // const queries = parseQueryString(this.props.history.location.search);
+      // let term = queries['q'];
+      // term = term.split(',')
+      // // this.props.storeTerm(term)
+      // this.props.storeSearchedTerm(term)
+
+      debugger;
+      this.props.fetchResults(nextProps.searchedTerm)
     }
   }
 
   render() {
-    const {searchedTerm, results, fetchResults} = this.props
+    const {term, storeTerm, searchedTerm, results, fetchResults} = this.props
 
     return (
       <Flexbox flexWrap="wrap" className="ResultsContainer" maxWidth="100%">
@@ -55,6 +61,7 @@ class ResultsContainer extends Component {
 }
 
 ResultsContainer.propTypes = {
+  term : PropTypes.array.isRequired,
   searchedTerm : PropTypes.array.isRequired,
   results: PropTypes.array.isRequired,
   fetchResults: PropTypes.func.isRequired
@@ -62,6 +69,7 @@ ResultsContainer.propTypes = {
 
 const mapStateToProps = state => {
   return {
+    term: state.searchResults.term,
     searchedTerm: state.searchResults.searchedTerm,
     results: state.searchResults.results,
     isFetching: state.searchResults.isFetching
@@ -72,6 +80,9 @@ const mapDispatchToProps = dispatch => {
   return {
     fetchResults: term => {
       dispatch(fetchResults(term))
+    },
+    storeTerm: term => {
+      dispatch(storeTerm(term))
     },
     storeSearchedTerm: term => {
       dispatch(storeSearchedTerm(term))

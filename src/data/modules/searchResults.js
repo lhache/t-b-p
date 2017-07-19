@@ -61,8 +61,6 @@ export const searchResultsReducer = (state = initialState, action) => {
       })
     case FETCH_RESULTS:
       return Object.assign({}, state, {
-        term: action.term,
-        searchedTerm: action.searchedTerm,
         isFetching: true,
         hasFailedFetching: false
       })
@@ -77,6 +75,12 @@ export const searchResultsReducer = (state = initialState, action) => {
           isFetching: false,
           hasFailedFetching: true
         })
+      case '@@router/LOCATION_CHANGE': {
+        return Object.assign({}, state, {
+          term: action.payload.state ? action.payload.state.term : [],
+          searchedTerm: action.payload.state ? action.payload.state.term : []
+        })
+      }
     default:
       return initialState
   }

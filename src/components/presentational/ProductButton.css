@@ -4,6 +4,7 @@
   border-radius: 100px;
   width: 176px;
 	height: 32px;
+  outline: none;
 }
 .ProductButton:hover {
   cursor: pointer;

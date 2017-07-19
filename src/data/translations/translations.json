@@ -10,6 +10,9 @@
       "easy": "Easy",
       "easySub": "Stop searching & start finding"
     },
+    "search": {
+      "search": "search"
+    },
     "results": {
       "headline": "Search results for"
     },
@@ -32,6 +35,9 @@
       "trustSub": "4 & 5 stars only",
       "easy": "Quality",
       "easySub": "Stop searching & start finding"
+    },
+    "search": {
+      "search": "search"
     },
     "results": {
       "headline": "Search results for"

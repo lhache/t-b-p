@@ -1,20 +1,37 @@
 import React, { Component } from 'react';
+import Translate from 'react-translate-component'
 import TagAutocomplete from './TagAutocomplete'
-import ReactTags from 'react-tag-autocomplete'
+import TagInput from 'react-categorized-tag-input';
 import Flexbox from 'flexbox-react';
+import 'react-categorized-tag-input/categorized-tag-input.css';
 import './SearchForm.css'
 
-const suggestions = [
-  { name: "Green toy" },
-  { name: "Sustainable" },
-  { name: "Educational" },
-  { name: "For 3 years old" },
-  { name: "For 4 years old" },
-  { name: "For 5 years old" }
-]
+
 
 const SearchForm = ({ term, onChange, onSubmit }) => {
   let input
+  const categories = [
+    {
+      id: 'general',
+      type: 'toy type',
+      title: ' ',
+      items: ['gen1', 'gen2', 'gen3'],
+      single: false
+    },
+    {
+      id: 'age',
+      type: 'age type',
+      title: 'Age group',
+      items: ['age1', 'age2', 'age3'],
+      single: false
+    }
+  ]
+  // const values = [
+  //   {
+  //     title: "gen1",
+  //     category: "general"
+  //   }
+  // ]
 
   return (
     <Flexbox flexBasis="100%">
@@ -33,22 +50,21 @@ const SearchForm = ({ term, onChange, onSubmit }) => {
           onChange(e.target.value)
         }}
       >
-        {/* <Flexbox>
-          <ReactTags
-            placeholder="Search for toys"
-            tags={term}
-            suggestions={suggestions}
-            handleDelete={this.handleDelete.bind(this)}
-            handleAddition={this.handleAddition.bind(this)}
-            minQueryLength={1}
-          />
-        </Flexbox> */}
+
         <Flexbox flexBasis="100%">
-          <Flexbox flexBasis="90%">
-          <input className="SearchInput" ref={node => { input = node}} value={term} />
+          <Flexbox flexBasis="80%">
+          {/* <input className="SearchInput" ref={node => { input = node}} value={term} /> */}
+          <TagInput
+            value={term}
+            categories={categories}
+            addNew={false}
+            onChange={onChange}
+          />
           </Flexbox>
-          <Flexbox flexBasis="10%">
-            <button type="submit">Search</button>
+          <Flexbox flexBasis="20%">
+            <button className="SearchButton" type="submit">
+              <Translate content="search.search" />
+            </button>
           </Flexbox>
         </Flexbox>
 

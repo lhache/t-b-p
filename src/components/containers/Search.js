@@ -2,26 +2,27 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux'
 import { withRouter } from 'react-router-dom'
 import PropTypes from 'prop-types'
-import './Search.css';
 import SearchForm from '../presentational/SearchForm'
 import Flexbox from 'flexbox-react';
 import { storeTerm, storeSearchedTerm } from '../../data/modules/searchResults'
-
+import _isArray from 'lodash/isArray'
+import './Search.css';
 
 class SearchContainer extends Component {
 
 
   handleSubmit(term) {
     const history = this.props.history;
+    const termForURL = term.map(t => t.title).join(',')
     history.push({
       pathname: '/results',
-      search: `?q=${term}`,
+      search: `?q=${termForURL}`,
       state: { term }
     })
   }
 
   handleChange(term) {
-    this.props.storeTerm(term)
+    _isArray(term) && this.props.storeTerm(term)
   }
 
   render() {

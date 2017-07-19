@@ -5,13 +5,15 @@ import './ResultsHeadline.css'
 const showWhichHeadline = (type, term) => {
   if (type === 'category') {
     return (
-      <h3>{term}</h3>
+      <h3>
+        { term.map(t => t.title)}
+      </h3>
     )
   } else {
     return (
       <div>
         <Translate content="results.headline" component="span" />
-        <b> {term}</b>
+        <b> { term.map(t => t.title).join(' - ')} </b>
       </div>
     )
   }
