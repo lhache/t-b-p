@@ -11,7 +11,9 @@
       "easySub": "Stop searching & start finding"
     },
     "search": {
-      "search": "search"
+      "search": "search",
+      "placeholder": "What kind of toys are you looking for?",
+      "formSubPlaceholder": "e.g. wooden, sustainable, educational, 3-4 years old..."
     },
     "results": {
       "headline": "Search results for"
@@ -37,7 +39,9 @@
       "easySub": "Stop searching & start finding"
     },
     "search": {
-      "search": "search"
+      "search": "search",
+      "placeholder": "What kind of toys are you looking for?",
+      "formSubPlaceholder": "e.g. wooden, sustainable, educational, 3-4 years old..."
     },
     "results": {
       "headline": "Search results for"

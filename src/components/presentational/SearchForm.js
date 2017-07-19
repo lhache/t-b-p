@@ -3,6 +3,7 @@ import Translate from 'react-translate-component'
 import TagAutocomplete from './TagAutocomplete'
 import TagInput from 'react-categorized-tag-input';
 import Flexbox from 'flexbox-react';
+import counterpart from 'counterpart'
 import 'react-categorized-tag-input/categorized-tag-input.css';
 import './SearchForm.css'
 
@@ -59,6 +60,7 @@ const SearchForm = ({ term, onChange, onSubmit }) => {
             categories={categories}
             addNew={false}
             onChange={onChange}
+            placeholder={counterpart("search.placeholder")}
           />
           </Flexbox>
           <Flexbox flexBasis="20%">
@@ -66,6 +68,9 @@ const SearchForm = ({ term, onChange, onSubmit }) => {
               <Translate content="search.search" />
             </button>
           </Flexbox>
+        </Flexbox>
+        <Flexbox flexBasis="100%">
+          <Translate className="SearchSubPlaceholder" content="search.formSubPlaceholder" />
         </Flexbox>
 
       </form>

@@ -15,3 +15,10 @@
 .SearchButton {
   width: 100%;
 }
+
+.SearchSubPlaceholder {
+  color: white;
+  opacity: 0.75;
+  font-size: 12px;
+  padding-top: 10px;
+}
