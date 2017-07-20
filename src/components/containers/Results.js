@@ -27,22 +27,16 @@ class ResultsContainer extends Component {
     // set searchedTerm and fetch results at page load
     const queries = parseQueryString(this.props.history.location.search);
     let term = queries['q'];
-    term = term.split(',')
-    // this.props.storeTerm(term)
-    // this.props.storeSearchedTerm(term)
-    this.props.fetchResults(term)
+
+    if (term) {
+      term = term.split(',')
+      this.props.fetchResults(term)
+    }
   }
 
   componentWillReceiveProps(nextProps) {
     // set searchedTerm and fetch results at form submission
     if (this.props.searchedTerm !== nextProps.searchedTerm) {
-      // const queries = parseQueryString(this.props.history.location.search);
-      // let term = queries['q'];
-      // term = term.split(',')
-      // // this.props.storeTerm(term)
-      // this.props.storeSearchedTerm(term)
-
-      debugger;
       this.props.fetchResults(nextProps.searchedTerm)
     }
   }

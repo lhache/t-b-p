@@ -16,14 +16,28 @@ const SearchForm = ({ term, onChange, onSubmit }) => {
       id: 'general',
       type: 'toy type',
       title: ' ',
-      items: ['gen1', 'gen2', 'gen3'],
+      items: [
+        'sustainable',
+        'wooden',
+        'green toy',
+        'educational',
+        'maths',
+        'development'
+      ],
       single: false
     },
     {
       id: 'age',
       type: 'age type',
       title: 'Age group',
-      items: ['age1', 'age2', 'age3'],
+      items: [
+        'all',
+        '0-2 years old',
+        '2-3 years old',
+        '3-4 years old',
+        '4-5 years old',
+        '5-6 years old',
+      ],
       single: false
     }
   ]
