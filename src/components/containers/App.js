@@ -5,6 +5,8 @@ import DetailsPage from '../pages/DetailsPage'
 import HomePage from '../pages/HomePage'
 import ResultsPage from '../pages/ResultsPage'
 import LandingPage from '../pages/LandingPage'
+import ImpressumPage from '../pages/ImpressumPage'
+import PrivacyPolicyPage from '../pages/PrivacyPolicyPage'
 import Flexbox from 'flexbox-react';
 
 class App extends Component {
@@ -15,6 +17,8 @@ class App extends Component {
         <Route path="/results" component={ResultsPage}/>
         <Route path="/details/:id" component={DetailsPage}/>
         <Route path="/landing" component={LandingPage}/>
+        <Route path="/impressum" component={ImpressumPage}/>
+        <Route path="/privacy-policy" component={PrivacyPolicyPage}/>
       </Flexbox>
     );
   }

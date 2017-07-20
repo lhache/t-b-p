@@ -8,7 +8,7 @@ const FooterLinks = () => {
   return (
     <Flexbox className="FooterLinks">
       <Flexbox marginLeft="10px">
-        <Link to="/privacy">
+        <Link to="/privacy-policy">
           <Translate content="pages.privacy" />
         </Link>
       </Flexbox>
