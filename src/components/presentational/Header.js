@@ -34,7 +34,7 @@ const Header = ({type}) => {
         </Flexbox>
 
         <Flexbox flex="flex" flexBasis="100%"  justifyContent="center">
-          <h1>
+          <h1 className="HeaderSubtitle" marginBottom="20px">
             {renderSubtitle(type !== 'oneline')}
           </h1>
 

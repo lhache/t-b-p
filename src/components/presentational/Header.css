@@ -13,10 +13,12 @@
 
 .HeaderSubtitle {
   color: white;
+  margin: 0;
 }
 
 .HeaderSubtitleOneLine {
   margin: 0;
+  margin-bottom: 10px;
   font-size: 0.9em;
 }
 

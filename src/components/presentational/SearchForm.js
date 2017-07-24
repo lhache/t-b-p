@@ -3,9 +3,11 @@ import Translate from 'react-translate-component'
 import TagAutocomplete from './TagAutocomplete'
 import TagInput from 'react-categorized-tag-input';
 import Flexbox from 'flexbox-react';
+import ReactSVG from 'react-svg'
 import counterpart from 'counterpart'
 import 'react-categorized-tag-input/categorized-tag-input.css';
 import './SearchForm.css'
+import iconSearch from '../../images/icon-search.svg'
 
 
 
@@ -41,12 +43,6 @@ const SearchForm = ({ term, onChange, onSubmit }) => {
       single: false
     }
   ]
-  // const values = [
-  //   {
-  //     title: "gen1",
-  //     category: "general"
-  //   }
-  // ]
 
   return (
     <Flexbox flexBasis="100%">
@@ -67,7 +63,12 @@ const SearchForm = ({ term, onChange, onSubmit }) => {
       >
 
         <Flexbox flexBasis="100%">
-          <Flexbox flexBasis="80%">
+          <Flexbox flexBasis="5%" className="SearchIconContainer">
+            <Flexbox flexBasis="100%" alignSelf="center" justifyContent="center">
+              <ReactSVG path={iconSearch} />
+            </Flexbox>
+          </Flexbox>
+          <Flexbox flexBasis="75%">
           {/* <input className="SearchInput" ref={node => { input = node}} value={term} /> */}
           <TagInput
             value={term}

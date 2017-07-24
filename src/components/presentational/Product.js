@@ -10,7 +10,7 @@ import ProductImage from './ProductImage'
 
 const Product = ({product}) => {
   return (
-    <Flexbox flexBasis="100%" justifyContent="center" padding="10px" className="Product">
+    <Flexbox flexBasis="100%" justifyContent="center" className="Product">
       <Flexbox flexBasis="90%" flexWrap="wrap" >
         <Flexbox flexBasis="100%" justifyContent="center">
           <Flexbox flexBasis="90%" justifyContent="center">
@@ -26,7 +26,7 @@ const Product = ({product}) => {
         <Flexbox flexBasis="50%" justifyContent="flex-end">
             <Ratings ratings={product.ratings} />
         </Flexbox>
-        <Flexbox flexBasis="100%" justifyContent="center">
+        <Flexbox flexBasis="90%" justifyContent="center">
           <ProductButton link={`/details/${product.id}`} />
         </Flexbox>
       </Flexbox>
