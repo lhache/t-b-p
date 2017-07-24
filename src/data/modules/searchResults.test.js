@@ -49,6 +49,7 @@ describe('actions', () => {
     const term = 'searched term'
     const expectedAction = {
       type: FETCH_RESULTS,
+      searchedTerm: term,
       term
     }
     expect(requestResults(term)).toEqual(expectedAction)
@@ -75,56 +76,59 @@ describe('reducer', () => {
     expect(searchResultsReducer(undefined, {})).toEqual(initialState)
   })
 
-  it('should handle STORE_TERM', () => {
-
-    // test with empty state
+  it('should handle STORE_TERM with empty state', () => {
     expect(
       searchResultsReducer([], {
         type: STORE_TERM,
-        term: 'term'
+        term: 'termA'
       })
-    ).toEqual(Object.assign({}, initialState, {
-      term: 'term'
-    }))
+    ).toEqual({
+      term: 'termA'
+    })
+  })
 
-    // test with initial state
+  it('should handle STORE_TERM with initial state', () => {
     expect(
       searchResultsReducer(initialState, {
         type: STORE_TERM,
-        term: 'term'
+        term: 'termB'
       })
     ).toEqual(Object.assign({}, initialState, {
-      term: 'term'
+      hasFailedFetching: false,
+      isFetching: false,
+      results: [],
+      searchedTerm: [],
+      term: 'termB'
     }))
+  })
 
-    // test with already altered state
+  it('should handle STORE_TERM with already altered state', () => {
     expect(
       searchResultsReducer({
           term: 'term1'
         },
         {
           type: STORE_TERM,
-          term: 'term2'
+          term: ['term1', 'term2']
         }
       )
-    ).toEqual(Object.assign({}, initialState, {
-      term: 'term2'
-    }))
+    ).toEqual({
+      term: ['term1', 'term2']
+    })
   })
 
-  it('should handle STORE_SEARCHED_TERM', () => {
-
-    // test with empty state
+  it('should handle STORE_SEARCHED_TERM with empty state', () => {
     expect(
       searchResultsReducer([], {
         type: STORE_SEARCHED_TERM,
         searchedTerm: 'term'
       })
-    ).toEqual(Object.assign({}, initialState, {
+    ).toEqual({
       searchedTerm: 'term'
-    }))
+    })
+  })
 
-    // test with initial state
+  it('should handle STORE_SEARCHED_TERM with initial state', () => {
     expect(
       searchResultsReducer(initialState, {
         type: STORE_SEARCHED_TERM,
@@ -133,51 +137,51 @@ describe('reducer', () => {
     ).toEqual(Object.assign({}, initialState, {
       searchedTerm: 'term'
     }))
+  })
 
-    // test with already altered state
+  it('should handle STORE_SEARCHED_TERM with altered state', () => {
     expect(
       searchResultsReducer({
           searchedTerm: 'term1'
         },
         {
           type: STORE_SEARCHED_TERM,
-          searchedTerm: 'term2'
+          searchedTerm: ['term1', 'term2']
         }
       )
-    ).toEqual(Object.assign({}, initialState, {
-      searchedTerm: 'term2'
-    }))
+    ).toEqual({
+      searchedTerm: ['term1', 'term2']
+    })
   })
 
-  it('should handle FETCH_RESULTS', () => {
-
-    // test with empty state
+  it('should handle FETCH_RESULTS with empty state', () => {
     expect(
       searchResultsReducer([], {
         type: FETCH_RESULTS,
         term: 'term'
       })
     ).toEqual({
-      term: 'term',
       isFetching: true,
       hasFailedFetching: false
     })
+  })
 
-    // test with initial state
+  it('should handle FETCH_RESULTS with initial state', () => {
     expect(
       searchResultsReducer(initialState, {
         type: FETCH_RESULTS,
         term: 'term'
       })
     ).toEqual({
-      term: 'term',
-      searchedTerm: '',
+      term: [],
+      searchedTerm: [],
       results: [],
       isFetching: true,
       hasFailedFetching: false
     })
+  })
 
-    // test with already altered state
+  it('should handle FETCH_RESULTS with altered state', () => {
     expect(
       searchResultsReducer({
           results: [1: {}],
@@ -190,7 +194,6 @@ describe('reducer', () => {
         }
       )
     ).toEqual({
-        term: 'term',
         results: [1: {}],
         isFetching: true,
         hasFailedFetching: false
@@ -212,7 +215,7 @@ describe('async actions', () => {
     )
 
     const expectedActions = [
-      { type: FETCH_RESULTS, term },
+      { type: FETCH_RESULTS, searchedTerm: term, term },
       { type: FETCH_RESULTS_SUCCESS, results: mockData.results, term }
     ]
     const store = mockStore(initialState)

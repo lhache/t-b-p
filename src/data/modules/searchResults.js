@@ -70,16 +70,16 @@ export const searchResultsReducer = (state = initialState, action) => {
         results: action.results,
         hasFailedFetching: false
       })
-      case FETCH_RESULTS_FAILURE:
-        return Object.assign({}, state, {
-          isFetching: false,
-          hasFailedFetching: true
-        })
-      case '@@router/LOCATION_CHANGE': {
-        return Object.assign({}, state, {
-          term: action.payload.state ? action.payload.state.term : [],
-          searchedTerm: action.payload.state ? action.payload.state.term : []
-        })
+    case FETCH_RESULTS_FAILURE:
+      return Object.assign({}, state, {
+        isFetching: false,
+        hasFailedFetching: true
+      })
+    case '@@router/LOCATION_CHANGE': {
+      return Object.assign({}, state, {
+        term: action.payload.state ? action.payload.state.term : [],
+        searchedTerm: action.payload.state ? action.payload.state.term : []
+      })
       }
     default:
       return initialState
