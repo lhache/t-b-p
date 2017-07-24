@@ -46,4 +46,5 @@
 .SearchIconContainer {
   background-color: white;
   border-radius: 24px 0 0 24px;
+  padding-top: 4px;
 }

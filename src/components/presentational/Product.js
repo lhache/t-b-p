@@ -1,12 +1,13 @@
 import React from 'react'
 import Flexbox from 'flexbox-react';
 import { Link} from 'react-router-dom'
-import './Product.css'
+import Truncate from 'react-truncate';
 import Translate from 'react-translate-component'
 import Price from './Price'
 import Ratings from './Ratings'
 import ProductButton from './ProductButton'
 import ProductImage from './ProductImage'
+import './Product.css'
 
 const Product = ({product}) => {
   return (
@@ -17,8 +18,10 @@ const Product = ({product}) => {
             <ProductImage />
           </Flexbox>
         </Flexbox>
-        <Flexbox flexBasis="100%">
-            <p>{product.name}</p>
+        <Flexbox flexBasis="100%" className="ProductName">
+          <Truncate lines={2}>
+            {product.name}
+          </Truncate>
         </Flexbox>
         <Flexbox flexBasis="50%" justifyContent="flex-start">
             <Price price={product.price} />

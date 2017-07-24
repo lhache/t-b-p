@@ -12,6 +12,7 @@
 
 .FooterLogo {
   width: 180px;
+  cursor: pointer;
 }
 
 .FooterSocial {
