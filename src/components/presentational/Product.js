@@ -1,8 +1,6 @@
 import React from 'react'
 import Flexbox from 'flexbox-react';
-import { Link} from 'react-router-dom'
 import Truncate from 'react-truncate';
-import Translate from 'react-translate-component'
 import Price from './Price'
 import Ratings from './Ratings'
 import ProductButton from './ProductButton'

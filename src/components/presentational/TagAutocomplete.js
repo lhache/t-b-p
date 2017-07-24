@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import ReactTags from 'react-tag-autocomplete'
 import './TagAutocomplete.css'
 
-class TagAutocomplete extends React.Component {
+class TagAutocomplete extends Component {
   constructor (props) {
     super(props)
 

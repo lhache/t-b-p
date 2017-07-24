@@ -1,6 +1,5 @@
-import React, { Component } from 'react';
+import React from 'react';
 import Translate from 'react-translate-component'
-import TagAutocomplete from './TagAutocomplete'
 import TagInput from 'react-categorized-tag-input';
 import Flexbox from 'flexbox-react';
 import ReactSVG from 'react-svg'
@@ -9,10 +8,8 @@ import 'react-categorized-tag-input/categorized-tag-input.css';
 import './SearchForm.css'
 import iconSearch from '../../images/icon-search.svg'
 
-
-
 const SearchForm = ({ term, onChange, onSubmit }) => {
-  let input
+  // let input
   const categories = [
     {
       id: 'general',

@@ -1,9 +1,6 @@
 import React from 'react';
-import Translate from 'react-translate-component'
-import starIcon from '../../images/icon-star.svg'
-import './Ratings.css'
 import Rater from 'react-rater'
-
+import './Ratings.css'
 
 const Ratings = ({ratings}) => {
   return (
