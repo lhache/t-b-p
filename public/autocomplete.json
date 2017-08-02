@@ -1,0 +1,14 @@
+{
+  "values": [
+    { "value": "sustainable", "label": "Sustainable" },
+    { "value": "educational", "label": "Educational" },
+    { "value": "development", "label": "Development" },
+    { "value": "maths", "label": "Maths" },
+    { "value": "wooden", "label": "Wooden" },
+    { "value": "ecofriendly", "label": "Eco-friendly" },
+    { "value": "0-2", "label": "0-2 years old" },
+    { "value": "2-3", "label": "2-3 years old" },
+    { "value": "3-4", "label": "3-4 years old" },
+    { "value": "4-5", "label": "4-5 years old" }
+  ]
+}

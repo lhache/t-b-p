@@ -13,7 +13,7 @@ class SearchContainer extends Component {
 
   handleSubmit(term) {
     const history = this.props.history;
-    const termForURL = term.map(t => t.title).join(',')
+    const termForURL = term.map(t => t.value).join(',')
     history.push({
       pathname: '/results',
       search: `?q=${termForURL}`,
@@ -22,7 +22,7 @@ class SearchContainer extends Component {
   }
 
   handleChange(term) {
-    _isArray(term) && this.props.storeTerm(term)
+    this.props.storeTerm(term)
   }
 
   render() {
