@@ -19,7 +19,7 @@ class HomePage extends Component {
             <USP />
         </Flexbox>
 
-        <Results />
+        {/* <Results /> */}
         <Footer />
       </Flexbox>
     )
