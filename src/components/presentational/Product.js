@@ -10,12 +10,10 @@ import './Product.css'
 const Product = ({product}) => {
   return (
     <Flexbox flexBasis="100%" justifyContent="center" className="Product">
-      <Flexbox flexBasis="90%" flexWrap="wrap" >
-        <Flexbox flexBasis="100%" justifyContent="center">
-          <Flexbox flexBasis="90%" justifyContent="center">
+      <Flexbox flexBasis="100%" flexWrap="wrap" >
+          <Flexbox flexBasis="100%" justifyContent="center">
             <ProductImage />
           </Flexbox>
-        </Flexbox>
         <Flexbox flexBasis="100%" className="ProductName" marginTop="10px">
           <Truncate lines={2}>
             {product.name}

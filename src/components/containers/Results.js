@@ -14,7 +14,7 @@ const showLoader = isFetching => (isFetching && <p>loading...</p>)
 const showResults = (results, isFetching) => (!isFetching && (
   <Flexbox maxWidth="100%" flexWrap="wrap" justifyContent="center">
       {results.map((result, idx) => (
-        <Flexbox key={result.id} order={idx} maxWidth="170px" padding="10px" boxSizing="border-box">
+        <Flexbox key={result.id} order={idx} maxWidth="170px" padding="10px" marginBottom="10px" boxSizing="border-box">
           <Product product={result} />
         </Flexbox>
       ))}

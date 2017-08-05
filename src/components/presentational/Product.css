@@ -4,3 +4,11 @@
   height: 50px;
   font-size: 15px;
 }
+
+.ProductImageContainer {
+  text-align: center;
+}
+
+.ProductImage {
+  width: 90%;
+}
