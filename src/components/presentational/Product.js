@@ -16,18 +16,18 @@ const Product = ({product}) => {
             <ProductImage />
           </Flexbox>
         </Flexbox>
-        <Flexbox flexBasis="100%" className="ProductName">
+        <Flexbox flexBasis="100%" className="ProductName" marginTop="10px">
           <Truncate lines={2}>
             {product.name}
           </Truncate>
         </Flexbox>
-        <Flexbox flexBasis="50%" justifyContent="flex-start">
+        <Flexbox flexBasis="50%" justifyContent="flex-start" marginTop="5px">
             <Price price={product.price} />
         </Flexbox>
-        <Flexbox flexBasis="50%" justifyContent="flex-end">
+        <Flexbox flexBasis="50%" justifyContent="flex-end" marginTop="5px">
             <Ratings ratings={product.ratings} />
         </Flexbox>
-        <Flexbox flexBasis="90%" justifyContent="center">
+        <Flexbox flexBasis="90%" justifyContent="center" marginTop="5px">
           <ProductButton link={`/details/${product.id}`} />
         </Flexbox>
       </Flexbox>

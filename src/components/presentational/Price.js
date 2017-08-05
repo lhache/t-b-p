@@ -5,7 +5,7 @@ import Translate from 'react-translate-component'
 const Price = ({price}) => {
   return (
     <div>
-      {(price/100).toFixed(2)}
+      <b>{(price/100).toFixed(2)} €</b>
     </div>
   )
 }
