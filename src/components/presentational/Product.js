@@ -14,7 +14,9 @@ const showMobileProduct = (product) => {
         <Flexbox flexBasis="40%" justifyContent="center">
           <ProductImage />
         </Flexbox>
-        <Flexbox flexBasis="60%" flexWrap="wrap">
+        <Flexbox flexBasis="2%" flexWrap="wrap">
+        </Flexbox>
+        <Flexbox flexBasis="58%" flexWrap="wrap">
           <Flexbox flexBasis="100%" className="ProductName">
             <Truncate lines={1}>
               {product.name}
