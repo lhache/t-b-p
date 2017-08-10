@@ -2,21 +2,42 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux'
 import { withRouter } from 'react-router-dom'
 import PropTypes from 'prop-types'
-import './Details.css';
 import {fetchDetails} from '../../data/modules/details'
+import Flexbox from 'flexbox-react';
 import { Link} from 'react-router-dom'
 import _last from 'lodash/last'
+import ReactSVG from 'react-svg'
+import loader from '../../images/loader.svg'
+import placeholderImage from '../../images/product-placeholder.jpg'
+import Ratings from '../presentational/Ratings'
+import Price from '../presentational/Price'
+import './Details.css';
 
-const showLoader = isFetching => (isFetching && <p>loading...</p>)
+const showLoader = isFetching => (isFetching && <Flexbox flexBasis="100%" justifyContent="center"><ReactSVG path={loader} /></Flexbox>)
 
 const showDetails = (details, isFetching) => (!isFetching && (
-  <div>
-    <p>{details.name}</p>
-    <p>{details.shopName}</p>
-    <p>{details.ratings}</p>
-    <p>{details.description}</p>
-    <p>{details.name}</p>
-  </div>
+  <Flexbox flexBasis="100%" flexWrap="wrap" padding="20px">
+    <Flexbox flexBasis="100%" justifyContent="center" marginBottom="10px">
+      <Flexbox flexBasis="90%" justifyContent="center">
+        <img src={placeholderImage} />
+      </Flexbox>
+    </Flexbox>
+    <Flexbox flexBasis="100%" marginBottom="10px">
+        <b>{details.name}</b>
+    </Flexbox>
+    <Flexbox flexBasis="100%" marginBottom="10px">
+      <Ratings ratings={details.ratings} />
+    </Flexbox>
+    <Flexbox flexBasis="100%" marginBottom="10px">
+      <Price price={details.price} />
+    </Flexbox>
+    <Flexbox flexBasis="100%" marginBottom="10px">
+      <p>{details.description}</p>
+    </Flexbox>
+    <Flexbox flexBasis="100%" justifyContent="center" marginBottom="10px">
+      <button>Go to product</button>
+    </Flexbox>
+  </Flexbox>
 ))
 
 class DetailsContainer extends Component {
