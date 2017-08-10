@@ -1,14 +1,14 @@
-.Product {}
+.AppMobile .Product {
+  background-color: #f2f3f5; }
+
+.AppDesktop .ProductName {
+  height: 50px; }
 
 .ProductName {
-  height: 50px;
-  font-size: 15px;
-}
+  font-size: 15px; }
 
 .ProductImageContainer {
-  text-align: center;
-}
+  text-align: center; }
 
 .ProductImage {
-  width: 90%;
-}
+  width: 90%; }

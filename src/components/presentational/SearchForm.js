@@ -2,7 +2,6 @@ import React from 'react';
 import Translate from 'react-translate-component'
 import Flexbox from 'flexbox-react';
 import ReactSVG from 'react-svg'
-import counterpart from 'counterpart'
 import TagAutocomplete from './TagAutocomplete'
 import './SearchForm.css'
 import iconSearch from '../../images/icon-search.svg'

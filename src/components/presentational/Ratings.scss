@@ -1,0 +1,15 @@
+.react-rater .is-disabled.is-active, .react-rater .is-disabled.is-active-half {
+  color: yellow;
+}
+
+.AppMobile {
+  .react-rater, .is-disabled {
+    color: white;
+  }
+}
+
+.AppDesktop {
+  .react-rater, .is-disabled {
+    color: #efefef;
+  }
+}

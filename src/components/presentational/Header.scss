@@ -1,23 +1,32 @@
+.HeaderContainer {}
+
 .Header {
   max-width: 960px;
   margin: 0 auto;
-  text-align: center; }
+  text-align: center;
+}
 
 .HeaderLogo {
   width: 200px;
-  min-height: 70px; }
+  min-height: 70px;
+}
 
 .HeaderLogoLink {
-  margin: 0 auto; }
+  margin: 0 auto;
+}
 
 .HeaderSubtitle {
   color: white;
-  margin: 0 auto; }
+  margin: 0 auto;
+}
 
 .HeaderSubtitleOneLine {
   margin-bottom: 10px;
-  font-size: 0.9em; }
+  font-size: 0.9em;
+}
 
 @media (max-width: 960px) {
   .HeaderLogoContainer {
-    width: 100%; } }
+    width: 100%;
+  }
+}

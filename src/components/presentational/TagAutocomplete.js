@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import Select from 'react-select';
+import counterpart from 'counterpart'
 import 'react-select/dist/react-select.css';
 import './TagAutocomplete.css'
 
@@ -21,6 +22,7 @@ class TagAutocomplete extends Component {
         multi={true}
         autosize={true}
         autoBlur={true}
+        placeholder={counterpart('search.placeholder')}
         // autofocus={true}
         // simpleValue
       />
