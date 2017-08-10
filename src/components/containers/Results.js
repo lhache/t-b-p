@@ -7,9 +7,11 @@ import ResultsHeadline from '../presentational/ResultsHeadline'
 import Product from '../presentational/Product'
 import Flexbox from 'flexbox-react';
 import { parseQueryString } from '../../data/utils'
+import ReactSVG from 'react-svg'
 import './Results.css';
+import loader from '../../images/loader.svg'
 
-const showLoader = isFetching => (isFetching && <p>loading...</p>)
+const showLoader = isFetching => (isFetching && <Flexbox flexBasis="100%" justifyContent="center"><ReactSVG path={loader} /></Flexbox>)
 
 const showResults = (results, isFetching) => (!isFetching && (
   <Flexbox maxWidth="100%" flexWrap="wrap" justifyContent="center">
