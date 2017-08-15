@@ -3,6 +3,7 @@ import { Route } from 'react-router-dom'
 import './App.css';
 import DetailsPage from '../pages/DetailsPage'
 import HomePage from '../pages/HomePage'
+import SearchPage from '../pages/SearchPage'
 import ResultsPage from '../pages/ResultsPage'
 import LandingPage from '../pages/LandingPage'
 import ImpressumPage from '../pages/ImpressumPage'
@@ -22,6 +23,7 @@ class App extends Component {
         <Route path="/landing" component={LandingPage}/>
         <Route path="/impressum" component={ImpressumPage}/>
         <Route path="/privacy-policy" component={PrivacyPolicyPage}/>
+        <Route path="/search" component={SearchPage}/>
       </Flexbox>
     );
   }

@@ -3,6 +3,8 @@
   margin: 0 auto;
 }
 
-.LandingPageContainer .SearchContainer, .HomePageContainer .SearchContainer {
-  margin-top: 40px;
+.AppDesktop {
+  .LandingPageContainer .SearchContainer, .HomePageContainer .SearchContainer {
+    margin-top: 40px;
+  }
 }

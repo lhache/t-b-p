@@ -21,7 +21,6 @@
   width: 100%;
   background-color: #00cbe2;
   border-radius: 0 100px 100px 0;
-  height: 48px;
   font-size: 18px;
   font-weight: bold;
   text-align: center;
@@ -40,3 +39,17 @@
   background-color: white;
   border-radius: 24px 0 0 24px;
   padding-top: 4px; }
+
+.AppMobile .SearchButtonContainer {
+  height: 60px; }
+
+.AppMobile .SearchButton {
+  border-radius: 0; }
+
+.AppMobile .HomePageContainer .SearchFormContainer, .AppMobile .SearchPageContainer .SearchFormContainer {
+  height: calc(100vh - 120px); }
+
+.AppMobile .HomePageContainer .Select-menu-outer, .AppMobile .SearchPageContainer .Select-menu-outer {
+  height: 100% !important;
+  position: absolute;
+  top: 50px; }
