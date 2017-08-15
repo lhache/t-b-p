@@ -25,9 +25,9 @@ const showMobileFooter = () => (
           </Flexbox>
         </Flexbox>
         <Flexbox flexDirection="column" flexBasis="100%" alignSelf="center">
-          <Flexbox alignSelf="center" display="none">
+          {/* <Flexbox alignSelf="center">
             <FooterSocial />
-          </Flexbox>
+          </Flexbox> */}
           <Flexbox alignSelf="center" marginTop="20px">
             <FooterLinks />
           </Flexbox>
@@ -51,9 +51,9 @@ const showDesktopFooter = () => (
           </Flexbox>
         </Flexbox>
         <Flexbox flexDirection="column" flexBasis="50%" justifyContent="flex-end" alignSelf="center">
-          <Flexbox alignSelf="flex-end" display="none">
+          {/* <Flexbox alignSelf="flex-end">
             <FooterSocial />
-          </Flexbox>
+          </Flexbox> */}
           <Flexbox alignSelf="flex-end">
             <FooterLinks />
           </Flexbox>

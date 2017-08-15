@@ -38,7 +38,7 @@ const showMobileProduct = (product) => {
 
 const showDesktopProduct = (product) => {
   return (
-    <Flexbox flexBasis="100%" flexWrap="wrap" maxWidth="170px" padding="10px" marginBottom="10px" boxSizing="border-box">
+    <Flexbox flexBasis="100%" flexWrap="wrap" maxWidth="170px" padding="10px" marginBottom="10px">
         <Flexbox flexBasis="100%" justifyContent="center">
           <ProductImage />
         </Flexbox>

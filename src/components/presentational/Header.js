@@ -51,8 +51,8 @@ const showDesktopHeader = (type) => {
           </h3>
         </Flexbox>
       </Flexbox>
-      <Flexbox flex="flex" flexBasis="100%"  justifyContent="center">
-        <h1 className="HeaderSubtitle" marginBottom="20px">
+      <Flexbox flex="flex" flexBasis="100%" justifyContent="center" marginBottom="20px">
+        <h1 className="HeaderSubtitle">
           {renderSubtitle(type !== 'oneline')}
         </h1>
       </Flexbox>
