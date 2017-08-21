@@ -37,7 +37,7 @@ const showMobileFooter = () => (
 
 const showDesktopFooter = () => (
       <Flexbox className="Footer FooterDesktop" flexBasis="100%">
-        <Flexbox flexDirection="column" justifyContent="flex-start" flexBasis="50%" alignSelf="center">
+        <Flexbox flexDirection="column" justifyContent="flex-start" flexBasis="30%" alignSelf="center">
           <Flexbox>
             <Link to="/" className="FooterLogoLink">
               <ReactSVG
@@ -50,10 +50,11 @@ const showDesktopFooter = () => (
             <Translate content="subtitle" />
           </Flexbox>
         </Flexbox>
-        <Flexbox flexDirection="column" flexBasis="50%" justifyContent="flex-end" alignSelf="center">
-          {/* <Flexbox alignSelf="flex-end">
-            <FooterSocial />
-          </Flexbox> */}
+        <Flexbox flexDirection="column" flexBasis="70%" justifyContent="flex-end" alignSelf="center">
+          <Flexbox alignSelf="flex-end">
+            {/* <FooterSocial /> */}
+            <br/><br/><br/>
+          </Flexbox>
           <Flexbox alignSelf="flex-end">
             <FooterLinks />
           </Flexbox>

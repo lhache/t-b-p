@@ -4,18 +4,27 @@ import Translate from 'react-translate-component'
 import { Link } from 'react-router-dom'
 // import './FooterLinks.css'
 
+const footerLinks = [
+  'about',
+  'imprint',
+  'privacy-policy',
+  'affiliate-disclaimer'
+]
+
 const FooterLinks = () => {
   return (
     <Flexbox className="FooterLinks">
+      { footerLinks.map(link => (
+        <Flexbox marginLeft="10px">
+          <Link to={`/${link}`}>
+            <Translate content={`pages.${link}`} />
+          </Link>
+        </Flexbox>
+      ))}
       <Flexbox marginLeft="10px">
-        <Link to="/privacy-policy">
-          <Translate content="pages.privacy" />
-        </Link>
-      </Flexbox>
-      <Flexbox marginLeft="10px">
-        <Link to="/impressum">
-          <Translate content="pages.impressum" />
-        </Link>
+        <a href="mailto:info@thebetterplay.com">
+          <Translate content="pages.contact" />
+        </a>
       </Flexbox>
     </Flexbox>
   )

@@ -23,8 +23,11 @@
       "hoverImage": "See more"
     },
     "pages": {
-      "privacy": "Privacy Policy",
-      "impressum": "Impressum"
+      "about": "Über uns",
+      "privacy-policy": "Datenschutzerklärung",
+      "imprint": "Impressum",
+      "affiliate-disclaimer": "Amazon Partnerprogramm",
+      "contact": "Kontakt"
     },
     "cookies": {
       "bannerText": "Diese Webseite verwendet Cookies, um Ihnen ein angenehmeres Surfen zu ermöglichen."
@@ -54,8 +57,11 @@
       "hoverImage": "See more"
     },
     "pages": {
-      "privacy": "Privacy Policy",
-      "impressum": "Impressum"
+      "about": "About us",
+      "privacy-policy": "Privacy Policy",
+      "imprint": "Impressum",
+      "affiliate-disclaimer": "Affiliate Disclaimer",
+      "contact": "Contact"
     },
     "cookies": {
       "bannerText": "Diese Webseite verwendet Cookies, um Ihnen ein angenehmeres Surfen zu ermöglichen."
