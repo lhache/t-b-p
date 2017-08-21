@@ -23,16 +23,16 @@ const showDetails = (details, isFetching) => (!isFetching && (
       </Flexbox>
     </Flexbox>
     <Flexbox flexBasis="100%" marginBottom="10px">
-        <b>{details.name}</b>
+        <b>{details.name || ''}</b>
     </Flexbox>
     <Flexbox flexBasis="100%" marginBottom="10px">
-      <Ratings ratings={details.ratings} />
+      <Ratings ratings={details.ratings || ''} />
     </Flexbox>
     <Flexbox flexBasis="100%" marginBottom="10px">
-      <Price price={details.price} />
+      <Price price={details.price || ''} />
     </Flexbox>
     <Flexbox flexBasis="100%" marginBottom="10px">
-      <p>{details.description}</p>
+      <p>{details.description || ''}</p>
     </Flexbox>
     <Flexbox flexBasis="100%" justifyContent="center" marginBottom="10px">
       <button>Go to product</button>

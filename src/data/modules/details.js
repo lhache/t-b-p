@@ -13,10 +13,11 @@ export const requestDetails = id => {
 }
 
 export const receiveDetails = (id, json) => {
+  debugger;
   return {
     type: FETCH_DETAILS_SUCCESS,
     id,
-    details: json.details
+    details: json || {}
   }
 }
 
@@ -51,9 +52,14 @@ export const detailsReducer = (state = initialState, action) => {
 export function fetchDetails(id) {
   return function (dispatch) {
     dispatch(requestDetails(id))
-    return fetch(`/details.json?q=${id}`)
+    // return fetch(`/details.json?q=${id}`)
+    return fetch(`http://localhost:8081/product/${id}`, {
+      'Access-Control-Allow-Origin':'*',
+      'Content-Type': 'application/json'
+    })
       .then(
         response => {
+          debugger;
             return response.json()
         },
         // Do not use catch, because that will also catch
