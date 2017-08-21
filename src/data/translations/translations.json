@@ -25,6 +25,9 @@
     "pages": {
       "privacy": "Privacy Policy",
       "impressum": "Impressum"
+    },
+    "cookies": {
+      "bannerText": "Diese Webseite verwendet Cookies, um Ihnen ein angenehmeres Surfen zu ermöglichen."
     }
   },
   "en": {
@@ -53,6 +56,9 @@
     "pages": {
       "privacy": "Privacy Policy",
       "impressum": "Impressum"
+    },
+    "cookies": {
+      "bannerText": "Diese Webseite verwendet Cookies, um Ihnen ein angenehmeres Surfen zu ermöglichen."
     }
   }
 }

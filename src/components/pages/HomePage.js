@@ -5,6 +5,7 @@ import Results from '../containers/Results'
 import Header from '../presentational/Header'
 import Footer from '../presentational/Footer'
 import USP from '../presentational/USP'
+import CookieBannerBar from '../presentational/CookieBannerBar'
 // import './HomePage.css'
 
 
@@ -21,6 +22,7 @@ class HomePage extends Component {
 
         {/* <Results /> */}
         <Footer />
+        <CookieBannerBar />
       </Flexbox>
     )
   }
