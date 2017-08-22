@@ -1,8 +1,11 @@
 import React, { Component } from 'react';
 import Select from 'react-select';
 import counterpart from 'counterpart'
-import 'react-select/dist/react-select.css';
+import VirtualizedSelect from 'react-virtualized-select'
 import './TagAutocomplete.css'
+import 'react-select/dist/react-select.css';
+import 'react-virtualized/styles.css'
+import 'react-virtualized-select/styles.css'
 
 const getOptions = input => {
   return fetch(`/autocomplete.json?q=${input}`)
@@ -13,19 +16,36 @@ const getOptions = input => {
 class TagAutocomplete extends Component {
   render () {
     return (
-      <Select.Async
+      <VirtualizedSelect
+        // options={options}
+        async
+        multi={true}
         name="searchform-tags"
-        value={this.props.value}
-        openOnFocus={true}
         loadOptions={getOptions}
         onChange={this.props.onChange}
-        multi={true}
-        autosize={true}
-        autoBlur={true}
+        value={this.props.value}
         placeholder={counterpart('search.placeholder')}
-        // autofocus={true}
-        // simpleValue
+        openOnFocus={true}
+        autoBlur={true}
+        autosize={true}
+        noResultsText="TODO"
+        maxHeight={1000}
+        optionHeight={60}
+        // menuBuffer={1000}
       />
+      // <Select.Async
+      //   name="searchform-tags"
+      //   value={this.props.value}
+      //   openOnFocus={true}
+      //   loadOptions={getOptions}
+      //   onChange={this.props.onChange}
+      //   multi={true}
+      //   autosize={true}
+      //   autoBlur={true}
+      //   placeholder={counterpart('search.placeholder')}
+      //   // autofocus={true}
+      //   // simpleValue
+      // />
     )
   }
 }

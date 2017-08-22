@@ -46,10 +46,12 @@
 .AppMobile .SearchButton {
   border-radius: 0; }
 
-.AppMobile .HomePageContainer .SearchFormContainer, .AppMobile .SearchPageContainer .SearchFormContainer {
-  height: calc(100vh - 120px); }
+.AppMobile .SearchPageContainer .SearchInputContainer {
+  height: calc(100vh - 60px); }
 
-.AppMobile .HomePageContainer .Select-menu-outer, .AppMobile .SearchPageContainer .Select-menu-outer {
-  height: 100% !important;
-  position: absolute;
+.AppMobile .SearchPageContainer .Select-menu-outer {
+  height: calc(100vh - 100px) !important;
+  max-height: none !important;
   top: 50px; }
+  .AppMobile .SearchPageContainer .Select-menu-outer .Select-menu {
+    max-height: 100%; }

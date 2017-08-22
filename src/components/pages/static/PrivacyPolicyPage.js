@@ -13,8 +13,6 @@ class PrivacyPolicyPage extends Component {
       <Flexbox flex="flex" flexBasis="100%" flexWrap="wrap" className="PrivacyPolicyPageContainer">
         <Flexbox flex="flex" flexBasis="100%" flexWrap="wrap" className="HeaderBackground">
             <Header />
-            <Search />
-            <USP />
         </Flexbox>
 
         <Flexbox>

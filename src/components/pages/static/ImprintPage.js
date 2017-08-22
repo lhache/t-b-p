@@ -13,8 +13,6 @@ class ImpressumPage extends Component {
       <Flexbox flex="flex" flexBasis="100%" flexWrap="wrap" className="ImpressumPageContainer">
         <Flexbox flex="flex" flexBasis="100%" flexWrap="wrap" className="HeaderBackground">
             <Header />
-            <Search />
-            <USP />
         </Flexbox>
 
         <Flexbox flexWrap="wrap">

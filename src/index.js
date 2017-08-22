@@ -14,11 +14,11 @@ import { detailsReducer } from './data/modules/details'
 
 // root component of App
 import Root from './components/Root';
+
 // main style
 import './index.css';
 
 import { registerTranslations } from './data/translations/translations.js';
-
 
 // set history to browser history
 const history = createHistory()

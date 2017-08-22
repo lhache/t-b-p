@@ -57,19 +57,33 @@
     border-radius: 0;
   }
 
-  .HomePageContainer, .SearchPageContainer {
+  .SearchPageContainer {
     .SearchFormContainer {
-      height: calc(100vh - 120px);
+      // height: calc(100vh - 120px);
     }
 
     .SearchInputContainer {
-      // height: calc(100vh - 60px);
+      height: calc(100vh - 60px);
     }
 
     .Select-menu-outer {
-      height: 100%!important;
-      position: absolute;
+      height: calc(100vh - 100px)!important;
+      max-height: none!important;
       top: 50px;
+
+      .Select-menu  {
+        max-height: 100%;
+      }
     }
+
+    .ReactVirtualized__Grid,
+    .ReactVirtualized__Grid__innerScrollContainer
+     {
+      // height: 100!important;
+    }
+    //
+    // .VirtualizedSelectOption {
+    //   height: 150px!important;
+    // }
   }
 }

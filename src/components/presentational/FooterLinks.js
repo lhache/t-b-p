@@ -4,6 +4,8 @@ import Translate from 'react-translate-component'
 import { Link } from 'react-router-dom'
 // import './FooterLinks.css'
 
+const urlPrefix = '/static/';
+
 const footerLinks = [
   'about',
   'imprint',
@@ -16,7 +18,7 @@ const FooterLinks = () => {
     <Flexbox className="FooterLinks">
       { footerLinks.map((link, index) => (
         <Flexbox marginLeft="10px" key={index}>
-          <Link to={`/${link}`}>
+          <Link to={`${urlPrefix}${link}`}>
             <Translate content={`pages.${link}`} />
           </Link>
         </Flexbox>

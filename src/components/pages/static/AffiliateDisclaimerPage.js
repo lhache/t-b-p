@@ -14,8 +14,6 @@ class AffiliateDisclaimerPage extends Component {
       Container">
         <Flexbox flex="flex" flexBasis="100%" flexWrap="wrap" className="HeaderBackground">
             <Header />
-            <Search />
-            <USP />
         </Flexbox>
 
         <Flexbox>

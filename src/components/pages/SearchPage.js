@@ -9,12 +9,11 @@ import USP from '../presentational/USP'
 
 
 class SearchPage extends Component {
-
   render() {
     return (
-      <Flexbox flex="flex" flexBasis="100%" flexWrap="wrap" className="HomePageContainer">
+      <Flexbox flex="flex" flexBasis="100%" flexWrap="wrap" className="SearchPageContainer" height="100vh">
         <Flexbox flex="flex" flexBasis="100%" flexWrap="wrap" className="HeaderBackground">
-            <Search />
+          <Search />
         </Flexbox>
       </Flexbox>
     )
