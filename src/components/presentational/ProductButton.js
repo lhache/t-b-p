@@ -4,7 +4,6 @@ import { Link } from 'react-router-dom'
 import './ProductButton.css'
 
 const ProductButton = ({link, translationKey}) => {
-  debugger;
   return (
     <button className="ProductButton">
       <Link to={link} className="ProductButtonLink">

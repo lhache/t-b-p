@@ -13,7 +13,6 @@ export const requestDetails = id => {
 }
 
 export const receiveDetails = (id, json) => {
-  debugger;
   return {
     type: FETCH_DETAILS_SUCCESS,
     id,
@@ -59,7 +58,6 @@ export function fetchDetails(id) {
     })
       .then(
         response => {
-          debugger;
             return response.json()
         },
         // Do not use catch, because that will also catch
