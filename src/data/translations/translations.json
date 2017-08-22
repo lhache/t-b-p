@@ -20,6 +20,7 @@
     },
     "product": {
       "goToDetails": "Go to product",
+      "goToAffShop": "Go to product",
       "hoverImage": "See more"
     },
     "pages": {
@@ -35,7 +36,7 @@
   },
   "en": {
     "title": "The Better Play",
-    "subtitle": "Inspiration für gutes Spielzeug",
+    "subtitle": "Inspiration for good toys",
     "USP": {
       "quality": "Quality",
       "qualitySub": "Good for the kids & the environment",
@@ -54,12 +55,13 @@
     },
     "product": {
       "goToDetails": "Go to product",
+      "goToAffShop": "Go to product",
       "hoverImage": "See more"
     },
     "pages": {
       "about": "About us",
       "privacy-policy": "Privacy Policy",
-      "imprint": "Impressum",
+      "imprint": "Imprint",
       "affiliate-disclaimer": "Affiliate Disclaimer",
       "contact": "Contact"
     },

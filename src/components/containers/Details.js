@@ -11,6 +11,7 @@ import loader from '../../images/loader.svg'
 import placeholderImage from '../../images/product-placeholder.jpg'
 import Ratings from '../presentational/Ratings'
 import Price from '../presentational/Price'
+import ProductButton from '../presentational/ProductButton'
 import './Details.css';
 
 const showLoader = isFetching => (isFetching && <Flexbox flexBasis="100%" justifyContent="center"><ReactSVG path={loader} /></Flexbox>)
@@ -35,7 +36,7 @@ const showDetails = (details, isFetching) => (!isFetching && (
       <p>{details.description || ''}</p>
     </Flexbox>
     <Flexbox flexBasis="100%" justifyContent="center" marginBottom="10px">
-      <button>Go to product</button>
+      <ProductButton link={`${details.deeplinkUrl}`} translationKey="product.goToAffShop"/>
     </Flexbox>
   </Flexbox>
 ))

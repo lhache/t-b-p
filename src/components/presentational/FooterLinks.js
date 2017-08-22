@@ -14,8 +14,8 @@ const footerLinks = [
 const FooterLinks = () => {
   return (
     <Flexbox className="FooterLinks">
-      { footerLinks.map(link => (
-        <Flexbox marginLeft="10px">
+      { footerLinks.map((link, index) => (
+        <Flexbox marginLeft="10px" key={index}>
           <Link to={`/${link}`}>
             <Translate content={`pages.${link}`} />
           </Link>

@@ -1,16 +1,17 @@
 import React, { Component } from 'react';
 import Flexbox from 'flexbox-react';
-import Search from '../containers/Search'
-import Header from '../presentational/Header'
-import Footer from '../presentational/Footer'
-import USP from '../presentational/USP'
-// import './ImpressumPage.css'
+import Search from '../../containers/Search'
+import Header from '../../presentational/Header'
+import Footer from '../../presentational/Footer'
+import USP from '../../presentational/USP'
+// import './AffiliateDisclaimerPage.css'
 
-class ImpressumPage extends Component {
+class AffiliateDisclaimerPage extends Component {
 
   render() {
     return (
-      <Flexbox flex="flex" flexBasis="100%" flexWrap="wrap" className="ImpressumPageContainer">
+      <Flexbox flex="flex" flexBasis="100%" flexWrap="wrap" className="AffiliateDisclaimerPage
+      Container">
         <Flexbox flex="flex" flexBasis="100%" flexWrap="wrap" className="HeaderBackground">
             <Header />
             <Search />
@@ -28,4 +29,4 @@ class ImpressumPage extends Component {
   }
 }
 
-export default ImpressumPage;
+export default AffiliateDisclaimerPage;
