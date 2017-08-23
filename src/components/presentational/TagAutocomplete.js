@@ -30,7 +30,7 @@ class TagAutocomplete extends Component {
         autosize={true}
         noResultsText="TODO"
         maxHeight={1000}
-        optionHeight={60}
+        optionHeight={40}
         // menuBuffer={1000}
       />
       // <Select.Async

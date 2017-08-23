@@ -4,11 +4,12 @@ import './Ratings.css'
 
 const Ratings = ({ratings}) => {
 
-  ratings = parseInt(ratings, 2)
+
+
 
   return (
     <div>
-      <Rater total={5} rating={ratings} interactive={false} />
+      <Rater total={5} rating={parseInt(ratings, 10)} interactive={false} />
     </div>
   )
 }

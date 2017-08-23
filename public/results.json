@@ -4,43 +4,43 @@
       "id": 1,
       "name": "item #1 from API",
       "price": 1200,
-      "ratings": 3
+      "ratings": "3"
     },
     {
       "id": 2,
       "name": "item #2 from API with a text long like 3 dicks",
       "price": 100099,
-      "ratings": 3
+      "ratings": "3"
     },
     {
       "id": 3,
       "name": "item #3 from API with very very very long text",
       "price": 499,
-      "ratings": 3
+      "ratings": "3"
     },
     {
       "id": 4,
       "name": "item #4 from API",
       "price": 1200,
-      "ratings": 3
+      "ratings": "3"
     },
     {
       "id": 5,
       "name": "item #5 from API with oh my gud such a long text",
       "price": 2499,
-      "ratings": 3
+      "ratings": "3"
     },
     {
       "id": 6,
       "name": "item #6 from API",
       "price": 12000,
-      "ratings": 3
+      "ratings": "3"
     },
     {
       "id": 7,
       "name": "item #7 from API with longer text",
       "price": 12000,
-      "ratings": 3.9
+      "ratings": "3.9"
     },
     {
       "id": 8,
@@ -58,7 +58,7 @@
       "id": 10,
       "name": "item #10 from API",
       "price": 12000,
-      "ratings": 3
+      "ratings": "3"
     }
   ]
 }
