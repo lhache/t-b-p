@@ -19,13 +19,13 @@ const FooterLinks = () => {
       { footerLinks.map((link, index) => (
         <Flexbox marginLeft="10px" key={index}>
           <Link to={`${urlPrefix}${link}`}>
-            <Translate content={`pages.${link}`} />
+            <Translate content={`${link}.title`} />
           </Link>
         </Flexbox>
       ))}
       <Flexbox marginLeft="10px">
         <a href="mailto:info@thebetterplay.com">
-          <Translate content="pages.contact" />
+          <Translate content="contact.title" />
         </a>
       </Flexbox>
     </Flexbox>

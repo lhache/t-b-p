@@ -23,12 +23,25 @@
       "goToAffShop": "Go to product",
       "hoverImage": "See more"
     },
-    "pages": {
-      "about": "Über uns",
-      "privacy-policy": "Datenschutzerklärung",
-      "imprint": "Impressum",
-      "affiliate-disclaimer": "Amazon Partnerprogramm",
-      "contact": "Kontakt"
+    "about": {
+      "title": "Über uns",
+      "content": ""
+    },
+    "privacy-policy": {
+      "title": "Datenschutzerklärung",
+      "content": ""
+    },
+    "imprint": {
+      "title": "Impressum",
+      "content": ""
+    },
+    "affiliate-disclaimer": {
+      "title": "Amazon Partnerprogramm",
+      "content": ""
+    },
+    "contact": {
+      "title": "Kontakt",
+      "content": ""
     },
     "cookies": {
       "bannerText": "Diese Webseite verwendet Cookies, um Ihnen ein angenehmeres Surfen zu ermöglichen."
@@ -58,12 +71,25 @@
       "goToAffShop": "Go to product",
       "hoverImage": "See more"
     },
-    "pages": {
-      "about": "About us",
-      "privacy-policy": "Privacy Policy",
-      "imprint": "Imprint",
-      "affiliate-disclaimer": "Affiliate Disclaimer",
-      "contact": "Contact"
+    "about": {
+      "title": "About us",
+      "content": ""
+    },
+    "privacy-policy": {
+      "title": "Privacy Policy",
+      "content": ""
+    },
+    "imprint": {
+      "title": "Imprint",
+      "content": ""
+    },
+    "affiliate-disclaimer": {
+      "title": "Affiliate Disclaimer",
+      "content": ""
+    },
+    "contact": {
+      "title": "Contact",
+      "content": ""
     },
     "cookies": {
       "bannerText": "Diese Webseite verwendet Cookies, um Ihnen ein angenehmeres Surfen zu ermöglichen."
