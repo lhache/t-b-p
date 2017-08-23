@@ -45,8 +45,7 @@ const deContent = () => (
         <h3>Haftungsausschuss</h3>
       </Flexbox>
       <Flexbox flexBasis="100%">
-        <b>Haftung für Inhalte </b>
-        <span> (von https://www.e-recht24.de/muster-disclaimer.html)</span>
+        <h4>Haftung für Inhalte </h4>
       </Flexbox>
       <Flexbox flexBasis="100%">
         <p>Als Diensteanbieter sind wir gemäß § 7 Abs.1 TMG für eigene Inhalte auf diesen Seiten nach den allgemeinen Gesetzen verantwortlich. Nach §§ 8 bis 10 TMG sind wir als Diensteanbieter jedoch nicht verpflichtet, übermittelte oder gespeicherte fremde Informationen zu überwachen oder nach Umständen zu forschen, die auf eine rechtswidrige Tätigkeit hinweisen.</p>
@@ -56,8 +55,7 @@ const deContent = () => (
       </Flexbox>
 
       <Flexbox flexBasis="100%">
-        <b>Haftung für Links </b>
-        <span> (von https://www.e-recht24.de/muster-disclaimer.html)</span>
+        <h4>Haftung für Links </h4>
       </Flexbox>
       <Flexbox flexBasis="100%">
         <p>Unser Angebot enthält Links zu externen Webseiten Dritter, auf deren Inhalte wir keinen Einfluss haben. Deshalb können wir für diese fremden Inhalte auch keine Gewähr übernehmen. Für die Inhalte der verlinkten Seiten ist stets der jeweilige Anbieter oder Betreiber der Seiten verantwortlich. Die verlinkten Seiten wurden zum Zeitpunkt der Verlinkung auf mögliche Rechtsverstöße überprüft. Rechtswidrige Inhalte waren zum Zeitpunkt der Verlinkung nicht erkennbar.</p>
@@ -67,8 +65,7 @@ const deContent = () => (
       </Flexbox>
 
       <Flexbox flexBasis="100%">
-        <b>Urheberrecht </b>
-        <span> (von https://www.e-recht24.de/muster-disclaimer.html)</span>
+        <h4>Urheberrecht </h4>
       </Flexbox>
       <Flexbox flexBasis="100%">
         <p>Die durch die Seitenbetreiber erstellten Inhalte und Werke auf diesen Seiten unterliegen dem deutschen Urheberrecht. Die Vervielfältigung, Bearbeitung, Verbreitung und jede Art der Verwertung außerhalb der Grenzen des Urheberrechtes bedürfen der schriftlichen Zustimmung des jeweiligen Autors bzw. Erstellers. Downloads und Kopien dieser Seite sind nur für den privaten, nicht kommerziellen Gebrauch gestattet.</p>
@@ -78,7 +75,7 @@ const deContent = () => (
       </Flexbox>
 
       <Flexbox flexBasis="100%">
-        <b>Wichtiger Hinweis zu den Produkt- und Preisangaben  </b>
+        <h4>Wichtiger Hinweis zu den Produkt- und Preisangaben  </h4>
       </Flexbox>
       <Flexbox flexBasis="100%">
         <p>Wir bemühen uns die Angaben zu den Produkte und Preise, immer auf dem aktuellsten Stand zu halten. Es kann jedoch vereinzelt vorkommen, dass die auf unserer Website gemachten Angaben von denen des Shops, abweichen.</p>
