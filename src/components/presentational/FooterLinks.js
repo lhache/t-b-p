@@ -2,7 +2,7 @@ import React from 'react';
 import Flexbox from 'flexbox-react';
 import Translate from 'react-translate-component'
 import { Link } from 'react-router-dom'
-// import './FooterLinks.css'
+import './FooterLinks.css'
 
 const urlPrefix = '/static/';
 

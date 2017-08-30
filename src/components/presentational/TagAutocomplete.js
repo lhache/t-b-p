@@ -17,7 +17,6 @@ class TagAutocomplete extends Component {
   render () {
     return (
       <VirtualizedSelect
-        // options={options}
         async
         multi={true}
         name="searchform-tags"
@@ -31,6 +30,7 @@ class TagAutocomplete extends Component {
         noResultsText="TODO"
         maxHeight={1000}
         optionHeight={40}
+        disabled={this.props.disabled}
         // menuBuffer={1000}
       />
       // <Select.Async

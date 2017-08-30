@@ -16,7 +16,7 @@
 .App .Select-multi-value-wrapper {
   /*width: 100%;*/ }
 
-.App .Select--multi .Select-value {
+.App .Select--multi .Select-value, .App .Select--multi.is-disabled .Select-value {
   border-color: #00cbe2;
   background-color: #00cbe2;
   color: white;

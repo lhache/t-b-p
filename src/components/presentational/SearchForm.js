@@ -9,14 +9,14 @@ import './SearchForm.css'
 
 const showMobileSearchForm = (term, onChange) => {
   return (
-    <Flexbox flexBasis="100%" flexWrap="wrap" className="SearchFormContainer">
-      <Flexbox flexBasis="100%" className="SearchInputContainer">
+    <Flexbox flexBasis="100%" flexWrap="wrap"  flexDirection="column" className="SearchFormContainer">
+      <Flexbox flexBasis="100%" className="SearchInputContainer" order={1}>
         <TagAutocomplete
           value={term}
           onChange={onChange}
         />
       </Flexbox>
-      <Flexbox flexBasis="100%" className="SearchButtonContainer" alignSelf="flex-end">
+      <Flexbox flexBasis="100%" className="SearchButtonContainer" alignSelf="flex-end" order={2}>
         <button className="SearchButton" type="submit">
           <Translate content="search.search" />
         </button>

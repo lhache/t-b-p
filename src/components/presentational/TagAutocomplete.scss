@@ -23,7 +23,7 @@
     /*width: 100%;*/
   }
 
-  .Select--multi .Select-value {
+  .Select--multi .Select-value, .Select--multi.is-disabled .Select-value {
     border-color: #00cbe2;
     background-color: #00cbe2;
     color: white;
