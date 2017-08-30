@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import Select from 'react-select';
 import counterpart from 'counterpart'
 import VirtualizedSelect from 'react-virtualized-select'
 import './TagAutocomplete.css'

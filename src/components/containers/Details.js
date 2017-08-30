@@ -47,7 +47,7 @@ class DetailsContainer extends Component {
   }
 
   render() {
-    const {details, isFetching, fetchDetails} = this.props
+    const {details, isFetching} = this.props
 
     return (
       <Flexbox className="DetailsContainer" flexBasis="100%" flexWrap="wrap">
