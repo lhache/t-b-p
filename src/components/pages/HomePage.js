@@ -20,6 +20,9 @@ class HomePage extends Component {
             <USP />
         </Flexbox>
 
+        <Flexbox flex="flex" flexBasis="100%" flexWrap="wrap" height="50vh">
+          
+        </Flexbox>
         {/* <Results /> */}
         <Footer />
         <CookieBannerBar />

@@ -52,10 +52,10 @@ class DetailsContainer extends Component {
     const {details, isFetching, fetchDetails} = this.props
 
     return (
-      <div className="DetailsContainer">
+      <Flexbox className="DetailsContainer" flexBasis="100%" flexWrap="wrap">
         { showLoader(this.props.isFetching) }
         { showDetails(this.props.details, this.props.isFetching) }
-      </div>
+      </Flexbox>
     )
   }
 }
