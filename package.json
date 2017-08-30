@@ -52,6 +52,6 @@
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject",
     "test:watch": "npm test -- --watch",
-    "deploy-surge": "yarn build && surge --project ./build --domain t-b-p.surge.sh"
+    "deploy-surge": "surge --project ./build --domain t-b-p.surge.sh"
   }
 }
