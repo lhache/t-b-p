@@ -14,7 +14,7 @@ const showWhichHeadline = (type, term) => {
     return (
       <div>
         <Translate content="results.headline" component="span" />
-        <b> { term.map(t => t.label).join(' - ')} </b>
+        <b className="ResultsHeadlineTermCollection"> { term.map(t => t.label).join(' - ')} </b>
       </div>
     )
   }

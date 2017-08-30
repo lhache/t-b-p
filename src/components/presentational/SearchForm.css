@@ -32,7 +32,8 @@
   color: white;
   opacity: 0.75;
   font-size: 12px;
-  padding-top: 10px; }
+  padding-top: 10px;
+  margin-bottom: 20px; }
 
 .SearchIconContainer {
   background-color: white;
