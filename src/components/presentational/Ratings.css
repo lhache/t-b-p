@@ -1,6 +1,9 @@
 .react-rater .is-disabled.is-active, .react-rater .is-disabled.is-active-half {
   color: yellow; }
 
+.react-rater div {
+  display: inline-block; }
+
 .AppMobile .react-rater, .AppMobile .is-disabled {
   color: white; }
 
