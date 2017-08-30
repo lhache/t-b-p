@@ -51,8 +51,8 @@ export const detailsReducer = (state = initialState, action) => {
 export function fetchDetails(id) {
   return function (dispatch) {
     dispatch(requestDetails(id))
-    // return fetch(`/details.json?q=${id}`)
-    return fetch(`http://localhost:8081/product/${id}`, {
+    const url = `${process.env.REACT_APP_API_HOST}${process.env.REACT_APP_API_DETAILS_ENDPOINT}${id}`
+    return fetch(url, {
       'Access-Control-Allow-Origin':'*',
       'Content-Type': 'application/json'
     })

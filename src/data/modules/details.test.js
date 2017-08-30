@@ -33,18 +33,16 @@ describe('actions', () => {
   it('should create an action to receive details', () => {
     const id = 1
     const details = {
-      "details": {
-        "id": 1,
-        "name": "Product name",
-        "shopName": "Shop name",
-        "ratings": 3,
-        "description": "Lorem ipsum dolor sit amet"
-      }
+      "id": 1,
+      "name": "Product name",
+      "shopName": "Shop name",
+      "ratings": 3,
+      "description": "Lorem ipsum dolor sit amet"
     }
     const expectedAction = {
       type: FETCH_DETAILS_SUCCESS,
       id,
-      details: details.details
+      details: details
     }
     expect(receiveDetails(id, details)).toEqual(expectedAction)
   })
@@ -105,13 +103,13 @@ describe('async actions', () => {
     const id = 1
 
     fetchMock.mock(
-      `/details.json?q=${id}`,
+      `${process.env.REACT_APP_API_HOST}${process.env.REACT_APP_API_DETAILS_ENDPOINT}${id}`,
       { body: mockData, status: 200 }
     )
 
     const expectedActions = [
       { type: FETCH_DETAILS, id },
-      { type: FETCH_DETAILS_SUCCESS, details: mockData.details, id }
+      { type: FETCH_DETAILS_SUCCESS, details: mockData, id }
     ]
     const store = mockStore(initialState)
 
