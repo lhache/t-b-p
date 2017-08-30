@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import Flexbox from 'flexbox-react';
 import Header from '../../presentational/Header'
 import Footer from '../../presentational/Footer'
-import Translate from 'react-translate-component'
 import './StaticPages.css'
 
 const deContent = () => (

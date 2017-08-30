@@ -6,7 +6,6 @@ import SearchForm from '../presentational/SearchForm'
 import TagAutocomplete from '../presentational/TagAutocomplete'
 import Flexbox from 'flexbox-react';
 import { storeTerm, storeSearchedTerm } from '../../data/modules/searchResults'
-import _isArray from 'lodash/isArray'
 import { Link } from 'react-router-dom'
 import { isDeviceConsideredMobile } from '../../data/utils'
 

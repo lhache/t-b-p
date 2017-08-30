@@ -1,5 +1,4 @@
 import React from 'react';
-import Translate from 'react-translate-component'
 // import './Price.css'
 
 const Price = ({price}) => {

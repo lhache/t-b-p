@@ -1,13 +1,11 @@
 import React, { Component } from 'react';
 import Flexbox from 'flexbox-react';
 import Search from '../containers/Search'
-import Results from '../containers/Results'
 import Header from '../presentational/Header'
 import Footer from '../presentational/Footer'
 import USP from '../presentational/USP'
 import CookieBannerBar from '../presentational/CookieBannerBar'
 // import './HomePage.css'
-
 
 class HomePage extends Component {
 
@@ -21,7 +19,7 @@ class HomePage extends Component {
         </Flexbox>
 
         <Flexbox flex="flex" flexBasis="100%" flexWrap="wrap" height="50vh">
-          
+
         </Flexbox>
         {/* <Results /> */}
         <Footer />

@@ -4,7 +4,7 @@ import ReactSVG from 'react-svg'
 import Flexbox from 'flexbox-react';
 import { Link } from 'react-router-dom'
 import logo from '../../images/logo.svg'
-import FooterSocial from './FooterSocial'
+// import FooterSocial from './FooterSocial'
 import FooterLinks from './FooterLinks'
 import './Footer.css'
 import { isDeviceConsideredMobile } from '../../data/utils'

@@ -1,10 +1,8 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux'
 import { withRouter } from 'react-router-dom'
-import PropTypes from 'prop-types'
 import {fetchDetails} from '../../data/modules/details'
 import Flexbox from 'flexbox-react';
-import { Link} from 'react-router-dom'
 import _last from 'lodash/last'
 import ReactSVG from 'react-svg'
 import loader from '../../images/loader.svg'
@@ -20,7 +18,7 @@ const showDetails = (details, isFetching) => (!isFetching && (
   <Flexbox flexBasis="100%" flexWrap="wrap" padding="20px">
     <Flexbox flexBasis="100%" justifyContent="center" marginBottom="10px">
       <Flexbox flexBasis="90%" justifyContent="center">
-        <img src={placeholderImage} />
+        <img src={placeholderImage} alt=""/>
       </Flexbox>
     </Flexbox>
     <Flexbox flexBasis="100%" marginBottom="10px">
@@ -53,8 +51,8 @@ class DetailsContainer extends Component {
 
     return (
       <Flexbox className="DetailsContainer" flexBasis="100%" flexWrap="wrap">
-        { showLoader(this.props.isFetching) }
-        { showDetails(this.props.details, this.props.isFetching) }
+        { showLoader(isFetching) }
+        { showDetails(details, isFetching) }
       </Flexbox>
     )
   }

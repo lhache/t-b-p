@@ -1,8 +1,6 @@
 import React from 'react';
 import CookieBanner from 'react-cookie-banner';
 import Flexbox from 'flexbox-react';
-import Translate from 'react-translate-component'
-import { Link } from 'react-router-dom'
 import counterpart from 'counterpart'
 // import './CookieBannerBar.css'
 
