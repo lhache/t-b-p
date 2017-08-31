@@ -66,8 +66,7 @@ const deContent = () => (
 class AboutUsPage extends Component {
   render() {
     return (
-      <Flexbox flex="flex" flexBasis="100%" flexWrap="wrap" className="AboutUsPage
-      Container">
+      <Flexbox flex="flex" flexBasis="100%" flexWrap="wrap" className="AboutUsPageContainer">
         <Flexbox flex="flex" flexBasis="100%" flexWrap="wrap" className="HeaderBackground">
             <Header />
         </Flexbox>

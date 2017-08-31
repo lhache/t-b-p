@@ -7,6 +7,7 @@ import './FooterLinks.css'
 const urlPrefix = '/static/';
 
 const footerLinks = [
+  'contact',
   'about',
   'imprint',
   'privacy-policy',
@@ -16,11 +17,6 @@ const footerLinks = [
 const FooterLinks = () => {
   return (
     <Flexbox className="FooterLinks">
-      <Flexbox marginLeft="10px">
-        <a href="mailto:info@thebetterplay.com">
-          <Translate content="contact.title" />
-        </a>
-      </Flexbox>
       { footerLinks.map((link, index) => (
         <Flexbox marginLeft="10px" key={index}>
           <Link to={`${urlPrefix}${link}`}>
