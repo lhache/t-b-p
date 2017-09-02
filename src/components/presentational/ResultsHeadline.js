@@ -1,6 +1,7 @@
 import React from 'react';
 import Translate from 'react-translate-component'
 import Flexbox from 'flexbox-react'
+import { isDeviceConsideredMobile } from '../../data/utils'
 import './ResultsHeadline.css'
 
 const showWhichHeadline = (type, term) => {
@@ -23,7 +24,7 @@ const showWhichHeadline = (type, term) => {
 const ResultsHeadline = ({type, term}) => {
   return (
     <Flexbox className="ResultsHeadline" flexBasis="100%">
-      { showWhichHeadline(type, term) }
+      { !isDeviceConsideredMobile() && showWhichHeadline(type, term) }
     </Flexbox>
   )
 }
