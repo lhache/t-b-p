@@ -8,6 +8,7 @@ import Flexbox from 'flexbox-react';
 import { storeTerm, storeSearchedTerm } from '../../data/modules/searchResults'
 import { Link } from 'react-router-dom'
 import { isDeviceConsideredMobile } from '../../data/utils'
+import { parseQueryString } from '../../data/utils'
 
 import './Search.css';
 
@@ -23,7 +24,7 @@ const showMobileSearch = (term, that) => {
   }
   else {
     return (
-      <Link to={`/search`} className="SearchLink">
+      <Link to={`/search?q=${term}`} className="SearchLink">
         <TagAutocomplete
           value={term}
           onChange={that.handleChange.bind(that)}
@@ -44,6 +45,16 @@ const showDesktopSearch = (term, that) => (
 
 class SearchContainer extends Component {
 
+  componentDidMount() {
+    // set searchedTerm and fetch results at page load
+    const queries = parseQueryString(this.props.history.location.search);
+    let term = queries['q'];
+
+    if (term) {
+      term = term.split(',')
+      this.props.storeTerm(term)
+    }
+  }
 
   handleSubmit(term) {
     const history = this.props.history;
