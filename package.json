@@ -2,6 +2,7 @@
   "name": "t-b-p",
   "version": "0.1.0",
   "private": true,
+  "proxy": "http://tbp-app.netlify.com/",
   "dependencies": {
     "babel-polyfill": "^6.23.0",
     "babel-preset-react": "^6.24.1",
