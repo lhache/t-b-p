@@ -3,7 +3,7 @@ import Flexbox from 'flexbox-react';
 import Results from '../containers/Results'
 import Search from '../containers/Search'
 import Header from '../presentational/Header'
-import Footer from '../presentational/Footer'
+// import Footer from '../presentational/Footer'
 // import './ResultsPage.css'
 
 class ResultsPage extends Component {
@@ -17,7 +17,7 @@ class ResultsPage extends Component {
         </Flexbox>
 
         <Results />
-        <Footer />
+        {/* <Footer /> */}
       </Flexbox>
     )
   }

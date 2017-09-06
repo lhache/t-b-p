@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import Flexbox from 'flexbox-react';
 import Details from '../containers/Details'
 import Header from '../presentational/Header'
-import Footer from '../presentational/Footer'
+// import Footer from '../presentational/Footer'
 // import './DetailsPage.css'
 
 
@@ -16,7 +16,7 @@ class DetailsPage extends Component {
         </Flexbox>
 
         <Details />
-        <Footer />
+        {/* <Footer /> */}
       </Flexbox>
     )
   }
