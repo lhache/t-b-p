@@ -210,7 +210,7 @@ describe('async actions', () => {
     const term = 'luliz'
 
     fetchMock.mock(
-      `/results.json?q=${term}`,
+      `${process.env.REACT_APP_API_HOST}${process.env.REACT_APP_API_RESULTS_ENDPOINT}${term}`,
       { body: mockData, status: 200 }
     )
 

@@ -7,7 +7,7 @@ import 'react-virtualized/styles.css'
 import 'react-virtualized-select/styles.css'
 
 const getOptions = input => {
-  return fetch(`/autocomplete.json?q=${input}`)
+  return fetch(`${process.env.REACT_APP_ASSET_HOST}/autocomplete.json?q=${input}`)
     .then((response) => response.json())
     .then((json) => ({ options: json.values }))
 }

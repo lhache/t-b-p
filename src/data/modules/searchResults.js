@@ -90,7 +90,7 @@ export const searchResultsReducer = (state = initialState, action) => {
 export function fetchResults(term) {
   return function (dispatch) {
     dispatch(requestResults(term))
-    return fetch(`/results.json?q=${term}`)
+    return fetch(`${process.env.REACT_APP_ASSET_HOST}/${process.env.REACT_APP_API_RESULTS_ENDPOINT}${term}`)
       .then(
         response => {
             return response.json()
