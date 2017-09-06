@@ -21,7 +21,7 @@ const showMobileHeader = () => {
       <Flexbox flex="flex" flexBasis="100%" className="HeaderLogoContainer" alignItems="baseline">
         <Link to="/" className="HeaderLogoLink">
           <ReactSVG
-            path={logo}
+            path={`${process.env.REACT_APP_ASSET_HOST}${logo}`}
             className="HeaderLogo"
           />
         </Link>

@@ -11,7 +11,7 @@ import ReactSVG from 'react-svg'
 import './Results.css';
 import loader from '../../images/loader.svg'
 
-const showLoader = isFetching => (isFetching && <Flexbox flexBasis="100%" justifyContent="center"><ReactSVG path={loader} /></Flexbox>)
+const showLoader = isFetching => (isFetching && <Flexbox flexBasis="100%" justifyContent="center"><ReactSVG path={`${process.env.REACT_APP_ASSET_HOST}${loader}`} /></Flexbox>)
 
 const showResults = (results, isFetching) => (!isFetching && (
   <Flexbox maxWidth="100%" flexWrap="wrap" justifyContent="center">

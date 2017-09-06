@@ -12,7 +12,7 @@ import Price from '../presentational/Price'
 import ProductButton from '../presentational/ProductButton'
 import './Details.css';
 
-const showLoader = isFetching => (isFetching && <Flexbox flexBasis="100%" justifyContent="center"><ReactSVG path={loader} /></Flexbox>)
+const showLoader = isFetching => (isFetching && <Flexbox flexBasis="100%" justifyContent="center"><ReactSVG path={`${process.env.REACT_APP_ASSET_HOST}${loader}`} /></Flexbox>)
 
 const showDetails = (details, isFetching) => (!isFetching && (
   <Flexbox flexBasis="100%" flexWrap="wrap" padding="20px">

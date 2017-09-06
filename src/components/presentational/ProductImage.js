@@ -6,7 +6,7 @@ import counterpart from 'counterpart';
 const ProductImage = ({price}) => {
   return (
     <div className="ProductImageContainer" data-content={counterpart('product.hoverImage')}>
-      <img src={placeholderImage} alt="" className="ProductImage"/>
+      <img src={`${process.env.REACT_APP_ASSET_HOST}${placeholderImage}`} alt="" className="ProductImage"/>
     </div>
   )
 }
