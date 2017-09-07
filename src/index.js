@@ -47,7 +47,7 @@ const store = createStore(
 
 ReactDOM.render(
   <Root store={store} history={history} />,
-  document.getElementById('root')
+  document.getElementById('tbp-app')
 )
 
 registerServiceWorker();

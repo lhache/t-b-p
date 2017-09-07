@@ -1,7 +1,11 @@
 {
-  "name": "t-b-p",
-  "version": "0.1.0",
-  "private": true,
+  "version": "0.0.1",
+  "name": "tbp-app",
+  "description": "tbp - frontend app logic",
+  "homepage": "https://github.com/lhache/tbp-cms#readme",
+  "bugs": {
+    "url": "https://github.com/lhache/tbp-cms/issues"
+  },
   "dependencies": {
     "babel-polyfill": "^6.23.0",
     "babel-preset-react": "^6.24.1",
