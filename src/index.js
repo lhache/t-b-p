@@ -54,7 +54,9 @@ registerServiceWorker();
 
 export default class TBPAPP extends Component {
   render() {
-    <Root store={store} history={history} />,
-    document.getElementById('tbp-app')
+    return (
+      <Root store={store} history={history} />,
+      document.getElementById('tbp-app')
+    )
   }
 }
