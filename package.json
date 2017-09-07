@@ -3,8 +3,13 @@
   "name": "tbp-app",
   "description": "tbp - frontend app logic",
   "homepage": "https://github.com/lhache/tbp-cms#readme",
+  "main": "src/index.js",
   "bugs": {
     "url": "https://github.com/lhache/tbp-cms/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/lhache/t-b-p.git"
   },
   "dependencies": {
     "babel-polyfill": "^6.23.0",
