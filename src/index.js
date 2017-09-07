@@ -1,5 +1,5 @@
 import 'babel-polyfill'
-import React from 'react';
+import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
 import { createStore, combineReducers, applyMiddleware } from 'redux'
 import { routerReducer, routerMiddleware } from 'react-router-redux'
