@@ -45,9 +45,16 @@ const store = createStore(
   applyMiddleware(...middlewares)
 )
 
-ReactDOM.render(
-  <Root store={store} history={history} />,
-  document.getElementById('tbp-app')
-)
+// ReactDOM.render(
+//   <Root store={store} history={history} />,
+//   document.getElementById('tbp-app')
+// )
 
 registerServiceWorker();
+
+export default class TBPAPP extends Component {
+  render() {
+    <Root store={store} history={history} />,
+    document.getElementById('tbp-app')
+  }
+}
