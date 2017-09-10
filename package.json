@@ -3,7 +3,7 @@
   "name": "tbp-app",
   "description": "tbp - frontend app logic",
   "homepage": "https://github.com/lhache/tbp-cms#readme",
-  "main": "build/static/js/main.js",
+  "main": "static/js/main.js",
   "bugs": {
     "url": "https://github.com/lhache/tbp-cms/issues"
   },
@@ -95,7 +95,8 @@
     "test": "node scripts/test.js --env=jsdom",
     "test:watch": "npm test -- --watch",
     "deploy-surge": "surge --project ./build --domain t-b-p.surge.sh",
-    "deploy-netlify": "netlify deploy"
+    "deploy-netlify": "netlify deploy",
+    "prepub": "npm run build && cp ./package.json build"
   },
   "jest": {
     "collectCoverageFrom": [
