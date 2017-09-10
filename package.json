@@ -3,7 +3,7 @@
   "name": "tbp-app",
   "description": "tbp - frontend app logic",
   "homepage": "https://github.com/lhache/tbp-cms#readme",
-  "main": "src/index.js",
+  "main": "build/index.html",
   "bugs": {
     "url": "https://github.com/lhache/tbp-cms/issues"
   },

@@ -52,7 +52,7 @@ const store = createStore(
 
 registerServiceWorker();
 
-export default class TBPAPP extends Component {
+class TBPAPP extends Component {
   render() {
     return (
       <Root store={store} history={history} />,
@@ -60,3 +60,5 @@ export default class TBPAPP extends Component {
     )
   }
 }
+
+export default TBPAPP;
