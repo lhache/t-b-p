@@ -34,7 +34,7 @@ export const receiveResults = (term, json) => {
   return {
     type: FETCH_RESULTS_SUCCESS,
     term,
-    results: json.results
+    results: json
   }
 }
 
@@ -90,7 +90,7 @@ export const searchResultsReducer = (state = initialState, action) => {
 export function fetchResults(term) {
   return function (dispatch) {
     dispatch(requestResults(term))
-    return fetch(`${process.env.REACT_APP_ASSET_HOST}/${process.env.REACT_APP_API_RESULTS_ENDPOINT}${term}`)
+    return fetch(`${process.env.REACT_APP_API_HOST}${process.env.REACT_APP_API_RESULTS_ENDPOINT}${term}`)
       .then(
         response => {
             return response.json()
