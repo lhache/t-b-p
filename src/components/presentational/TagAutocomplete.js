@@ -7,12 +7,12 @@ import 'react-virtualized/styles.css'
 import 'react-virtualized-select/styles.css'
 
 const getOptions = input => {
-  return fetch(`${process.env.REACT_APP_ASSET_HOST}/autocomplete.json?q=${input}`,{
+  return fetch(`${process.env.REACT_APP_API_HOST}${process.env.REACT_APP_API_SUGGEST_ENDPOINT}${input}`,{
     'Access-Control-Allow-Origin':'*',
     'Content-Type': 'application/json'
   })
     .then((response) => response.json())
-    .then((json) => ({ options: json.values }))
+    .then((json) => ({ options: json }))
 }
 
 class TagAutocomplete extends Component {
@@ -33,6 +33,10 @@ class TagAutocomplete extends Component {
         maxHeight={1000}
         optionHeight={40}
         disabled={this.props.disabled}
+        labelKey="name"
+        valueKey="name"
+        closeOnSelect={false}
+        cache={false}
         // menuBuffer={1000}
       />
       // <Select.Async

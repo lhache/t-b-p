@@ -1,15 +1,6 @@
 {
   "de": {
     "title": "The Better Play",
-    "subtitle": "Inspiration für gutes Spielzeug",
-    "USP": {
-      "quality": "Quality",
-      "qualitySub": "Good for the kids",
-      "trust": "Trusted",
-      "trustSub": "4 & 5 stars recommendations only",
-      "easy": "Easy",
-      "easySub": "Stop searching & start finding"
-    },
     "search": {
       "search": "Search",
       "placeholder": "What kind of toys are you looking for?",
@@ -22,26 +13,6 @@
       "goToDetails": "Go to product",
       "goToAffShop": "Go to product",
       "hoverImage": "See more"
-    },
-    "about": {
-      "title": "Über uns",
-      "content": ""
-    },
-    "privacy-policy": {
-      "title": "Datenschutzerklärung",
-      "content": ""
-    },
-    "imprint": {
-      "title": "Impressum",
-      "content": ""
-    },
-    "affiliate-disclaimer": {
-      "title": "Amazon Partnerprogramm",
-      "content": ""
-    },
-    "contact": {
-      "title": "Kontakt",
-      "content": ""
     },
     "cookies": {
       "bannerText": "Diese Webseite verwendet Cookies, um Ihnen ein angenehmeres Surfen zu ermöglichen."
@@ -49,15 +20,6 @@
   },
   "en": {
     "title": "The Better Play",
-    "subtitle": "Inspiration for good toys",
-    "USP": {
-      "quality": "Quality",
-      "qualitySub": "Good for the kids",
-      "trust": "Trusted",
-      "trustSub": "4 & 5 stars only",
-      "easy": "Quality",
-      "easySub": "Stop searching & start finding"
-    },
     "search": {
       "search": "Search",
       "placeholder": "What kind of toys are you looking for?",
@@ -70,26 +32,6 @@
       "goToDetails": "Go to product",
       "goToAffShop": "Go to product",
       "hoverImage": "See more"
-    },
-    "about": {
-      "title": "About us",
-      "content": ""
-    },
-    "privacy-policy": {
-      "title": "Privacy Policy",
-      "content": ""
-    },
-    "imprint": {
-      "title": "Imprint",
-      "content": ""
-    },
-    "affiliate-disclaimer": {
-      "title": "Affiliate Disclaimer",
-      "content": ""
-    },
-    "contact": {
-      "title": "Contact",
-      "content": ""
     },
     "cookies": {
       "bannerText": "Diese Webseite verwendet Cookies, um Ihnen ein angenehmeres Surfen zu ermöglichen."

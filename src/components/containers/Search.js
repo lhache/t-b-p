@@ -58,7 +58,7 @@ class SearchContainer extends Component {
 
   handleSubmit(term) {
     const history = this.props.history;
-    const termForURL = term.map(t => t.value).join(',')
+    const termForURL = term.map(t => t.name).join(',')
     history.push({
       pathname: '/results',
       search: `?q=${termForURL}`,
