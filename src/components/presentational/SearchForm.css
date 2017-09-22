@@ -38,7 +38,9 @@
 .SearchIconContainer {
   background-color: white;
   border-radius: 24px 0 0 24px;
-  padding-top: 4px; }
+  padding-top: 4px;
+  border: 1px solid #00cbe2;
+  border-right: none; }
 
 .AppMobile .SearchButtonContainer {
   width: 100%;
