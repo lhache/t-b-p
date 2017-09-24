@@ -17,9 +17,9 @@ class App extends Component {
       <Flexbox flex="flex" flexDirection="row" flexWrap="wrap" className={`App App${deviceTypeClass}`}>
         {/* app logic pages  */}
         <Route exact path="/" component={HomePage} />
-        <Route path="/search" component={SearchPage} />
-        <Route path="/results" component={ResultsPage} />
-        <Route path="/details" component={DetailsPage} />
+        <Route path="/s/search" component={SearchPage} />
+        <Route path="/s/results" component={ResultsPage} />
+        <Route path="/s/details" component={DetailsPage} />
         <Route path="/landing" component={LandingPage} />
       </Flexbox>
     );

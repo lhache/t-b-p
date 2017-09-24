@@ -60,7 +60,7 @@ class SearchContainer extends Component {
     const history = this.props.history;
     const termForURL = term.map(t => t.name).join(',')
     history.push({
-      pathname: '/results',
+      pathname: '/s/results',
       search: `?q=${termForURL}`,
       state: { term }
     })
