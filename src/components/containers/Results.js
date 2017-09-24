@@ -4,14 +4,13 @@ import { withRouter } from 'react-router-dom'
 import PropTypes from 'prop-types'
 import { fetchResults, storeTerm, storeSearchedTerm }  from '../../data/modules/searchResults'
 import ResultsHeadline from '../presentational/ResultsHeadline'
+import Loader from '../presentational/Loader'
 import Product from '../presentational/Product'
 import Flexbox from 'flexbox-react';
 import { parseQueryString } from '../../data/utils'
-import ReactSVG from 'react-svg'
 import './Results.css';
-import loader from '../../images/loader.svg'
 
-const showLoader = isFetching => (isFetching && <Flexbox flexBasis="100%" justifyContent="center"><ReactSVG path={`${process.env.REACT_APP_ASSET_HOST}${loader}`} /></Flexbox>)
+const showLoader = isFetching => (isFetching && <Loader />)
 
 const showResults = (results, isFetching) => (!isFetching && (
   <Flexbox maxWidth="100%" flexWrap="wrap" justifyContent="center">

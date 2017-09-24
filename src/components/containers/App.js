@@ -19,7 +19,7 @@ class App extends Component {
         <Route exact path="/" component={HomePage} />
         <Route path="/search" component={SearchPage} />
         <Route path="/results" component={ResultsPage} />
-        <Route path="/details/:id" component={DetailsPage} />
+        <Route path="/details" component={DetailsPage} />
         <Route path="/landing" component={LandingPage} />
       </Flexbox>
     );

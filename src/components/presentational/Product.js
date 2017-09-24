@@ -29,7 +29,7 @@ const showMobileProduct = (product) => {
               <Price price={product.price} />
           </Flexbox>
           <Flexbox flexBasis="100%" justifyContent="center" marginTop="5px">
-            <ProductButton link={`/details/${product.id}`} translationKey="product.goToDetails" />
+            <ProductButton link={`/details?id=${product.id}`} translationKey="product.goToDetails" />
           </Flexbox>
         </Flexbox>
     </Flexbox>
@@ -54,7 +54,7 @@ const showDesktopProduct = (product) => {
           <Ratings ratings={product.ratings} />
       </Flexbox>
       <Flexbox flexBasis="90%" justifyContent="center" marginTop="5px">
-        <ProductButton link={`/details/${product.id}`} translationKey="product.goToDetails" />
+        <ProductButton link={`/details?id=${product.id}`} translationKey="product.goToDetails" />
       </Flexbox>
     </Flexbox>
   )

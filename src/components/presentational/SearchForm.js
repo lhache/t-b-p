@@ -31,7 +31,7 @@ const showDesktopSearchForm = (term, onChange) => {
       <Flexbox flexBasis="100%">
         <Flexbox flexBasis="5%" className="SearchIconContainer">
           <Flexbox flexBasis="100%" alignSelf="center" justifyContent="center">
-            <ReactSVG path={`${process.env.REACT_APP_ASSET_HOST}${iconSearch}`} />
+            <ReactSVG path={`${process.env.REACT_APP_ASSET_HOST}/static/media/icon-search.svg`} />
           </Flexbox>
         </Flexbox>
         <Flexbox flexBasis="75%">

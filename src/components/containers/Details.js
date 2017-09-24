@@ -4,15 +4,15 @@ import { withRouter } from 'react-router-dom'
 import {fetchDetails} from '../../data/modules/details'
 import Flexbox from 'flexbox-react';
 import _last from 'lodash/last'
-import ReactSVG from 'react-svg'
-import loader from '../../images/loader.svg'
 import placeholderImage from '../../images/product-placeholder.jpg'
 import Ratings from '../presentational/Ratings'
+import Loader from '../presentational/Loader'
 import Price from '../presentational/Price'
 import ProductButton from '../presentational/ProductButton'
+import { parseQueryString } from '../../data/utils'
 import './Details.css';
 
-const showLoader = isFetching => (isFetching && <Flexbox flexBasis="100%" justifyContent="center"><ReactSVG path={`${process.env.REACT_APP_ASSET_HOST}${loader}`} /></Flexbox>)
+const showLoader = isFetching => (isFetching && <Loader />)
 
 const showDetails = (details, isFetching) => (!isFetching && (
   <Flexbox flexBasis="100%" flexWrap="wrap" padding="20px">
@@ -42,7 +42,8 @@ const showDetails = (details, isFetching) => (!isFetching && (
 class DetailsContainer extends Component {
 
   componentDidMount() {
-    let id = _last(this.props.history.location.pathname.split('/'))
+    const queries = parseQueryString(this.props.history.location.search);
+    const id = queries['id'];
     this.props.fetchDetails(id)
   }
 

@@ -3,6 +3,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import { createStore, combineReducers, applyMiddleware } from 'redux'
 import { routerReducer, routerMiddleware } from 'react-router-redux'
+import { gaMiddleware } from './data/middlewares/gaMiddleware'
 import thunk from 'redux-thunk'
 import { createLogger } from 'redux-logger'
 import registerServiceWorker from './registerServiceWorker';
@@ -27,7 +28,11 @@ const history = createHistory()
 registerTranslations();
 
 // middlewares
-const middlewares = [ thunk, routerMiddleware(history) ];
+const middlewares = [
+  thunk,
+  routerMiddleware(history),
+  gaMiddleware
+];
 if (process.env.NODE_ENV !== 'production') {
   middlewares.push(createLogger());
 }
