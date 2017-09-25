@@ -6,6 +6,7 @@ import Ratings from './Ratings'
 import ProductButton from './ProductButton'
 import ProductImage from './ProductImage'
 import { isDeviceConsideredMobile } from '../../data/utils'
+import { detailsURL } from '../../data/urls'
 import './Product.css'
 
 const showMobileProduct = (product) => {
@@ -54,7 +55,7 @@ const showDesktopProduct = (product) => {
           <Ratings ratings={product.ratings} />
       </Flexbox>
       <Flexbox flexBasis="90%" justifyContent="center" marginTop="5px">
-        <ProductButton link={`/s/details?id=${product.id}`} translationKey="product.goToDetails" />
+        <ProductButton link={`${detailsURL}?id=${product.id}`} translationKey="product.goToDetails" />
       </Flexbox>
     </Flexbox>
   )

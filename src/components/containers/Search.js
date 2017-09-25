@@ -9,6 +9,7 @@ import { storeTerm, storeSearchedTerm } from '../../data/modules/searchResults'
 import { Link } from 'react-router-dom'
 import { isDeviceConsideredMobile } from '../../data/utils'
 import { parseQueryString } from '../../data/utils'
+import { searchURL, resultsURL } from '../../data/urls'
 
 import './Search.css';
 
@@ -24,7 +25,7 @@ const showMobileSearch = (term, that) => {
   }
   else {
     return (
-      <Link to={`/search?q=${term}`} className="SearchLink">
+      <Link to={`${searchURL}?q=${term}`} className="SearchLink">
         <TagAutocomplete
           value={term}
           onChange={that.handleChange.bind(that)}
@@ -60,7 +61,7 @@ class SearchContainer extends Component {
     const history = this.props.history;
     const termForURL = term.map(t => t.name).join(',')
     history.push({
-      pathname: '/s/results',
+      pathname: `${resultsURL}`,
       search: `?q=${termForURL}`,
       state: { term }
     })
