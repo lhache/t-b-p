@@ -14,7 +14,9 @@ import './Details.css';
 
 const showLoader = isFetching => (isFetching && <Loader />)
 
-const showDetails = (details, isFetching) => (!isFetching && (
+const showError = hasFailedFetching => (hasFailedFetching && <p>error</p>)
+
+const showDetails = (details, isFetching, hasFailedFetching) => ((!isFetching && !hasFailedFetching) && (
   <Flexbox flexBasis="100%" flexWrap="wrap" padding="20px">
     <Flexbox flexBasis="100%" justifyContent="center" marginBottom="10px">
       <Flexbox flexBasis="90%" justifyContent="center">
@@ -48,12 +50,13 @@ class DetailsContainer extends Component {
   }
 
   render() {
-    const {details, isFetching} = this.props
+    const {details, isFetching, hasFailedFetching} = this.props
 
     return (
       <Flexbox className="DetailsContainer" flexBasis="100%" flexWrap="wrap">
         { showLoader(isFetching) }
-        { showDetails(details, isFetching) }
+        { showError(hasFailedFetching) }
+        { showDetails(details, isFetching, hasFailedFetching) }
       </Flexbox>
     )
   }
@@ -62,7 +65,8 @@ class DetailsContainer extends Component {
 const mapStateToProps = state => {
   return {
     details: state.details.details,
-    isFetching: state.details.isFetching
+    isFetching: state.details.isFetching,
+    hasFailedFetching: state.details.hasFailedFetching
   }
 }
 

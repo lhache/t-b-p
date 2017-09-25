@@ -12,7 +12,9 @@ import './Results.css';
 
 const showLoader = isFetching => (isFetching && <Loader />)
 
-const showResults = (results, isFetching) => (!isFetching && (
+const showError = hasFailedFetching => (hasFailedFetching && <p>error</p>)
+
+const showResults = (results, isFetching, hasFailedFetching) => ((!isFetching && !hasFailedFetching) && (
   <Flexbox maxWidth="100%" flexWrap="wrap" justifyContent="center">
       {results.map((result, idx) => (
         <Flexbox key={result.id} order={idx}>
@@ -43,11 +45,14 @@ class ResultsContainer extends Component {
   }
 
   render() {
+    const {results, isFetching, hasFailedFetching} = this.props
+
     return (
       <Flexbox flexWrap="wrap" className="ResultsContainer" maxWidth="100%">
         <ResultsHeadline type="results" term={this.props.searchedTerm} />
-        { showLoader(this.props.isFetching) }
-        { showResults(this.props.results, this.props.isFetching) }
+        { showLoader(isFetching) }
+        { showError(hasFailedFetching) }
+        { showResults(results, isFetching, hasFailedFetching) }
       </Flexbox>
     )
   }
@@ -65,7 +70,8 @@ const mapStateToProps = state => {
     term: state.searchResults.term,
     searchedTerm: state.searchResults.searchedTerm,
     results: state.searchResults.results,
-    isFetching: state.searchResults.isFetching
+    isFetching: state.searchResults.isFetching,
+    hasFailedFetching: state.searchResults.hasFailedFetching
   }
 }
 
