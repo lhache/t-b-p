@@ -43,8 +43,6 @@ class ResultsContainer extends Component {
   }
 
   render() {
-    // const {term, storeTerm, searchedTerm, results, fetchResults} = this.props
-
     return (
       <Flexbox flexWrap="wrap" className="ResultsContainer" maxWidth="100%">
         <ResultsHeadline type="results" term={this.props.searchedTerm} />

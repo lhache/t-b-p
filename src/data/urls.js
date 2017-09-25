@@ -1,3 +1,3 @@
-export const searchURL = "/toys/search"
-export const resultsURL = "/toys/results"
-export const detailsURL = "/toys/details"
+export const searchURL = "/s/search"
+export const resultsURL = "/s/results"
+export const detailsURL = "/s/details"

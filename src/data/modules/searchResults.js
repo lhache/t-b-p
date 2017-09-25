@@ -38,7 +38,12 @@ export const receiveResults = (term, json) => {
   }
 }
 
-// TODO action for failure
+export const failedfetchingResults = (term) => {
+  return {
+    type: FETCH_RESULTS_FAILURE,
+    term
+  }
+}
 
 export const initialState = {
   term: [],
@@ -67,7 +72,7 @@ export const searchResultsReducer = (state = initialState, action) => {
     case FETCH_RESULTS_SUCCESS:
       return Object.assign({}, state, {
         isFetching: false,
-        results: action.results,
+        results: action.results.slice(0, 20),  // look how naughty I am here
         hasFailedFetching: false
       })
     case FETCH_RESULTS_FAILURE:
@@ -86,29 +91,12 @@ export const searchResultsReducer = (state = initialState, action) => {
   }
 }
 
-
-export function fetchResults(term) {
-  return function (dispatch) {
-    dispatch(requestResults(term))
-    return fetch(`${process.env.REACT_APP_API_HOST}${process.env.REACT_APP_API_RESULTS_ENDPOINT}${term}`)
-      .then(
-        response => {
-            return response.json()
-        },
-        // Do not use catch, because that will also catch
-        // any errors in the dispatch and resulting render,
-        // causing an loop of 'Unexpected batch number' errors.
-        // https://github.com/facebook/react/issues/6895
-        error => console.log('An error occured.', error)
-      )
-      .then(json => {
-
-        //
-        // dispatch(storeTerm) ??
-
-        // We can dispatch many times!
-        // Here, we update the app state with the results of the API call.
-        dispatch(receiveResults(term, json))
-      })
-  }
+export const fetchResults = term => dispatch => {
+  dispatch(requestResults(term))
+  return fetch(`${process.env.REACT_APP_API_HOST}${process.env.REACT_APP_API_RESULTS_ENDPOINT}${term}`)
+    .then(response => response.json())
+    .then(json =>
+      dispatch(receiveResults(term, json)),
+      error => dispatch(failedfetchingResults(term))
+    )
 }
