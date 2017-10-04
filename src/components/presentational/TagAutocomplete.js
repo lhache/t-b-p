@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { buildUrl } from '../../data/utils'
 import counterpart from 'counterpart'
 import VirtualizedSelect from 'react-virtualized-select'
 import './TagAutocomplete.css'
@@ -7,10 +8,12 @@ import 'react-virtualized/styles.css'
 import 'react-virtualized-select/styles.css'
 
 const getOptions = input => {
-  return fetch(`${process.env.REACT_APP_API_HOST}${process.env.REACT_APP_API_SUGGEST_ENDPOINT}${input}`,{
-    'Access-Control-Allow-Origin':'*',
-    'Content-Type': 'application/json'
-  })
+
+  const url = buildUrl(
+    `${process.env.REACT_APP_API_HOST}${process.env.REACT_APP_API_SUGGEST_ENDPOINT}`,
+    { q: input }
+  )
+  return fetch(url)
     .then((response) => response.json())
     .then((json) => ({ options: json }))
 }

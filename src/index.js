@@ -22,7 +22,9 @@ import './index.css';
 import { registerTranslations } from './data/translations/translations.js';
 
 // set history to browser history
-const history = createHistory()
+ const history = createHistory({
+  forceRefresh: true
+})
 
 // load translations
 registerTranslations();

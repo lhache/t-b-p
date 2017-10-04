@@ -1,4 +1,5 @@
 import 'isomorphic-fetch'
+import { buildUrl } from '../utils'
 
 export const STORE_TERM = 'STORE_TERM'
 export const STORE_SEARCHED_TERM = 'STORE_SEARCHED_TERM'
@@ -93,7 +94,12 @@ export const searchResultsReducer = (state = initialState, action) => {
 
 export const fetchResults = term => dispatch => {
   dispatch(requestResults(term))
-  return fetch(`${process.env.REACT_APP_API_HOST}${process.env.REACT_APP_API_RESULTS_ENDPOINT}${term}`)
+
+  const url = buildUrl(
+    `${process.env.REACT_APP_API_HOST}${process.env.REACT_APP_API_RESULTS_ENDPOINT}`,
+    { q: term, image_sizes: 'medium' }
+  )
+  return fetch(url)
     .then(response => response.json())
     .then(json =>
       dispatch(receiveResults(term, json)),

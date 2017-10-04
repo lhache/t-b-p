@@ -1,4 +1,5 @@
 import 'isomorphic-fetch'
+import { buildUrl } from '../utils'
 
 export const FETCH_DETAILS = 'FETCH_DETAILS'
 export const FETCH_DETAILS_SUCCESS = 'FETCH_DETAILS_SUCCESS'
@@ -57,7 +58,12 @@ export const detailsReducer = (state = initialState, action) => {
 
 export const fetchDetails = id => dispatch => {
   dispatch(requestDetails(id))
-  return fetch(`${process.env.REACT_APP_API_HOST}${process.env.REACT_APP_API_DETAILS_ENDPOINT}${id}`)
+
+  const url = buildUrl(
+    `${process.env.REACT_APP_API_HOST}${process.env.REACT_APP_API_DETAILS_ENDPOINT}${id}`,
+    { image_sizes: 'tiny, large' }
+  )
+  return fetch(url)
     .then(response => response.json())
     .then(json =>
       dispatch(receiveDetails(id, json)),

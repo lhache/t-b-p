@@ -1,10 +1,11 @@
 import React from 'react';
-// import './Price.css'
+import './Price.css'
 
 const Price = ({price}) => {
   return (
-    <div>
-      <b>{(price/100).toFixed(2)} €</b>
+    <div className="Price">
+      {/* <b>{(price/100).toFixed(2)} €</b> */}
+      <b>{price}</b>
     </div>
   )
 }

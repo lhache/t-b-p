@@ -9,6 +9,7 @@ import Ratings from '../presentational/Ratings'
 import Loader from '../presentational/Loader'
 import Price from '../presentational/Price'
 import ProductButton from '../presentational/ProductButton'
+import ProductImage from '../presentational/ProductImage'
 import { parseQueryString } from '../../data/utils'
 import './Details.css';
 
@@ -20,22 +21,20 @@ const showDetails = (details, isFetching, hasFailedFetching) => ((!isFetching &&
   <Flexbox flexBasis="100%" flexWrap="wrap" padding="20px">
     <Flexbox flexBasis="100%" justifyContent="center" marginBottom="10px">
       <Flexbox flexBasis="90%" justifyContent="center">
-        <img src={placeholderImage} alt=""/>
+        <ProductImage images={details.imageUrls} size="large" hover={false} />
       </Flexbox>
     </Flexbox>
     <Flexbox flexBasis="100%" marginBottom="10px">
         <b>{details.name || ''}</b>
     </Flexbox>
     <Flexbox flexBasis="100%" marginBottom="10px">
-      <Ratings ratings={details.ratings || ''} />
-    </Flexbox>
-    <Flexbox flexBasis="100%" marginBottom="10px">
-      <Price price={details.price || ''} />
+      <Price price={details.price ? details.price.displayPrice : ''} />
     </Flexbox>
     <Flexbox flexBasis="100%" marginBottom="10px">
       <p>{details.description || ''}</p>
     </Flexbox>
     <Flexbox flexBasis="100%" justifyContent="center" marginBottom="10px">
+      <a href={details.deeplinkUrl} target="_blank">lol</a>
       <ProductButton link={`${details.deeplinkUrl}`} translationKey="product.goToAffShop"/>
     </Flexbox>
   </Flexbox>
@@ -51,7 +50,6 @@ class DetailsContainer extends Component {
 
   render() {
     const {details, isFetching, hasFailedFetching} = this.props
-
     return (
       <Flexbox className="DetailsContainer" flexBasis="100%" flexWrap="wrap">
         { showLoader(isFetching) }

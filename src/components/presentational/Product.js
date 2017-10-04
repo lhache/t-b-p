@@ -13,7 +13,7 @@ const showMobileProduct = (product) => {
   return (
     <Flexbox flexBasis="100%" flexWrap="wrap" padding="10px">
         <Flexbox flexBasis="40%" justifyContent="center">
-          <ProductImage />
+          <ProductImage images={product.imageUrls} size="medium" hover={false}/>
         </Flexbox>
         <Flexbox flexBasis="2%" flexWrap="wrap">
         </Flexbox>
@@ -23,9 +23,9 @@ const showMobileProduct = (product) => {
               {product.name}
             </Truncate>
           </Flexbox>
-          <Flexbox flexBasis="100%" justifyContent="flex-start" marginTop="5px">
+          {/* <Flexbox flexBasis="100%" justifyContent="flex-start" marginTop="5px">
               <Ratings ratings={product.ratings} />
-          </Flexbox>
+          </Flexbox> */}
           <Flexbox flexBasis="100%" justifyContent="flex-start" marginTop="5px">
               <Price price={product.price} />
           </Flexbox>
@@ -41,7 +41,7 @@ const showDesktopProduct = (product) => {
   return (
     <Flexbox flexBasis="100%" flexWrap="wrap" maxWidth="170px" padding="10px" marginBottom="10px">
         <Flexbox flexBasis="100%" justifyContent="center">
-          <ProductImage />
+          <ProductImage images={product.imageUrls} size="medium" hover={true}/>
         </Flexbox>
       <Flexbox flexBasis="100%" className="ProductName" marginTop="10px">
         <Truncate lines={2}>
@@ -49,11 +49,11 @@ const showDesktopProduct = (product) => {
         </Truncate>
       </Flexbox>
       <Flexbox flexBasis="50%" justifyContent="flex-start" marginTop="5px">
-          <Price price={product.price} />
+          <Price price={product.price.displayPrice} />
       </Flexbox>
-      <Flexbox flexBasis="50%" justifyContent="flex-end" marginTop="5px">
+      {/* <Flexbox flexBasis="50%" justifyContent="flex-end" marginTop="5px">
           <Ratings ratings={product.ratings} />
-      </Flexbox>
+      </Flexbox> */}
       <Flexbox flexBasis="90%" justifyContent="center" marginTop="5px">
         <ProductButton link={`${detailsURL}?id=${product.id}`} translationKey="product.goToDetails" />
       </Flexbox>
