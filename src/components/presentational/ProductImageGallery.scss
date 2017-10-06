@@ -1,0 +1,47 @@
+.image-gallery {
+  width: 60%;
+}
+
+// border on large picture
+.image-gallery-swipe {
+  border: solid 1px #dcdcdf;
+}
+
+// large picture styling
+.image-gallery-image {
+  text-align: center;
+  height: 350px;
+  display: flex;
+
+  img {
+    align-self: center;
+    width: 100%;
+    height: auto;
+  }
+}
+
+// spacing between image and thumbnails
+.image-gallery-thumbnails-wrapper {
+  margin-top: 30px;
+}
+
+ // space between thumbnails
+.image-gallery-thumbnail + .image-gallery-thumbnail {
+    margin-left: 5px;
+}
+
+// individual thumbnails
+.image-gallery-thumbnail {
+  border: solid 1px #dcdcdf;
+  width: auto;
+
+  &.active {
+    border: solid 1px #ff4572;
+  }
+
+  img {
+    height: 40px;
+    width: auto;
+    max-width: 100px;
+  }
+}

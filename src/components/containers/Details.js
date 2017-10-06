@@ -3,42 +3,53 @@ import { connect } from 'react-redux'
 import { withRouter } from 'react-router-dom'
 import {fetchDetails} from '../../data/modules/details'
 import Flexbox from 'flexbox-react';
-import _last from 'lodash/last'
-import placeholderImage from '../../images/product-placeholder.jpg'
-import Ratings from '../presentational/Ratings'
 import Loader from '../presentational/Loader'
 import Price from '../presentational/Price'
 import ProductButton from '../presentational/ProductButton'
 import ProductImage from '../presentational/ProductImage'
+import ProductImageGallery from '../presentational/ProductImageGallery'
 import { parseQueryString } from '../../data/utils'
+import _get from 'lodash/get'
+import _merge from 'lodash/merge'
+import _toArray from 'lodash/toArray'
 import './Details.css';
 
 const showLoader = isFetching => (isFetching && <Loader />)
 
 const showError = hasFailedFetching => (hasFailedFetching && <p>error</p>)
 
-const showDetails = (details, isFetching, hasFailedFetching) => ((!isFetching && !hasFailedFetching) && (
-  <Flexbox flexBasis="100%" flexWrap="wrap" padding="20px">
-    <Flexbox flexBasis="100%" justifyContent="center" marginBottom="10px">
-      <Flexbox flexBasis="90%" justifyContent="center">
-        <ProductImage images={details.imageUrls} size="large" hover={false} />
+const flattenImagesBySize = (images, size, target) => (
+  images && _get(images, size).map(image => ({[target]: image}))
+)
+
+const showDetails = (props) => {
+  const imagesForGallery = _toArray(_merge(
+    flattenImagesBySize(props.details.imageUrls, 'tiny', 'thumbnail'),
+    flattenImagesBySize(props.details.imageUrls, 'large', 'original')
+  ))
+
+  return (!props.isFetching && !props.hasFailedFetching) && (
+  <Flexbox className="Details" flexBasis="100%" flexWrap="wrap" padding="20px">
+    <Flexbox flexBasis="50%" justifyContent="center" marginBottom="10px" maxWidth="50%">
+      <ProductImageGallery images={imagesForGallery} />
+    </Flexbox>
+    <Flexbox flexBasis="50%" flexWrap="wrap" justifyContent="center" marginBottom="10px">
+      <Flexbox flexBasis="100%" marginBottom="10px">
+          <b className="Details-Name">{props.details.name || ''}</b>
+      </Flexbox>
+      <Flexbox flexBasis="100%" marginBottom="10px">
+        <Price price={props.details.price ? props.details.price.displayPrice : ''} />
+      </Flexbox>
+      <Flexbox flexBasis="100%" marginBottom="10px">
+        <p>{props.details.description || ''}</p>
+      </Flexbox>
+      <Flexbox flexBasis="100%" justifyContent="center" marginBottom="10px">
+        <a href={props.details.deeplinkUrl} target="_blank">lol</a>
+        <ProductButton link={`${props.details.deeplinkUrl}`} translationKey="product.goToAffShop"/>
       </Flexbox>
     </Flexbox>
-    <Flexbox flexBasis="100%" marginBottom="10px">
-        <b>{details.name || ''}</b>
-    </Flexbox>
-    <Flexbox flexBasis="100%" marginBottom="10px">
-      <Price price={details.price ? details.price.displayPrice : ''} />
-    </Flexbox>
-    <Flexbox flexBasis="100%" marginBottom="10px">
-      <p>{details.description || ''}</p>
-    </Flexbox>
-    <Flexbox flexBasis="100%" justifyContent="center" marginBottom="10px">
-      <a href={details.deeplinkUrl} target="_blank">lol</a>
-      <ProductButton link={`${details.deeplinkUrl}`} translationKey="product.goToAffShop"/>
-    </Flexbox>
   </Flexbox>
-))
+)}
 
 class DetailsContainer extends Component {
 
@@ -49,12 +60,11 @@ class DetailsContainer extends Component {
   }
 
   render() {
-    const {details, isFetching, hasFailedFetching} = this.props
     return (
       <Flexbox className="DetailsContainer" flexBasis="100%" flexWrap="wrap">
-        { showLoader(isFetching) }
-        { showError(hasFailedFetching) }
-        { showDetails(details, isFetching, hasFailedFetching) }
+        { showLoader(this.props.isFetching) }
+        { showError(this.props.hasFailedFetching) }
+        { showDetails(this.props) }
       </Flexbox>
     )
   }
