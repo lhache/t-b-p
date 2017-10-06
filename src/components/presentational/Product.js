@@ -2,7 +2,6 @@ import React from 'react'
 import Flexbox from 'flexbox-react';
 import Truncate from 'react-truncate';
 import Price from './Price'
-import Ratings from './Ratings'
 import ProductButton from './ProductButton'
 import ProductImage from './ProductImage'
 import { isDeviceConsideredMobile } from '../../data/utils'
@@ -23,9 +22,6 @@ const showMobileProduct = (product) => {
               {product.name}
             </Truncate>
           </Flexbox>
-          {/* <Flexbox flexBasis="100%" justifyContent="flex-start" marginTop="5px">
-              <Ratings ratings={product.ratings} />
-          </Flexbox> */}
           <Flexbox flexBasis="100%" justifyContent="flex-start" marginTop="5px">
               <Price price={product.price} />
           </Flexbox>
