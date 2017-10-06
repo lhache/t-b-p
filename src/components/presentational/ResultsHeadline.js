@@ -2,6 +2,7 @@ import React from 'react';
 import Translate from 'react-translate-component'
 import Flexbox from 'flexbox-react'
 import { isDeviceConsideredMobile } from '../../data/utils'
+import _isEmpty from 'lodash/isEmpty'
 import './ResultsHeadline.css'
 
 const showWhichHeadline = (type, term) => {
@@ -12,10 +13,10 @@ const showWhichHeadline = (type, term) => {
       </h3>
     )
   } else {
-    return (
+    return (!_isEmpty(term) &&
       <div>
         <Translate content="results.headline" component="span" />
-        <b className="ResultsHeadlineTermCollection"> { term.map(t => t.label).join(' - ')} </b>
+        <b className="ResultsHeadlineTermCollection"> { term.join(' - ')} </b>
       </div>
     )
   }

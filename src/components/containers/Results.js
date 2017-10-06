@@ -45,11 +45,11 @@ class ResultsContainer extends Component {
   }
 
   render() {
-    const {results, isFetching, hasFailedFetching} = this.props
+    const {results, isFetching, hasFailedFetching, searchedTerm} = this.props
 
     return (
       <Flexbox flexWrap="wrap" className="ResultsContainer" maxWidth="100%">
-        <ResultsHeadline type="results" term={this.props.searchedTerm} />
+        <ResultsHeadline type="results" term={searchedTerm} />
         { showLoader(isFetching) }
         { showError(hasFailedFetching) }
         { showResults(results, isFetching, hasFailedFetching) }

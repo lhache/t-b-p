@@ -3,25 +3,10 @@ import ReactDOM from 'react-dom';
 import CookieBanner from 'react-cookie-banner';
 import Flexbox from 'flexbox-react';
 import counterpart from 'counterpart'
+import { getOrCreateElementById } from '../../utils/domUtils'
 // import './CookieBannerBar.css'
 
 class CookieBannerBar extends Component {
-  constructor(props) {
-    super(props)
-
-    let wrapper = document.getElementById('cookie-banner-wrapper')
-
-    // create the element if it's not there
-    // mainly a temp hack for development setup
-    if (!this.element) {
-      wrapper = document.createElement('div')
-      wrapper.setAttribute('id', 'cookie-banner-wrapper')
-    }
-
-    this.portalElement = wrapper;
-
-  }
-
   render() {
     return ReactDOM.createPortal(
       <Flexbox className="CookieBanner" flexBasis="100%">
@@ -32,7 +17,7 @@ class CookieBannerBar extends Component {
           dismissOnScroll={false}
         />
       </Flexbox>,
-      this.portalElement,
+      getOrCreateElementById('div', { id: 'cookie-banner-wrapper'}),
     );
   }
 }

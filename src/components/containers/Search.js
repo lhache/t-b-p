@@ -54,6 +54,8 @@ class SearchContainer extends Component {
     if (term) {
       term = term.split(',')
       this.props.storeTerm(term)
+      this.props.storeSearchedTerm(term)
+      // debugger;
     }
   }
 

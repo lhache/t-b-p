@@ -16,7 +16,7 @@ export const storeTerm = term => {
 }
 
 // store searchedTerm
-export const storeSearchedTerm = term => {
+  export const storeSearchedTerm = term => {
   return {
     type: STORE_SEARCHED_TERM,
     searchedTerm: term

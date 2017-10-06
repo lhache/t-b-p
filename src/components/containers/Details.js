@@ -6,7 +6,6 @@ import Flexbox from 'flexbox-react';
 import Loader from '../presentational/Loader'
 import Price from '../presentational/Price'
 import ProductButton from '../presentational/ProductButton'
-import ProductImage from '../presentational/ProductImage'
 import ProductImageGallery from '../presentational/ProductImageGallery'
 import { parseQueryString } from '../../data/utils'
 import _get from 'lodash/get'
@@ -44,7 +43,7 @@ const showDetails = (props) => {
         <p>{props.details.description || ''}</p>
       </Flexbox>
       <Flexbox flexBasis="100%" justifyContent="center" marginBottom="10px">
-        <a href={props.details.deeplinkUrl} target="_blank">lol</a>
+        <a href={props.details.deeplinkUrl} target="_blank" rel="noopener noreferrer">lol</a>
         <ProductButton link={`${props.details.deeplinkUrl}`} translationKey="product.goToAffShop"/>
       </Flexbox>
     </Flexbox>
