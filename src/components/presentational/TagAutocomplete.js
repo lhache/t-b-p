@@ -9,9 +9,12 @@ import 'react-virtualized-select/styles.css'
 
 const getOptions = input => {
 
+  // TODO remove this when API fixed
+  const q = input ? input : 'bui'
+
   const url = buildUrl(
     `${process.env.REACT_APP_API_HOST}${process.env.REACT_APP_API_SUGGEST_ENDPOINT}`,
-    { q: input }
+    { q: q }
   )
   return fetch(url)
     .then((response) => response.json())
