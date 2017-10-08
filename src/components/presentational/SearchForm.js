@@ -48,9 +48,6 @@ const showDesktopSearchForm = (term, onChange) => {
           </button>
         </Flexbox>
       </Flexbox>
-      <Flexbox flexBasis="100%">
-        <Translate className="SearchSubPlaceholder" content="search.formSubPlaceholder" />
-      </Flexbox>
     </Flexbox>
   )
 }
