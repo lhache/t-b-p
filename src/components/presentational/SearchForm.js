@@ -1,9 +1,11 @@
-import React from 'react';
+import React, { Component } from 'react';
+import ReactDOM from 'react-dom';
 import Translate from 'react-translate-component'
 import Flexbox from 'flexbox-react';
 import ReactSVG from 'react-svg'
 import TagAutocomplete from './TagAutocomplete'
 import { isDeviceConsideredMobile } from '../../data/utils'
+import { getOrCreateElementById } from '../../utils/domUtils'
 import iconSearch from '../../images/icon-search.svg'
 import './SearchForm.css'
 
@@ -53,18 +55,28 @@ const showDesktopSearchForm = (term, onChange) => {
   )
 }
 
-const SearchForm = ({ term, onChange, onSubmit }) => {
-  return (
-    <Flexbox flexBasis="100%">
-      <form
-        className="SearchForm"
-        onSubmit={e => {
-          e.preventDefault()
-          onSubmit(term)
-        }} >
-        {isDeviceConsideredMobile() ? showMobileSearchForm(term, onChange) : showDesktopSearchForm(term, onChange)}
-      </form>
-    </Flexbox>)
+class SearchForm extends Component {
+  constructor(props) {
+    super(props)
+    this._handleSumbit = this._handleSumbit.bind(this)
   }
+
+  _handleSumbit(e) {
+    e.preventDefault()
+    this.props.onSubmit(this.props.term)
+  }
+
+  render() {
+    const { term, onChange } = this.props
+    return ReactDOM.createPortal(
+      <Flexbox flexBasis="100%">
+        <form className="SearchForm" onSubmit={this._handleSumbit}>
+          {isDeviceConsideredMobile() ? showMobileSearchForm(term, onChange) : showDesktopSearchForm(term, onChange)}
+        </form>
+      </Flexbox>,
+      getOrCreateElementById('div', { id: 'SearchContainer'})
+    )
+  }
+}
 
 export default SearchForm;

@@ -1,4 +1,3 @@
-
 const createElementWithId = (elementType, attributes) => {
   let el = document.createElement(elementType)
   el.setAttribute('id', attributes.id)

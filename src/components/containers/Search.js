@@ -76,7 +76,7 @@ class SearchContainer extends Component {
     const {term} = this.props
 
     return (
-      <Flexbox flexBasis="100%" flexWrap="wrap" className="SearchContainer">
+      <Flexbox flexBasis="100%" flexWrap="wrap" id="SearchContainer" className="SearchContainer">
         { isDeviceConsideredMobile() ? showMobileSearch(term, this) : showDesktopSearch(term, this)}
       </Flexbox>
     )
