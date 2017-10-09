@@ -12,7 +12,7 @@ import { isDeviceConsideredMobile } from '../../data/utils'
 import { parseQueryString } from '../../data/utils'
 import { searchURL, resultsURL } from '../../data/urls'
 import { getOrCreateElementById } from '../../utils/domUtils'
-import { termCollectionToUrlTerm } from '../../utils/appUtils'
+import { joinTermToStringWithSymbol } from '../../utils/appUtils'
 import './Search.css';
 
 const showMobileSearch = (term, that) => {
@@ -29,7 +29,7 @@ const showMobileSearch = (term, that) => {
   }
   else {
     return (
-      <Link to={`${searchURL}?q=${termCollectionToUrlTerm(term)}`} className="SearchLink">
+      <Link to={`${searchURL}?q=${joinTermToStringWithSymbol(term, ',')}`} className="SearchLink">
         <TagAutocomplete
           value={term}
           onChange={that.handleChange.bind(that)}

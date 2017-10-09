@@ -8,6 +8,7 @@ import Loader from '../presentational/Loader'
 import Product from '../presentational/Product'
 import Flexbox from 'flexbox-react';
 import { parseQueryString } from '../../data/utils'
+import { joinTermToStringWithSymbol } from '../../utils/appUtils'
 import './Results.css';
 
 const showLoader = isFetching => (isFetching && <Loader />)
@@ -48,7 +49,7 @@ class ResultsContainer extends Component {
 
     return (
       <Flexbox flexWrap="wrap" className="ResultsContainer" maxWidth="100%">
-        <ResultsHeadline type="results" term={searchedTerm} />
+        <ResultsHeadline type="results" term={joinTermToStringWithSymbol(searchedTerm, ' - ')} />
         { showLoader(isFetching) }
         { showError(hasFailedFetching) }
         { showResults(results, isFetching, hasFailedFetching) }

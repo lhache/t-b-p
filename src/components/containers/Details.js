@@ -29,21 +29,21 @@ const showMobileDetails = (props) => {
   ))
 
   return (!props.isFetching && !props.hasFailedFetching) && (
-  <Flexbox className="Details" flexBasis="100%" flexWrap="wrap" flexDirection="column" width="100%">
-    <Flexbox justifyContent="center" margin="20px">
+  <Flexbox className="Details" flexWrap="wrap" flexDirection="column">
+    <Flexbox justifyContent="center">
       <ProductImageGallery images={imagesForGallery} />
     </Flexbox>
     <Flexbox flexDirection="column" justifyContent="center" margin="20px" padding="20px">
       <Flexbox flexBasis="100%" marginBottom="10px">
           <b className="Details-Name">{props.details.name || ''}</b>
       </Flexbox>
-      <Flexbox flexBasis="100%" marginBottom="10px">
+      <Flexbox marginBottom="10px">
         <Price price={props.details.price ? props.details.price.displayPrice : ''} />
       </Flexbox>
-      <Flexbox flexBasis="100%" marginBottom="10px">
+      <Flexbox marginBottom="10px">
         <p>{props.details.description || ''}</p>
       </Flexbox>
-      <Flexbox flexBasis="100%" justifyContent="center" marginBottom="10px">
+      <Flexbox justifyContent="center" marginBottom="10px">
         <a href={props.details.deeplinkUrl} target="_blank" rel="noopener noreferrer">lol</a>
         <ProductButton link={`${props.details.deeplinkUrl}`} translationKey="product.goToAffShop"/>
       </Flexbox>

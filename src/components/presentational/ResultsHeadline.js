@@ -16,7 +16,7 @@ const showWhichHeadline = (type, term) => {
     return (!_isEmpty(term) &&
       <div>
         <Translate content="results.headline" component="span" />
-        <b className="ResultsHeadlineTermCollection"> { term.join(' - ')} </b>
+        <b className="ResultsHeadlineTermCollection"> { term } </b>
       </div>
     )
   }
