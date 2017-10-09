@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import ReactDOM from 'react-dom';
 import { connect } from 'react-redux'
 import { withRouter } from 'react-router-dom'
 import PropTypes from 'prop-types'
@@ -10,10 +11,13 @@ import { Link } from 'react-router-dom'
 import { isDeviceConsideredMobile } from '../../data/utils'
 import { parseQueryString } from '../../data/utils'
 import { searchURL, resultsURL } from '../../data/urls'
-
+import { getOrCreateElementById } from '../../utils/domUtils'
+import { termCollectionToUrlTerm } from '../../utils/appUtils'
 import './Search.css';
 
 const showMobileSearch = (term, that) => {
+
+
   if (/search/i.test(window.location.pathname)) {
     return (
       <SearchForm
@@ -25,7 +29,7 @@ const showMobileSearch = (term, that) => {
   }
   else {
     return (
-      <Link to={`${searchURL}?q=${term}`} className="SearchLink">
+      <Link to={`${searchURL}?q=${termCollectionToUrlTerm(term)}`} className="SearchLink">
         <TagAutocomplete
           value={term}
           onChange={that.handleChange.bind(that)}
@@ -52,7 +56,7 @@ class SearchContainer extends Component {
     let term = queries['q'];
 
     if (term) {
-      term = term.split(',')
+      term = term.split(',').map(t => ({id: t, name: t}))
       this.props.storeTerm(term)
       this.props.storeSearchedTerm(term)
     }
@@ -73,12 +77,13 @@ class SearchContainer extends Component {
   }
 
   render() {
-    const {term} = this.props
+    const { term } = this.props
 
-    return (
+    return ReactDOM.createPortal(
       <Flexbox flexBasis="100%" flexWrap="wrap" className="SearchContainer">
         { isDeviceConsideredMobile() ? showMobileSearch(term, this) : showDesktopSearch(term, this)}
-      </Flexbox>
+      </Flexbox>,
+      getOrCreateElementById('div', { id: 'SearchContainer'})
     )
   }
 }

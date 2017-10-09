@@ -23,7 +23,7 @@ const showMobileProduct = (product) => {
             </Truncate>
           </Flexbox>
           <Flexbox flexBasis="100%" justifyContent="flex-start" marginTop="5px">
-              <Price price={product.price} />
+              <Price price={product.price.displayPrice} />
           </Flexbox>
           <Flexbox flexBasis="100%" justifyContent="center" marginTop="5px">
             <ProductButton link={`/s/details?id=${product.id}`} translationKey="product.goToDetails" />

@@ -32,16 +32,15 @@ class ResultsContainer extends Component {
     let term = queries['q'];
 
     if (term) {
-      term = term.split(',')
       this.props.fetchResults(term)
     }
   }
 
   componentWillReceiveProps(nextProps) {
     // set searchedTerm and fetch results at form submission
-    if (this.props.searchedTerm !== nextProps.searchedTerm) {
-      this.props.fetchResults(nextProps.searchedTerm)
-    }
+    // if (this.props.searchedTerm !== nextProps.searchedTerm) {
+    //   this.props.fetchResults(nextProps.searchedTerm)
+    // }
   }
 
   render() {

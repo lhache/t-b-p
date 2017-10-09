@@ -1,11 +1,9 @@
 import React, { Component } from 'react';
-import ReactDOM from 'react-dom';
 import Translate from 'react-translate-component'
 import Flexbox from 'flexbox-react';
 import ReactSVG from 'react-svg'
 import TagAutocomplete from './TagAutocomplete'
 import { isDeviceConsideredMobile } from '../../data/utils'
-import { getOrCreateElementById } from '../../utils/domUtils'
 import iconSearch from '../../images/icon-search.svg'
 import './SearchForm.css'
 
@@ -65,13 +63,12 @@ class SearchForm extends Component {
 
   render() {
     const { term, onChange } = this.props
-    return ReactDOM.createPortal(
+    return (
       <Flexbox flexBasis="100%">
         <form className="SearchForm" onSubmit={this._handleSumbit}>
           {isDeviceConsideredMobile() ? showMobileSearchForm(term, onChange) : showDesktopSearchForm(term, onChange)}
         </form>
-      </Flexbox>,
-      getOrCreateElementById('div', { id: 'SearchContainer'})
+      </Flexbox>
     )
   }
 }

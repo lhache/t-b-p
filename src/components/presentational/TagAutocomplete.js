@@ -18,6 +18,7 @@ const getOptions = input => {
   )
   return fetch(url)
     .then((response) => response.json())
+    // .then((json) => (json.map(r => Object.assign({}, r, {value: r.id, label: r.name}))))
     .then((json) => ({ options: json }))
 }
 
@@ -40,7 +41,7 @@ class TagAutocomplete extends Component {
         optionHeight={40}
         disabled={this.props.disabled}
         labelKey="name"
-        valueKey="name"
+        valueKey="id"
         closeOnSelect={false}
         cache={false}
         // menuBuffer={1000}
