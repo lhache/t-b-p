@@ -3,7 +3,8 @@
     "title": "The Better Play",
     "search": {
       "search": "Search",
-      "placeholder": "What kind of toys are you looking for?"
+      "placeholder": "What kind of toys are you looking for?",
+      "noResultsFound": "No results found, please type in something else."
     },
     "results": {
       "headline": "Search results for"
@@ -21,7 +22,8 @@
     "title": "The Better Play",
     "search": {
       "search": "Search",
-      "placeholder": "What kind of toys are you looking for?"
+      "placeholder": "What kind of toys are you looking for?",
+      "noResultsFound": "No results found, please type in something else."
     },
     "results": {
       "headline": "Search results for"

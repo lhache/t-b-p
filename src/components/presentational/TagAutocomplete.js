@@ -36,7 +36,7 @@ class TagAutocomplete extends Component {
         openOnFocus={true}
         autoBlur={true}
         autosize={true}
-        noResultsText="TODO"
+        noResultsText={counterpart('search.noResultsFound')}
         maxHeight={1000}
         optionHeight={40}
         disabled={this.props.disabled}
