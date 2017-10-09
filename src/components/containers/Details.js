@@ -8,6 +8,7 @@ import Price from '../presentational/Price'
 import ProductButton from '../presentational/ProductButton'
 import ProductImageGallery from '../presentational/ProductImageGallery'
 import { parseQueryString } from '../../data/utils'
+import { isDeviceConsideredMobile } from '../../data/utils'
 import _get from 'lodash/get'
 import _merge from 'lodash/merge'
 import _toArray from 'lodash/toArray'
@@ -21,7 +22,36 @@ const flattenImagesBySize = (images, size, target) => (
   images && _get(images, size).map(image => ({[target]: image}))
 )
 
-const showDetails = (props) => {
+const showMobileDetails = (props) => {
+  const imagesForGallery = _toArray(_merge(
+    flattenImagesBySize(props.details.imageUrls, 'tiny', 'thumbnail'),
+    flattenImagesBySize(props.details.imageUrls, 'large', 'original')
+  ))
+
+  return (!props.isFetching && !props.hasFailedFetching) && (
+  <Flexbox className="Details" flexBasis="100%" flexWrap="wrap" flexDirection="column" width="100%">
+    <Flexbox justifyContent="center" margin="20px">
+      <ProductImageGallery images={imagesForGallery} />
+    </Flexbox>
+    <Flexbox flexDirection="column" justifyContent="center" margin="20px" padding="20px">
+      <Flexbox flexBasis="100%" marginBottom="10px">
+          <b className="Details-Name">{props.details.name || ''}</b>
+      </Flexbox>
+      <Flexbox flexBasis="100%" marginBottom="10px">
+        <Price price={props.details.price ? props.details.price.displayPrice : ''} />
+      </Flexbox>
+      <Flexbox flexBasis="100%" marginBottom="10px">
+        <p>{props.details.description || ''}</p>
+      </Flexbox>
+      <Flexbox flexBasis="100%" justifyContent="center" marginBottom="10px">
+        <a href={props.details.deeplinkUrl} target="_blank" rel="noopener noreferrer">lol</a>
+        <ProductButton link={`${props.details.deeplinkUrl}`} translationKey="product.goToAffShop"/>
+      </Flexbox>
+    </Flexbox>
+  </Flexbox>
+)}
+
+const showDesktopDetails = (props) => {
   const imagesForGallery = _toArray(_merge(
     flattenImagesBySize(props.details.imageUrls, 'tiny', 'thumbnail'),
     flattenImagesBySize(props.details.imageUrls, 'large', 'original')
@@ -63,7 +93,7 @@ class DetailsContainer extends Component {
       <Flexbox className="DetailsContainer" flexBasis="100%" flexWrap="wrap">
         { showLoader(this.props.isFetching) }
         { showError(this.props.hasFailedFetching) }
-        { showDetails(this.props) }
+        {isDeviceConsideredMobile() ? showMobileDetails(this.props) : showDesktopDetails(this.props)}
       </Flexbox>
     )
   }
