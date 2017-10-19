@@ -7,13 +7,15 @@ import { isDeviceConsideredMobile } from '../../data/utils'
 import iconSearch from '../../images/icon-search.svg'
 import './SearchForm.css'
 
-const showMobileSearchForm = (term, onChange) => {
+const showMobileSearchForm = (props) => {
   return (
     <Flexbox flexBasis="100%" flexWrap="wrap"  flexDirection="column" className="SearchFormContainer">
       <Flexbox flexBasis="100%" className="SearchInputContainer" order={1}>
         <TagAutocomplete
-          value={term}
-          onChange={onChange}
+          term={props.term}
+          selectedTerms={props.selectedTerms}
+          fetchOptions={props.fetchOptions}
+          onChange={props.onChange}
         />
       </Flexbox>
       <Flexbox flexBasis="100%" className="SearchButtonContainer" alignSelf="flex-end" order={2}>
@@ -25,7 +27,7 @@ const showMobileSearchForm = (term, onChange) => {
   )
 }
 
-const showDesktopSearchForm = (term, onChange) => {
+const showDesktopSearchForm = (props) => {
   return (
     <Flexbox flexBasis="100%" flexWrap="wrap">
       <Flexbox flexBasis="100%">
@@ -36,8 +38,10 @@ const showDesktopSearchForm = (term, onChange) => {
         </Flexbox>
         <Flexbox flexBasis="75%">
           <TagAutocomplete
-            value={term}
-            onChange={onChange}
+            term={props.term}
+            selectedTerms={props.selectedTerms}
+            fetchOptions={props.fetchOptions}
+            onChange={props.onChange}
           />
         </Flexbox>
         <Flexbox flexBasis="20%">
@@ -62,11 +66,10 @@ class SearchForm extends Component {
   }
 
   render() {
-    const { term, onChange } = this.props
     return (
       <Flexbox flexBasis="100%">
         <form className="SearchForm" onSubmit={this._handleSumbit}>
-          {isDeviceConsideredMobile() ? showMobileSearchForm(term, onChange) : showDesktopSearchForm(term, onChange)}
+          {isDeviceConsideredMobile() ? showMobileSearchForm(this.props) : showDesktopSearchForm(this.props)}
         </form>
       </Flexbox>
     )

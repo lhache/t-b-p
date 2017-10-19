@@ -16,7 +16,7 @@ const showWhichHeadline = (type, term) => {
     return (!_isEmpty(term) &&
       <div>
         <Translate content="results.headline" component="span" />
-        <b className="ResultsHeadlineTermCollection"> { term } </b>
+        <b className="ResultsHeadlineTermCollection"> { decodeURIComponent(term) } </b>
       </div>
     )
   }

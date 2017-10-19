@@ -2,6 +2,10 @@ import React, { Component } from 'react';
 import { buildUrl } from '../../data/utils'
 import counterpart from 'counterpart'
 import VirtualizedSelect from 'react-virtualized-select'
+import { joinTermToStringWithSymbol } from '../../utils/appUtils'
+import { parseQueryString } from '../../data/utils'
+import _get from 'lodash/get'
+import { fetchSuggestOptions } from '../../data/modules/searchResults'
 import './TagAutocomplete.css'
 import 'react-select/dist/react-select.css';
 import 'react-virtualized/styles.css'
@@ -10,11 +14,10 @@ import 'react-virtualized-select/styles.css'
 const getOptions = input => {
 
   // TODO remove this when API fixed
-  const q = input ? input : 'bui'
 
   const url = buildUrl(
     `${process.env.REACT_APP_API_HOST}${process.env.REACT_APP_API_SUGGEST_ENDPOINT}`,
-    { q: q }
+    { q: input }
   )
   return fetch(url)
     .then((response) => response.json())
@@ -23,7 +26,10 @@ const getOptions = input => {
 }
 
 class TagAutocomplete extends Component {
+
   render () {
+    const value = this.props.term ? this.props.term.split(',').map(t => ({id: t, name: t})) : []
+
     return (
       <VirtualizedSelect
         async
@@ -31,7 +37,8 @@ class TagAutocomplete extends Component {
         name="searchform-tags"
         loadOptions={getOptions}
         onChange={this.props.onChange}
-        value={this.props.value}
+        // onInputChange={this.props.onChange}
+        value={value}
         placeholder={counterpart('search.placeholder')}
         openOnFocus={true}
         autoBlur={true}

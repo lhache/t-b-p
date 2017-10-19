@@ -3,7 +3,7 @@ import MobileDetect from 'mobile-detect'
 export const parseQueryString = (str = "") => {
   let objURL = {};
   str.replace(
-      new RegExp( "([^?=&]+)(=([^&]*))?", "g" ),
+      new RegExp( "([^?=&]+)(=([^]*))?", "g" ),
       function( $0, $1, $2, $3 ){
           objURL[ $1 ] = $3;
       }
@@ -16,7 +16,7 @@ export const isDeviceConsideredMobile = () => {
   return !(md.mobile() === null)
 }
 
-// parameters format: 
+// parameters format:
 // var parameters = {
 //   name: "George Washington",
 //   dob: "17320222"
@@ -25,7 +25,7 @@ export const buildUrl = (url, parameters) => {
   var qs = "";
   for(var key in parameters) {
     var value = parameters[key];
-    qs += encodeURIComponent(key) + "=" + encodeURIComponent(value) + "&";
+    value && (qs += encodeURIComponent(key) + "=" + encodeURIComponent(value) + "&")
   }
   if (qs.length > 0){
     qs = qs.substring(0, qs.length-1); //chop off last "&"

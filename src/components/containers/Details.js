@@ -51,7 +51,7 @@ const showMobileDetails = (props) => {
   </Flexbox>
 )}
 
-const showDesktopDetails = (props) => {
+const showDesktopDetails = (props, url) => {
   const imagesForGallery = _toArray(_merge(
     flattenImagesBySize(props.details.imageUrls, 'tiny', 'thumbnail'),
     flattenImagesBySize(props.details.imageUrls, 'large', 'original')
@@ -74,7 +74,7 @@ const showDesktopDetails = (props) => {
       </Flexbox>
       <Flexbox flexBasis="100%" justifyContent="center" marginBottom="10px">
         <a href={props.details.deeplinkUrl} target="_blank" rel="noopener noreferrer">lol</a>
-        <ProductButton link={`${props.details.deeplinkUrl}`} translationKey="product.goToAffShop"/>
+        <ProductButton link={`${url}`} translationKey="product.goToAffShop"/>
       </Flexbox>
     </Flexbox>
   </Flexbox>
@@ -89,11 +89,12 @@ class DetailsContainer extends Component {
   }
 
   render() {
+    var url = this.props.details.deeplinkUrl && this.props.details.deeplinkUrl.replace('https://api.thebetterplay.com','http://toymaster.eu-central-1.elasticbeanstalk.com')
     return (
       <Flexbox className="DetailsContainer" flexBasis="100%" flexWrap="wrap">
         { showLoader(this.props.isFetching) }
         { showError(this.props.hasFailedFetching) }
-        {isDeviceConsideredMobile() ? showMobileDetails(this.props) : showDesktopDetails(this.props)}
+        {isDeviceConsideredMobile() ? showMobileDetails(this.props) : showDesktopDetails(this.props, url)}
       </Flexbox>
     )
   }
