@@ -7,6 +7,7 @@ import Loader from '../presentational/Loader'
 import Price from '../presentational/Price'
 import ProductButton from '../presentational/ProductButton'
 import ProductImageGallery from '../presentational/ProductImageGallery'
+import Translate from 'react-translate-component'
 import { parseQueryString } from '../../data/utils'
 import { isDeviceConsideredMobile } from '../../data/utils'
 import _get from 'lodash/get'
@@ -44,8 +45,9 @@ const showMobileDetails = (props) => {
         <p>{props.details.description || ''}</p>
       </Flexbox>
       <Flexbox justifyContent="center" marginBottom="10px">
-        <a href={props.details.deeplinkUrl} target="_blank" rel="noopener noreferrer">lol</a>
-        <ProductButton link={`${props.details.deeplinkUrl}`} translationKey="product.goToAffShop"/>
+        <a className="ProductButton" href={props.details.deeplinkUrl} target="_blank" rel="noopener noreferrer">
+          <Translate content="product.goToAffShop" />
+        </a>
       </Flexbox>
     </Flexbox>
   </Flexbox>
@@ -73,8 +75,9 @@ const showDesktopDetails = (props, url) => {
         <p>{props.details.description || ''}</p>
       </Flexbox>
       <Flexbox flexBasis="100%" justifyContent="center" marginBottom="10px">
-        <a href={props.details.deeplinkUrl} target="_blank" rel="noopener noreferrer">lol</a>
-        <ProductButton link={`${url}`} translationKey="product.goToAffShop"/>
+        <a className="ProductButton" href={props.details.deeplinkUrl} target="_blank" rel="noopener noreferrer">
+          <Translate content="product.goToAffShop" />
+        </a>
       </Flexbox>
     </Flexbox>
   </Flexbox>
