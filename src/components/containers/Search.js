@@ -30,7 +30,7 @@ const showMobileSearch = (props, that) => {
   }
   else {
     return (
-      <Link to={`${searchUrl}?q=${joinTermToStringWithSymbol(props.term, ',')}`} className="SearchLink">
+      <Link to={`${searchUrl}?q=${props.term}`} className="SearchLink">
         <TagAutocomplete
           term={props.term}
           selectedTerms={props.selectedTerms}
