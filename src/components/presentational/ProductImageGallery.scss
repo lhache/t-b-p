@@ -53,15 +53,20 @@
 .AppMobile {
   .image-gallery {
     max-width: 280px;
+    min-width: 280px;
     margin: 0 auto;
   }
   .image-gallery-image {
     width: 60%;
     min-height: 200px;
+    min-width: 150px;
     margin: 0 auto;
   }
   .image-gallery-thumbnails-wrapper {
     width: 60%;
     margin: 0 auto;
+  }
+  .image-gallery-thumbnail {
+    min-width: 40px;
   }
 }

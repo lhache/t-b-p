@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux'
 import { withRouter } from 'react-router-dom'
 import PropTypes from 'prop-types'
+import Translate from 'react-translate-component'
 import { fetchResults, storeTerm, storeSelectedTerms, fetchSuggestOptions }  from '../../data/modules/searchResults'
 import ResultsHeadline from '../presentational/ResultsHeadline'
 import Loader from '../presentational/Loader'
@@ -11,11 +12,17 @@ import { parseQueryString } from '../../data/utils'
 import { joinTermToStringWithSymbol } from '../../utils/appUtils'
 import './Results.css';
 
-const showLoader = isFetching => (isFetching && <Loader />)
+const showHeadline = (terms) => (
+  <ResultsHeadline type="results" term={joinTermToStringWithSymbol(terms, 'name', ' - ')} />
+)
 
-const showError = hasFailedFetching => (hasFailedFetching && <p>error</p>)
+const showLoader = () => (<Loader />)
 
-const showResults = (results, isFetching, hasFailedFetching) => ((!isFetching && !hasFailedFetching) && (
+const showError = () => (<p>technical error</p>)
+
+const showNoResultsMessage = () => (<p>No results found</p>)
+
+const showResults = (results) => (
   <Flexbox maxWidth="100%" flexWrap="wrap" justifyContent="center">
       {results.map((result, idx) => (
         <Flexbox key={result.id} order={idx}>
@@ -23,21 +30,29 @@ const showResults = (results, isFetching, hasFailedFetching) => ((!isFetching &&
         </Flexbox>
       ))}
   </Flexbox>
-))
+)
+
+const showLoadMore = (fetchMore) => (
+  <Flexbox justifyContent="center" flexBasis="100%">
+    <button className="ResultsLoadMoreButton" onClick={fetchMore}>
+      <Translate content="results.loadMore" />
+    </button>
+  </Flexbox>
+)
 
 class ResultsContainer extends Component {
+
+  constructor(props) {
+    super(props)
+    this._fetchMoreResults = this._fetchMoreResults.bind(this)
+  }
 
   componentDidMount() {
     // set selectedTerms and fetch results at page load
     const queries = parseQueryString(this.props.history.location.search);
     let term = decodeURIComponent(queries['q']);
 
-    // this.props.fetchSuggestOptions(term)
-
     if (term) {
-      console.log('log term in Results')
-      console.log(this.props.term)
-      // debugger;
       this.props.fetchResults(this.props.term, this.props.term)
     }
   }
@@ -49,15 +64,22 @@ class ResultsContainer extends Component {
     // }
   }
 
+  _fetchMoreResults() {
+    this.props.fetchResults(this.props.term, this.props.term, this.props.results.length)
+  }
+
   render() {
     const {results, isFetching, hasFailedFetching, selectedTerms} = this.props
+    const hasResults = !!results.length
 
     return (
       <Flexbox flexWrap="wrap" className="ResultsContainer" maxWidth="100%">
-        <ResultsHeadline type="results" term={joinTermToStringWithSymbol(selectedTerms, 'name', ' - ')} />
-        { showLoader(isFetching) }
-        { showError(hasFailedFetching) }
-        { showResults(results, isFetching, hasFailedFetching) }
+        { hasResults && showHeadline(selectedTerms)}
+        { (isFetching && !hasResults) && showLoader() }
+        { hasFailedFetching && showError() }
+        { (!hasFailedFetching && !hasResults && !isFetching) && showNoResultsMessage() }
+        { !hasFailedFetching &&  showResults(results)}
+        { hasResults && showLoadMore(this._fetchMoreResults)}
       </Flexbox>
     )
   }
@@ -90,8 +112,8 @@ const mapDispatchToProps = dispatch => {
     storeSelectedTerms: term => {
       dispatch(storeSelectedTerms(term))
     },
-    fetchResults: (term, categories) => {
-      dispatch(fetchResults(term, categories))
+    fetchResults: (term, categories, offset) => {
+      dispatch(fetchResults(term, categories, offset))
     }
   }
 }

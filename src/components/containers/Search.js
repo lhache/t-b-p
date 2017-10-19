@@ -65,7 +65,6 @@ class SearchContainer extends Component {
   componentWillMount() {
     // set selectedTerms and fetch results at page load
     const termFromUrl = _get(parseQueryString(this.props.history.location.search), 'q')
-    debugger
     if (termFromUrl) {
       const term = decodeURIComponent(termFromUrl)
 
@@ -75,7 +74,6 @@ class SearchContainer extends Component {
   }
 
   _fetchOptions(input) {
-    // debugger;
     return this.props.fetchSuggestOptions(input, this.props.selectedTerms)
   }
 

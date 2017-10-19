@@ -1,6 +1,6 @@
 import 'isomorphic-fetch'
 import { buildUrl } from '../utils'
-import { joinTermToStringWithSymbol } from '../../utils/appUtils'
+import _concat from 'lodash/concat'
 
 export const STORE_TERM = 'STORE_TERM'
 export const STORE_SELECTED_TERMS = 'STORE_SELECTED_TERMS'
@@ -97,7 +97,7 @@ export const searchResultsReducer = (state = initialState, action) => {
     case FETCH_RESULTS_SUCCESS:
       return Object.assign({}, state, {
         isFetching: false,
-        results: action.results,
+        results: _concat(state.results, action.results),
         hasFailedFetching: false
       })
     case FETCH_RESULTS_FAILURE:
@@ -132,15 +132,15 @@ export const searchResultsReducer = (state = initialState, action) => {
   }
 }
 
-export const fetchResults = (term, categories) => dispatch => {
+export const fetchResults = (term, categories, offset = 0) => dispatch => {
   dispatch(requestResults(categories))
 
   const url = buildUrl(
     `${process.env.REACT_APP_API_HOST}${process.env.REACT_APP_API_RESULTS_ENDPOINT}`,
     {
-      // q: "lego",
       c: categories,
-      image_sizes: 'medium'
+      image_sizes: 'medium',
+      offset
     }
   )
   return fetch(url)
