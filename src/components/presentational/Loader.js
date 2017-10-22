@@ -1,5 +1,4 @@
 import React from 'react';
-import loader from '../../images/loader.svg'
 import ReactSVG from 'react-svg'
 import Flexbox from 'flexbox-react';
 // import './Loader.css'

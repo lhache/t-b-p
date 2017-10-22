@@ -3,18 +3,13 @@ import { connect } from 'react-redux'
 import { withRouter } from 'react-router-dom'
 import PropTypes from 'prop-types'
 import Translate from 'react-translate-component'
-import { fetchResults, storeTerm, storeSelectedTerms, fetchSuggestOptions }  from '../../data/modules/searchResults'
+import { fetchResults, storeTerm, storeSelectedTerms }  from '../../data/modules/searchResults'
 import ResultsHeadline from '../presentational/ResultsHeadline'
 import Loader from '../presentational/Loader'
 import Product from '../presentational/Product'
 import Flexbox from 'flexbox-react';
-import { parseQueryString } from '../../data/utils'
 import { joinTermToStringWithSymbol } from '../../utils/appUtils'
 import './Results.css';
-
-const showHeadline = (terms) => (
-  <ResultsHeadline type="results" term={joinTermToStringWithSymbol(terms, 'name', ' - ')} />
-)
 
 const showLoader = () => (<Loader />)
 
@@ -22,8 +17,12 @@ const showError = () => (<p>technical error</p>)
 
 const showNoResultsMessage = () => (<p>No results found</p>)
 
+const showHeadline = (terms) => (
+  <ResultsHeadline type="results" term={joinTermToStringWithSymbol(terms, 'name', ' - ')} />
+)
+
 const showResults = (results) => (
-  <Flexbox maxWidth="100%" flexWrap="wrap" justifyContent="center">
+  <Flexbox maxWidth="100%" flexWrap="wrap">
       {results.map((result, idx) => (
         <Flexbox key={result.id} order={idx}>
           <Product product={result} />
@@ -48,20 +47,7 @@ class ResultsContainer extends Component {
   }
 
   componentDidMount() {
-    // set selectedTerms and fetch results at page load
-    const queries = parseQueryString(this.props.history.location.search);
-    let term = decodeURIComponent(queries['q']);
-
-    if (term) {
-      this.props.fetchResults(this.props.term, this.props.term)
-    }
-  }
-
-  componentWillReceiveProps(nextProps) {
-    // set selectedTerms and fetch results at form submission
-    // if (this.props.selectedTerms !== nextProps.selectedTerms) {
-    //   this.props.fetchResults(nextProps.selectedTerms)
-    // }
+    this.props.fetchResults(this.props.term, this.props.term)
   }
 
   _fetchMoreResults() {
@@ -79,7 +65,7 @@ class ResultsContainer extends Component {
         { hasFailedFetching && showError() }
         { (!hasFailedFetching && !hasResults && !isFetching) && showNoResultsMessage() }
         { !hasFailedFetching &&  showResults(results)}
-        { hasResults && showLoadMore(this._fetchMoreResults)}
+        { (hasResults && results.length >= 20 ) && showLoadMore(this._fetchMoreResults)}
       </Flexbox>
     )
   }

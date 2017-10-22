@@ -5,7 +5,6 @@ import {fetchDetails} from '../../data/modules/details'
 import Flexbox from 'flexbox-react';
 import Loader from '../presentational/Loader'
 import Price from '../presentational/Price'
-import ProductButton from '../presentational/ProductButton'
 import ProductImageGallery from '../presentational/ProductImageGallery'
 import Translate from 'react-translate-component'
 import { parseQueryString } from '../../data/utils'
@@ -23,7 +22,7 @@ const flattenImagesBySize = (images, size, target) => (
   images && _get(images, size).map(image => ({[target]: image}))
 )
 
-const showMobileDetails = (props) => {
+const showMobileDetails = (props, track) => {
   const imagesForGallery = _toArray(_merge(
     flattenImagesBySize(props.details.imageUrls, 'tiny', 'thumbnail'),
     flattenImagesBySize(props.details.imageUrls, 'large', 'original')
@@ -45,7 +44,7 @@ const showMobileDetails = (props) => {
         <p>{props.details.description || ''}</p>
       </Flexbox>
       <Flexbox justifyContent="center" marginBottom="10px">
-        <a className="ProductButton" href={props.details.deeplinkUrl} target="_blank" rel="noopener noreferrer">
+        <a className="ProductButton" href={props.details.deeplinkUrl} target="_blank" rel="noopener noreferrer" onClick={track}>
           <Translate content="product.goToAffShop" />
         </a>
       </Flexbox>
@@ -53,7 +52,7 @@ const showMobileDetails = (props) => {
   </Flexbox>
 )}
 
-const showDesktopDetails = (props, url) => {
+const showDesktopDetails = (props, track) => {
   const imagesForGallery = _toArray(_merge(
     flattenImagesBySize(props.details.imageUrls, 'tiny', 'thumbnail'),
     flattenImagesBySize(props.details.imageUrls, 'large', 'original')
@@ -75,7 +74,7 @@ const showDesktopDetails = (props, url) => {
         <p>{props.details.description || ''}</p>
       </Flexbox>
       <Flexbox flexBasis="100%" justifyContent="center" marginBottom="10px">
-        <a className="ProductButton" href={props.details.deeplinkUrl} target="_blank" rel="noopener noreferrer">
+        <a className="ProductButton" href={props.details.deeplinkUrl} target="_blank" rel="noopener noreferrer" onClick={track}>
           <Translate content="product.goToAffShop" />
         </a>
       </Flexbox>
@@ -85,19 +84,29 @@ const showDesktopDetails = (props, url) => {
 
 class DetailsContainer extends Component {
 
+  constructor(props) {
+    super(props)
+    this._trackClick = this._trackClick.bind(this)
+  }
+
   componentDidMount() {
-    const queries = parseQueryString(this.props.history.location.search);
-    const id = queries['id'];
+    const queries = parseQueryString(this.props.history.location.search)
+    const id = queries['id']
     this.props.fetchDetails(id)
   }
 
+  _trackClick(event) {
+    debugger;
+    window.ga && window.ga('send', 'event', 'user-engagement', 'clickout')
+  }
+
   render() {
-    var url = this.props.details.deeplinkUrl && this.props.details.deeplinkUrl.replace('https://api.thebetterplay.com','http://toymaster.eu-central-1.elasticbeanstalk.com')
+      // var url = this.props.details.deeplinkUrl && this.props.details.deeplinkUrl.replace('https://api.thebetterplay.com','http://toymaster.eu-central-1.elasticbeanstalk.com')
     return (
       <Flexbox className="DetailsContainer" flexBasis="100%" flexWrap="wrap">
         { showLoader(this.props.isFetching) }
         { showError(this.props.hasFailedFetching) }
-        {isDeviceConsideredMobile() ? showMobileDetails(this.props) : showDesktopDetails(this.props, url)}
+        {isDeviceConsideredMobile() ? showMobileDetails(this.props, this._trackClick) : showDesktopDetails(this.props, this._trackClick)}
       </Flexbox>
     )
   }

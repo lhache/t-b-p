@@ -64,7 +64,7 @@ class SearchContainer extends Component {
 
   componentWillMount() {
     // set selectedTerms and fetch results at page load
-    const termFromUrl = _get(parseQueryString(this.props.history.location.search), 'q')
+    const termFromUrl = _get(parseQueryString(this.props.history.location.search), 'c')
     if (termFromUrl) {
       const term = decodeURIComponent(termFromUrl)
 
@@ -80,7 +80,7 @@ class SearchContainer extends Component {
   _handleSubmit(term) {
     this.props.history.push({
       pathname: `${ resultsUrl }`,
-      search: `?q=${ term }`,
+      search: `?c=${ term }`,
       state: { term }
     })
   }

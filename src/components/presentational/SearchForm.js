@@ -4,7 +4,6 @@ import Flexbox from 'flexbox-react';
 import ReactSVG from 'react-svg'
 import TagAutocomplete from './TagAutocomplete'
 import { isDeviceConsideredMobile } from '../../data/utils'
-import iconSearch from '../../images/icon-search.svg'
 import './SearchForm.css'
 
 const showMobileSearchForm = (props) => {

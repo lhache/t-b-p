@@ -11,20 +11,20 @@
     margin: 0 auto;
     padding: 0;
   }
+}
 
-  .ResultsLoadMoreButton {
-    width: 248px;
-  	height: 48px;
-    border: none;
-  	border-radius: 100px;
-  	background-color: #00cbe2;
-  	font-size: 16px;
-  	font-weight: bold;
-  	line-height: 3.0;
-  	text-align: center;
-  	color: #ffffff;
-    margin: 40px;
-    cursor: pointer;
-    outline: none;
-  }
+.ResultsLoadMoreButton {
+  width: 248px;
+  height: 48px;
+  border: none;
+  border-radius: 100px;
+  background-color: #00cbe2;
+  font-size: 16px;
+  font-weight: bold;
+  line-height: 3.0;
+  text-align: center;
+  color: #ffffff;
+  margin: 40px;
+  cursor: pointer;
+  outline: none;
 }
