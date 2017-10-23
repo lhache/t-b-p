@@ -4,6 +4,7 @@ import _concat from 'lodash/concat'
 
 export const STORE_TERM = 'STORE_TERM'
 export const STORE_SELECTED_TERMS = 'STORE_SELECTED_TERMS'
+export const STORE_AGE = 'STORE_AGE'
 export const FETCH_RESULTS = 'FETCH_RESULTS'
 export const FETCH_RESULTS_SUCCESS = 'FETCH_RESULTS_SUCCESS'
 export const FETCH_RESULTS_FAILURE = 'FETCH_RESULTS_FAILURE'
@@ -14,6 +15,7 @@ export const FETCH_SUGGEST_OPTIONS_FAILURE = 'FETCH_SUGGEST_OPTIONS_FAILURE'
 export const initialState = {
   term: '',
   selectedTerms: [],
+  age: {from: 0, to: 0},
   suggestOptions: [],
   results: [],
   isFetching: false,
@@ -31,6 +33,11 @@ export const storeTerm = term => ({
   type: STORE_SELECTED_TERMS,
   selectedTerms: terms
 })
+
+export const storeAge = (age) => ({
+    type: STORE_AGE,
+    age
+  })
 
 export const requestResults = term => {
   return {
@@ -89,6 +96,10 @@ export const searchResultsReducer = (state = initialState, action) => {
       return Object.assign({}, state, {
         selectedTerms: action.selectedTerms
       })
+    case STORE_AGE:
+      return Object.assign({}, state, {
+        age: action.age
+      })
     case FETCH_RESULTS:
       return Object.assign({}, state, {
         isFetching: true,
@@ -132,7 +143,7 @@ export const searchResultsReducer = (state = initialState, action) => {
   }
 }
 
-export const fetchResults = (term, categories, offset = 0) => dispatch => {
+export const fetchResults = (term, categories, age, offset = 0) => dispatch => {
   dispatch(requestResults(categories))
 
   const url = buildUrl(
@@ -140,7 +151,9 @@ export const fetchResults = (term, categories, offset = 0) => dispatch => {
     {
       c: categories,
       image_sizes: 'medium',
-      offset
+      offset,
+      age_from: age.age_from,
+      age_until: age.age_until
     }
   )
   return fetch(url)
