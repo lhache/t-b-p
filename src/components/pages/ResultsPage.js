@@ -13,7 +13,10 @@ class ResultsPage extends Component {
             <Search />
         </Flexbox>
 
-        <Results />
+        <Results
+          hideLoadMore={false}
+          hideAgeRanges={false}
+        />
       </Flexbox>
     )
   }

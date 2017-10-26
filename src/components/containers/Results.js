@@ -3,16 +3,16 @@ import { connect } from 'react-redux'
 import { withRouter } from 'react-router-dom'
 import PropTypes from 'prop-types'
 import Translate from 'react-translate-component'
-import { fetchResults, storeTerm, storeSelectedTerms, storeAge }  from '../../data/modules/searchResults'
+import { fetchResults, fetchAndResetResults, storeTerm, storeSelectedTerms, storeAge }  from '../../data/modules/searchResults'
 import ResultsHeadline from '../presentational/ResultsHeadline'
 import Loader from '../presentational/Loader'
 import Product from '../presentational/Product'
+import Age from '../presentational/Age'
 import Flexbox from 'flexbox-react';
 import { joinTermToStringWithSymbol } from '../../utils/appUtils'
 import { parseQueryString } from '../../data/utils'
 import _get from 'lodash/get'
-import _first from 'lodash/first'
-import _last from 'lodash/last'
+import _take from 'lodash/take'
 import './Results.css';
 
 const showLoader = () => (<Loader />)
@@ -21,14 +21,21 @@ const showError = () => (<p>technical error</p>)
 
 const showNoResultsMessage = () => (<p>No results found</p>)
 
-const showHeadline = (terms) => (
-  <ResultsHeadline type="results" term={joinTermToStringWithSymbol(terms, 'name', ' - ')} />
+const showAgeRanges = (age, updateAgeRange) => (
+  age && <Age age={age} update={updateAgeRange} />
+)
+
+const showHeadline = (terms, isCategory) => (
+  <ResultsHeadline
+    type={isCategory? 'category' : 'results'}
+    term={joinTermToStringWithSymbol(terms, 'name', ' - ')}
+  />
 )
 
 const showResults = (results) => (
   <Flexbox maxWidth="100%" flexWrap="wrap">
       {results.map((result, idx) => (
-        <Flexbox key={result.id} order={idx}>
+        <Flexbox key={Math.random() + result.id} order={idx}>
           <Product product={result} />
         </Flexbox>
       ))}
@@ -48,6 +55,7 @@ class ResultsContainer extends Component {
   constructor(props) {
     super(props)
     this._fetchMoreResults = this._fetchMoreResults.bind(this)
+    this._updateAgeRange = this._updateAgeRange.bind(this)
   }
 
 
@@ -60,25 +68,48 @@ class ResultsContainer extends Component {
     ageFrom && Object.assign(age, { age_from: ageFrom })
     ageUntil && Object.assign(age, { age_until: ageUntil })
     this.props.storeAge(age)
-    this.props.fetchResults(this.props.term, this.props.term, age)
+
+    const selectedCategory = this.props.hardcodedCategory ?
+      joinTermToStringWithSymbol(this.props.hardcodedCategory, 'name', ' - ') :
+      this.props.term
+    this.props.fetchResults(this.props.term, selectedCategory, age)
   }
 
   _fetchMoreResults() {
     this.props.fetchResults(this.props.term, this.props.term, this.props.age, this.props.results.length)
   }
 
+  _updateAgeRange(ageRange) {
+    this.props.storeAge(ageRange)
+    this.props.fetchAndResetResults(this.props.term, this.props.term, ageRange, this.props.results.length)
+  }
+
   render() {
-    const {results, isFetching, hasFailedFetching, selectedTerms} = this.props
+    const {
+      hideLoadMore,
+      hideAgeRanges,
+      hardcodedCategory,
+      maxItems,
+      results,
+      age,
+      isFetching,
+      hasFailedFetching,
+      selectedTerms
+    } = this.props
+
     const hasResults = !!results.length
+    const trimmedResults = maxItems ? _take(results, maxItems) : results;
+    const headlineText = hardcodedCategory ? hardcodedCategory : selectedTerms;
 
     return (
       <Flexbox flexWrap="wrap" className="ResultsContainer" maxWidth="100%">
-        { hasResults && showHeadline(selectedTerms)}
+        { (!hideAgeRanges) && showAgeRanges(age, this._updateAgeRange)}
+        { (hasResults) && showHeadline(headlineText, !!hardcodedCategory)}
         { (isFetching && !hasResults) && showLoader() }
-        { hasFailedFetching && showError() }
+        { (hasFailedFetching) && showError() }
         { (!hasFailedFetching && !hasResults && !isFetching) && showNoResultsMessage() }
-        { !hasFailedFetching &&  showResults(results)}
-        { (hasResults && results.length >= 20 ) && showLoadMore(this._fetchMoreResults)}
+        { (!hasFailedFetching) &&  showResults(trimmedResults)}
+        { (!hideLoadMore && hasResults && results.length >= 20 ) && showLoadMore(this._fetchMoreResults)}
       </Flexbox>
     )
   }
@@ -118,6 +149,9 @@ const mapDispatchToProps = dispatch => {
     },
     fetchResults: (term, categories, offset) => {
       dispatch(fetchResults(term, categories, offset))
+    },
+    fetchAndResetResults: (term, categories, offset) => {
+      dispatch(fetchAndResetResults(term, categories, offset))
     }
   }
 }

@@ -15,7 +15,10 @@ class LandingPage extends Component {
               <Search />
           </Flexbox>
 
-        <Results />
+          <Results
+            hideLoadMore={false}
+            hideAgeRanges={true}
+          />
         <CookieBannerBar />
       </Flexbox>
     )

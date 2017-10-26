@@ -1,13 +1,15 @@
 .ResultsHeadline {
   font-size: 18px;
+  margin-bottom: 20px;
+  margin-left: 20px;
 }
 
 .ResultsHeadlineTermCollection {
-  text-transform: lowercase;
+  text-transform: capitalize;
 }
 
 .AppDesktop {
   .ResultsHeadline {
-    margin-bottom: 20px;
+
   }
 }

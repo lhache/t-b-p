@@ -1,0 +1,21 @@
+
+
+.AgeItem {
+  background-color: white;
+  border-radius: 2px;
+  border: 1px solid rgba(0, 126, 255, 0.24);
+  color: #007eff;
+  display: inline-block;
+  font-size: 0.9em;
+  line-height: 1.4;
+  margin-left: 5px;
+  margin-top: 5px;
+  vertical-align: top;
+  padding: 5px;
+
+  &.AgeItem-Active {
+    background-color: #00cbe2;
+    color: white;
+    font-weight: bold;
+  }
+}

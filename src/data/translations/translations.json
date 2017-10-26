@@ -2,7 +2,7 @@
   "de": {
     "title": "The Better Play",
     "search": {
-      "search": "Search",
+      "search": "Suchen",
       "placeholder": "What kind of toys are you looking for?",
       "noResultsFound": "No results found, please type in something else."
     },
@@ -17,6 +17,13 @@
     },
     "cookies": {
       "bannerText": "Diese Webseite verwendet Cookies, um Ihnen ein angenehmeres Surfen zu ermöglichen."
+    },
+    "age": {
+      "month": "month",
+      "months": "months",
+      "year": "year",
+      "years": "years",
+      "allAges": "All ages"
     }
   },
   "en": {
@@ -37,6 +44,13 @@
     },
     "cookies": {
       "bannerText": "Diese Webseite verwendet Cookies, um Ihnen ein angenehmeres Surfen zu ermöglichen."
+    },
+    "age": {
+      "month": "month",
+      "months": "months",
+      "year": "year",
+      "years": "years",
+      "allAges": "All ages"
     }
   }
 }

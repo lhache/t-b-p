@@ -6,7 +6,7 @@ import Flexbox from 'flexbox-react';
 const Loader = () => {
   return (
     <Flexbox flexBasis="100%" justifyContent="center">
-      <ReactSVG path={`${process.env.REACT_APP_ASSET_HOST}/static/media/loader.svg`} />
+      <ReactSVG path={`${process.env.REACT_APP_ASSET_HOST}/loader.svg`} />
     </Flexbox>
   )
 }

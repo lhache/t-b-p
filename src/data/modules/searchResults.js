@@ -5,6 +5,7 @@ import _concat from 'lodash/concat'
 export const STORE_TERM = 'STORE_TERM'
 export const STORE_SELECTED_TERMS = 'STORE_SELECTED_TERMS'
 export const STORE_AGE = 'STORE_AGE'
+export const RESET_RESULTS = 'RESET_RESULTS'
 export const FETCH_RESULTS = 'FETCH_RESULTS'
 export const FETCH_RESULTS_SUCCESS = 'FETCH_RESULTS_SUCCESS'
 export const FETCH_RESULTS_FAILURE = 'FETCH_RESULTS_FAILURE'
@@ -15,7 +16,7 @@ export const FETCH_SUGGEST_OPTIONS_FAILURE = 'FETCH_SUGGEST_OPTIONS_FAILURE'
 export const initialState = {
   term: '',
   selectedTerms: [],
-  age: {from: 0, to: 0},
+  age: {age_from: 0, age_until: 0},
   suggestOptions: [],
   results: [],
   isFetching: false,
@@ -47,6 +48,13 @@ export const requestResults = term => {
   }
 }
 
+export const resetResults = (term, json) => {
+  return {
+    type: RESET_RESULTS,
+    term,
+    results: json
+  }
+}
 export const receiveResults = (term, json) => {
   return {
     type: FETCH_RESULTS_SUCCESS,
@@ -58,29 +66,6 @@ export const receiveResults = (term, json) => {
 export const failedfetchingResults = (term) => {
   return {
     type: FETCH_RESULTS_FAILURE,
-    term
-  }
-}
-
-export const requestSuggestOptions = term => {
-  return {
-    type: FETCH_SUGGEST_OPTIONS,
-    term,
-    selectedTerms: term
-  }
-}
-
-export const receiveSuggestOptions = (term, json) => {
-  return {
-    type: FETCH_SUGGEST_OPTIONS_SUCCESS,
-    term,
-    suggestOptions: json
-  }
-}
-
-export const failedfetchingSuggestOptions = (term) => {
-  return {
-    type: FETCH_SUGGEST_OPTIONS_FAILURE,
     term
   }
 }
@@ -100,6 +85,12 @@ export const searchResultsReducer = (state = initialState, action) => {
       return Object.assign({}, state, {
         age: action.age
       })
+    case RESET_RESULTS:
+    return Object.assign({}, state, {
+      isFetching: false,
+      results: action.results,
+      hasFailedFetching: false
+    })
     case FETCH_RESULTS:
       return Object.assign({}, state, {
         isFetching: true,
@@ -116,22 +107,7 @@ export const searchResultsReducer = (state = initialState, action) => {
         isFetching: false,
         hasFailedFetching: true
       })
-    case FETCH_SUGGEST_OPTIONS:
-      return Object.assign({}, state, {
-        isFetching: true,
-        hasFailedFetching: false
-      })
-    case FETCH_SUGGEST_OPTIONS_SUCCESS:
-      return Object.assign({}, state, {
-        isFetching: false,
-        suggestOptions: action.suggestOptions,
-        hasFailedFetching: false
-      })
-    case FETCH_SUGGEST_OPTIONS_FAILURE:
-      return Object.assign({}, state, {
-        isFetching: false,
-        hasFailedFetching: true
-      })
+
     // case '@@router/LOCATION_CHANGE': {
     //   return Object.assign({}, state, {
     //     term: action.payload.state ? action.payload.state.term : [],
@@ -164,22 +140,23 @@ export const fetchResults = (term, categories, age, offset = 0) => dispatch => {
     )
 }
 
-export const fetchSuggestOptions = (term, selectedTerms) => dispatch => {
-  dispatch(requestSuggestOptions(term))
+export const fetchAndResetResults = (term, categories, age, offset = 0) => dispatch => {
+  dispatch(requestResults(categories))
 
   const url = buildUrl(
-    `${process.env.REACT_APP_API_HOST}${process.env.REACT_APP_API_SUGGEST_ENDPOINT}`,
+    `${process.env.REACT_APP_API_HOST}${process.env.REACT_APP_API_RESULTS_ENDPOINT}`,
     {
-      q: term
+      c: categories,
+      image_sizes: 'medium',
+      offset,
+      age_from: age.age_from,
+      age_until: age.age_until
     }
   )
-
   return fetch(url)
     .then(response => response.json())
-    .then(suggestOptions => {
-        dispatch(receiveSuggestOptions(term, suggestOptions))
-        return suggestOptions
-      },
-      error => dispatch(failedfetchingSuggestOptions(term))
+    .then(json =>
+      dispatch(resetResults(categories, json)),
+      error => dispatch(failedfetchingResults(categories))
     )
 }

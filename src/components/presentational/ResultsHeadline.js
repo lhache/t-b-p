@@ -1,7 +1,6 @@
 import React from 'react';
 import Translate from 'react-translate-component'
 import Flexbox from 'flexbox-react'
-import { isDeviceConsideredMobile } from '../../data/utils'
 import _isEmpty from 'lodash/isEmpty'
 import './ResultsHeadline.css'
 
@@ -9,7 +8,7 @@ const showWhichHeadline = (type, term) => {
   if (type === 'category') {
     return (
       <h3>
-        { term.map(t => t.title)}
+        <b className="ResultsHeadlineTermCollection"> { decodeURIComponent(term) } </b>
       </h3>
     )
   } else {
@@ -25,7 +24,7 @@ const showWhichHeadline = (type, term) => {
 const ResultsHeadline = ({type, term}) => {
   return (
     <Flexbox className="ResultsHeadline" flexBasis="100%">
-      { !isDeviceConsideredMobile() && showWhichHeadline(type, term) }
+      { showWhichHeadline(type, term) }
     </Flexbox>
   )
 }
