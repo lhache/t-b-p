@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import Flexbox from 'flexbox-react';
 import Results from '../containers/Results'
 import Search from '../containers/Search'
+import ResultsHeadline from '../presentational/ResultsHeadline'
 // import './ResultsPage.css'
 
 class ResultsPage extends Component {
@@ -12,7 +13,7 @@ class ResultsPage extends Component {
         <Flexbox flex="flex" flexBasis="100%" flexWrap="wrap" className="">
             <Search />
         </Flexbox>
-
+        <ResultsHeadline showPrefixText={true} />
         <Results
           hideLoadMore={false}
           hideAgeRanges={false}

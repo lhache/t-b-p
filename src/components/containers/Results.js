@@ -4,7 +4,6 @@ import { withRouter } from 'react-router-dom'
 import PropTypes from 'prop-types'
 import Translate from 'react-translate-component'
 import { fetchResults, fetchAndResetResults, storeTerm, storeSelectedTerms, storeAge }  from '../../data/modules/searchResults'
-import ResultsHeadline from '../presentational/ResultsHeadline'
 import Loader from '../presentational/Loader'
 import Product from '../presentational/Product'
 import Age from '../presentational/Age'
@@ -23,13 +22,6 @@ const showNoResultsMessage = () => (<p>No results found</p>)
 
 const showAgeRanges = (age, updateAgeRange) => (
   age && <Age age={age} update={updateAgeRange} />
-)
-
-const showHeadline = (terms, isCategory) => (
-  <ResultsHeadline
-    type={isCategory? 'category' : 'results'}
-    term={joinTermToStringWithSymbol(terms, 'name', ' - ')}
-  />
 )
 
 const showResults = (results) => (
@@ -88,7 +80,6 @@ class ResultsContainer extends Component {
     const {
       hideLoadMore,
       hideAgeRanges,
-      hardcodedCategory,
       maxItems,
       results,
       age,
@@ -99,12 +90,10 @@ class ResultsContainer extends Component {
 
     const hasResults = !!results.length
     const trimmedResults = maxItems ? _take(results, maxItems) : results;
-    const headlineText = hardcodedCategory ? hardcodedCategory : selectedTerms;
 
     return (
       <Flexbox flexWrap="wrap" className="ResultsContainer" maxWidth="100%">
         { (!hideAgeRanges) && showAgeRanges(age, this._updateAgeRange)}
-        { (hasResults) && showHeadline(headlineText, !!hardcodedCategory)}
         { (isFetching && !hasResults) && showLoader() }
         { (hasFailedFetching) && showError() }
         { (!hasFailedFetching && !hasResults && !isFetching) && showNoResultsMessage() }
