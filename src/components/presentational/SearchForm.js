@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import Translate from 'react-translate-component'
 import Flexbox from 'flexbox-react';
 import ReactSVG from 'react-svg'
-import TagAutocomplete from './TagAutocomplete'
+import TagAutocomplete from '../connected/TagAutocomplete'
 import { isDeviceConsideredMobile } from '../../data/utils'
 import './SearchForm.css'
 
@@ -12,7 +12,7 @@ const showMobileSearchForm = (props) => {
       <Flexbox flexBasis="100%" className="SearchInputContainer" order={1}>
         <TagAutocomplete
           term={props.term}
-          selectedTerms={props.selectedTerms}
+          selectedCategories={props.selectedCategories}
           fetchOptions={props.fetchOptions}
           onChange={props.onChange}
         />
@@ -38,7 +38,7 @@ const showDesktopSearchForm = (props) => {
         <Flexbox flexBasis="75%">
           <TagAutocomplete
             term={props.term}
-            selectedTerms={props.selectedTerms}
+            selectedCategories={props.selectedCategories}
             fetchOptions={props.fetchOptions}
             onChange={props.onChange}
           />

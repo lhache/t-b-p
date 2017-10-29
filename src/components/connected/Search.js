@@ -4,14 +4,14 @@ import { connect } from 'react-redux'
 import { withRouter } from 'react-router-dom'
 import PropTypes from 'prop-types'
 import SearchForm from '../presentational/SearchForm'
-import TagAutocomplete from '../presentational/TagAutocomplete'
+import TagAutocomplete from './TagAutocomplete'
 import Flexbox from 'flexbox-react';
-import { storeTerm, storeSelectedTerms, fetchSuggestOptions } from '../../data/modules/searchResults'
+import { storeTerm, storeSelectedCategories, storeSearchedCategories, fetchSuggestOptions } from '../../data/modules/searchResults'
 import { Link } from 'react-router-dom'
 import { isDeviceConsideredMobile, parseQueryString, buildUrl } from '../../data/utils'
 import { searchUrl, resultsUrl } from '../../data/urls'
 import { getOrCreateElementById } from '../../utils/domUtils'
-import { joinTermToStringWithSymbol, buildAppSpecificUrlParams } from '../../utils/appUtils'
+import { joinTermToStringWithSymbol } from '../../utils/appUtils'
 import _get from 'lodash/get'
 import './Search.css';
 
@@ -20,7 +20,7 @@ const showMobileSearch = (props, that) => {
     return (
       <SearchForm
         term={props.term}
-        selectedTerms={props.selectedTerms}
+        selectedCategories={props.selectedCategories}
         fetchOptions={that._fetchOptions}
         onChange={that._handleChange}
         onSubmit={that._handleSubmit}
@@ -32,7 +32,7 @@ const showMobileSearch = (props, that) => {
       <Link to={`${searchUrl}?q=${props.term}`} className="SearchLink">
         <TagAutocomplete
           term={props.term}
-          selectedTerms={props.selectedTerms}
+          selectedCategories={props.selectedCategories}
           fetchOptions={that._fetchOptions}
           onChange={that._handleChange}
           disabled={true}
@@ -45,7 +45,7 @@ const showMobileSearch = (props, that) => {
 const showDesktopSearch = (props, that) => (
   <SearchForm
     term={props.term}
-    selectedTerms={props.selectedTerms}
+    selectedCategories={props.searchedCategories}
     fetchOptions={that._fetchOptions}
     onChange={that._handleChange}
     onSubmit={that._handleSubmit}
@@ -62,18 +62,19 @@ class SearchContainer extends Component {
   }
 
   componentWillMount() {
-    // set selectedTerms and fetch results at page load
+    // set selectedCategories and fetch results at page load
     const termFromUrl = _get(parseQueryString(this.props.history.location.search), 'c')
     if (termFromUrl) {
       const term = decodeURIComponent(termFromUrl)
 
       this.props.storeTerm(term)
-      this.props.storeSelectedTerms(term.split(',').map(t => ({ name: t })))
+      this.props.storeSearchedCategories(term.split(',').map(t => ({ name: t })))
+      this.props.storeSelectedCategories(term.split(',').map(t => ({ name: t })))
     }
   }
 
   _fetchOptions(input) {
-    return this.props.fetchSuggestOptions(input, this.props.selectedTerms)
+    return this.props.fetchSuggestOptions(input, this.props.selectedCategories)
   }
 
   _handleSubmit(term) {
@@ -94,6 +95,7 @@ class SearchContainer extends Component {
   _handleChange(data) {
     const term = joinTermToStringWithSymbol(data, 'name', ',')
     this.props.storeTerm(term)
+    this.props.storeSelectedCategories(data)
   }
 
   render() {
@@ -111,16 +113,18 @@ class SearchContainer extends Component {
 
 SearchContainer.propTypes = {
   term: PropTypes.string.isRequired,
-  selectedTerms: PropTypes.array.isRequired,
+  selectedCategories: PropTypes.array.isRequired,
   storeTerm: PropTypes.func.isRequired,
-  storeSelectedTerms: PropTypes.func.isRequired
+  storeSelectedCategories: PropTypes.func.isRequired,
+  storeSearchedCategories: PropTypes.func.isRequired
 }
 
 const mapStateToProps = state => {
   return {
     age: state.searchResults.age,
     term: state.searchResults.term,
-    selectedTerms: state.searchResults.selectedTerms
+    selectedCategories: state.searchResults.selectedCategories,
+    searchedCategories: state.searchResults.searchedCategories
   }
 }
 
@@ -130,8 +134,11 @@ const mapDispatchToProps = dispatch => {
     storeTerm: term => {
       return dispatch(storeTerm(term))
     },
-    storeSelectedTerms: term => {
-      return dispatch(storeSelectedTerms(term))
+    storeSelectedCategories: c => {
+      return dispatch(storeSelectedCategories(c))
+    },
+    storeSearchedCategories: c => {
+      return dispatch(storeSearchedCategories(c))
     }
   }
 }

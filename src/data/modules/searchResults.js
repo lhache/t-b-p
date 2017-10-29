@@ -1,9 +1,11 @@
 import 'isomorphic-fetch'
 import { buildUrl } from '../utils'
 import _concat from 'lodash/concat'
+import { joinTermToStringWithSymbol } from '../../utils/appUtils'
 
 export const STORE_TERM = 'STORE_TERM'
-export const STORE_SELECTED_TERMS = 'STORE_SELECTED_TERMS'
+export const STORE_SELECTED_CATEGORIES = 'STORE_SELECTED_CATEGORIES'
+export const STORE_SEARCHED_CATEGORIES = 'STORE_SEARCHED_CATEGORIES'
 export const STORE_AGE = 'STORE_AGE'
 export const RESET_RESULTS = 'RESET_RESULTS'
 export const FETCH_RESULTS = 'FETCH_RESULTS'
@@ -15,7 +17,8 @@ export const FETCH_SUGGEST_OPTIONS_FAILURE = 'FETCH_SUGGEST_OPTIONS_FAILURE'
 
 export const initialState = {
   term: '',
-  selectedTerms: [],
+  selectedCategories: [],
+  searchedCategories: [],
   age: { age_from: 0, age_until: 1200 },
   suggestOptions: [],
   results: [],
@@ -29,10 +32,16 @@ export const storeTerm = term => ({
   term: term
 })
 
-// store selectedTerms
-  export const storeSelectedTerms = terms => ({
-  type: STORE_SELECTED_TERMS,
-  selectedTerms: terms
+// store selectedCategories
+export const storeSelectedCategories = categories => ({
+  type: STORE_SELECTED_CATEGORIES,
+  selectedCategories: categories
+})
+
+// store searched Categories
+export const storeSearchedCategories = categories => ({
+  type: STORE_SEARCHED_CATEGORIES,
+  searchedCategories: categories
 })
 
 export const storeAge = (age) => ({
@@ -50,7 +59,7 @@ export const requestResults = term => {
   return {
     type: FETCH_RESULTS,
     term,
-    selectedTerms: term
+    selectedCategories: term
   }
 }
 
@@ -76,9 +85,13 @@ export const searchResultsReducer = (state = initialState, action) => {
       return Object.assign({}, state, {
         term: action.term
       })
-    case STORE_SELECTED_TERMS:
+    case STORE_SELECTED_CATEGORIES:
       return Object.assign({}, state, {
-        selectedTerms: action.selectedTerms
+        selectedCategories: action.selectedCategories
+      })
+    case STORE_SEARCHED_CATEGORIES:
+      return Object.assign({}, state, {
+        searchedCategories: action.searchedCategories
       })
     case STORE_AGE:
       return Object.assign({}, state, {
@@ -108,7 +121,7 @@ export const searchResultsReducer = (state = initialState, action) => {
     // case '@@router/LOCATION_CHANGE': {
     //   return Object.assign({}, state, {
     //     term: action.payload.state ? action.payload.state.term : [],
-    //     selectedTerms: action.payload.state ? action.payload.state.term : []
+    //     selectedCategories: action.payload.state ? action.payload.state.term : []
     //   })
     //   }
     default:
@@ -122,7 +135,7 @@ export const fetchResults = (term, categories, age, offset = 0) => dispatch => {
   const url = buildUrl(
     `${process.env.REACT_APP_API_HOST}${process.env.REACT_APP_API_RESULTS_ENDPOINT}`,
     {
-      c: categories,
+      c: joinTermToStringWithSymbol(categories, 'name', ','),
       image_sizes: 'medium',
       offset,
       age_from: age.age_from,

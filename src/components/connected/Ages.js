@@ -5,10 +5,8 @@ import PropTypes from 'prop-types'
 import Flexbox from 'flexbox-react';
 import counterpart from 'counterpart';
 import _last from 'lodash/last'
-import { resetResults, fetchResults, storeAge, dispatchStoreAge }  from '../../data/modules/searchResults'
-import { joinTermToStringWithSymbol } from '../../utils/appUtils'
+import { resetResults, fetchResults, storeAge }  from '../../data/modules/searchResults'
 import { parseQueryString } from '../../data/utils'
-import { resultsUrl } from '../../data/urls'
 import _get from 'lodash/get'
 import './Ages.css'
 
@@ -93,7 +91,7 @@ class AgesContainerContainer extends Component {
     this.setState({ selectedAge })
     this.props.storeAge(selectedAge)
     this.props.resetResults()
-    this.props.fetchResults(this.props.term, this.props.term, selectedAge, this.props.results.length)
+    this.props.fetchResults(this.props.term, this.props.searchedCategories, selectedAge, this.props.results.length)
   }
 
 
@@ -128,7 +126,7 @@ AgesContainerContainer.propTypes = {
 const mapStateToProps = state => {
   return {
     term: state.searchResults.term,
-    selectedTerms: state.searchResults.selectedTerms,
+    searchedCategories: state.searchResults.searchedCategories,
     age: state.searchResults.age,
     results: state.searchResults.results
   }
