@@ -16,7 +16,7 @@ export const FETCH_SUGGEST_OPTIONS_FAILURE = 'FETCH_SUGGEST_OPTIONS_FAILURE'
 export const initialState = {
   term: '',
   selectedTerms: [],
-  age: {age_from: 0, age_until: 0},
+  age: { age_from: 0, age_until: 1200 },
   suggestOptions: [],
   results: [],
   isFetching: false,
@@ -40,6 +40,12 @@ export const storeAge = (age) => ({
     age
   })
 
+export const resetResults = () => {
+  return {
+    type: RESET_RESULTS
+  }
+}
+
 export const requestResults = term => {
   return {
     type: FETCH_RESULTS,
@@ -48,13 +54,6 @@ export const requestResults = term => {
   }
 }
 
-export const resetResults = (term, json) => {
-  return {
-    type: RESET_RESULTS,
-    term,
-    results: json
-  }
-}
 export const receiveResults = (term, json) => {
   return {
     type: FETCH_RESULTS_SUCCESS,
@@ -87,9 +86,7 @@ export const searchResultsReducer = (state = initialState, action) => {
       })
     case RESET_RESULTS:
     return Object.assign({}, state, {
-      isFetching: false,
-      results: action.results,
-      hasFailedFetching: false
+      results: initialState.results,
     })
     case FETCH_RESULTS:
       return Object.assign({}, state, {
@@ -136,27 +133,6 @@ export const fetchResults = (term, categories, age, offset = 0) => dispatch => {
     .then(response => response.json())
     .then(json =>
       dispatch(receiveResults(categories, json)),
-      error => dispatch(failedfetchingResults(categories))
-    )
-}
-
-export const fetchAndResetResults = (term, categories, age, offset = 0) => dispatch => {
-  dispatch(requestResults(categories))
-
-  const url = buildUrl(
-    `${process.env.REACT_APP_API_HOST}${process.env.REACT_APP_API_RESULTS_ENDPOINT}`,
-    {
-      c: categories,
-      image_sizes: 'medium',
-      offset,
-      age_from: age.age_from,
-      age_until: age.age_until
-    }
-  )
-  return fetch(url)
-    .then(response => response.json())
-    .then(json =>
-      dispatch(resetResults(categories, json)),
       error => dispatch(failedfetchingResults(categories))
     )
 }

@@ -1,13 +1,13 @@
 import React, { Component } from 'react';
 import { Route } from 'react-router-dom'
-import HomePage from '../pages/HomePage'
-import SearchPage from '../pages/SearchPage'
-import ResultsPage from '../pages/ResultsPage'
-import DetailsPage from '../pages/DetailsPage'
-import LandingPage from '../pages/LandingPage'
+import HomePage from './pages/HomePage'
+import SearchPage from './pages/SearchPage'
+import ResultsPage from './pages/ResultsPage'
+import DetailsPage from './pages/DetailsPage'
+import LandingPage from './pages/LandingPage'
 import Flexbox from 'flexbox-react';
-import { isDeviceConsideredMobile } from '../../data/utils'
-import { searchUrl, resultsUrl, detailsUrl } from '../../data/urls'
+import { isDeviceConsideredMobile } from './../data/utils'
+import { searchUrl, resultsUrl, detailsUrl } from './../data/urls'
 import './App.css';
 
 class App extends Component {

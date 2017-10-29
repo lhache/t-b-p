@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import Flexbox from 'flexbox-react';
-import Details from '../containers/Details'
+import Details from '../connected/Details'
 // import './DetailsPage.css'
 
 

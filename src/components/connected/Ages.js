@@ -1,8 +1,16 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux'
+import { withRouter } from 'react-router-dom'
+import PropTypes from 'prop-types'
 import Flexbox from 'flexbox-react';
 import counterpart from 'counterpart';
 import _last from 'lodash/last'
-import './Age.css'
+import { resetResults, fetchResults, storeAge, dispatchStoreAge }  from '../../data/modules/searchResults'
+import { joinTermToStringWithSymbol } from '../../utils/appUtils'
+import { parseQueryString } from '../../data/utils'
+import { resultsUrl } from '../../data/urls'
+import _get from 'lodash/get'
+import './Ages.css'
 
 const maxAge = 1200
 const ageRanges = [
@@ -42,7 +50,7 @@ const displayFormattedAge = range => {
   return formatMonthOrYear(range.age_from) + ' - ' + formatMonthOrYear(range.age_until)
 }
 
-class Age extends Component {
+class AgesContainerContainer extends Component {
 
   constructor(props) {
     super(props)
@@ -51,6 +59,17 @@ class Age extends Component {
     }
 
     this._updateAge = this._updateAge.bind(this)
+  }
+
+  componentWillMount() {
+    const searchParams = parseQueryString(this.props.history.location.search)
+    const ageFrom = _get(searchParams, 'age_from')
+    const ageUntil = _get(searchParams, 'age_until')
+    const age = {}
+
+    ageFrom && Object.assign(age, { age_from: ageFrom })
+    ageUntil && Object.assign(age, { age_until: ageUntil })
+    this.props.storeAge(age)
   }
 
   componentWillReceiveProps(nextProps) {
@@ -72,7 +91,9 @@ class Age extends Component {
       age_until: range[1]
     }
     this.setState({ selectedAge })
-    this.props.update(selectedAge)
+    this.props.storeAge(selectedAge)
+    this.props.resetResults()
+    this.props.fetchResults(this.props.term, this.props.term, selectedAge, this.props.results.length)
   }
 
 
@@ -90,7 +111,7 @@ class Age extends Component {
               onClick={this._updateAge}
               value={`${ageRange.age_from}-${ageRange.age_until}`}
               >
-                + | {displayFormattedAge(ageRange)}
+                 {displayFormattedAge(ageRange)}
             </button>
           )
         })}
@@ -100,4 +121,27 @@ class Age extends Component {
   }
 }
 
-export default Age;
+AgesContainerContainer.propTypes = {
+  age: PropTypes.object.isRequired
+}
+
+const mapStateToProps = state => {
+  return {
+    term: state.searchResults.term,
+    selectedTerms: state.searchResults.selectedTerms,
+    age: state.searchResults.age,
+    results: state.searchResults.results
+  }
+}
+
+const mapDispatchToProps = dispatch => {
+  return {
+    storeAge: age => dispatch(storeAge(age)),
+    fetchResults: (term, categories, offset) => dispatch(fetchResults(term, categories, offset)),
+    resetResults: () => dispatch(resetResults())
+  }
+}
+
+const Ages = withRouter(connect(mapStateToProps, mapDispatchToProps)(AgesContainerContainer))
+
+export default Ages;
