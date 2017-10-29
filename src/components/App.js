@@ -7,7 +7,7 @@ import DetailsPage from './pages/DetailsPage'
 import LandingPage from './pages/LandingPage'
 import Flexbox from 'flexbox-react';
 import { isDeviceConsideredMobile } from './../data/utils'
-import { searchUrl, resultsUrl, detailsUrl } from './../data/urls'
+import { searchUrl, resultsUrl, detailsUrl, landingPageUrl } from './../data/urls'
 import './App.css';
 
 class App extends Component {
@@ -21,7 +21,7 @@ class App extends Component {
         <Route path={ searchUrl } component={SearchPage} />
         <Route path={ resultsUrl } component={ResultsPage} />
         <Route path={ detailsUrl } component={DetailsPage} />
-        <Route path="/landing" component={LandingPage} />
+        <Route path={ landingPageUrl } component={LandingPage} />
       </Flexbox>
     );
   }

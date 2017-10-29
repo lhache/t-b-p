@@ -1,24 +1,22 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux'
-import { withRouter } from 'react-router-dom'
+import counterpart from 'counterpart'
 import PropTypes from 'prop-types'
 import Translate from 'react-translate-component'
 import { fetchResults, storeTerm, storeSelectedCategories }  from '../../data/modules/searchResults'
+import { getCategoryKey } from '../../utils/appUtils'
 import Loader from '../presentational/Loader'
 import Product from '../presentational/Product'
 import Flexbox from 'flexbox-react';
-import { joinTermToStringWithSymbol } from '../../utils/appUtils'
-import { parseQueryString } from '../../data/utils'
-import _get from 'lodash/get'
 import _take from 'lodash/take'
-import _isFinite from 'lodash/isFinite'
+import _get from 'lodash/get'
 import './Results.css';
 
 const showLoader = () => (<Loader />)
 
-const showError = () => (<p>technical error</p>)
+const showError = () => (<p>{ counterpart('results.technicalError') }</p>)
 
-const showNoResultsMessage = () => (<p>No results found</p>)
+const showNoResultsMessage = () => (<p>{ counterpart('results.noResultsFound') }</p>)
 
 const showResults = (results) => (
   <Flexbox maxWidth="100%" flexWrap="wrap">
@@ -47,8 +45,8 @@ class ResultsContainer extends Component {
 
 
   componentDidMount() {
-    const selectedCategories = this.props.hardcodedCategory ?
-      this.props.hardcodedCategory :
+    const selectedCategories = this.props.hardcodedCategories ?
+      this.props.hardcodedCategories :
       this.props.selectedCategories
 
     this.props.fetchResults(this.props.term, selectedCategories, this.props.age)
@@ -65,30 +63,38 @@ class ResultsContainer extends Component {
       results,
       isFetching,
       hasFailedFetching,
-      selectedCategories
+      searchedCategories,
+      hardcodedCategories
     } = this.props
 
-    const hasResults = !!results.length
-    const hasFiniteAmountOfResults = results.length % 20 === 0
-    const trimmedResults = maxItems ? _take(results, maxItems) : results;
+    const categories = hardcodedCategories ? hardcodedCategories : searchedCategories
+    const resultsForCategory = _get(results, getCategoryKey(categories))
 
-    return (
-      <Flexbox flexWrap="wrap" className="ResultsContainer" maxWidth="100%">
-        { (isFetching && !hasResults) && showLoader() }
-        { (hasFailedFetching) && showError() }
-        { (!hasFailedFetching && !hasResults && !isFetching) && showNoResultsMessage() }
-        { (!hasFailedFetching) &&  showResults(trimmedResults)}
-        { (!hideLoadMore && hasResults && hasFiniteAmountOfResults ) && showLoadMore(this._fetchMoreResults)}
-      </Flexbox>
-    )
+    if (resultsForCategory) {
+        const hasResults = !!resultsForCategory.length
+        const hasFiniteAmountOfResults = resultsForCategory.length % 20 === 0
+        const trimmedResults = maxItems ? _take(resultsForCategory, maxItems) : resultsForCategory
+
+        return (
+          <Flexbox flexWrap="wrap" className="ResultsContainer" maxWidth="100%">
+            { (isFetching && !hasResults) && showLoader() }
+            { (hasFailedFetching) && showError() }
+            { (!hasFailedFetching && !hasResults && !isFetching) && showNoResultsMessage() }
+            { (!hasFailedFetching) &&  showResults(trimmedResults)}
+            { (!hideLoadMore && hasResults && hasFiniteAmountOfResults ) && showLoadMore(this._fetchMoreResults)}
+          </Flexbox>
+        )
+    }
+    return (<Flexbox flexWrap="wrap" className="ResultsContainer" maxWidth="100%"></Flexbox>)
   }
 }
 
 ResultsContainer.propTypes = {
   term : PropTypes.string.isRequired,
   selectedCategories : PropTypes.array.isRequired,
+  searchedCategories : PropTypes.array.isRequired,
   age : PropTypes.object.isRequired,
-  results: PropTypes.array.isRequired,
+  results: PropTypes.object.isRequired,
   storeTerm: PropTypes.func.isRequired,
   storeSelectedCategories: PropTypes.func.isRequired,
   fetchResults: PropTypes.func.isRequired
@@ -99,6 +105,7 @@ const mapStateToProps = state => {
     age: state.searchResults.age,
     term: state.searchResults.term,
     selectedCategories: state.searchResults.selectedCategories,
+    searchedCategories: state.searchResults.searchedCategories,
     results: state.searchResults.results,
     isFetching: state.searchResults.isFetching,
     hasFailedFetching: state.searchResults.hasFailedFetching
@@ -119,9 +126,9 @@ const mapDispatchToProps = dispatch => {
   }
 }
 
-const Results = withRouter(connect(
+const Results = connect(
   mapStateToProps,
   mapDispatchToProps
-)(ResultsContainer))
+)(ResultsContainer)
 
 export default Results;

@@ -1,3 +1,5 @@
-export const searchUrl = "/toys/search"
-export const resultsUrl = "/toys/results"
-export const detailsUrl = "/toys/details"
+const urlPrefix = '/app'
+export const searchUrl = urlPrefix + '/search'
+export const resultsUrl = urlPrefix + '/results'
+export const detailsUrl = urlPrefix + '/details'
+export const landingPageUrl = '/spielzeug'

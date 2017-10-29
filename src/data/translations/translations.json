@@ -8,7 +8,9 @@
     },
     "results": {
       "headline": "Suchsresultate für",
-      "loadMore": "Mehr zeigen"
+      "loadMore": "Mehr zeigen",
+      "technicalError": "technical error",
+      "noResultsFound": "No results found"
     },
     "product": {
       "goToDetails": "Zum Produkt",
@@ -35,7 +37,9 @@
     },
     "results": {
       "headline": "Search results for",
-      "loadMore": "Show More"
+      "loadMore": "Show More",
+      "technicalError": "technical error",
+      "noResultsFound": "No results found"
     },
     "product": {
       "goToDetails": "Go to product",

@@ -1,7 +1,7 @@
 import 'isomorphic-fetch'
 import { buildUrl } from '../utils'
 import _concat from 'lodash/concat'
-import { joinTermToStringWithSymbol } from '../../utils/appUtils'
+import { getCategoryKey } from '../../utils/appUtils'
 
 export const STORE_TERM = 'STORE_TERM'
 export const STORE_SELECTED_CATEGORIES = 'STORE_SELECTED_CATEGORIES'
@@ -11,17 +11,13 @@ export const RESET_RESULTS = 'RESET_RESULTS'
 export const FETCH_RESULTS = 'FETCH_RESULTS'
 export const FETCH_RESULTS_SUCCESS = 'FETCH_RESULTS_SUCCESS'
 export const FETCH_RESULTS_FAILURE = 'FETCH_RESULTS_FAILURE'
-export const FETCH_SUGGEST_OPTIONS = 'FETCH_SUGGEST_OPTIONS'
-export const FETCH_SUGGEST_OPTIONS_SUCCESS = 'FETCH_SUGGEST_OPTIONS_SUCCESS'
-export const FETCH_SUGGEST_OPTIONS_FAILURE = 'FETCH_SUGGEST_OPTIONS_FAILURE'
 
 export const initialState = {
   term: '',
   selectedCategories: [],
   searchedCategories: [],
   age: { age_from: 0, age_until: 1200 },
-  suggestOptions: [],
-  results: [],
+  results: {},
   isFetching: false,
   hasFailedFetching: false
 }
@@ -49,32 +45,32 @@ export const storeAge = (age) => ({
     age
   })
 
-export const resetResults = () => {
+export const resetResults = (searchedCategories) => {
   return {
-    type: RESET_RESULTS
+    type: RESET_RESULTS,
+    searchedCategories
   }
 }
 
-export const requestResults = term => {
+export const requestResults = searchedCategories => {
   return {
     type: FETCH_RESULTS,
-    term,
-    selectedCategories: term
+    searchedCategories
   }
 }
 
-export const receiveResults = (term, json) => {
+export const receiveResults = (searchedCategories, json) => {
   return {
     type: FETCH_RESULTS_SUCCESS,
-    term,
+    searchedCategories,
     results: json
   }
 }
 
-export const failedfetchingResults = (term) => {
+export const failedfetchingResults = (category) => {
   return {
     type: FETCH_RESULTS_FAILURE,
-    term
+    category
   }
 }
 
@@ -98,18 +94,24 @@ export const searchResultsReducer = (state = initialState, action) => {
         age: action.age
       })
     case RESET_RESULTS:
-    return Object.assign({}, state, {
-      results: initialState.results,
-    })
+      return Object.assign({}, state, {
+        ['results' + action.searchedCategories]: initialState.results,
+        results: Object.assign({}, state.results, {
+          [getCategoryKey(action.searchedCategories)]: []
+        }),
+      })
     case FETCH_RESULTS:
       return Object.assign({}, state, {
         isFetching: true,
         hasFailedFetching: false
       })
     case FETCH_RESULTS_SUCCESS:
+      const categoryKey = getCategoryKey(action.searchedCategories)
       return Object.assign({}, state, {
         isFetching: false,
-        results: _concat(state.results, action.results),
+        results: Object.assign({}, state.results, {
+          [categoryKey]: _concat(state.results[categoryKey] || [], action.results)
+        }),
         hasFailedFetching: false
       })
     case FETCH_RESULTS_FAILURE:
@@ -135,7 +137,7 @@ export const fetchResults = (term, categories, age, offset = 0) => dispatch => {
   const url = buildUrl(
     `${process.env.REACT_APP_API_HOST}${process.env.REACT_APP_API_RESULTS_ENDPOINT}`,
     {
-      c: joinTermToStringWithSymbol(categories, 'name', ','),
+      c: getCategoryKey(categories),
       image_sizes: 'medium',
       offset,
       age_from: age.age_from,

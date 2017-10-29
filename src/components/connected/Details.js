@@ -1,7 +1,9 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux'
 import { withRouter } from 'react-router-dom'
-import {fetchDetails} from '../../data/modules/details'
+import PropTypes from 'prop-types'
+import { fetchDetails } from '../../data/modules/details'
+import counterpart from 'counterpart'
 import Flexbox from 'flexbox-react';
 import Loader from '../presentational/Loader'
 import Price from '../presentational/Price'
@@ -14,9 +16,9 @@ import _merge from 'lodash/merge'
 import _toArray from 'lodash/toArray'
 import './Details.css';
 
-const showLoader = isFetching => (isFetching && <Loader />)
+const showLoader = () => (<Loader />)
 
-const showError = hasFailedFetching => (hasFailedFetching && <p>error</p>)
+const showError = () => (<p>{ counterpart('results.technicalError') }</p>)
 
 const flattenImagesBySize = (images, size, target) => (
   images && _get(images, size).map(image => ({[target]: image}))
@@ -96,20 +98,27 @@ class DetailsContainer extends Component {
   }
 
   _trackClick(event) {
-    debugger;
     window.ga && window.ga('send', 'event', 'user-engagement', 'clickout')
   }
 
   render() {
-      // var url = this.props.details.deeplinkUrl && this.props.details.deeplinkUrl.replace('https://api.thebetterplay.com','http://toymaster.eu-central-1.elasticbeanstalk.com')
+    const { isFetching, hasFailedFetching } = this.props
+
     return (
       <Flexbox className="DetailsContainer" flexBasis="100%" flexWrap="wrap">
-        { showLoader(this.props.isFetching) }
-        { showError(this.props.hasFailedFetching) }
-        {isDeviceConsideredMobile() ? showMobileDetails(this.props, this._trackClick) : showDesktopDetails(this.props, this._trackClick)}
+        { isFetching && showLoader(isFetching) }
+        { hasFailedFetching && showError(hasFailedFetching) }
+        { isDeviceConsideredMobile() ?
+          showMobileDetails(this.props, this._trackClick) :
+          showDesktopDetails(this.props, this._trackClick)
+        }
       </Flexbox>
     )
   }
+}
+
+DetailsContainer.propTypes = {
+  details : PropTypes.object.isRequired
 }
 
 const mapStateToProps = state => {
