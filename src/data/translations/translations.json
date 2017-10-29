@@ -3,27 +3,27 @@
     "title": "The Better Play",
     "search": {
       "search": "Suchen",
-      "placeholder": "What kind of toys are you looking for?",
-      "noResultsFound": "No results found, please type in something else."
+      "placeholder": "Was für ein Spielzeug suchst du?",
+      "noResultsFound": "Keine Resultate gefunden, bitte versuche es mit einem anderen Stichwort."
     },
     "results": {
-      "headline": "Search results for",
-      "loadMore": "Load more products"
+      "headline": "Suchsresultate für",
+      "loadMore": "Mehr zeigen"
     },
     "product": {
-      "goToDetails": "Go to product",
-      "goToAffShop": "Go to product",
-      "hoverImage": "See more"
+      "goToDetails": "Zum Produkt",
+      "goToAffShop": "Zum Produkt",
+      "hoverImage": "Mehr zeigen"
     },
     "cookies": {
       "bannerText": "Diese Webseite verwendet Cookies, um Ihnen ein angenehmeres Surfen zu ermöglichen."
     },
     "age": {
-      "month": "month",
-      "months": "months",
-      "year": "year",
-      "years": "years",
-      "allAges": "All ages"
+      "month": "Monat",
+      "months": "Monate",
+      "year": "Jahr",
+      "years": "Jahre",
+      "allAges": "Alle Altersklassen"
     }
   },
   "en": {
@@ -35,7 +35,7 @@
     },
     "results": {
       "headline": "Search results for",
-      "loadMore": "Load more products"
+      "loadMore": "Show More"
     },
     "product": {
       "goToDetails": "Go to product",
@@ -43,7 +43,7 @@
       "hoverImage": "See more"
     },
     "cookies": {
-      "bannerText": "Diese Webseite verwendet Cookies, um Ihnen ein angenehmeres Surfen zu ermöglichen."
+      "bannerText": "This Website is using Cookies, to enable you to have a better experience on our Website."
     },
     "age": {
       "month": "month",
