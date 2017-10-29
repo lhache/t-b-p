@@ -47,7 +47,7 @@ const displayFormattedAge = range => {
   if (range.age_until === maxAge) {
     return counterpart('age.allAges')
   }
-  return formatMonthOrYear(range.age_from) + ' - ' + formatMonthOrYear(range.age_until)
+  return (range.age_from) + ' - ' + formatMonthOrYear(range.age_until)
 }
 
 class AgesContainerContainer extends Component {
