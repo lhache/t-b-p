@@ -11,6 +11,7 @@ import { joinTermToStringWithSymbol } from '../../utils/appUtils'
 import { parseQueryString } from '../../data/utils'
 import _get from 'lodash/get'
 import _take from 'lodash/take'
+import _isFinite from 'lodash/isFinite'
 import './Results.css';
 
 const showLoader = () => (<Loader />)
@@ -67,15 +68,16 @@ class ResultsContainer extends Component {
     } = this.props
 
     const hasResults = !!results.length
+    const hasFiniteAmountOfResults = results.length % 20 === 0
     const trimmedResults = maxItems ? _take(results, maxItems) : results;
-
+    
     return (
       <Flexbox flexWrap="wrap" className="ResultsContainer" maxWidth="100%">
         { (isFetching && !hasResults) && showLoader() }
         { (hasFailedFetching) && showError() }
         { (!hasFailedFetching && !hasResults && !isFetching) && showNoResultsMessage() }
         { (!hasFailedFetching) &&  showResults(trimmedResults)}
-        { (!hideLoadMore && hasResults && results.length >= 20 ) && showLoadMore(this._fetchMoreResults)}
+        { (!hideLoadMore && hasResults && hasFiniteAmountOfResults ) && showLoadMore(this._fetchMoreResults)}
       </Flexbox>
     )
   }
