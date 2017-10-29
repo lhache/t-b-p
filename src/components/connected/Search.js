@@ -8,11 +8,10 @@ import TagAutocomplete from '../presentational/TagAutocomplete'
 import Flexbox from 'flexbox-react';
 import { storeTerm, storeSelectedTerms, fetchSuggestOptions } from '../../data/modules/searchResults'
 import { Link } from 'react-router-dom'
-import { isDeviceConsideredMobile } from '../../data/utils'
-import { parseQueryString } from '../../data/utils'
+import { isDeviceConsideredMobile, parseQueryString, buildUrl } from '../../data/utils'
 import { searchUrl, resultsUrl } from '../../data/urls'
 import { getOrCreateElementById } from '../../utils/domUtils'
-import { joinTermToStringWithSymbol } from '../../utils/appUtils'
+import { joinTermToStringWithSymbol, buildAppSpecificUrlParams } from '../../utils/appUtils'
 import _get from 'lodash/get'
 import './Search.css';
 
@@ -78,9 +77,16 @@ class SearchContainer extends Component {
   }
 
   _handleSubmit(term) {
+
+    const urlParams = {
+      c: term,
+      age_from: this.props.age.age_from,
+      age_until: this.props.age.age_until
+    }
+
     this.props.history.push({
       pathname: `${ resultsUrl }`,
-      search: `?c=${ term }`,
+      search: buildUrl('', urlParams),
       state: { term }
     })
   }
@@ -112,6 +118,7 @@ SearchContainer.propTypes = {
 
 const mapStateToProps = state => {
   return {
+    age: state.searchResults.age,
     term: state.searchResults.term,
     selectedTerms: state.searchResults.selectedTerms
   }

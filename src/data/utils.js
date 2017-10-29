@@ -25,7 +25,9 @@ export const buildUrl = (url, parameters) => {
   var qs = "";
   for(var key in parameters) {
     var value = parameters[key];
-    value && (qs += encodeURIComponent(key) + "=" + encodeURIComponent(value) + "&")
+    // value && (qs += encodeURIComponent(key) + "=" + encodeURIComponent(value) + "&")
+    value && (qs += (key) + "=" + (value) + "&")
+    // qs += (key) + "=" + (value) + "&"
   }
   if (qs.length > 0){
     qs = qs.substring(0, qs.length-1); //chop off last "&"

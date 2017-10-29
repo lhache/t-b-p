@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 import Flexbox from 'flexbox-react';
-import Search from '../containers/Search'
-import Results from '../containers/Results'
+import Search from '../connected/Search'
+import Results from '../connected/Results'
 import CookieBannerBar from '../presentational/CookieBannerBar'
-import ResultsHeadline from '../presentational/ResultsHeadline'
+import ResultsHeadline from '../connected/ResultsHeadline'
 // import './HomePage.css'
 
 class HomePage extends Component {

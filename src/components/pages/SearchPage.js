@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import Flexbox from 'flexbox-react';
-import Search from '../containers/Search'
+import Search from '../connected/Search'
 // import './SearchPage.css'
 
 class SearchPage extends Component {

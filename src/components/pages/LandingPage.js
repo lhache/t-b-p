@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import Flexbox from 'flexbox-react';
-import Results from '../containers/Results'
-import Search from '../containers/Search'
+import Results from '../connected/Results'
+import Search from '../connected/Search'
 import CookieBannerBar from '../presentational/CookieBannerBar'
 // import './LandingPage.css'
 

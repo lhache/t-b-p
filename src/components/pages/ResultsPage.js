@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
 import Flexbox from 'flexbox-react';
-import Results from '../containers/Results'
-import Search from '../containers/Search'
-import ResultsHeadline from '../presentational/ResultsHeadline'
+import Results from '../connected/Results'
+import Search from '../connected/Search'
+import Ages from '../connected/Ages'
+import ResultsHeadline from '../connected/ResultsHeadline'
 // import './ResultsPage.css'
 
 class ResultsPage extends Component {
@@ -10,14 +11,18 @@ class ResultsPage extends Component {
   render() {
     return (
       <Flexbox flex="flex" flexBasis="100%" flexWrap="wrap" maxWidth="100%" className="ResultsPageContainer">
+
         <Flexbox flex="flex" flexBasis="100%" flexWrap="wrap" className="">
             <Search />
         </Flexbox>
+
+        <Ages />
         <ResultsHeadline showPrefixText={true} />
         <Results
           hideLoadMore={false}
           hideAgeRanges={false}
         />
+
       </Flexbox>
     )
   }
