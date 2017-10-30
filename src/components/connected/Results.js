@@ -14,14 +14,18 @@ import './Results.css';
 
 const showLoader = () => (<Loader />)
 
-const showError = () => (<p>{ counterpart('results.technicalError') }</p>)
+const showError = () => (
+  <h3 className="Results-Error Results-ErrorTechnical">{ counterpart('results.technicalError') }</h3>
+)
 
-const showNoResultsMessage = () => (<p>{ counterpart('results.noResultsFound') }</p>)
+const showNoResultsMessage = () => (
+  <h3 className="Results-Error Results-ErrorNoResults">{ counterpart('results.noResultsFound') }</h3>
+)
 
 const showResults = (results) => (
   <Flexbox maxWidth="100%" flexWrap="wrap">
       {results.map((result, idx) => (
-        <Flexbox key={Math.random() + result.id} order={idx}>
+        <Flexbox key={Math.random() + result.id} order={idx} className="fadeIn duration-500">
           <Product product={result} />
         </Flexbox>
       ))}
@@ -50,6 +54,11 @@ class ResultsContainer extends Component {
       this.props.selectedCategories
 
     this.props.fetchResults(this.props.term, selectedCategories, this.props.age)
+  }
+
+  // don't update when results are the same
+  shouldComponentUpdate(nextProps, nextState) {
+    return this.props.results !== nextProps.results
   }
 
   _fetchMoreResults() {

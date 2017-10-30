@@ -12,8 +12,8 @@ class HomePage extends Component {
 
     const hardcodedCategories = [
       [{name: 'LEGO'}],
-      [{name: 'Holzpuzzles'}],
-      [{name: 'Ravensburger'}],
+      // [{name: 'Holzpuzzles'}],
+      // [{name: 'Ravensburger'}],
     ]
 
     return (
@@ -32,6 +32,7 @@ class HomePage extends Component {
               maxItems={5}
               hardcodedCategories={c}
               searchedCategories={c}
+              freezeUpdate={true}
             />
           </Flexbox>
         ))}

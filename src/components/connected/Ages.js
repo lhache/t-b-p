@@ -12,9 +12,10 @@ import './Ages.css'
 
 const maxAge = 1200
 const ageRanges = [
-  { age_from: 0, age_until: 3},
-  { age_from: 3, age_until: 6},
-  { age_from: 6, age_until: 12},
+  // { age_from: 0, age_until: 3},
+  // { age_from: 3, age_until: 6},
+  // { age_from: 6, age_until: 12},
+  { age_from: 0, age_until: 12},
   { age_from: 12, age_until: 24},
   { age_from: 24, age_until: 36},
   { age_from: 36, age_until: 48},
@@ -25,7 +26,6 @@ const ageRanges = [
   { age_from: 96, age_until: 108},
   { age_from: 108, age_until: 120},
   { age_from: 120, age_until: 132},
-  { age_from: 132, age_until: 144},
   { age_from: 0, age_until: maxAge}
 ]
 
@@ -109,7 +109,7 @@ class AgesContainerContainer extends Component {
               onClick={this._updateAge}
               value={`${ageRange.age_from}-${ageRange.age_until}`}
               >
-                 {displayFormattedAge(ageRange)}
+                 + {displayFormattedAge(ageRange)}
             </button>
           )
         })}

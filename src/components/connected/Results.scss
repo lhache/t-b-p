@@ -1,6 +1,23 @@
+.fadeIn {
+  -webkit-animation-name: fadeIn;
+  animation-name: fadeIn;
+  -webkit-animation-timing-function: cubic-bezier(0.455, 0.03, 0.515, 0.955);
+  animation-timing-function: cubic-bezier(0.455, 0.03, 0.515, 0.955); }
+
+@keyframes fadeIn {
+  0% {
+    opacity: 0; }
+  100% {
+    opacity: 1; } }
+
+.duration-500 {
+  -webkit-animation-duration: .5s;
+  animation-duration: .5s; }
+
 .AppMobile {
   .ResultsContainer {
     padding: 10px 0;
+    min-height: 90vh;
   }
 }
 
@@ -27,4 +44,9 @@
   margin: 40px;
   cursor: pointer;
   outline: none;
+}
+
+.Results-Error {
+  margin: 0 auto;
+  padding: 40px;
 }

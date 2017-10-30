@@ -17,7 +17,7 @@ import './Details.css';
 
 const showLoader = () => (<Loader />)
 
-const showError = () => (<p>{ counterpart('results.technicalError') }</p>)
+const showError = () => (<h3 className="Results-Error Results-ErrorTechnical">{ counterpart('results.technicalError') }</h3>)
 
 const flattenImagesBySize = (images, size, target) => (
   images && _get(images, size).map(image => ({[target]: image}))

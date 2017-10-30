@@ -57,4 +57,4 @@ ReactDOM.render(
   document.getElementById('tbp-app-wrapper')
 )
 
-registerServiceWorker();
+// registerServiceWorker();
