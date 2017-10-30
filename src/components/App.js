@@ -6,7 +6,7 @@ import ResultsPage from './pages/ResultsPage'
 import DetailsPage from './pages/DetailsPage'
 import LandingPage from './pages/LandingPage'
 import Flexbox from 'flexbox-react';
-import { isDeviceConsideredMobile } from './../data/utils'
+import { isDeviceConsideredMobile } from './../utils/appUtils'
 import { searchUrl, resultsUrl, detailsUrl, landingPageUrl } from './../data/urls'
 import './App.css';
 

@@ -53,7 +53,7 @@ class ResultsContainer extends Component {
   }
 
   _fetchMoreResults() {
-    this.props.fetchResults(this.props.term, this.props.selectedCategories, this.props.age, this.props.results.length)
+    this.props.fetchResults(this.props.term, this.props.selectedCategories, this.props.age, _get(this.props.results, getCategoryKey(this.props.selectedCategories)).length)
   }
 
   render() {

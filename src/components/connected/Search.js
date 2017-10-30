@@ -8,11 +8,10 @@ import TagAutocomplete from './TagAutocomplete'
 import Flexbox from 'flexbox-react';
 import { storeTerm, storeSelectedCategories, storeSearchedCategories, fetchSuggestOptions } from '../../data/modules/searchResults'
 import { Link } from 'react-router-dom'
-import { isDeviceConsideredMobile, parseQueryString, buildUrl } from '../../data/utils'
+import { isDeviceConsideredMobile, buildUrl } from '../../utils/appUtils'
 import { searchUrl, resultsUrl } from '../../data/urls'
 import { getOrCreateElementById } from '../../utils/domUtils'
-import { joinTermToStringWithSymbol } from '../../utils/appUtils'
-import _get from 'lodash/get'
+import { joinTermToStringWithSymbol, getUrlParam } from '../../utils/appUtils'
 import './Search.css';
 
 const showMobileSearch = (props, that) => {
@@ -63,7 +62,7 @@ class SearchContainer extends Component {
 
   componentWillMount() {
     // set selectedCategories and fetch results at page load
-    const termFromUrl = _get(parseQueryString(this.props.history.location.search), 'c')
+    const termFromUrl = getUrlParam(this.props.history.location.search, 'c')
     if (termFromUrl) {
       const term = decodeURIComponent(termFromUrl)
 
@@ -114,6 +113,7 @@ class SearchContainer extends Component {
 SearchContainer.propTypes = {
   term: PropTypes.string.isRequired,
   selectedCategories: PropTypes.array.isRequired,
+  searchedCategories: PropTypes.array.isRequired,
   storeTerm: PropTypes.func.isRequired,
   storeSelectedCategories: PropTypes.func.isRequired,
   storeSearchedCategories: PropTypes.func.isRequired

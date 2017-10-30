@@ -4,7 +4,7 @@ import Truncate from 'react-truncate';
 import Price from './Price'
 import ProductButton from './ProductButton'
 import ProductImage from './ProductImage'
-import { isDeviceConsideredMobile } from '../../data/utils'
+import { isDeviceConsideredMobile } from '../../utils/appUtils'
 import { detailsUrl } from '../../data/urls'
 import './Product.css'
 

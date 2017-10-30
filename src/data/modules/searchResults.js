@@ -1,5 +1,5 @@
 import 'isomorphic-fetch'
-import { buildUrl } from '../utils'
+import { buildUrl } from '../../utils/appUtils'
 import _concat from 'lodash/concat'
 import { getCategoryKey } from '../../utils/appUtils'
 
@@ -45,10 +45,10 @@ export const storeAge = (age) => ({
     age
   })
 
-export const resetResults = (searchedCategories) => {
+export const resetResults = (categoryKey) => {
   return {
     type: RESET_RESULTS,
-    searchedCategories
+    categoryKey
   }
 }
 
@@ -95,9 +95,8 @@ export const searchResultsReducer = (state = initialState, action) => {
       })
     case RESET_RESULTS:
       return Object.assign({}, state, {
-        ['results' + action.searchedCategories]: initialState.results,
         results: Object.assign({}, state.results, {
-          [getCategoryKey(action.searchedCategories)]: []
+          [getCategoryKey(action.categoryKey)]: []
         }),
       })
     case FETCH_RESULTS:

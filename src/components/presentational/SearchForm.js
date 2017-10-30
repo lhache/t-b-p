@@ -3,7 +3,7 @@ import Translate from 'react-translate-component'
 import Flexbox from 'flexbox-react';
 import ReactSVG from 'react-svg'
 import TagAutocomplete from '../connected/TagAutocomplete'
-import { isDeviceConsideredMobile } from '../../data/utils'
+import { isDeviceConsideredMobile } from '../../utils/appUtils'
 import './SearchForm.css'
 
 const showMobileSearchForm = (props) => {

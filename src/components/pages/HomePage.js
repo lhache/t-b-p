@@ -23,7 +23,7 @@ class HomePage extends Component {
         </Flexbox>
 
         { hardcodedCategories.map(c => (
-          <section key={Math.random()}>
+          <Flexbox key={Math.random()} flexWrap="wrap" minHeight="325px" flexBasis="100%">
             <ResultsHeadline hardcodedTerms={c} showPrefixText={false} />
             <Results
               key={`res-${Math.random()}`}
@@ -33,7 +33,7 @@ class HomePage extends Component {
               hardcodedCategories={c}
               searchedCategories={c}
             />
-          </section>
+          </Flexbox>
         ))}
 
         <CookieBannerBar />

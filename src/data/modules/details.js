@@ -1,5 +1,5 @@
 import 'isomorphic-fetch'
-import { buildUrl } from '../utils'
+import { buildUrl } from '../../utils/appUtils'
 
 export const FETCH_DETAILS = 'FETCH_DETAILS'
 export const FETCH_DETAILS_SUCCESS = 'FETCH_DETAILS_SUCCESS'

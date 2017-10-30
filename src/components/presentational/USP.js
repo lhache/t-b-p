@@ -1,7 +1,7 @@
 import React from 'react';
 import Flexbox from 'flexbox-react';
 import Translate from 'react-translate-component'
-import { isDeviceConsideredMobile } from '../../data/utils'
+import { isDeviceConsideredMobile } from '../../utils/appUtils'
 import './USP.css'
 
 const showUSP = () => (

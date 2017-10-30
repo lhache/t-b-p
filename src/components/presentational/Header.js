@@ -4,7 +4,7 @@ import Flexbox from 'flexbox-react';
 import ReactSVG from 'react-svg'
 import { Link } from 'react-router-dom'
 import logo from '../../images/logo.svg'
-import { isDeviceConsideredMobile } from '../../data/utils'
+import { isDeviceConsideredMobile } from '../../utils/appUtils'
 import './Header.css'
 
 const renderSubtitle = condition => {

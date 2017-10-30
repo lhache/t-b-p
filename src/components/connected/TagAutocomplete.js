@@ -2,10 +2,9 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux'
 import { withRouter } from 'react-router-dom'
 import PropTypes from 'prop-types'
-import { buildUrl } from '../../data/utils'
+import { buildUrl, joinTermToStringWithSymbol } from '../../utils/appUtils'
 import counterpart from 'counterpart'
 import VirtualizedSelect from 'react-virtualized-select'
-import { joinTermToStringWithSymbol } from '../../utils/appUtils'
 import './TagAutocomplete.css'
 import 'react-select/dist/react-select.css';
 import 'react-virtualized/styles.css'
@@ -19,7 +18,6 @@ class TagAutocompleteContainer extends Component {
   }
 
   _getOptions(input) {
-    console.log('selectedCategories', this.props.selectedCategories)
     const url = buildUrl(
       `${process.env.REACT_APP_API_HOST}${process.env.REACT_APP_API_SUGGEST_ENDPOINT}`,
       {

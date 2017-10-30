@@ -6,7 +6,7 @@ import Flexbox from 'flexbox-react';
 import counterpart from 'counterpart';
 import _last from 'lodash/last'
 import { resetResults, fetchResults, storeAge }  from '../../data/modules/searchResults'
-import { parseQueryString } from '../../data/utils'
+import { parseQueryString } from '../../utils/appUtils'
 import _get from 'lodash/get'
 import './Ages.css'
 
@@ -90,7 +90,7 @@ class AgesContainerContainer extends Component {
     }
     this.setState({ selectedAge })
     this.props.storeAge(selectedAge)
-    this.props.resetResults()
+    this.props.resetResults(this.props.searchedCategories)
     this.props.fetchResults(this.props.term, this.props.searchedCategories, selectedAge, this.props.results.length)
   }
 
@@ -136,7 +136,7 @@ const mapDispatchToProps = dispatch => {
   return {
     storeAge: age => dispatch(storeAge(age)),
     fetchResults: (term, categories, offset) => dispatch(fetchResults(term, categories, offset)),
-    resetResults: () => dispatch(resetResults())
+    resetResults: (cat) => dispatch(resetResults(cat))
   }
 }
 

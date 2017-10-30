@@ -7,7 +7,7 @@ import logo from '../../images/logo.svg'
 // import FooterSocial from './FooterSocial'
 import FooterLinks from './FooterLinks'
 import './Footer.css'
-import { isDeviceConsideredMobile } from '../../data/utils'
+import { isDeviceConsideredMobile } from '../../utils/appUtils'
 
 const showMobileFooter = () => (
       <Flexbox className="Footer FooterMobile" flexBasis="100%" flexDirection="column">

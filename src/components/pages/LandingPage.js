@@ -10,7 +10,7 @@ class LandingPage extends Component {
 
   render() {
     return (
-      <Flexbox flex="flex" flexBasis="100%" flexWrap="wrap" className="LandingPageContainer">
+      <Flexbox flex="flex" flexBasis="100%" flexWrap="wrap" className="LandingPageContainer" minHeight="50vh">
           <Flexbox flex="flex" flexBasis="100%" flexWrap="wrap" className="">
               <Search />
           </Flexbox>
