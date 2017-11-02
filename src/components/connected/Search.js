@@ -11,7 +11,7 @@ import { Link } from 'react-router-dom'
 import { isDeviceConsideredMobile, buildUrl } from '../../utils/appUtils'
 import { searchUrl, resultsUrl } from '../../data/urls'
 import { getOrCreateElementById } from '../../utils/domUtils'
-import { joinTermToStringWithSymbol, getUrlParam } from '../../utils/appUtils'
+import { joinTermToStringWithSymbol, getAppParam } from '../../utils/appUtils'
 import './Search.css';
 
 const showMobileSearch = (props, that) => {
@@ -28,7 +28,7 @@ const showMobileSearch = (props, that) => {
   }
   else {
     return (
-      <Link to={`${searchUrl}?q=${props.term}`} className="SearchLink">
+      <Link to={`${searchUrl}?c=${props.term}`} className="SearchLink">
         <TagAutocomplete
           term={props.term}
           selectedCategories={props.selectedCategories}
@@ -62,7 +62,7 @@ class SearchContainer extends Component {
 
   componentWillMount() {
     // set selectedCategories and fetch results at page load
-    const termFromUrl = getUrlParam(this.props.history.location.search, 'c')
+    const termFromUrl = getAppParam('c')
     if (termFromUrl) {
       const term = decodeURIComponent(termFromUrl)
 
@@ -99,7 +99,7 @@ class SearchContainer extends Component {
 
   render() {
     return ReactDOM.createPortal(
-      <Flexbox flexBasis="100%" flexWrap="wrap" className="SearchContainer">
+      <Flexbox flexBasis="100%" flexWrap="wrap" className="SearchContainer fadeIn duration-500">
         { isDeviceConsideredMobile() ?
           showMobileSearch(this.props, this) :
           showDesktopSearch(this.props, this)

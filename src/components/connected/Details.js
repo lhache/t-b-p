@@ -15,6 +15,10 @@ import _merge from 'lodash/merge'
 import _toArray from 'lodash/toArray'
 import './Details.css';
 
+function escapeHTML(data) {
+    return {__html: data}
+}
+
 const showLoader = () => (<Loader />)
 
 const showError = () => (<h3 className="Results-Error Results-ErrorTechnical">{ counterpart('results.technicalError') }</h3>)
@@ -38,16 +42,21 @@ const showMobileDetails = (props, track) => {
       <Flexbox flexBasis="100%" marginBottom="10px">
           <b className="Details-Name">{props.details.name || ''}</b>
       </Flexbox>
-      <Flexbox marginBottom="10px">
+      <Flexbox marginBottom="10px" justifyContent="flex-end">
         <Price price={props.details.price ? props.details.price.displayPrice : ''} />
-      </Flexbox>
-      <Flexbox marginBottom="10px">
-        <p>{props.details.description || ''}</p>
       </Flexbox>
       <Flexbox justifyContent="center" marginBottom="10px">
         <a className="ProductButton" href={props.details.deeplinkUrl} target="_blank" rel="noopener noreferrer" onClick={track}>
           <Translate content="product.goToAffShop" />
         </a>
+      </Flexbox>
+
+      <Flexbox marginBottom="10px" flexDirection="column">
+        {
+          (!!props.details.description ) && props.details.description.map(d => (
+            <Flexbox margin="5px" dangerouslySetInnerHTML={escapeHTML('-&nbsp;' + d)}></Flexbox>
+          ))
+        }
       </Flexbox>
     </Flexbox>
   </Flexbox>
@@ -71,8 +80,12 @@ const showDesktopDetails = (props, track) => {
       <Flexbox flexBasis="100%" marginBottom="10px">
         <Price price={props.details.price ? props.details.price.displayPrice : ''} />
       </Flexbox>
-      <Flexbox flexBasis="100%" marginBottom="10px">
-        <p>{props.details.description || ''}</p>
+      <Flexbox flexBasis="100%" marginBottom="10px" flexDirection="column">
+        {
+          (!!props.details.description) && props.details.description.map(d => (
+            <Flexbox margin="5px" dangerouslySetInnerHTML={escapeHTML('-&nbsp;' + d)}></Flexbox>
+          ))
+        }
       </Flexbox>
       <Flexbox flexBasis="100%" justifyContent="center" marginBottom="10px">
         <a className="ProductButton" href={props.details.deeplinkUrl} target="_blank" rel="noopener noreferrer" onClick={track}>
@@ -97,7 +110,8 @@ class DetailsContainer extends Component {
   }
 
   _trackClick(event) {
-    window.ga && window.ga('send', 'event', 'user-engagement', 'clickout')
+    // TODO add price
+    window.ga && window.ga('send', 'event', 'go-to-partner', 'clickout')
   }
 
   render() {

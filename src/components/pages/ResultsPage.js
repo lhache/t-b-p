@@ -10,7 +10,7 @@ class ResultsPage extends Component {
 
   render() {
     return (
-      <Flexbox flex="flex" flexBasis="100%" flexWrap="wrap" maxWidth="100%" className="ResultsPageContainer" minHeight="80vh">
+      <Flexbox flex="flex" flexBasis="100%" flexWrap="wrap" maxWidth="100%" className="ResultsPageContainer">
 
         <Flexbox flex="flex" flexBasis="100%" flexWrap="wrap" className="">
             <Search />
@@ -18,10 +18,7 @@ class ResultsPage extends Component {
 
         <Ages />
         <ResultsHeadline showPrefixText={true} />
-        <Results
-          hideLoadMore={false}
-          hideAgeRanges={false}
-        />
+        <Results hideLoadMore={false} />
 
       </Flexbox>
     )

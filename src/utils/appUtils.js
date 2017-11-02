@@ -3,6 +3,17 @@ import _flatMap from 'lodash/flatMap'
 import _join from 'lodash/join'
 import _get from 'lodash/get'
 
+export const getAppParam = (param) => {
+    if (window.tbpAppData) {
+      const data = JSON.parse(window.tbpAppData)
+      return _get(data, param)
+    } else if (window.location.search) {
+      return getUrlParam(window.location.search, param)
+    } else {
+      return ''
+    }
+}
+
 export const getUrlParam = (search, param) => {
   return _get(parseQueryString(search), param)
 }

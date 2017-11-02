@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import Flexbox from 'flexbox-react';
 import Results from '../connected/Results'
 import Search from '../connected/Search'
+import Ages from '../connected/Ages'
 import CookieBannerBar from '../presentational/CookieBannerBar'
 // import './LandingPage.css'
 
@@ -15,10 +16,8 @@ class LandingPage extends Component {
               <Search />
           </Flexbox>
 
-          <Results
-            hideLoadMore={false}
-            hideAgeRanges={true}
-          />
+          <Ages />
+          <Results hideLoadMore={false} />
         <CookieBannerBar />
       </Flexbox>
     )

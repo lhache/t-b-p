@@ -6,38 +6,28 @@ import Flexbox from 'flexbox-react';
 import counterpart from 'counterpart';
 import _last from 'lodash/last'
 import { resetResults, fetchResults, storeAge }  from '../../data/modules/searchResults'
-import { parseQueryString } from '../../utils/appUtils'
-import _get from 'lodash/get'
+import { getAppParam } from '../../utils/appUtils'
 import './Ages.css'
 
 const maxAge = 1200
 const ageRanges = [
-  // { age_from: 0, age_until: 3},
-  // { age_from: 3, age_until: 6},
-  // { age_from: 6, age_until: 12},
-  { age_from: 0, age_until: 12},
-  { age_from: 12, age_until: 24},
-  { age_from: 24, age_until: 36},
-  { age_from: 36, age_until: 48},
-  { age_from: 48, age_until: 60},
-  { age_from: 60, age_until: 72},
-  { age_from: 72, age_until: 84},
-  { age_from: 84, age_until: 96},
-  { age_from: 96, age_until: 108},
-  { age_from: 108, age_until: 120},
-  { age_from: 120, age_until: 132},
+  { age_from: 0, age_until: 36},
+  { age_from: 36, age_until: 60},
+  { age_from: 60, age_until: 96},
+  { age_from: 96, age_until: 144},
+  { age_from: 144, age_until: 216},
   { age_from: 0, age_until: maxAge}
 ]
 
-const formatMonthOrYear = age => {
+const formatMonthOrYear = (age, withText = true) => {
   if (age < 12) {
-    return `${ age } ${ counterpart('age.months') }`
+    return `${ age } ${ withText ? counterpart('age.months') : '' }`
   }
   else if (age >= 12 && age < 24) {
-    return `${ age / 12 } ${ counterpart('age.year') }`
+    return `${ age / 12 } ${ withText ? counterpart('age.year')  : ''}`
   }
   else {
-    return `${ age / 12 } ${ counterpart('age.years') }`
+    return `${ age / 12 } ${ withText ? counterpart('age.years')  : ''}`
   }
 }
 
@@ -45,7 +35,7 @@ const displayFormattedAge = range => {
   if (range.age_until === maxAge) {
     return counterpart('age.allAges')
   }
-  return formatMonthOrYear(range.age_from) + ' - ' + formatMonthOrYear(range.age_until)
+  return formatMonthOrYear(range.age_from, false) + ' - ' + formatMonthOrYear(range.age_until)
 }
 
 class AgesContainerContainer extends Component {
@@ -60,10 +50,9 @@ class AgesContainerContainer extends Component {
   }
 
   componentWillMount() {
-    const searchParams = parseQueryString(this.props.history.location.search)
-    const ageFrom = _get(searchParams, 'age_from')
-    const ageUntil = _get(searchParams, 'age_until')
     const age = {}
+    const ageFrom = getAppParam('age_from')
+    const ageUntil = getAppParam('age_until')
 
     ageFrom && Object.assign(age, { age_from: ageFrom })
     ageUntil && Object.assign(age, { age_until: ageUntil })
@@ -100,8 +89,8 @@ class AgesContainerContainer extends Component {
       <Flexbox className="AgeContainer" flexBasis="100%" flexWrap="wrap">
         {ageRanges.map((ageRange) => {
           const className = (
-            this.state.selectedAge === ageRange
-            ? 'AgeItem AgeItem-Active' : 'AgeItem')
+            this.state.selectedAge === ageRange ? 'AgeItem AgeItem-Active' : 'AgeItem'
+          )
           return (
             <button
               key={`${ageRange.age_from}-${ageRange.age_until}`}
@@ -113,7 +102,6 @@ class AgesContainerContainer extends Component {
             </button>
           )
         })}
-
       </Flexbox>
     )
   }

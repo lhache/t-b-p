@@ -6,8 +6,8 @@ import { routerReducer, routerMiddleware } from 'react-router-redux'
 import { gaMiddleware } from './data/middlewares/gaMiddleware'
 import thunk from 'redux-thunk'
 import { createLogger } from 'redux-logger'
-import registerServiceWorker from './registerServiceWorker';
 import createHistory from 'history/createBrowserHistory'
+// import registerServiceWorker from './registerServiceWorker';
 
 // reducers
 import { searchResultsReducer } from './data/modules/searchResults'
