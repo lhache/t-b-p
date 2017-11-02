@@ -9,6 +9,8 @@ import Flexbox from 'flexbox-react';
 import { isDeviceConsideredMobile } from './../utils/appUtils'
 import { searchUrl, resultsUrl, detailsUrl, landingPageUrl } from './../data/urls'
 import { supportedLanguages, defaultLocale } from '../data/translations/translations'
+import _uniq from 'lodash/uniq'
+import _flatten from 'lodash/flatten'
 import './App.css';
 
 class App extends Component {
@@ -16,6 +18,10 @@ class App extends Component {
     const deviceTypeClass = isDeviceConsideredMobile() ? 'Mobile' : 'Desktop';
 
     let appRoutes = [
+      { path: '/',
+        component: HomePage,
+        exact: true
+      },
       { path: searchUrl,
         component: SearchPage
       },
@@ -28,15 +34,25 @@ class App extends Component {
       { path: '/' + defaultLocale + landingPageUrl,
         component: LandingPage
       }
-    ];
+    ]
 
-    supportedLanguages.map(l => {
-      return appRoutes.push({
-        path: '/' + l,
-        component: HomePage,
-        exact: true
-      })
-    })
+    appRoutes = _uniq(_flatten(supportedLanguages.map(l => {
+      return appRoutes.concat([
+        { path: '/' + l,
+          component: HomePage,
+          exact: true
+        },
+        { path: '/' + l + searchUrl,
+          component: SearchPage
+        },
+        { path: '/' + l + resultsUrl,
+          component: ResultsPage
+        },
+        { path: '/' + l + detailsUrl,
+          component: DetailsPage
+        }
+      ])
+    })))
 
     return (
       <Flexbox flex="flex" flexDirection="row" flexWrap="wrap" className={`App App${deviceTypeClass}`}>

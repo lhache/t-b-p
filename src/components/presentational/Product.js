@@ -1,4 +1,5 @@
 import React from 'react'
+import counterpart from 'counterpart'
 import Flexbox from 'flexbox-react';
 import Truncate from 'react-truncate';
 import Price from './Price'
@@ -26,7 +27,7 @@ const showMobileProduct = (product) => {
               <Price price={product.price.displayPrice} />
           </Flexbox>
           <Flexbox flexBasis="100%" justifyContent="center" marginTop="5px">
-            <ProductButton link={`${detailsUrl}?id=${product.id}`} translationKey="product.goToDetails" />
+            <ProductButton link={`/${counterpart.getLocale()}${detailsUrl}?id=${product.id}`} translationKey="product.goToDetails" />
           </Flexbox>
         </Flexbox>
     </Flexbox>
@@ -51,7 +52,7 @@ const showDesktopProduct = (product) => {
           <Ratings ratings={product.ratings} />
       </Flexbox> */}
       <Flexbox flexBasis="90%" justifyContent="center" marginTop="5px">
-        <ProductButton link={`${detailsUrl}?id=${product.id}`} translationKey="product.goToDetails" />
+        <ProductButton link={`/${counterpart.getLocale()}${detailsUrl}?id=${product.id}`} translationKey="product.goToDetails" />
       </Flexbox>
     </Flexbox>
   )

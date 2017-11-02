@@ -3,6 +3,7 @@ import ReactDOM from 'react-dom';
 import { connect } from 'react-redux'
 import { withRouter } from 'react-router-dom'
 import PropTypes from 'prop-types'
+import counterpart from 'counterpart'
 import SearchForm from '../presentational/SearchForm'
 import TagAutocomplete from './TagAutocomplete'
 import Flexbox from 'flexbox-react';
@@ -85,7 +86,8 @@ class SearchContainer extends Component {
     }
 
     this.props.history.push({
-      pathname: `${ resultsUrl }`,
+      // pathname: `${ resultsUrl }`,
+      pathname: `/${counterpart.getLocale()}${ resultsUrl }`,
       search: buildUrl('', urlParams),
       state: { term }
     })

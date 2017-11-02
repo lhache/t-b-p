@@ -43,6 +43,7 @@ class TagAutocompleteContainer extends Component {
         // onInputChange={this.props.onChange}
         value={value}
         placeholder={counterpart('search.placeholder')}
+        loadingPlaceholder={counterpart('search.loadingPlaceholder')}
         noResultsText={counterpart('search.noResultsFound')}
         openOnFocus={true}
         autoBlur={true}
