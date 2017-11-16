@@ -1,17 +1,17 @@
 {
-  "de": {
+  "de-DE": {
     "title": "The Better Play",
     "search": {
       "search": "Suchen",
       "placeholder": "Was für ein Spielzeug suchst du?",
-      "loadingPlaceholder": "Loading...",
+      "loadingPlaceholder": "Laden...",
       "noResultsFound": "Keine Resultate gefunden, bitte versuche es mit einem anderen Stichwort."
     },
     "results": {
       "headline": "Suchsresultate für",
       "loadMore": "Mehr zeigen",
       "technicalError": "technical error",
-      "noResultsFound": "No results found"
+      "noResultsFound": "Keine Resultate gefunden"
     },
     "product": {
       "goToDetails": "Zum Produkt",
@@ -29,7 +29,7 @@
       "allAges": "Alle Altersklassen"
     }
   },
-  "en": {
+  "en-US": {
     "title": "The Better Play",
     "search": {
       "search": "Search",

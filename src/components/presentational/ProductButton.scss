@@ -7,6 +7,11 @@
   outline: none;
   margin: 10px 5px;
   cursor: pointer;
+  text-decoration: none;
+  color: white;
+  font-size: 14px;
+	font-weight: bold;
+	line-height: 2;
 }
 .ProductButton:hover {
   cursor: pointer;
@@ -21,11 +26,7 @@
 }
 
 .ProductButtonLink {
-  text-decoration: none;
-  color: white;
-  font-size: 14px;
-	font-weight: bold;
-	line-height: 2;
+
 	text-align: center;
   width: 100%;
 }

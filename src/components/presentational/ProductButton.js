@@ -5,11 +5,11 @@ import './ProductButton.css'
 
 const ProductButton = ({link, translationKey}) => {
   return (
-    <button className="ProductButton">
-      <Link to={link} className="ProductButtonLink">
+    <Link to={link} className="ProductButtonLink">
+      <button className="ProductButton">
         <Translate content={translationKey} />
-      </Link>
-    </button>
+      </button>
+    </Link>
   )
 }
 

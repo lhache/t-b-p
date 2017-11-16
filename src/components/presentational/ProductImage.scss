@@ -1,4 +1,8 @@
-.ProductImageContainer, .ProductImageContainer-HoverCover {
+.ProductImage-Link {
+  display: flex;
+}
+
+.ProductImage-Link, .ProductImageContainer, .ProductImageContainer-HoverCover {
   width: auto;
   position: relative;
   min-height: 150px;

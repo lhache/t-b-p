@@ -12,8 +12,8 @@ class HomePage extends Component {
 
     const hardcodedCategories = [
       [{name: 'Spielzeug'}],
-      [{name: 'Holzpuzzles'}],
-      [{name: 'Marken'}]
+      [{name: 'HABA'}],
+      [{name: 'Puzzles'}]
     ]
 
     return (

@@ -1,5 +1,6 @@
 import 'isomorphic-fetch'
 import { buildUrl } from '../../utils/appUtils'
+import { getLocale } from '../translations/translations'
 
 export const FETCH_DETAILS = 'FETCH_DETAILS'
 export const FETCH_DETAILS_SUCCESS = 'FETCH_DETAILS_SUCCESS'
@@ -60,10 +61,16 @@ export const fetchDetails = id => dispatch => {
   dispatch(requestDetails(id))
 
   const url = buildUrl(
-    `${process.env.REACT_APP_API_HOST}${process.env.REACT_APP_API_DETAILS_ENDPOINT}${id}`,
-    { image_sizes: 'tiny, large' }
+    `${process.env.REACT_APP_API_HOST}${process.env.REACT_APP_API_DETAILS_ENDPOINT}${id}`, {
+      image_sizes: 'tiny, large'
+    }
   )
-  return fetch(url)
+  return fetch(url, {
+    method: 'GET',
+    headers: {
+      'TBP-Locale': getLocale()
+    }
+  })
     .then(response => response.json())
     .then(json =>
       dispatch(receiveDetails(id, json)),

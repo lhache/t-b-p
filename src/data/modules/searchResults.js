@@ -2,6 +2,7 @@ import 'isomorphic-fetch'
 import { buildUrl } from '../../utils/appUtils'
 import _concat from 'lodash/concat'
 import { getCategoryKey } from '../../utils/appUtils'
+import { getLocale } from '../translations/translations'
 
 export const STORE_TERM = 'STORE_TERM'
 export const STORE_SELECTED_CATEGORIES = 'STORE_SELECTED_CATEGORIES'
@@ -143,7 +144,12 @@ export const fetchResults = (term, categories, age, offset = 0) => dispatch => {
       age_until: age.age_until
     }
   )
-  return fetch(url)
+  return fetch(url, {
+    method: 'GET',
+    headers: {
+      'TBP-Locale': getLocale()
+    }
+  })
     .then(response => response.json())
     .then(json =>
       dispatch(receiveResults(categories, json)),

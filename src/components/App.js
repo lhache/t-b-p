@@ -9,6 +9,7 @@ import Flexbox from 'flexbox-react';
 import { isDeviceConsideredMobile } from './../utils/appUtils'
 import { searchUrl, resultsUrl, detailsUrl, landingPageUrl } from './../data/urls'
 import { supportedLanguages, defaultLocale } from '../data/translations/translations'
+import _first from 'lodash/first'
 import _uniq from 'lodash/uniq'
 import _flatten from 'lodash/flatten'
 import './App.css';
@@ -31,24 +32,25 @@ class App extends Component {
       { path: detailsUrl,
         component: DetailsPage
       },
-      { path: '/' + defaultLocale + landingPageUrl,
+      { path: '/' + _first(defaultLocale.split('-')) + landingPageUrl,
         component: LandingPage
       }
     ]
 
     appRoutes = _uniq(_flatten(supportedLanguages.map(l => {
+      const shortenedLanguage = _first(l.split('-'))
       return appRoutes.concat([
-        { path: '/' + l,
+        { path: '/' + shortenedLanguage,
           component: HomePage,
           exact: true
         },
-        { path: '/' + l + searchUrl,
+        { path: '/' + shortenedLanguage + searchUrl,
           component: SearchPage
         },
-        { path: '/' + l + resultsUrl,
+        { path: '/' + shortenedLanguage + resultsUrl,
           component: ResultsPage
         },
-        { path: '/' + l + detailsUrl,
+        { path: '/' + shortenedLanguage + detailsUrl,
           component: DetailsPage
         }
       ])

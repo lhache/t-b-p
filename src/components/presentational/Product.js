@@ -1,5 +1,5 @@
 import React from 'react'
-import counterpart from 'counterpart'
+import { getShortenedLocale } from '../../data/translations/translations'
 import Flexbox from 'flexbox-react';
 import Truncate from 'react-truncate';
 import Price from './Price'
@@ -9,11 +9,11 @@ import { isDeviceConsideredMobile } from '../../utils/appUtils'
 import { detailsUrl } from '../../data/urls'
 import './Product.css'
 
-const showMobileProduct = (product) => {
+const showMobileProduct = (product, link) => {
   return (
     <Flexbox flexBasis="100%" flexWrap="wrap" padding="10px">
         <Flexbox flexBasis="40%" justifyContent="center">
-          <ProductImage images={product.imageUrls} size="medium" hover={false}/>
+          <ProductImage images={product.imageUrls} size="medium" hover={false} link={ link }/>
         </Flexbox>
         <Flexbox flexBasis="2%" flexWrap="wrap">
         </Flexbox>
@@ -27,18 +27,18 @@ const showMobileProduct = (product) => {
               <Price price={product.price.displayPrice} />
           </Flexbox>
           <Flexbox flexBasis="100%" justifyContent="center" marginTop="5px">
-            <ProductButton link={`/${counterpart.getLocale()}${detailsUrl}?id=${product.id}`} translationKey="product.goToDetails" />
+            <ProductButton link={ link } translationKey="product.goToDetails" />
           </Flexbox>
         </Flexbox>
     </Flexbox>
   )
 }
 
-const showDesktopProduct = (product) => {
+const showDesktopProduct = (product, link) => {
   return (
     <Flexbox flexBasis="100%" flexWrap="wrap" maxWidth="170px" padding="10px" marginBottom="10px">
         <Flexbox flexBasis="100%" justifyContent="center">
-          <ProductImage images={product.imageUrls} size="medium" hover={true}/>
+          <ProductImage images={product.imageUrls} size="medium" hover={true} link={ link }/>
         </Flexbox>
       <Flexbox flexBasis="100%" className="ProductName" marginTop="10px">
         <Truncate lines={2}>
@@ -52,16 +52,17 @@ const showDesktopProduct = (product) => {
           <Ratings ratings={product.ratings} />
       </Flexbox> */}
       <Flexbox flexBasis="90%" justifyContent="center" marginTop="5px">
-        <ProductButton link={`/${counterpart.getLocale()}${detailsUrl}?id=${product.id}`} translationKey="product.goToDetails" />
+        <ProductButton link={ link } translationKey="product.goToDetails" />
       </Flexbox>
     </Flexbox>
   )
 }
 
 const Product = ({product}) => {
+  const link = `/${getShortenedLocale()}${detailsUrl}/?id=${product.id}`
   return (
     <Flexbox flexBasis="100%" justifyContent="center" className="Product">
-      {isDeviceConsideredMobile() ? showMobileProduct(product) : showDesktopProduct(product)}
+      {isDeviceConsideredMobile() ? showMobileProduct(product, link) : showDesktopProduct(product, link)}
     </Flexbox>
   );
 }

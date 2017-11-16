@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom';
 import { connect } from 'react-redux'
 import { withRouter } from 'react-router-dom'
 import PropTypes from 'prop-types'
-import counterpart from 'counterpart'
+import { getShortenedLocale } from '../../data/translations/translations'
 import SearchForm from '../presentational/SearchForm'
 import TagAutocomplete from './TagAutocomplete'
 import Flexbox from 'flexbox-react';
@@ -29,7 +29,7 @@ const showMobileSearch = (props, that) => {
   }
   else {
     return (
-      <Link to={`${searchUrl}?c=${props.term}`} className="SearchLink">
+      <Link to={`/${getShortenedLocale()}${searchUrl}?c=${props.term}`} className="SearchLink">
         <TagAutocomplete
           term={props.term}
           selectedCategories={props.selectedCategories}
@@ -87,7 +87,7 @@ class SearchContainer extends Component {
 
     this.props.history.push({
       // pathname: `${ resultsUrl }`,
-      pathname: `/${counterpart.getLocale()}${ resultsUrl }`,
+      pathname: `/${getShortenedLocale()}${ resultsUrl }`,
       search: buildUrl('', urlParams),
       state: { term }
     })
