@@ -13,6 +13,9 @@ export const FETCH_RESULTS = 'FETCH_RESULTS'
 export const FETCH_RESULTS_SUCCESS = 'FETCH_RESULTS_SUCCESS'
 export const FETCH_RESULTS_FAILURE = 'FETCH_RESULTS_FAILURE'
 
+// TODO move age thing in its own state
+export const maxAge = 1200
+
 export const initialState = {
   term: '',
   selectedCategories: [],
@@ -134,15 +137,22 @@ export const searchResultsReducer = (state = initialState, action) => {
 export const fetchResults = (term, categories, age, offset = 0) => dispatch => {
   dispatch(requestResults(categories))
 
+  let queryParams = {
+    c: getCategoryKey(categories),
+    image_sizes: 'medium',
+    offset
+  }
+
+  if(parseInt(age.age_from, 10) !== 0) {
+    queryParams = Object.assign({}, queryParams, {age_from: age.age_from})
+  }
+  if(parseInt(age.age_until, 10) !== 1200) {
+    queryParams = Object.assign({}, queryParams, {age_until: age.age_until})
+  }
+
   const url = buildUrl(
     `${process.env.REACT_APP_API_HOST}${process.env.REACT_APP_API_RESULTS_ENDPOINT}`,
-    {
-      c: getCategoryKey(categories),
-      image_sizes: 'medium',
-      offset,
-      age_from: age.age_from,
-      age_until: age.age_until
-    }
+    queryParams
   )
   return fetch(url, {
     method: 'GET',

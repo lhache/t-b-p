@@ -5,11 +5,10 @@ import PropTypes from 'prop-types'
 import Flexbox from 'flexbox-react';
 import counterpart from 'counterpart';
 import _last from 'lodash/last'
-import { resetResults, fetchResults, storeAge }  from '../../data/modules/searchResults'
+import { resetResults, fetchResults, storeAge, maxAge }  from '../../data/modules/searchResults'
 import { getAppParam } from '../../utils/appUtils'
 import './Ages.css'
 
-const maxAge = 1200
 const ageRanges = [
   { age_from: 0, age_until: 12}, // 0-1
   { age_from: 12, age_until: 24}, // 1-2
