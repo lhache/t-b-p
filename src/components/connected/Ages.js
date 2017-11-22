@@ -23,6 +23,7 @@ const ageRanges = [
   { age_from: 108, age_until: 120}, // 9-10
   { age_from: 120, age_until: 132}, // 10-11
   { age_from: 132, age_until: 144}, // 11-12
+  { age_from: 144, age_until: 156}, // 12-13
   { age_from: 0, age_until: maxAge} // // all
 ]
 
@@ -42,7 +43,12 @@ const displayFormattedAge = range => {
   if (range.age_until === maxAge) {
     return counterpart('age.allAges')
   }
-  return formatMonthOrYear(range.age_from, false) + ' - ' + formatMonthOrYear(range.age_until)
+  else if (range.age_from === 0) {
+    return formatMonthOrYear(range.age_from, false) + ' - ' + range.age_until + ' ' + counterpart('age.months')  // erk
+  }
+  else {
+    return formatMonthOrYear(range.age_from)
+  }
 }
 
 class AgesContainerContainer extends Component {
@@ -105,7 +111,7 @@ class AgesContainerContainer extends Component {
               onClick={this._updateAge}
               value={`${ageRange.age_from}-${ageRange.age_until}`}
               >
-                 + {displayFormattedAge(ageRange)}
+                 { displayFormattedAge(ageRange) }
             </button>
           )
         })}
