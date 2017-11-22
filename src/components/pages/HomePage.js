@@ -11,9 +11,12 @@ class HomePage extends Component {
   render() {
 
     const hardcodedCategories = [
-      [{name: 'Spielzeug'}],
-      [{name: 'HABA'}],
-      [{name: 'Puzzles'}]
+      [{name: 'Adventskalender'}],
+      [{name: 'Basteln und Malen'}],
+      [{name: 'Musikinstrumente'}],
+      [{name: 'Bausteine'}],
+      [{name: 'Puzzles'}],
+      [{name: 'Spiele'}]
     ]
 
     return (
@@ -28,7 +31,7 @@ class HomePage extends Component {
             <Results
               key={`res-${Math.random()}`}
               hideLoadMore={true}
-              hideAgeRanges={true}
+              hideAgeRanges={false}
               maxItems={5}
               hardcodedCategories={c}
               searchedCategories={c}
