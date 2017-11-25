@@ -3,6 +3,11 @@
   border: solid 1px #dcdcdf;
 }
 
+.image-gallery-slide {
+  display: flex;
+  justify-content: center;
+}
+
 // large picture styling
 .image-gallery-image {
   text-align: center;
@@ -10,8 +15,12 @@
 
   img {
     align-self: center;
-    width: 100%;
-    height: auto;
+    // width: 100%;
+    // height: auto;
+    max-width: 100%;
+    width: auto;
+    max-height: 350px;
+    margin: 0 auto;
   }
 }
 

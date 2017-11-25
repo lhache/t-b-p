@@ -17,7 +17,7 @@ const showMobileSearchForm = (props) => {
           onChange={props.onChange}
         />
       </Flexbox>
-      <Flexbox flexBasis="100%" className="SearchButtonContainer" alignSelf="flex-end" order={2}>
+      <Flexbox flexBasis="100%" className="SearchButtonContainer" order={2}>
         <button className="SearchButton" type="submit">
           <Translate content="search.search" />
         </button>

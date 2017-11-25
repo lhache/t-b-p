@@ -19,7 +19,8 @@
       "hoverImage": "Mehr zeigen"
     },
     "cookies": {
-      "bannerText": "Diese Webseite verwendet Cookies, um Ihnen ein angenehmeres Surfen zu ermöglichen."
+      "bannerText": "Diese Webseite verwendet Cookies, um Ihnen ein angenehmeres Surfen zu ermöglichen.",
+      "buttonText": "Ok"
     },
     "age": {
       "month": "Monat",
@@ -49,7 +50,8 @@
       "hoverImage": "See more"
     },
     "cookies": {
-      "bannerText": "This Website is using Cookies, to enable you to have a better experience on our Website."
+      "bannerText": "This Website is using Cookies, to enable you to have a better experience on our Website.",
+      "buttonText": "Ok"
     },
     "age": {
       "month": "month",

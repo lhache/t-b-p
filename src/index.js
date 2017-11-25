@@ -10,6 +10,7 @@ import createHistory from 'history/createBrowserHistory'
 // import registerServiceWorker from './registerServiceWorker';
 
 // reducers
+import { searchOptionsReducer } from './data/modules/searchOptions'
 import { searchResultsReducer } from './data/modules/searchResults'
 import { detailsReducer } from './data/modules/details'
 
@@ -41,6 +42,7 @@ if (process.env.NODE_ENV !== 'production') {
 
 // reducers
 const reducers = combineReducers({
+  searchOptions: searchOptionsReducer,
   searchResults: searchResultsReducer,
   details: detailsReducer,
   routing: routerReducer

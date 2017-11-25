@@ -83,7 +83,7 @@ const showDesktopDetails = (props, track) => {
       <Flexbox flexBasis="100%" marginBottom="10px" flexDirection="column">
         {
           (!!props.details.description) && props.details.description.map(d => (
-            <Flexbox margin="5px" dangerouslySetInnerHTML={escapeHTML('-&nbsp;' + d)}></Flexbox>
+            <Flexbox key={Math.random()} margin="5px" dangerouslySetInnerHTML={escapeHTML('-&nbsp;' + d)}></Flexbox>
           ))
         }
       </Flexbox>
@@ -100,6 +100,10 @@ class DetailsContainer extends Component {
 
   constructor(props) {
     super(props)
+    this.state = {
+      previousPage: window.document.referrer
+    }
+
     this._trackClick = this._trackClick.bind(this)
   }
 
@@ -107,6 +111,19 @@ class DetailsContainer extends Component {
     const queries = parseQueryString(this.props.history.location.search)
     const id = queries['id']
     this.props.fetchDetails(id)
+  }
+
+  componentWillUpdate(nextProps) {
+    const location = this.props.location.pathname
+    const nextLocation = nextProps.history.location.pathname
+    // set previousLocation if props.location is not modal
+
+    if(/details/i.test(location) &&
+       /results/i.test(nextLocation)) {
+
+         // this.props.history.push(this.state.previousPage)
+         // this.props.history.go(0)
+       }
   }
 
   _trackClick(event) {

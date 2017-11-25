@@ -122,13 +122,6 @@ export const searchResultsReducer = (state = initialState, action) => {
         isFetching: false,
         hasFailedFetching: true
       })
-
-    // case '@@router/LOCATION_CHANGE': {
-    //   return Object.assign({}, state, {
-    //     term: action.payload.state ? action.payload.state.term : [],
-    //     selectedCategories: action.payload.state ? action.payload.state.term : []
-    //   })
-    //   }
     default:
       return initialState
   }
@@ -146,9 +139,13 @@ export const fetchResults = (term, categories, age, offset = 0) => dispatch => {
   if(parseInt(age.age_from, 10) !== 0) {
     queryParams = Object.assign({}, queryParams, {age_from: age.age_from})
   }
-  if(parseInt(age.age_until, 10) !== 1200) {
-    queryParams = Object.assign({}, queryParams, {age_until: age.age_until})
-  }
+  // TODO restore me
+  // if(parseInt(age.age_until, 10) !== 1200) {
+    // queryParams = Object.assign({}, queryParams, {age_until: age.age_until})
+  // }
+
+  const tempFixAge = !age.age_until ? maxAge : age.age_until
+  queryParams = Object.assign({}, queryParams, {age_until: tempFixAge})
 
   const url = buildUrl(
     `${process.env.REACT_APP_API_HOST}${process.env.REACT_APP_API_RESULTS_ENDPOINT}`,

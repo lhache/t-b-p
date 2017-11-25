@@ -1,0 +1,19 @@
+#cookie-banner-wrapper {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+}
+
+.react-cookie-banner {
+  height: auto!important;
+  display: flex;
+  align-items: center;
+}
+
+.cookie-message {
+  width: 75%!important;
+  position: relative!important;
+  display: block!important;
+  line-height: 1.5!important;
+  padding: 5px;
+}

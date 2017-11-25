@@ -62,7 +62,7 @@ export const fetchDetails = id => dispatch => {
 
   const url = buildUrl(
     `${process.env.REACT_APP_API_HOST}${process.env.REACT_APP_API_DETAILS_ENDPOINT}${id}`, {
-      image_sizes: 'tiny, large'
+      image_sizes: 'tiny,large'
     }
   )
   return fetch(url, {

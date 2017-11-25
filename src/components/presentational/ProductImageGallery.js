@@ -12,7 +12,7 @@ const ProductImageGallery = images => {
         disableArrowKeys={true}
         disableThumbnailScroll={false}
         showPlayButton={false}
-        showFullscreenButton={false}
+        showFullscreenButton={true}
         showNav={false}
         slideInterval={2000}
         lazyLoad={true}

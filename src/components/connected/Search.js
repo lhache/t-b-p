@@ -5,52 +5,14 @@ import { withRouter } from 'react-router-dom'
 import PropTypes from 'prop-types'
 import { getShortenedLocale } from '../../data/translations/translations'
 import SearchForm from '../presentational/SearchForm'
-import TagAutocomplete from './TagAutocomplete'
 import Flexbox from 'flexbox-react';
-import { storeTerm, storeSelectedCategories, storeSearchedCategories, fetchSuggestOptions } from '../../data/modules/searchResults'
-import { Link } from 'react-router-dom'
-import { isDeviceConsideredMobile, buildUrl } from '../../utils/appUtils'
-import { searchUrl, resultsUrl } from '../../data/urls'
+import { storeTerm, storeSelectedCategories, storeSearchedCategories } from '../../data/modules/searchResults'
+import { fetchSearchOptions } from '../../data/modules/searchOptions'
+import { buildUrl } from '../../utils/appUtils'
+import { resultsUrl } from '../../data/urls'
 import { getOrCreateElementById } from '../../utils/domUtils'
 import { joinTermToStringWithSymbol, getAppParam } from '../../utils/appUtils'
 import './Search.css';
-
-const showMobileSearch = (props, that) => {
-  if (/search/i.test(window.location.pathname)) {
-    return (
-      <SearchForm
-        term={props.term}
-        selectedCategories={props.selectedCategories}
-        fetchOptions={that._fetchOptions}
-        onChange={that._handleChange}
-        onSubmit={that._handleSubmit}
-      />
-    )
-  }
-  else {
-    return (
-      <Link to={`/${getShortenedLocale()}${searchUrl}?c=${props.term}`} className="SearchLink">
-        <TagAutocomplete
-          term={props.term}
-          selectedCategories={props.selectedCategories}
-          fetchOptions={that._fetchOptions}
-          onChange={that._handleChange}
-          disabled={true}
-        />
-      </Link>
-    )
-  }
-}
-
-const showDesktopSearch = (props, that) => (
-  <SearchForm
-    term={props.term}
-    selectedCategories={props.searchedCategories}
-    fetchOptions={that._fetchOptions}
-    onChange={that._handleChange}
-    onSubmit={that._handleSubmit}
-  />
-)
 
 class SearchContainer extends Component {
 
@@ -93,19 +55,24 @@ class SearchContainer extends Component {
     })
   }
 
-  _handleChange(data) {
-    const term = joinTermToStringWithSymbol(data, 'name', ',')
+  _handleChange(categories) {
+    const term = joinTermToStringWithSymbol(categories, 'name', ',')
     this.props.storeTerm(term)
-    this.props.storeSelectedCategories(data)
+    this.props.storeSelectedCategories(categories)
+    // debugger
+    // this.props.fetchSearchOptions(null, categories)
   }
 
   render() {
     return ReactDOM.createPortal(
       <Flexbox flexBasis="100%" flexWrap="wrap" className="SearchContainer fadeIn duration-500">
-        { isDeviceConsideredMobile() ?
-          showMobileSearch(this.props, this) :
-          showDesktopSearch(this.props, this)
-        }
+        <SearchForm
+          term={this.props.term}
+          selectedCategories={this.props.searchedCategories}
+          fetchOptions={this._fetchOptions}
+          onChange={this._handleChange}
+          onSubmit={this._handleSubmit}
+        />
       </Flexbox>,
       getOrCreateElementById('div', { id: 'SearchContainer'})
     )
@@ -132,7 +99,9 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
   return {
-    fetchSuggestOptions: term => (dispatch(fetchSuggestOptions(term))),
+    fetchSearchOptions: (term, categories) => {
+      return dispatch(fetchSearchOptions(term, categories))
+    },
     storeTerm: term => {
       return dispatch(storeTerm(term))
     },
@@ -141,7 +110,7 @@ const mapDispatchToProps = dispatch => {
     },
     storeSearchedCategories: c => {
       return dispatch(storeSearchedCategories(c))
-    }
+    },
   }
 }
 
