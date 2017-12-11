@@ -9,7 +9,8 @@ import { isDeviceConsideredMobile } from '../../utils/appUtils'
 import { detailsUrl } from '../../data/urls'
 import './Product.css'
 
-const showMobileProduct = (product, link) => {
+const showMobileProduct = (props, link, select) => {
+  const { product } = props
   return (
     <Flexbox flexBasis="100%" flexWrap="wrap" padding="10px">
         <Flexbox flexBasis="40%" justifyContent="center">
@@ -34,37 +35,52 @@ const showMobileProduct = (product, link) => {
   )
 }
 
-const showDesktopProduct = (product, link) => {
+const showDesktopProduct = (props, link, select) => {
+  const { product } = props
   return (
-    <Flexbox flexBasis="100%" flexWrap="wrap" maxWidth="170px" padding="10px" marginBottom="10px">
-        <Flexbox flexBasis="100%" justifyContent="center">
-          <ProductImage images={product.imageUrls} size="medium" hover={true} link={ link }/>
+      <Flexbox flexBasis="100%" flexWrap="wrap" maxWidth="170px" padding="10px" marginBottom="10px">
+          <Flexbox flexBasis="100%" justifyContent="center">
+            <ProductImage images={product.imageUrls} size="medium" hover={true} link={ link }/>
+          </Flexbox>
+        <Flexbox flexBasis="100%" className="ProductName" marginTop="10px">
+          <Truncate lines={2}>
+            {product.name}
+          </Truncate>
         </Flexbox>
-      <Flexbox flexBasis="100%" className="ProductName" marginTop="10px">
-        <Truncate lines={2}>
-          {product.name}
-        </Truncate>
+        <Flexbox flexBasis="50%" justifyContent="flex-start" marginTop="5px">
+            <Price price={product.price.displayPrice} />
+        </Flexbox>
+        <Flexbox flexBasis="90%" justifyContent="center" marginTop="5px">
+          {/* <ProductButton link={ link } translationKey="product.goToDetails" /> */}
+          <div onClick={select}>open</div>
+        </Flexbox>
       </Flexbox>
-      <Flexbox flexBasis="50%" justifyContent="flex-start" marginTop="5px">
-          <Price price={product.price.displayPrice} />
-      </Flexbox>
-      {/* <Flexbox flexBasis="50%" justifyContent="flex-end" marginTop="5px">
-          <Ratings ratings={product.ratings} />
-      </Flexbox> */}
-      <Flexbox flexBasis="90%" justifyContent="center" marginTop="5px">
-        <ProductButton link={ link } translationKey="product.goToDetails" />
-      </Flexbox>
-    </Flexbox>
   )
 }
 
-const Product = ({product}) => {
-  const link = `/${getShortenedLocale()}${detailsUrl}/?id=${product.id}`
-  return (
-    <Flexbox flexBasis="100%" justifyContent="center" className="Product">
-      {isDeviceConsideredMobile() ? showMobileProduct(product, link) : showDesktopProduct(product, link)}
-    </Flexbox>
-  );
+
+class Product extends React.Component {
+
+  constructor(props) {
+    super(props)
+    this._select = this._select.bind(this)
+  }
+
+  _select() {
+    this.props.select(this.props.product.id)
+  }
+
+  render() {
+    const link = `/${getShortenedLocale()}${detailsUrl}/?id=${this.props.product.id}`
+    return (
+      <Flexbox flexBasis="100%" justifyContent="center" className="Product">
+        {isDeviceConsideredMobile() ?
+          showMobileProduct(this.props, link, this._select) :
+          showDesktopProduct(this.props, link, this._select)
+        }
+      </Flexbox>
+    )
+  }
 }
 
 export default Product

@@ -12,6 +12,7 @@ export const RESET_RESULTS = 'RESET_RESULTS'
 export const FETCH_RESULTS = 'FETCH_RESULTS'
 export const FETCH_RESULTS_SUCCESS = 'FETCH_RESULTS_SUCCESS'
 export const FETCH_RESULTS_FAILURE = 'FETCH_RESULTS_FAILURE'
+export const SELECT_RESULT = 'SELECT_RESULT'
 
 // TODO move age thing in its own state
 export const maxAge = 1200
@@ -23,7 +24,8 @@ export const initialState = {
   age: { age_from: 0, age_until: 1200 },
   results: {},
   isFetching: false,
-  hasFailedFetching: false
+  hasFailedFetching: false,
+  selectedResult: null
 }
 
 // store term
@@ -78,6 +80,13 @@ export const failedfetchingResults = (category) => {
   }
 }
 
+export const selectResult = id => {
+  return {
+    type: SELECT_RESULT,
+    id
+  }
+}
+
 // reducer
 export const searchResultsReducer = (state = initialState, action) => {
   switch (action.type) {
@@ -122,8 +131,12 @@ export const searchResultsReducer = (state = initialState, action) => {
         isFetching: false,
         hasFailedFetching: true
       })
+    case SELECT_RESULT:
+      return Object.assign({}, state, {
+        selectedResult: action.id
+      })
     default:
-      return initialState
+      return state
   }
 }
 

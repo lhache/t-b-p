@@ -3,7 +3,8 @@ import { connect } from 'react-redux'
 import counterpart from 'counterpart'
 import PropTypes from 'prop-types'
 import Translate from 'react-translate-component'
-import { fetchResults, storeTerm, storeSelectedCategories }  from '../../data/modules/searchResults'
+import DetailsModal from '../presentational/DetailsModal'
+import { fetchResults, storeTerm, storeSelectedCategories, selectResult }  from '../../data/modules/searchResults'
 import { getCategoryKey } from '../../utils/appUtils'
 import Loader from '../presentational/Loader'
 import Product from '../presentational/Product'
@@ -22,11 +23,11 @@ const showNoResultsMessage = () => (
   <h3 className="Results-Error Results-ErrorNoResults">{ counterpart('results.noResultsFound') }</h3>
 )
 
-const showResults = (results) => (
+const showResults = (results, selectResult) => (
   <Flexbox maxWidth="100%" flexWrap="wrap">
       {results.map((result, idx) => (
         <Flexbox key={Math.random() + result.id} order={idx} className="fadeIn duration-500">
-          <Product product={result} />
+          <Product product={result} select={selectResult} />
         </Flexbox>
       ))}
   </Flexbox>
@@ -44,7 +45,14 @@ class ResultsContainer extends Component {
 
   constructor(props) {
     super(props)
+    this.state = {
+      modalIsOpen: false
+    }
+    this._closeDetails = this._closeDetails.bind(this)
     this._fetchMoreResults = this._fetchMoreResults.bind(this)
+    this._showProductDetails = this._showProductDetails.bind(this)
+    this._showNextProductDetails = this._showNextProductDetails.bind(this)
+    this._showPrevProductDetails = this._showPrevProductDetails.bind(this)
   }
 
 
@@ -58,11 +66,33 @@ class ResultsContainer extends Component {
 
   // don't update when results are the same
   shouldComponentUpdate(nextProps, nextState) {
+
+    if (this.state.modalIsOpen !== nextState.modalIsOpen) {
+      return true
+    }
     return this.props.results !== nextProps.results
   }
 
   _fetchMoreResults() {
     this.props.fetchResults(this.props.term, this.props.selectedCategories, this.props.age, _get(this.props.results, getCategoryKey(this.props.selectedCategories)).length)
+  }
+
+  _showProductDetails(id) {
+    this.setState({modalIsOpen: true})
+    this.props.selectResult(id)
+  }
+
+  _showNextProductDetails() {
+    const results = this.props.results[getCategoryKey(this.props.searchedCategories)]
+    // TODO
+  }
+
+  _showPrevProductDetails() {
+
+  }
+
+  _closeDetails() {
+    this.setState({modalIsOpen: false});
   }
 
   render() {
@@ -73,7 +103,8 @@ class ResultsContainer extends Component {
       isFetching,
       hasFailedFetching,
       searchedCategories,
-      hardcodedCategories
+      hardcodedCategories,
+      selectedResult
     } = this.props
 
     const categories = hardcodedCategories ? hardcodedCategories : searchedCategories
@@ -86,11 +117,33 @@ class ResultsContainer extends Component {
 
         return (
           <Flexbox flexWrap="wrap" className="ResultsContainer" maxWidth="100%">
+
+            {/* loader */}
             { (isFetching && !hasResults) && showLoader() }
+
+            {/* error */}
             { (hasFailedFetching) && showError() }
+
+            {/* no results */}
             { (!hasFailedFetching && !hasResults && !isFetching) && showNoResultsMessage() }
-            { (!hasFailedFetching) &&  showResults(trimmedResults)}
+
+            {/* errors fetching */}
+            { (!hasFailedFetching) &&  showResults(trimmedResults, this._showProductDetails)}
+
+            {/* results */}
             { (!hideLoadMore && hasResults && hasFiniteAmountOfResults ) && showLoadMore(this._fetchMoreResults)}
+
+            {/* modal */}
+            { (this.state.modalIsOpen) &&  (
+              <DetailsModal
+                id={selectedResult}
+                isOpened={this.state.modalIsOpen}
+                close={this._closeDetails}
+                next={this._showNextProductDetails}
+                prev={this._showPrevProductDetails}
+              />
+            ) }
+
           </Flexbox>
         )
     }
@@ -117,7 +170,8 @@ const mapStateToProps = state => {
     searchedCategories: state.searchResults.searchedCategories,
     results: state.searchResults.results,
     isFetching: state.searchResults.isFetching,
-    hasFailedFetching: state.searchResults.hasFailedFetching
+    hasFailedFetching: state.searchResults.hasFailedFetching,
+    selectedResult: state.searchResults.selectedResult
   }
 }
 
@@ -131,6 +185,9 @@ const mapDispatchToProps = dispatch => {
     },
     fetchResults: (term, categories, age, offset) => {
       dispatch(fetchResults(term, categories, age, offset))
+    },
+    selectResult: id => {
+      dispatch(selectResult(id))
     }
   }
 }

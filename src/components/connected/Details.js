@@ -100,30 +100,14 @@ class DetailsContainer extends Component {
 
   constructor(props) {
     super(props)
-    this.state = {
-      previousPage: window.document.referrer
-    }
 
     this._trackClick = this._trackClick.bind(this)
   }
 
   componentDidMount() {
-    const queries = parseQueryString(this.props.history.location.search)
-    const id = queries['id']
-    this.props.fetchDetails(id)
-  }
-
-  componentWillUpdate(nextProps) {
-    const location = this.props.location.pathname
-    const nextLocation = nextProps.history.location.pathname
-    // set previousLocation if props.location is not modal
-
-    if(/details/i.test(location) &&
-       /results/i.test(nextLocation)) {
-
-         // this.props.history.push(this.state.previousPage)
-         // this.props.history.go(0)
-       }
+    // const queries = parseQueryString(this.props.history.location.search)
+    // const id = queries['id']
+    this.props.fetchDetails(this.props.id)
   }
 
   _trackClick(event) {

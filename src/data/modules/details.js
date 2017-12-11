@@ -53,7 +53,7 @@ export const detailsReducer = (state = initialState, action) => {
           hasFailedFetching: true
         })
     default:
-      return initialState
+      return state
   }
 }
 
