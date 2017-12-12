@@ -11,7 +11,12 @@ import Product from '../presentational/Product'
 import Flexbox from 'flexbox-react';
 import _take from 'lodash/take'
 import _get from 'lodash/get'
-import './Results.css';
+import _find from 'lodash/find'
+import './Results.css'
+
+const getIndexOfResult = (results, lookup) => {
+  return results.indexOf(_find(results, lookup))
+}
 
 const showLoader = () => (<Loader />)
 
@@ -78,17 +83,43 @@ class ResultsContainer extends Component {
   }
 
   _showProductDetails(id) {
-    this.setState({modalIsOpen: true})
+    this.setState({
+      modalIsOpen: true,
+      resultIdForDetails: id
+    })
     this.props.selectResult(id)
   }
 
   _showNextProductDetails() {
-    const results = this.props.results[getCategoryKey(this.props.searchedCategories)]
-    // TODO
+    const category = this.props.hardcodedCategories ? this.props.hardcodedCategories : this.props.searchedCategories
+    const results = this.props.results[getCategoryKey(category)]
+    const res = _find(results, { id: this.props.selectedResult})
+    let index = results.indexOf(res)
+
+    if (index === results.length - 1) {
+      index = 0
+    } else {
+      index = index + 1
+    }
+
+    const newResultsId = results[index]
+    this.props.selectResult(newResultsId.id)
   }
 
   _showPrevProductDetails() {
+    const category = this.props.hardcodedCategories ? this.props.hardcodedCategories : this.props.searchedCategories
+    const results = this.props.results[getCategoryKey(category)]
+    const res = _find(results, { id: this.props.selectedResult})
+    let index = results.indexOf(res)
 
+    if (index === 0) {
+      index = results.length - 1
+    } else {
+      index = index - 1
+    }
+
+    const newResultsId = results[index]
+    this.props.selectResult(newResultsId.id)
   }
 
   _closeDetails() {
@@ -115,6 +146,8 @@ class ResultsContainer extends Component {
         const hasFiniteAmountOfResults = resultsForCategory.length % 20 === 0
         const trimmedResults = maxItems ? _take(resultsForCategory, maxItems) : resultsForCategory
 
+        const selectedResultsIndex = getIndexOfResult(resultsForCategory, { id: selectedResult})
+
         return (
           <Flexbox flexWrap="wrap" className="ResultsContainer" maxWidth="100%">
 
@@ -136,7 +169,9 @@ class ResultsContainer extends Component {
             {/* modal */}
             { (this.state.modalIsOpen) &&  (
               <DetailsModal
-                id={selectedResult}
+                id={this.props.selectedResult}
+                selectedResultsIndex={selectedResultsIndex}
+                amountOfItems={resultsForCategory.length}
                 isOpened={this.state.modalIsOpen}
                 close={this._closeDetails}
                 next={this._showNextProductDetails}

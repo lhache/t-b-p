@@ -110,6 +110,12 @@ class DetailsContainer extends Component {
     this.props.fetchDetails(this.props.id)
   }
 
+  componentWillReceiveProps(nextProps) {
+    if(nextProps.selectedResult !== this.props.selectedResult) {
+      this.props.fetchDetails(nextProps.selectedResult)
+    }
+  }
+
   _trackClick(event) {
     // TODO add price
     window.ga && window.ga('send', 'event', 'go-to-partner', 'clickout')
@@ -137,6 +143,7 @@ DetailsContainer.propTypes = {
 
 const mapStateToProps = state => {
   return {
+    selectedResult: state.searchResults.selectedResult,
     details: state.details.details,
     isFetching: state.details.isFetching,
     hasFailedFetching: state.details.hasFailedFetching
