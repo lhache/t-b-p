@@ -28,7 +28,7 @@ const showMobileProduct = (props, link, select) => {
               <Price price={product.price.displayPrice} />
           </Flexbox>
           <Flexbox flexBasis="100%" justifyContent="center" marginTop="5px">
-            <ProductButton link={ link } translationKey="product.goToDetails" />
+            <ProductButton onClick={select} translationKey="product.goToDetails" />
           </Flexbox>
         </Flexbox>
     </Flexbox>
@@ -51,8 +51,7 @@ const showDesktopProduct = (props, link, select) => {
             <Price price={product.price.displayPrice} />
         </Flexbox>
         <Flexbox flexBasis="90%" justifyContent="center" marginTop="5px">
-          {/* <ProductButton link={ link } translationKey="product.goToDetails" /> */}
-          <div onClick={select}>open</div>
+          <ProductButton onClick={select} translationKey="product.goToDetails" />
         </Flexbox>
       </Flexbox>
   )

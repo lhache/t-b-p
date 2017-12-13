@@ -34,8 +34,8 @@ const showMobileDetails = (props, track) => {
   ))
 
   return (!props.isFetching && !props.hasFailedFetching) && (
-  <Flexbox className="Details" flexWrap="wrap" flexDirection="column">
-    <Flexbox justifyContent="center">
+  <Flexbox className="Details DetailsMobile" flexWrap="wrap" flexDirection="column">
+    <Flexbox justifyContent="center" >
       <ProductImageGallery images={imagesForGallery} />
     </Flexbox>
     <Flexbox flexDirection="column" justifyContent="center" margin="20px" padding="20px">

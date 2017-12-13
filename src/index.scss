@@ -7,6 +7,10 @@ body {
   font-family: 'Nunito', sans-serif;
 }
 
+body.ReactModal__Body--open {
+  overflow: hidden;
+}
+
 
 .HeaderBackground {
   background-image: linear-gradient(to top, #ff4572, #2a079b);

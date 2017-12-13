@@ -16,7 +16,9 @@
     "product": {
       "goToDetails": "Zum Produkt",
       "goToAffShop": "Zum Produkt",
-      "hoverImage": "Mehr zeigen"
+      "hoverImage": "Mehr zeigen",
+      "nextProduct": "Nächster",
+      "prevProduct": "Bisherige"
     },
     "cookies": {
       "bannerText": "Diese Webseite verwendet Cookies, um Ihnen ein angenehmeres Surfen zu ermöglichen.",
@@ -47,7 +49,9 @@
     "product": {
       "goToDetails": "Go to product",
       "goToAffShop": "Go to product",
-      "hoverImage": "See more"
+      "hoverImage": "See more",
+      "nextProduct": "next",
+      "prevProduct": "prev"
     },
     "cookies": {
       "bannerText": "This Website is using Cookies, to enable you to have a better experience on our Website.",

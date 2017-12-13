@@ -7,6 +7,7 @@ import './ProductImageGallery.css'
 const ProductImageGallery = images => {
   return (
     !_isEmpty(images.images) &&
+    <div className="fadeIn">
       <ImageGallery
         items={images.images}
         disableArrowKeys={true}
@@ -19,6 +20,7 @@ const ProductImageGallery = images => {
         slideOnThumbnailHover={true}
         // onImageLoad={this.handleImageLoad}
       />
+      </div>
   )
 }
 
