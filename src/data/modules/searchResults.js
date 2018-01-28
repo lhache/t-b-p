@@ -21,7 +21,7 @@ export const initialState = {
   term: '',
   selectedCategories: [],
   searchedCategories: [],
-  age: { age_from: 0, age_until: 1200 },
+  age: { age_from: null, age_until: null },
   results: {},
   isFetching: false,
   hasFailedFetching: false,

@@ -4,7 +4,7 @@ import placeholderImage from '../../images/product-placeholder.jpg'
 import _get from 'lodash/get'
 import _first from 'lodash/first'
 import counterpart from 'counterpart'
-import { Link } from 'react-router-dom'
+import Flexbox from 'flexbox-react'
 
 const ProductImage = ({images, size, hover, link}) => {
 
@@ -12,7 +12,7 @@ const ProductImage = ({images, size, hover, link}) => {
   const withHover = hover && 'ProductImageContainer-HoverCover';
 
   return (
-    <Link to={link} className="ProductImage-Link">
+    <Flexbox>
       <div
         className={`ProductImageContainer ${withHover}`}
         data-content={counterpart('product.hoverImage')}>
@@ -20,7 +20,7 @@ const ProductImage = ({images, size, hover, link}) => {
             <img src={imageUrl} alt="" className="ProductImage"/>
           </div>
       </div>
-    </Link>
+    </Flexbox>
   )
 }
 

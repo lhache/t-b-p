@@ -1,8 +1,10 @@
 import React from 'react'
 import { getShortenedLocale } from '../../data/translations/translations'
-import Flexbox from 'flexbox-react';
+import Flexbox from 'flexbox-react'
+import Translate from 'react-translate-component'
 import Truncate from 'react-truncate';
 import Price from './Price'
+import { Link } from 'react-router-dom'
 import ProductButton from './ProductButton'
 import ProductImage from './ProductImage'
 import { isDeviceConsideredMobile } from '../../utils/appUtils'
@@ -28,7 +30,11 @@ const showMobileProduct = (props, link, select) => {
               <Price price={product.price.displayPrice} />
           </Flexbox>
           <Flexbox flexBasis="100%" justifyContent="center" marginTop="5px">
-            <ProductButton onClick={select} translationKey="product.goToDetails" />
+            <Link className="ProductButtonLink" to={link}>
+              <button className="ProductButton">
+                <Translate content="product.goToDetails" />
+              </button>
+            </Link>
           </Flexbox>
         </Flexbox>
     </Flexbox>
@@ -39,8 +45,8 @@ const showDesktopProduct = (props, link, select) => {
   const { product } = props
   return (
       <Flexbox flexBasis="100%" flexWrap="wrap" maxWidth="170px" padding="10px" marginBottom="10px">
-          <Flexbox flexBasis="100%" justifyContent="center">
-            <ProductImage images={product.imageUrls} size="medium" hover={true} link={ link }/>
+          <Flexbox flexBasis="100%" justifyContent="center" onClick={select} >
+            <ProductImage images={product.imageUrls} size="medium" hover={true}/>
           </Flexbox>
         <Flexbox flexBasis="100%" className="ProductName" marginTop="10px">
           <Truncate lines={2}>

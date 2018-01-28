@@ -4,7 +4,6 @@ import { withRouter } from 'react-router-dom'
 import PropTypes from 'prop-types'
 import { buildUrl, getCategoryKey } from '../../utils/appUtils'
 import counterpart from 'counterpart'
-import Select from 'react-select'
 import VirtualizedSelect from 'react-virtualized-select'
 import './TagAutocomplete.css'
 import 'react-select/dist/react-select.css';
@@ -54,32 +53,6 @@ class TagAutocompleteContainer extends Component {
     const value = this.props.term ? this.props.term.split(',').map(t => ({id: t, name: t})) : []
 
     return (
-
-      // <Select.Async
-      //   async
-      //   multi={true}
-      //   name="searchform-tags"
-      //   loadOptions={this._getOptions}
-      //   onChange={this._onChange}
-      //   value={value}
-      //   placeholder={counterpart('search.placeholder')}
-      //   loadingPlaceholder={counterpart('search.loadingPlaceholder')}
-      //   noResultsText={counterpart('search.noResultsFound')}
-      //   openOnFocus={true}
-      //   autoBlur={true}
-      //   autosize={true}
-      //   maxHeight={1000}
-      //   optionHeight={40}
-      //   disabled={this.props.disabled}
-      //   labelKey="name"
-      //   valueKey="id"
-      //   closeOnSelect={false}
-      //   cache={false}
-      //   // menuBuffer={1000}
-      //
-      // />
-
-      // {
         <VirtualizedSelect
         async
         multi={true}
@@ -101,7 +74,6 @@ class TagAutocompleteContainer extends Component {
         closeOnSelect={false}
         cache={false}
       />
-    // }
     )
   }
 }

@@ -1,22 +1,34 @@
 .image-gallery {
-  width: 75%;
-  max-width: 75%;
-}
-
-.DetailsMobile .image-gallery {
-  width: 85%;
-  max-width: 85%;
+  width: 450px;
+  max-width: 450px;
   margin: 0 auto;
 }
-.image-gallery-image {
-  height: 350px;
+
+.DetailsDesktop {
+  .image-gallery-image {
+    min-height: 350px;
+    height: 350px;
+  }
+  .image-gallery-swipe {
+    min-height: 350px;
+  }
 }
 
+.DetailsMobile {
+  .image-gallery {
+    width: 85%;
+    max-width: 85%;
+    min-height: 250px;
+    margin: 0 auto;
+  }
+  .image-gallery-swipe {
+    min-height: 200px;
+  }
+}
 
 // border on large picture
 .image-gallery-swipe {
   border: solid 1px #dcdcdf;
-  min-height: 350px;
 }
 
 .image-gallery-slide {
@@ -28,7 +40,6 @@
 .image-gallery-image {
   text-align: center;
   display: flex;
-  min-height: 350px;
 
   img {
     align-self: center;

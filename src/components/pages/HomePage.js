@@ -11,7 +11,6 @@ class HomePage extends Component {
   render() {
 
     const hardcodedCategories = [
-      [{name: 'Adventskalender'}],
       [{name: 'Basteln und Malen'}],
       [{name: 'Musikinstrumente'}],
       [{name: 'Bausteine'}],

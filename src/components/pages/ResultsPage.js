@@ -4,6 +4,7 @@ import Results from '../connected/Results'
 import Search from '../connected/Search'
 import Ages from '../connected/Ages'
 import ResultsHeadline from '../connected/ResultsHeadline'
+import { isDeviceConsideredMobile } from '../../utils/appUtils'
 // import './ResultsPage.css'
 
 class ResultsPage extends Component {
@@ -17,7 +18,7 @@ class ResultsPage extends Component {
         </Flexbox>
 
         <Ages />
-        <ResultsHeadline showPrefixText={true} />
+        { !isDeviceConsideredMobile && <ResultsHeadline showPrefixText={true} /> }
         <Results hideLoadMore={false} />
 
       </Flexbox>

@@ -12,6 +12,7 @@ import Flexbox from 'flexbox-react';
 import _take from 'lodash/take'
 import _get from 'lodash/get'
 import _find from 'lodash/find'
+import { trackModalOpen, trackModalClose, trackModalPrevItem, trackModalNextItem } from '../../data/tracking'
 import './Results.css'
 
 const getIndexOfResult = (results, lookup) => {
@@ -53,13 +54,12 @@ class ResultsContainer extends Component {
     this.state = {
       modalIsOpen: false
     }
-    this._closeDetails = this._closeDetails.bind(this)
+    this._closeDetails = this._closeDetails.bind(this) 
     this._fetchMoreResults = this._fetchMoreResults.bind(this)
     this._showProductDetails = this._showProductDetails.bind(this)
     this._showNextProductDetails = this._showNextProductDetails.bind(this)
     this._showPrevProductDetails = this._showPrevProductDetails.bind(this)
   }
-
 
   componentDidMount() {
     const selectedCategories = this.props.hardcodedCategories ?
@@ -71,11 +71,13 @@ class ResultsContainer extends Component {
 
   // don't update when results are the same
   shouldComponentUpdate(nextProps, nextState) {
-
+    // but update when modal is opening
     if (this.state.modalIsOpen !== nextState.modalIsOpen) {
       return true
     }
-    return this.props.results !== nextProps.results
+
+    const category = this.props.hardcodedCategories ? this.props.hardcodedCategories : this.props.searchedCategories
+    return this.props.results[getCategoryKey(category)] !== nextProps.results[getCategoryKey(category)]
   }
 
   _fetchMoreResults() {
@@ -88,6 +90,7 @@ class ResultsContainer extends Component {
       resultIdForDetails: id
     })
     this.props.selectResult(id)
+    trackModalOpen(id)
   }
 
   _showNextProductDetails() {
@@ -102,8 +105,10 @@ class ResultsContainer extends Component {
       index = index + 1
     }
 
-    const newResultsId = results[index]
-    this.props.selectResult(newResultsId.id)
+    const newRes = results[index]
+
+    trackModalNextItem(this.state.resultIdForDetails, newRes.id)
+    this.props.selectResult(newRes.id)
   }
 
   _showPrevProductDetails() {
@@ -118,12 +123,15 @@ class ResultsContainer extends Component {
       index = index - 1
     }
 
-    const newResultsId = results[index]
-    this.props.selectResult(newResultsId.id)
+    const newRes = results[index]
+
+    trackModalPrevItem(this.state.resultIdForDetails, newRes.id)
+    this.props.selectResult(newRes.id)
   }
 
   _closeDetails() {
     this.setState({modalIsOpen: false});
+    trackModalClose(this.state.resultIdForDetails)
   }
 
   render() {
@@ -176,6 +184,7 @@ class ResultsContainer extends Component {
                 close={this._closeDetails}
                 next={this._showNextProductDetails}
                 prev={this._showPrevProductDetails}
+                onImageLoad={this._onDetailsImageLoad}
               />
             ) }
 

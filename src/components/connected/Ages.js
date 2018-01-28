@@ -55,7 +55,7 @@ class AgesContainerContainer extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      selectedAge: ''
+      selectedAge: null
     }
 
     this._updateAge = this._updateAge.bind(this)
@@ -65,14 +65,14 @@ class AgesContainerContainer extends Component {
     const age = {}
     const ageFrom = getAppParam('age_from')
     const ageUntil = getAppParam('age_until')
-
+    
     ageFrom && Object.assign(age, { age_from: ageFrom })
     ageUntil && Object.assign(age, { age_until: ageUntil })
     this.props.storeAge(age)
   }
 
   componentWillReceiveProps(nextProps) {
-    if (nextProps.age !== this.state.selectedAge) {
+    if (nextProps.age !== this.state.selectedAge && this.props.age.age_from !== null && this.props.age.age_until !== null) {
       let selectedAge = ageRanges.filter(r => (
         parseInt(this.props.age.age_from, 10) === parseInt(r.age_from, 10)
         &&  parseInt(this.props.age.age_until, 10) === parseInt(r.age_until, 10)
@@ -98,11 +98,12 @@ class AgesContainerContainer extends Component {
 
   render() {
     return (
-      <Flexbox className="AgeContainer" flexBasis="100%" flexWrap="wrap">
+      <Flexbox className="AgeContainer" flexBasis="100%" flexWrap="wrap" alignSelf="flex-start">
         {ageRanges.map((ageRange) => {
           const className = (
-            this.state.selectedAge === ageRange ? 'AgeItem AgeItem-Active' : 'AgeItem'
+            this.state.selectedAge !== ageRange ? 'AgeItem' : 'AgeItem AgeItem-Active'
           )
+          
           return (
             <button
               key={`${ageRange.age_from}-${ageRange.age_until}`}
