@@ -86,8 +86,8 @@ TagAutocompleteContainer.propTypes = {
 
 const mapStateToProps = state => {
   return {
-    term: state.searchResults.term,
-    selectedCategories: state.searchResults.selectedCategories
+    term: state.term.term,
+    selectedCategories: state.categories.selectedCategories
   }
 }
 

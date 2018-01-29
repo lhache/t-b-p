@@ -7,11 +7,12 @@ import { gaMiddleware } from './data/middlewares/gaMiddleware'
 import thunk from 'redux-thunk'
 import { createLogger } from 'redux-logger'
 import createHistory from 'history/createBrowserHistory'
-// import registerServiceWorker from './registerServiceWorker';
 
 // reducers
-import { searchOptionsReducer } from './data/modules/searchOptions'
-import { searchResultsReducer } from './data/modules/searchResults'
+import { agesReducer } from './data/modules/ages'
+import { termReducer } from './data/modules/term'
+import { categoriesReducer } from './data/modules/categories'
+import { resultsReducer } from './data/modules/results'
 import { detailsReducer } from './data/modules/details'
 
 // root component of App
@@ -20,7 +21,7 @@ import Root from './components/Root';
 // main style
 import './index.css';
 
-import { registerTranslations } from './data/translations/translations.js';
+import { registerTranslations } from './data/translations/translations.js'
 
 // set history to browser history
  const history = createHistory({
@@ -42,8 +43,10 @@ if (process.env.NODE_ENV !== 'production') {
 
 // reducers
 const reducers = combineReducers({
-  searchOptions: searchOptionsReducer,
-  searchResults: searchResultsReducer,
+  ages: agesReducer,
+  term: termReducer,
+  categories: categoriesReducer,
+  results: resultsReducer,
   details: detailsReducer,
   routing: routerReducer
 })

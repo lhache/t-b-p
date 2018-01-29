@@ -4,52 +4,21 @@ import _concat from 'lodash/concat'
 import { getCategoryKey } from '../../utils/appUtils'
 import { getLocale } from '../translations/translations'
 
-export const STORE_TERM = 'STORE_TERM'
-export const STORE_SELECTED_CATEGORIES = 'STORE_SELECTED_CATEGORIES'
-export const STORE_SEARCHED_CATEGORIES = 'STORE_SEARCHED_CATEGORIES'
-export const STORE_AGE = 'STORE_AGE'
+
 export const RESET_RESULTS = 'RESET_RESULTS'
 export const FETCH_RESULTS = 'FETCH_RESULTS'
 export const FETCH_RESULTS_SUCCESS = 'FETCH_RESULTS_SUCCESS'
 export const FETCH_RESULTS_FAILURE = 'FETCH_RESULTS_FAILURE'
 export const SELECT_RESULT = 'SELECT_RESULT'
 
-// TODO move age thing in its own state
-export const maxAge = 1200
 
 export const initialState = {
-  term: '',
-  selectedCategories: [],
-  searchedCategories: [],
-  age: { age_from: null, age_until: null },
   results: {},
   isFetching: false,
   hasFailedFetching: false,
   selectedResult: null
 }
 
-// store term
-export const storeTerm = term => ({
-  type: STORE_TERM,
-  term: term
-})
-
-// store selectedCategories
-export const storeSelectedCategories = categories => ({
-  type: STORE_SELECTED_CATEGORIES,
-  selectedCategories: categories
-})
-
-// store searched Categories
-export const storeSearchedCategories = categories => ({
-  type: STORE_SEARCHED_CATEGORIES,
-  searchedCategories: categories
-})
-
-export const storeAge = (age) => ({
-    type: STORE_AGE,
-    age
-  })
 
 export const resetResults = (categoryKey) => {
   return {
@@ -88,24 +57,8 @@ export const selectResult = id => {
 }
 
 // reducer
-export const searchResultsReducer = (state = initialState, action) => {
+export const resultsReducer = (state = initialState, action) => {
   switch (action.type) {
-    case STORE_TERM:
-      return Object.assign({}, state, {
-        term: action.term
-      })
-    case STORE_SELECTED_CATEGORIES:
-      return Object.assign({}, state, {
-        selectedCategories: action.selectedCategories
-      })
-    case STORE_SEARCHED_CATEGORIES:
-      return Object.assign({}, state, {
-        searchedCategories: action.searchedCategories
-      })
-    case STORE_AGE:
-      return Object.assign({}, state, {
-        age: action.age
-      })
     case RESET_RESULTS:
       return Object.assign({}, state, {
         results: Object.assign({}, state.results, {
@@ -152,13 +105,9 @@ export const fetchResults = (term, categories, age, offset = 0) => dispatch => {
   if(parseInt(age.age_from, 10) !== 0) {
     queryParams = Object.assign({}, queryParams, {age_from: age.age_from})
   }
-  // TODO restore me
-  // if(parseInt(age.age_until, 10) !== 1200) {
-    // queryParams = Object.assign({}, queryParams, {age_until: age.age_until})
-  // }
-
-  const tempFixAge = !age.age_until ? maxAge : age.age_until
-  queryParams = Object.assign({}, queryParams, {age_until: tempFixAge})
+  if(parseInt(age.age_until, 10) !== 1200) {
+    queryParams = Object.assign({}, queryParams, {age_until: age.age_until})
+  }
 
   const url = buildUrl(
     `${process.env.REACT_APP_API_HOST}${process.env.REACT_APP_API_RESULTS_ENDPOINT}`,

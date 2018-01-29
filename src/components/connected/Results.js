@@ -4,7 +4,9 @@ import counterpart from 'counterpart'
 import PropTypes from 'prop-types'
 import Translate from 'react-translate-component'
 import DetailsModal from '../presentational/DetailsModal'
-import { fetchResults, storeTerm, storeSelectedCategories, selectResult }  from '../../data/modules/searchResults'
+import { storeTerm }  from '../../data/modules/term'
+import { storeCategories }  from '../../data/modules/categories'
+import { fetchResults, selectResult }  from '../../data/modules/results'
 import { getCategoryKey } from '../../utils/appUtils'
 import Loader from '../presentational/Loader'
 import Product from '../presentational/Product'
@@ -197,25 +199,23 @@ class ResultsContainer extends Component {
 
 ResultsContainer.propTypes = {
   term : PropTypes.string.isRequired,
-  selectedCategories : PropTypes.array.isRequired,
-  searchedCategories : PropTypes.array.isRequired,
+  categories : PropTypes.array.isRequired,
   age : PropTypes.object.isRequired,
   results: PropTypes.object.isRequired,
   storeTerm: PropTypes.func.isRequired,
-  storeSelectedCategories: PropTypes.func.isRequired,
+  storeCategories: PropTypes.func.isRequired,
   fetchResults: PropTypes.func.isRequired
 }
 
 const mapStateToProps = state => {
   return {
-    age: state.searchResults.age,
-    term: state.searchResults.term,
-    selectedCategories: state.searchResults.selectedCategories,
-    searchedCategories: state.searchResults.searchedCategories,
-    results: state.searchResults.results,
-    isFetching: state.searchResults.isFetching,
-    hasFailedFetching: state.searchResults.hasFailedFetching,
-    selectedResult: state.searchResults.selectedResult
+    age: state.ages.ages,
+    term: state.term.term,
+    categories: state.categories.categories,
+    results: state.results.results,
+    isFetching: state.results.isFetching,
+    hasFailedFetching: state.results.hasFailedFetching,
+    selectedResult: state.results.selectedResult
   }
 }
 
@@ -224,8 +224,8 @@ const mapDispatchToProps = dispatch => {
     storeTerm: term => {
       dispatch(storeTerm(term))
     },
-    storeSelectedCategories: term => {
-      dispatch(storeSelectedCategories(term))
+    storeCategories: term => {
+      dispatch(storeCategories(term))
     },
     fetchResults: (term, categories, age, offset) => {
       dispatch(fetchResults(term, categories, age, offset))

@@ -31,7 +31,7 @@ ResultsHeadlineContainer.propTypes = {
 
 const mapStateToProps = state => {
   return {
-    searchedCategories: state.searchResults.searchedCategories
+    searchedCategories: state.categories.searchedCategories
   }
 }
 

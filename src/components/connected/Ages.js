@@ -5,7 +5,8 @@ import PropTypes from 'prop-types'
 import Flexbox from 'flexbox-react';
 import counterpart from 'counterpart';
 import _last from 'lodash/last'
-import { resetResults, fetchResults, storeAge, maxAge }  from '../../data/modules/searchResults'
+import { resetResults, fetchResults }  from '../../data/modules/results'
+import { storeAge, MAX_AGE }  from '../../data/modules/ages'
 import { getAppParam } from '../../utils/appUtils'
 import './Ages.css'
 
@@ -23,7 +24,7 @@ const ageRanges = [
   { age_from: 120, age_until: 132}, // 10-11
   { age_from: 132, age_until: 144}, // 11-12
   { age_from: 144, age_until: 156}, // 12-13
-  { age_from: 0, age_until: maxAge} // // all
+  { age_from: 0, age_until: MAX_AGE} // // all
 ]
 
 const formatMonthOrYear = (age, withText = true) => {
@@ -39,7 +40,7 @@ const formatMonthOrYear = (age, withText = true) => {
 }
 
 const displayFormattedAge = range => {
-  if (range.age_until === maxAge) {
+  if (range.age_until === MAX_AGE) {
     return counterpart('age.allAges')
   }
   else if (range.age_from === 0) {
@@ -50,7 +51,7 @@ const displayFormattedAge = range => {
   }
 }
 
-class AgesContainerContainer extends Component {
+class AgesContainer extends Component {
 
   constructor(props) {
     super(props)
@@ -120,16 +121,16 @@ class AgesContainerContainer extends Component {
   }
 }
 
-AgesContainerContainer.propTypes = {
+AgesContainer.propTypes = {
   age: PropTypes.object.isRequired
 }
 
 const mapStateToProps = state => {
   return {
-    term: state.searchResults.term,
-    searchedCategories: state.searchResults.searchedCategories,
-    age: state.searchResults.age,
-    results: state.searchResults.results
+    term: state.term.term,
+    searchedCategories: state.categories.searchedCategories,
+    age: state.ages.ages,
+    results: state.results.results
   }
 }
 
@@ -141,6 +142,6 @@ const mapDispatchToProps = dispatch => {
   }
 }
 
-const Ages = withRouter(connect(mapStateToProps, mapDispatchToProps)(AgesContainerContainer))
+const Ages = withRouter(connect(mapStateToProps, mapDispatchToProps)(AgesContainer))
 
 export default Ages;

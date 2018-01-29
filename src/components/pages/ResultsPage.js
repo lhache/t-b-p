@@ -3,6 +3,7 @@ import Flexbox from 'flexbox-react';
 import Results from '../connected/Results'
 import Search from '../connected/Search'
 import Ages from '../connected/Ages'
+import Categories from '../connected/Categories'
 import ResultsHeadline from '../connected/ResultsHeadline'
 import { isDeviceConsideredMobile } from '../../utils/appUtils'
 // import './ResultsPage.css'
@@ -18,6 +19,7 @@ class ResultsPage extends Component {
         </Flexbox>
 
         <Ages />
+        <Categories />
         { !isDeviceConsideredMobile && <ResultsHeadline showPrefixText={true} /> }
         <Results hideLoadMore={false} />
 

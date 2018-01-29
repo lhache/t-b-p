@@ -6,8 +6,8 @@ import PropTypes from 'prop-types'
 import { getShortenedLocale } from '../../data/translations/translations'
 import SearchForm from '../presentational/SearchForm'
 import Flexbox from 'flexbox-react';
-import { storeTerm, storeSelectedCategories, storeSearchedCategories } from '../../data/modules/searchResults'
-import { fetchSearchOptions } from '../../data/modules/searchOptions'
+import { storeTerm } from '../../data/modules/term'
+import { storeCategories,  } from '../../data/modules/categories'
 import { buildUrl } from '../../utils/appUtils'
 import { resultsUrl } from '../../data/urls'
 import { getOrCreateElementById } from '../../utils/domUtils'
@@ -24,27 +24,26 @@ class SearchContainer extends Component {
   }
 
   componentWillMount() {
-    // set selectedCategories and fetch results at page load
+    // set categories and fetch results at page load
     const termFromUrl = getAppParam('c')
     if (termFromUrl) {
       const term = decodeURIComponent(termFromUrl)
 
       this.props.storeTerm(term)
-      this.props.storeSearchedCategories(term.split(',').map(t => ({ name: t })))
-      this.props.storeSelectedCategories(term.split(',').map(t => ({ name: t })))
+      this.props.storeCategories(term.split(',').map(t => ({ name: t })))
     }
   }
 
   _fetchOptions(input) {
-    return this.props.fetchSuggestOptions(input, this.props.selectedCategories)
+    return this.props.fetchSuggestOptions(input, this.props.categories)
   }
 
   _handleSubmit(term) {
 
     const urlParams = {
       c: term,
-      age_from: this.props.age.age_from,
-      age_until: this.props.age.age_until
+      age_from: this.props.ages.age_from,
+      age_until: this.props.ages.age_until
     }
 
     this.props.history.push({
@@ -58,9 +57,7 @@ class SearchContainer extends Component {
   _handleChange(categories) {
     const term = joinTermToStringWithSymbol(categories, 'name', ',')
     this.props.storeTerm(term)
-    this.props.storeSelectedCategories(categories)
-    // debugger
-    // this.props.fetchSearchOptions(null, categories)
+    this.props.storeCategories(categories)
   }
 
   render() {
@@ -68,7 +65,7 @@ class SearchContainer extends Component {
       <Flexbox flexBasis="100%" flexWrap="wrap" className="SearchContainer fadeIn duration-500">
         <SearchForm
           term={this.props.term}
-          selectedCategories={this.props.searchedCategories}
+          categories={this.props.categories}
           fetchOptions={this._fetchOptions}
           onChange={this._handleChange}
           onSubmit={this._handleSubmit}
@@ -81,36 +78,27 @@ class SearchContainer extends Component {
 
 SearchContainer.propTypes = {
   term: PropTypes.string.isRequired,
-  selectedCategories: PropTypes.array.isRequired,
-  searchedCategories: PropTypes.array.isRequired,
+  categories: PropTypes.array.isRequired,
   storeTerm: PropTypes.func.isRequired,
-  storeSelectedCategories: PropTypes.func.isRequired,
-  storeSearchedCategories: PropTypes.func.isRequired
+  storeCategories: PropTypes.func.isRequired
 }
 
 const mapStateToProps = state => {
   return {
-    age: state.searchResults.age,
-    term: state.searchResults.term,
-    selectedCategories: state.searchResults.selectedCategories,
-    searchedCategories: state.searchResults.searchedCategories
+    ages: state.ages.ages,
+    term: state.term.term,
+    categories: state.categories.categories
   }
 }
 
 const mapDispatchToProps = dispatch => {
   return {
-    fetchSearchOptions: (term, categories) => {
-      return dispatch(fetchSearchOptions(term, categories))
-    },
     storeTerm: term => {
       return dispatch(storeTerm(term))
     },
-    storeSelectedCategories: c => {
-      return dispatch(storeSelectedCategories(c))
-    },
-    storeSearchedCategories: c => {
-      return dispatch(storeSearchedCategories(c))
-    },
+    storeCategories: c => {
+      return dispatch(storeCategories(c))
+    }
   }
 }
 
