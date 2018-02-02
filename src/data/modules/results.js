@@ -93,20 +93,16 @@ export const resultsReducer = (state = initialState, action) => {
   }
 }
 
-export const fetchResults = (term, categories, age, offset = 0) => dispatch => {
+export const fetchResults = (term, categories, ages, offset = 0) => dispatch => {
   dispatch(requestResults(categories))
 
   let queryParams = {
+    q: term,
     c: getCategoryKey(categories),
     image_sizes: 'medium',
-    offset
-  }
-
-  if(parseInt(age.age_from, 10) !== 0) {
-    queryParams = Object.assign({}, queryParams, {age_from: age.age_from})
-  }
-  if(parseInt(age.age_until, 10) !== 1200) {
-    queryParams = Object.assign({}, queryParams, {age_until: age.age_until})
+    offset,
+    age_from: ages.age_from,
+    age_until: ages.age_until
   }
 
   const url = buildUrl(

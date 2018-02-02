@@ -7,7 +7,6 @@ import { getShortenedLocale } from '../../data/translations/translations'
 import SearchForm from '../presentational/SearchForm'
 import Flexbox from 'flexbox-react';
 import { storeTerm } from '../../data/modules/term'
-import { storeCategories,  } from '../../data/modules/categories'
 import { buildUrl } from '../../utils/appUtils'
 import { resultsUrl } from '../../data/urls'
 import { getOrCreateElementById } from '../../utils/domUtils'
@@ -24,13 +23,11 @@ class SearchContainer extends Component {
   }
 
   componentWillMount() {
-    // set categories and fetch results at page load
-    const termFromUrl = getAppParam('c')
+    const termFromUrl = getAppParam('q')
     if (termFromUrl) {
       const term = decodeURIComponent(termFromUrl)
 
       this.props.storeTerm(term)
-      this.props.storeCategories(term.split(',').map(t => ({ name: t })))
     }
   }
 
@@ -41,7 +38,7 @@ class SearchContainer extends Component {
   _handleSubmit(term) {
 
     const urlParams = {
-      c: term,
+      q: term,
       age_from: this.props.ages.age_from,
       age_until: this.props.ages.age_until
     }
@@ -54,10 +51,8 @@ class SearchContainer extends Component {
     })
   }
 
-  _handleChange(categories) {
-    const term = joinTermToStringWithSymbol(categories, 'name', ',')
+  _handleChange(term) {
     this.props.storeTerm(term)
-    this.props.storeCategories(categories)
   }
 
   render() {
@@ -65,7 +60,6 @@ class SearchContainer extends Component {
       <Flexbox flexBasis="100%" flexWrap="wrap" className="SearchContainer fadeIn duration-500">
         <SearchForm
           term={this.props.term}
-          categories={this.props.categories}
           fetchOptions={this._fetchOptions}
           onChange={this._handleChange}
           onSubmit={this._handleSubmit}
@@ -78,9 +72,7 @@ class SearchContainer extends Component {
 
 SearchContainer.propTypes = {
   term: PropTypes.string.isRequired,
-  categories: PropTypes.array.isRequired,
-  storeTerm: PropTypes.func.isRequired,
-  storeCategories: PropTypes.func.isRequired
+  storeTerm: PropTypes.func.isRequired
 }
 
 const mapStateToProps = state => {
@@ -95,9 +87,6 @@ const mapDispatchToProps = dispatch => {
   return {
     storeTerm: term => {
       return dispatch(storeTerm(term))
-    },
-    storeCategories: c => {
-      return dispatch(storeCategories(c))
     }
   }
 }

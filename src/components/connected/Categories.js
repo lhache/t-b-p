@@ -4,7 +4,7 @@ import PropTypes from 'prop-types'
 import Flexbox from 'flexbox-react';
 import _find from 'lodash/find'
 import _concat from 'lodash/concat'
-import { storeSelectedCategories }  from '../../data/modules/categories'
+import { storeSelectedCategories, getCategoriesByMatchingName }  from '../../data/modules/categories'
 import { resetResults, fetchResults }  from '../../data/modules/results'
 import { getAppParam } from '../../utils/appUtils'
 import './Categories.css'
@@ -13,16 +13,15 @@ class CategoriesContainer extends Component {
 
   constructor(props) {
     super(props)
-    this.state = {
-      selectedCategories: []
-    }
 
     this._updateCategories = this._updateCategories.bind(this)
   }
 
   componentWillMount() {
-    const categories = getAppParam('c')
-    categories && this.props.storeCategories(categories)
+    const selectedCategoriesNames = [...getAppParam('c').split(',')]
+    const selectedCategories = getCategoriesByMatchingName(this.props.categories, selectedCategoriesNames)
+    
+    selectedCategories && this.props.storeSelectedCategories(selectedCategories)
   }
 
   componentWillReceiveProps(nextProps) {
@@ -38,22 +37,12 @@ class CategoriesContainer extends Component {
   }
 
   _updateCategories(event) {
-    // let range = event.target.value.split('-')
-    // const selectedAge = {
-    //   age_from: range[0],
-    //   age_until: range[1]
-    // }
-    // this.setState({ selectedAge })
-    // this.props.storeAge(selectedAge)
-    // this.props.resetResults(this.props.searchedCategories)
-    // this.props.fetchResults(this.props.term, this.props.searchedCategories, selectedAge, this.props.results.length)
-
-    
     const newlySelectedCategory = _find(this.props.categories, {  id: event.target.value })
     const newSelectedCategories = _concat(this.props.selectedCategories, newlySelectedCategory)
-    debugger
-    this.setState({ selectedCategories: newSelectedCategories })
+    
+    this.props.resetResults(newSelectedCategories)
     this.props.storeSelectedCategories(newSelectedCategories)
+    this.props.fetchResults(this.props.term, newSelectedCategories, this.props.ages, this.props.results.length)
   }
 
 
@@ -62,9 +51,7 @@ class CategoriesContainer extends Component {
       <Flexbox className="Categoriesontainer" flexBasis="100%" flexWrap="wrap" alignSelf="flex-start">
         {
             this.props.categories.map((category) => {
-                const className = (
-                    this.state.selectedCategories.indexOf(category) !== -1 ? 'CategoriesItem CategoriesItem-Active' : 'CategoriesItem'
-                )
+              const className = _find(this.props.selectedCategories, category) ? 'CategoriesItem CategoriesItem-Active' : 'CategoriesItem'
                 
                 return (
                     <button
@@ -76,8 +63,7 @@ class CategoriesContainer extends Component {
                         { category.name }
                     </button>
                 )
-                }
-            )
+            })
         }
       </Flexbox>
     )
@@ -86,13 +72,16 @@ class CategoriesContainer extends Component {
 
 CategoriesContainer.propTypes = {
   categories: PropTypes.array.isRequired,
-  selectedCategories: PropTypes.array.isRequired
+  selectedCategories: PropTypes.array
 }
 
 const mapStateToProps = state => {
   return {
+    term: state.term.term,
     categories: state.categories.categories,
-    selectedCategories: state.categories.selectedCategories
+    selectedCategories: state.categories.selectedCategories,
+    ages: state.ages.ages,
+    results: state.results.results
   }
 }
 

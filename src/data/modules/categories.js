@@ -1,3 +1,4 @@
+import _flatten from 'lodash/flatten'
 
 // TODO check if searched cat can be removed
 export const STORE_CATEGORIES = 'STORE_CATEGORIES'
@@ -20,7 +21,7 @@ export const initialState = {
       { id: '12', name: 'cat2'},
       { id: '24', name: 'cat3'}, 
       { id: '36', name: 'cat4'}, 
-      { id: '48', name: 'cat5'}
+      { id: '48', name: 'Kosmos'}
     ],
     selectedCategories: []
 }
@@ -40,3 +41,9 @@ export const categoriesReducer = (state = initialState, action) => {
         return state
     }
   }
+
+// helper function
+export const getCategoriesByMatchingName = (categories, selectedCategories) => {
+  const filteredCategories = _flatten(selectedCategories.map(selectedCategoryName => categories.filter(category => selectedCategoryName === category.name)))
+  return filteredCategories
+}

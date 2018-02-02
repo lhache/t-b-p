@@ -5,6 +5,7 @@ import Search from '../connected/Search'
 import Ages from '../connected/Ages'
 import Categories from '../connected/Categories'
 import ResultsHeadline from '../connected/ResultsHeadline'
+import Filter from '../presentational/Filter'
 import { isDeviceConsideredMobile } from '../../utils/appUtils'
 // import './ResultsPage.css'
 
@@ -18,9 +19,18 @@ class ResultsPage extends Component {
             <Search />
         </Flexbox>
 
-        <Ages />
-        <Categories />
-        { !isDeviceConsideredMobile && <ResultsHeadline showPrefixText={true} /> }
+        { 
+          isDeviceConsideredMobile() ? 
+          <Filter /> :
+          (
+            <div>
+              <Ages />
+              <Categories />
+            </div>
+          )
+        }
+        
+        { !isDeviceConsideredMobile() && <ResultsHeadline showPrefixText={true} /> }
         <Results hideLoadMore={false} />
 
       </Flexbox>

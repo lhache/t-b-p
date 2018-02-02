@@ -6,7 +6,7 @@ import Flexbox from 'flexbox-react';
 import counterpart from 'counterpart';
 import _last from 'lodash/last'
 import { resetResults, fetchResults }  from '../../data/modules/results'
-import { storeAge, MAX_AGE }  from '../../data/modules/ages'
+import { storeAge, MAX_AGE, MIN_AGE }  from '../../data/modules/ages'
 import { getAppParam } from '../../utils/appUtils'
 import './Ages.css'
 
@@ -56,44 +56,46 @@ class AgesContainer extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      selectedAge: null
+      selectedAges: null
     }
 
-    this._updateAge = this._updateAge.bind(this)
+    this._updateAges = this._updateAges.bind(this)
   }
 
   componentWillMount() {
-    const age = {}
+    const ages = {}
     const ageFrom = getAppParam('age_from')
     const ageUntil = getAppParam('age_until')
     
-    ageFrom && Object.assign(age, { age_from: ageFrom })
-    ageUntil && Object.assign(age, { age_until: ageUntil })
-    this.props.storeAge(age)
+    Object.assign(ages, { age_from: ageFrom ? ageFrom : MIN_AGE })
+    Object.assign(ages, { age_until: ageUntil ? ageUntil : MAX_AGE })
+    
+    this.props.storeAge(ages)
   }
 
   componentWillReceiveProps(nextProps) {
-    if (nextProps.age !== this.state.selectedAge && this.props.age.age_from !== null && this.props.age.age_until !== null) {
-      let selectedAge = ageRanges.filter(r => (
-        parseInt(this.props.age.age_from, 10) === parseInt(r.age_from, 10)
-        &&  parseInt(this.props.age.age_until, 10) === parseInt(r.age_until, 10)
+    if (nextProps.ages !== this.state.selectedAges && this.props.ages.age_from !== null && this.props.ages.age_until !== null) {
+      let selectedAges = ageRanges.filter(r => (
+        parseInt(this.props.ages.age_from, 10) === parseInt(r.age_from, 10)
+        &&  parseInt(this.props.ages.age_until, 10) === parseInt(r.age_until, 10)
       ))
-      if (!selectedAge.length) selectedAge = [_last(ageRanges)]
+      if (!selectedAges.length) selectedAges = [_last(ageRanges)]
 
-      this.setState({ selectedAge: selectedAge[0] })
+      this.setState({ selectedAges: selectedAges[0] })
     }
   }
 
-  _updateAge(event) {
+  _updateAges(event) {
     let range = event.target.value.split('-')
-    const selectedAge = {
+    const selectedAges = {
       age_from: range[0],
       age_until: range[1]
     }
-    this.setState({ selectedAge })
-    this.props.storeAge(selectedAge)
-    this.props.resetResults(this.props.searchedCategories)
-    this.props.fetchResults(this.props.term, this.props.searchedCategories, selectedAge, this.props.results.length)
+    
+    this.setState({ selectedAges })
+    this.props.storeAge(selectedAges)
+    this.props.resetResults(this.props.selectedCategories)
+    this.props.fetchResults(this.props.term, this.props.selectedCategories, selectedAges, this.props.results.length)
   }
 
 
@@ -102,14 +104,14 @@ class AgesContainer extends Component {
       <Flexbox className="AgeContainer" flexBasis="100%" flexWrap="wrap" alignSelf="flex-start">
         {ageRanges.map((ageRange) => {
           const className = (
-            this.state.selectedAge !== ageRange ? 'AgeItem' : 'AgeItem AgeItem-Active'
+            this.state.selectedAges !== ageRange ? 'AgeItem' : 'AgeItem AgeItem-Active'
           )
           
           return (
             <button
               key={`${ageRange.age_from}-${ageRange.age_until}`}
               className={className}
-              onClick={this._updateAge}
+              onClick={this._updateAges}
               value={`${ageRange.age_from}-${ageRange.age_until}`}
               >
                  { displayFormattedAge(ageRange) }
@@ -122,14 +124,14 @@ class AgesContainer extends Component {
 }
 
 AgesContainer.propTypes = {
-  age: PropTypes.object.isRequired
+  ages: PropTypes.object.isRequired
 }
 
 const mapStateToProps = state => {
   return {
     term: state.term.term,
-    searchedCategories: state.categories.searchedCategories,
-    age: state.ages.ages,
+    selectedCategories: state.categories.selectedCategories,
+    ages: state.ages.ages,
     results: state.results.results
   }
 }

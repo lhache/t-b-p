@@ -13,8 +13,8 @@ export const storeAge = (ages) => ({
 // state
 export const initialState = {
     ages: { 
-        age_from: null, 
-        age_until: null 
+        age_from: MIN_AGE, 
+        age_until: MAX_AGE 
     }
 }
 
