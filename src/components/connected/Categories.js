@@ -48,7 +48,7 @@ class CategoriesContainer extends Component {
 
   render() {
     return (
-      <Flexbox className="Categoriesontainer" flexBasis="100%" flexWrap="wrap" alignSelf="flex-start">
+      <Flexbox className="CategoriesContainer" flexBasis="100%" flexWrap="wrap" alignSelf="flex-start">
         {
             this.props.categories.map((category) => {
               const className = _find(this.props.selectedCategories, category) ? 'CategoriesItem CategoriesItem-Active' : 'CategoriesItem'

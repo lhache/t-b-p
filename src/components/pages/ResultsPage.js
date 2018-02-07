@@ -1,6 +1,8 @@
-import React, { Component } from 'react';
-import Flexbox from 'flexbox-react';
+import React, { Component } from 'react'
+import Flexbox from 'flexbox-react'
+import Translate from 'react-translate-component'
 import Results from '../connected/Results'
+import Details from '../connected/Details'
 import Search from '../connected/Search'
 import Ages from '../connected/Ages'
 import Categories from '../connected/Categories'
@@ -24,13 +26,17 @@ class ResultsPage extends Component {
           <Filter /> :
           (
             <div>
-              <Ages />
+              <Translate content="categories.title" component="h3"/>
               <Categories />
+              <Translate content="age.title" component="h3"/>
+              <Ages />
             </div>
           )
         }
+
+        <Details />
         
-        { !isDeviceConsideredMobile() && <ResultsHeadline showPrefixText={true} /> }
+        {/* { !isDeviceConsideredMobile() && <ResultsHeadline showPrefixText={true} /> } */}
         <Results hideLoadMore={false} />
 
       </Flexbox>

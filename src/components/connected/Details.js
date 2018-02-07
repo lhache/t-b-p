@@ -119,7 +119,10 @@ class DetailsContainer extends Component {
   componentDidMount() {
     // get id from props when mounted thru modal, search param thru modal
     const id = this.props.id ? this.props.id : getAppParam('id')
-    this.props.fetchDetails(id)
+
+    if (id) {
+      this.props.fetchDetails(id)
+    }
   }
 
   componentWillReceiveProps(nextProps) {
@@ -140,7 +143,9 @@ class DetailsContainer extends Component {
   render() {
     const { hasFailedFetching } = this.props
 
-    return (
+    const id = this.props.id ? this.props.id : getAppParam('id')
+
+    return id ? (
       <Flexbox>
         {/* { isFetching \&& showLoader(isFetching) } */}
         { hasFailedFetching && showError(hasFailedFetching) }
@@ -149,7 +154,8 @@ class DetailsContainer extends Component {
           showDesktopDetails(this.props, this.state, this._trackClick, this._onDetailsImageLoad)
         }
       </Flexbox>
-    )
+    ) :
+    null
   }
 }
 
@@ -159,7 +165,7 @@ DetailsContainer.propTypes = {
 
 const mapStateToProps = state => {
   return {
-    selectedResult: state.searchResults.selectedResult,
+    selectedResult: state.results.selectedResult,
     details: state.details.details,
     isFetching: state.details.isFetching,
     hasFailedFetching: state.details.hasFailedFetching

@@ -25,11 +25,15 @@
       "buttonText": "Ok"
     },
     "age": {
+      "title": "Age",
       "month": "Monat",
       "months": "Monate",
       "year": "Jahr",
       "years": "Jahre",
       "allAges": "Alle Altersklassen"
+    },
+    "categories": {
+      "title": "Categories"
     }
   },
   "en-US": {
@@ -58,11 +62,15 @@
       "buttonText": "Ok"
     },
     "age": {
+      "title": "Age",
       "month": "month",
       "months": "months",
       "year": "year",
       "years": "years",
       "allAges": "All ages"
+    },
+    "categories": {
+      "title": "Categories"
     }
   }
 }
