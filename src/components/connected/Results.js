@@ -6,15 +6,17 @@ import Translate from 'react-translate-component'
 import DetailsModal from '../presentational/DetailsModal'
 import { storeTerm }  from '../../data/modules/term'
 import { storeCategories }  from '../../data/modules/categories'
-import { fetchResults, selectResult }  from '../../data/modules/results'
+import { fetchResults, selectResult, resetResults }  from '../../data/modules/results'
 import { getCategoryKey } from '../../utils/appUtils'
 import Loader from '../presentational/Loader'
 import Product from '../presentational/Product'
-import Flexbox from 'flexbox-react';
+import Flexbox from 'flexbox-react'
 import _take from 'lodash/take'
 import _get from 'lodash/get'
 import _find from 'lodash/find'
+import _isEmpty from 'lodash/isEmpty'
 import { trackModalOpen, trackModalClose, trackModalPrevItem, trackModalNextItem } from '../../data/tracking'
+import { getResults } from '../../utils/appUtils'
 import './Results.css'
 
 const getIndexOfResult = (results, lookup) => {
@@ -78,12 +80,27 @@ class ResultsContainer extends Component {
       return true
     }
 
-    const category = this.props.hardcodedCategories ? this.props.hardcodedCategories : this.props.searchedCategories
-    return this.props.results[getCategoryKey(category)] !== nextProps.results[getCategoryKey(category)]
+    if (this.props.hardcodedCategories) {
+      if (this.props.results[getCategoryKey(this.props.hardcodedCategories)] !== nextProps.results[getCategoryKey(this.props.hardcodedCategories)]) {
+        return true
+      }
+      else {
+        return false
+      }
+    }
+    else {
+      if (!_isEmpty(nextProps.results)) {
+        return this.props.results[this.props.term] === nextProps.results[nextProps.term]
+      }
+      else {
+        return false
+      }
+    }
   }
 
   _fetchMoreResults() {
-    this.props.fetchResults(this.props.term, this.props.selectedCategories, this.props.age, _get(this.props.results, getCategoryKey(this.props.selectedCategories)).length)
+    const results = getResults(this.props.results, getCategoryKey(this.props.selectedCategories)) 
+    this.props.fetchResults(this.props.term, this.props.selectedCategories, this.props.age, results.length)
   }
 
   _showProductDetails(id) {
@@ -92,12 +109,13 @@ class ResultsContainer extends Component {
       resultIdForDetails: id
     })
     this.props.selectResult(id)
+    // this.props.resetResults()
     trackModalOpen(id)
   }
 
   _showNextProductDetails() {
-    const category = this.props.hardcodedCategories ? this.props.hardcodedCategories : this.props.searchedCategories
-    const results = this.props.results[getCategoryKey(category)]
+    const category = this.props.hardcodedCategories ? this.props.hardcodedCategories : this.props.selectedCategories
+    const results = _get(this.props.results, getCategoryKey(category)) 
     const res = _find(results, { id: this.props.selectedResult})
     let index = results.indexOf(res)
 
@@ -114,8 +132,8 @@ class ResultsContainer extends Component {
   }
 
   _showPrevProductDetails() {
-    const category = this.props.hardcodedCategories ? this.props.hardcodedCategories : this.props.searchedCategories
-    const results = this.props.results[getCategoryKey(category)]
+    const category = this.props.hardcodedCategories ? this.props.hardcodedCategories : this.props.selectedCategories
+    const results = _get(this.props.results, getCategoryKey(category)) 
     const res = _find(results, { id: this.props.selectedResult})
     let index = results.indexOf(res)
 
@@ -138,25 +156,32 @@ class ResultsContainer extends Component {
 
   render() {
     const {
+      term,
       hideLoadMore,
       maxItems,
       results,
       isFetching,
       hasFailedFetching,
-      searchedCategories,
+      selectedCategories,
       hardcodedCategories,
       selectedResult
     } = this.props
 
-    const categories = hardcodedCategories ? hardcodedCategories : searchedCategories
-    const resultsForCategory = _get(results, getCategoryKey(categories))
+    const resultsCategories = hardcodedCategories ? hardcodedCategories : selectedCategories
+    const displayedResults = getResults(results, resultsCategories) 
+    console.log('hardcodedCategories', hardcodedCategories)
+    console.log('selectedCategories ', selectedCategories  )
+    console.log('resultsCategories', resultsCategories)
+    console.log('results', results)
+    console.log('displayedResults', displayedResults)
 
-    if (resultsForCategory) {
-        const hasResults = !!resultsForCategory.length
-        const hasFiniteAmountOfResults = resultsForCategory.length % 20 === 0
-        const trimmedResults = maxItems ? _take(resultsForCategory, maxItems) : resultsForCategory
+    if (displayedResults) {
+        const hasResults = !!displayedResults.length
+        const hasFiniteAmountOfResults = displayedResults.length % 20 === 0
+        const trimmedResults = maxItems ? _take(displayedResults, maxItems) : displayedResults
+        // debugger
 
-        const selectedResultsIndex = getIndexOfResult(resultsForCategory, { id: selectedResult})
+        const selectedResultsIndex = getIndexOfResult(displayedResults, { id: selectedResult})
 
         return (
           <Flexbox flexWrap="wrap" className="ResultsContainer" maxWidth="100%">
@@ -181,7 +206,7 @@ class ResultsContainer extends Component {
               <DetailsModal
                 id={this.props.selectedResult}
                 selectedResultsIndex={selectedResultsIndex}
-                amountOfItems={resultsForCategory.length}
+                amountOfItems={displayedResults.length}
                 isOpened={this.state.modalIsOpen}
                 close={this._closeDetails}
                 next={this._showNextProductDetails}
@@ -209,9 +234,11 @@ ResultsContainer.propTypes = {
 
 const mapStateToProps = state => {
   return {
+    term: state.term.term,
     age: state.ages.ages,
     term: state.term.term,
     categories: state.categories.categories,
+    selectedCategories: state.categories.selectedCategories,
     results: state.results.results,
     isFetching: state.results.isFetching,
     hasFailedFetching: state.results.hasFailedFetching,
@@ -232,6 +259,9 @@ const mapDispatchToProps = dispatch => {
     },
     selectResult: id => {
       dispatch(selectResult(id))
+    },
+    resetResults: () => {
+      dispatch(resetResults())
     }
   }
 }

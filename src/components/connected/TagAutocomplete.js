@@ -10,6 +10,7 @@ import 'react-select/dist/react-select.css';
 import 'react-virtualized/styles.css'
 import 'react-virtualized-select/styles.css'
 import _isArray from 'lodash/isArray'
+import _truncate from 'lodash/truncate'
 
 class TagAutocompleteContainer extends Component {
 
@@ -28,61 +29,24 @@ class TagAutocompleteContainer extends Component {
         if (input) {
             queryParams = Object.assign({}, queryParams, {q: input})
         }
-        // queryParams = Object.assign({}, queryParams, {c: getCategoryKey(this.props.selectedCategories)})
       }
-      else {
-        // queryParams = Object.assign({}, queryParams, {c: getCategoryKey(input)})
-      }
-
+      
       const url = buildUrl(
         `${process.env.REACT_APP_API_HOST}${process.env.REACT_APP_API_SUGGEST_ENDPOINT}`,
         queryParams
       )
+
+
       return fetch(url)
         .then((response) => {
           return response.json()
         })
-        // .then((json) => ({ options: json }))
-        .then((json) => ({ options: [
-          {
-            id: "14",
-            name: "Kosmos 620813 - Elektro Profi",
-            price: {
-            priceInCents: 9490,
-            displayPrice: "94,90 €"
-            },
-            imageUrls: {
-            medium: [
-            "https://images-eu.ssl-images-amazon.com/images/I/61%2Bn3aKZTAL._SL160_.jpg",
-            "https://images-eu.ssl-images-amazon.com/images/I/51VILRCcadL._SL160_.jpg",
-            "https://images-eu.ssl-images-amazon.com/images/I/41hrTkvwF0L._SL160_.jpg",
-            "https://images-eu.ssl-images-amazon.com/images/I/613j8BoHc5L._SL160_.jpg"
-            ]
-            },
-            deeplinkUrl: "https://api.thebetterplay.com/deeplink/14"
-            },
-            {
-            id: "50",
-            name: "KOSMOS 606022 - Mein erstes Forscher-Set",
-            price: {
-            priceInCents: 3499,
-            displayPrice: "34,99 €"
-            },
-            imageUrls: {
-            medium: [
-            "https://images-eu.ssl-images-amazon.com/images/I/51YNWepHEUL._SL160_.jpg",
-            "https://images-eu.ssl-images-amazon.com/images/I/41FLilTDdNL._SL160_.jpg",
-            "https://images-eu.ssl-images-amazon.com/images/I/51dg-NO-S4L._SL160_.jpg"
-            ]
-            },
-            deeplinkUrl: "https://api.thebetterplay.com/deeplink/50"
-            }
-        ] }))
+        .then((json) => ({ options: json }))
   }
 
   // this is when the value of the input changes
   _onInputChange(e) {
-    this.props.onChange(e)
+    e !== "" && this.props.onChange(e)
   }
 
   // this is when selecting a product in the list

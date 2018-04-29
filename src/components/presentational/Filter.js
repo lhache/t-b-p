@@ -18,6 +18,7 @@ import Categories from '../connected/Categories'
 
 const styles = {
     button: {
+        backgroundColor: '#00cce2',
         position: 'fixed',
         bottom: '12px',
         right: '12px',
@@ -71,21 +72,16 @@ class Filter extends React.Component {
                 <Typography type="title" color="inherit" className={classes.flex}>
                   Filter
                 </Typography>
-                {/* <Button color="inherit" onClick={() => this.handleClose()}>
-                  close
-                </Button> */}
                 <IconButton color="inherit" onClick={() => this.handleClose()} aria-label="Close">
                   <CloseIcon />
                 </IconButton>
               </Toolbar>
             </AppBar>
             <List>
-                <ListSubheader>Ages</ListSubheader>
                 <ListItem>
                     <Ages />
                 </ListItem>
                 <Divider />
-                <ListSubheader>Categories</ListSubheader>
                 <ListItem>
                     <Categories />
                 </ListItem>

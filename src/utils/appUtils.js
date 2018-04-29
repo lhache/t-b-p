@@ -3,6 +3,19 @@ import _flatMap from 'lodash/flatMap'
 import _join from 'lodash/join'
 import _get from 'lodash/get'
 
+export const getResults = (results, categoriesFromStore) => {
+  const term = getAppParam('q')
+  const catsFromUrl = getAppParam('c')
+  // debugger
+  if (!catsFromUrl && !categoriesFromStore.length) {
+  // if (term && !catsFromUrl && !categoriesFromStore.length) {
+    return _get(results, 'term')
+  }
+  else {
+    return _get(results, getCategoryKey(categoriesFromStore))
+  }
+}
+
 export const getAppParam = (param) => {
     if (window.tbpAppData) {
       const data = JSON.parse(window.tbpAppData)

@@ -27,7 +27,7 @@ const showMobileProduct = (props, link, select) => {
             </Truncate>
           </Flexbox>
           <Flexbox flexBasis="100%" justifyContent="flex-start" marginTop="5px">
-              <Price price={product.price.displayPrice} />
+              <Price price={ product.price ? product.price.displayPrice : ''} />
           </Flexbox>
           <Flexbox flexBasis="100%" justifyContent="center" marginTop="5px">
             <Link className="ProductButtonLink" to={link}>
@@ -54,7 +54,7 @@ const showDesktopProduct = (props, link, select) => {
           </Truncate>
         </Flexbox>
         <Flexbox flexBasis="50%" justifyContent="flex-start" marginTop="5px">
-            <Price price={product.price.displayPrice} />
+          <Price price={ product.price ? product.price.displayPrice : ''} />
         </Flexbox>
         <Flexbox flexBasis="90%" justifyContent="center" marginTop="5px">
           <ProductButton onClick={select} translationKey="product.goToDetails" />

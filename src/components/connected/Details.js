@@ -3,6 +3,7 @@ import { connect } from 'react-redux'
 import { withRouter } from 'react-router-dom'
 import PropTypes from 'prop-types'
 import { fetchDetails } from '../../data/modules/details'
+import { selectResult, resetSelectedResult } from '../../data/modules/results'
 import counterpart from 'counterpart'
 import Flexbox from 'flexbox-react';
 import Price from '../presentational/Price'
@@ -19,7 +20,8 @@ function escapeHTML(data) {
     return {__html: data}
 }
 
-const showError = () => (<h3 className="Results-Error Results-ErrorTechnical">{ counterpart('results.technicalError') }</h3>)
+const showError = () => null
+// const showError = () => (<h3 className="Results-Error Results-ErrorTechnical">{ counterpart('results.technicalError') }</h3>)
 
 const flattenImagesBySize = (images, size, target) => (
   images && _get(images, size).map(image => ({[target]: image}))
@@ -110,7 +112,8 @@ class DetailsContainer extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      showSpinnerInsteadOfImages: true
+      showSpinnerInsteadOfImages: true,
+      showDetails: false
     }
     this._trackClick = this._trackClick.bind(this)
     this._onDetailsImageLoad = this._onDetailsImageLoad.bind(this)
@@ -126,10 +129,27 @@ class DetailsContainer extends Component {
   }
 
   componentWillReceiveProps(nextProps) {
-    if(nextProps.selectedResult !== this.props.selectedResult) {
-      this.setState({showSpinnerInsteadOfImages: true})
-      this.props.fetchDetails(nextProps.selectedResult)
+    // when loading with ?id=x in URL, let's select the result so that it's shown in the details box
+    // but only do that when no result was previously selected otherwise the box won't be wiped after change of cat/age/...
+    if(this.props.details !== nextProps.details && nextProps.details.id && nextProps.selectedResult === null) {
+      this.props.selectResult(nextProps.details.id)
     }
+    if(nextProps.selectedResult !== this.props.selectedResult) {
+      // it means the resetSelectResult function has been called so we wipe the box out
+      if (!this.props.selectedResult) {
+        this.setState({  showDetails: false })
+      }
+      else {
+        // debugger
+        this.setState({  showDetails: true })
+        this.setState({showSpinnerInsteadOfImages: true})
+        this.props.fetchDetails(nextProps.selectedResult)
+      }
+    }
+  }
+
+  componentWillUnmount() {
+    this.props.resetSelectedResult()
   }
 
   _trackClick(event) {
@@ -145,7 +165,7 @@ class DetailsContainer extends Component {
 
     const id = this.props.id ? this.props.id : getAppParam('id')
 
-    return id ? (
+    return id? (
       <Flexbox>
         {/* { isFetching \&& showLoader(isFetching) } */}
         { hasFailedFetching && showError(hasFailedFetching) }
@@ -174,9 +194,9 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
   return {
-    fetchDetails: id => {
-      dispatch(fetchDetails(id))
-    }
+    fetchDetails: id => dispatch(fetchDetails(id)),
+    selectResult: id => dispatch(selectResult(id)),
+    resetSelectedResult: id => dispatch(resetSelectedResult(id))
   }
 }
 

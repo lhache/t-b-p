@@ -1,19 +1,22 @@
-import React, { Component } from 'react';
-import Flexbox from 'flexbox-react';
-import Search from '../connected/Search'
+import React, { Component } from 'react'
+import Flexbox from 'flexbox-react'
+import Translate from 'react-translate-component'
 import Results from '../connected/Results'
-import CookieBannerBar from '../presentational/CookieBannerBar'
+import Details from '../connected/Details'
+import Search from '../connected/Search'
+import Ages from '../connected/Ages'
+import Categories from '../connected/Categories'
 import ResultsHeadline from '../connected/ResultsHeadline'
-// import './HomePage.css'
+import CookieBannerBar from '../presentational/CookieBannerBar'
+import Filter from '../presentational/Filter'
+import { isDeviceConsideredMobile } from '../../utils/appUtils'
+import { Div } from 'glamorous'
 
 class HomePage extends Component {
 
   render() {
 
     const hardcodedCategories = [
-      [{name: 'Basteln und Malen'}],
-      [{name: 'Musikinstrumente'}],
-      [{name: 'Bausteine'}],
       [{name: 'Puzzles'}],
       [{name: 'Spiele'}]
     ]
@@ -24,7 +27,7 @@ class HomePage extends Component {
             <Search />
         </Flexbox>
 
-        { hardcodedCategories.map(c => (
+        {/* { hardcodedCategories.map(c => (
           <Flexbox key={Math.random()} flexWrap="wrap" minHeight="325px" flexBasis="100%">
             <ResultsHeadline hardcodedTerms={c} showPrefixText={false} />
             <Results
@@ -37,7 +40,25 @@ class HomePage extends Component {
               freezeUpdate={true}
             />
           </Flexbox>
-        ))}
+        ))} */}
+
+        { 
+          isDeviceConsideredMobile() ? 
+          <Filter /> :
+          (
+            <div>
+              <Ages />
+              <Categories />
+            </div>
+          )
+        }
+
+        <Div marginTop="20px">
+          <Details />                
+        </Div>             
+        
+        { !isDeviceConsideredMobile() && <ResultsHeadline showPrefixText={false} /> }
+        <Results hideLoadMore={false} />
 
         <CookieBannerBar />
       </Flexbox>

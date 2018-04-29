@@ -9,6 +9,8 @@ import Categories from '../connected/Categories'
 import ResultsHeadline from '../connected/ResultsHeadline'
 import Filter from '../presentational/Filter'
 import { isDeviceConsideredMobile } from '../../utils/appUtils'
+import { getAppParam } from '../../utils/appUtils'
+import { Div } from 'glamorous'
 // import './ResultsPage.css'
 
 class ResultsPage extends Component {
@@ -26,17 +28,16 @@ class ResultsPage extends Component {
           <Filter /> :
           (
             <div>
-              <Translate content="categories.title" component="h3"/>
-              <Categories />
-              <Translate content="age.title" component="h3"/>
               <Ages />
+              <Categories />
             </div>
           )
         }
+        <Div marginTop="20px">
+          <Details />                
+        </Div>
 
-        <Details />
-        
-        {/* { !isDeviceConsideredMobile() && <ResultsHeadline showPrefixText={true} /> } */}
+        { !isDeviceConsideredMobile() && <ResultsHeadline showPrefixText={ getAppParam('c') } /> }
         <Results hideLoadMore={false} />
 
       </Flexbox>

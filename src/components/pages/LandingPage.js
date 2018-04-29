@@ -3,7 +3,12 @@ import Flexbox from 'flexbox-react';
 import Results from '../connected/Results'
 import Search from '../connected/Search'
 import Ages from '../connected/Ages'
+import Categories from '../connected/Categories'
+import ResultsHeadline from '../connected/ResultsHeadline'
+import Filter from '../presentational/Filter'
+import { isDeviceConsideredMobile } from '../../utils/appUtils'
 import CookieBannerBar from '../presentational/CookieBannerBar'
+import Translate from 'react-translate-component'
 // import './LandingPage.css'
 
 
@@ -16,7 +21,16 @@ class LandingPage extends Component {
               <Search />
           </Flexbox>
 
-          <Ages />
+          { 
+          isDeviceConsideredMobile() ? 
+          <Filter /> :
+          (
+            <div>
+              <Ages />
+              <Categories />
+            </div>
+          )
+        }
           <Results hideLoadMore={false} />
         <CookieBannerBar />
       </Flexbox>

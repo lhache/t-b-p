@@ -9,29 +9,31 @@ import './ResultsHeadline.css'
 
 class ResultsHeadlineContainer extends Component {
   render() {
-    const { showPrefixText, searchedCategories, hardcodedTerms } = this.props
+    const { showPrefixText, selectedCategories, hardcodedTerms } = this.props
 
-    const termsToDisplay = _isEmpty(searchedCategories) ? hardcodedTerms : searchedCategories
+    const termsToDisplay = _isEmpty(selectedCategories) ? hardcodedTerms : selectedCategories
 
     return (
       <Flexbox className="ResultsHeadline" flexBasis="100%">
-        { showPrefixText && <Translate content="results.headline" component="span" /> }
-        &nbsp;
-        <b className="ResultsHeadlineTermCollection">
-          { (!_isEmpty(termsToDisplay)) && decodeURIComponent(joinTermToStringWithSymbol(termsToDisplay, 'name', ' - ')) }
-        </b>
+        { showPrefixText ?
+            <Translate content="results.headline" component="h3" /> :
+            <b className="ResultsHeadlineTermCollection">
+              <Translate content="results.headlinePrefix" component="h3" /> 
+              {/* { (!_isEmpty(termsToDisplay)) && decodeURIComponent(joinTermToStringWithSymbol(termsToDisplay, 'name', ' - ')) } */}
+            </b>
+        }
       </Flexbox>
     )
   }
 }
 
 ResultsHeadlineContainer.propTypes = {
-  searchedCategories: PropTypes.array.isRequired
+  selectedCategories: PropTypes.array
 }
 
 const mapStateToProps = state => {
   return {
-    searchedCategories: state.categories.searchedCategories
+    selectedCategories: state.categories.selectedCategories
   }
 }
 

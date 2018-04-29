@@ -8,7 +8,8 @@
       "noResultsFound": "Keine Resultate gefunden, bitte versuche es mit einem anderen Stichwort."
     },
     "results": {
-      "headline": "Suchsresultate für",
+      "headline": "Andere Vorschläge",
+      "headlinePrefix": "Vorschläge",
       "loadMore": "Mehr zeigen",
       "technicalError": "technical error",
       "noResultsFound": "Keine Resultate gefunden"
@@ -25,7 +26,7 @@
       "buttonText": "Ok"
     },
     "age": {
-      "title": "Age",
+      "title": "Alter",
       "month": "Monat",
       "months": "Monate",
       "year": "Jahr",
@@ -33,7 +34,7 @@
       "allAges": "Alle Altersklassen"
     },
     "categories": {
-      "title": "Categories"
+      "title": "Kategorien"
     }
   },
   "en-US": {
@@ -45,7 +46,8 @@
       "noResultsFound": "No results found, please type in something else."
     },
     "results": {
-      "headline": "Search results for",
+      "headline": "Other suggestions",
+      "headlinePrefix": "Results",
       "loadMore": "Show More",
       "technicalError": "technical error",
       "noResultsFound": "No results found"

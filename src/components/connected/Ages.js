@@ -5,9 +5,11 @@ import PropTypes from 'prop-types'
 import Flexbox from 'flexbox-react';
 import counterpart from 'counterpart';
 import _last from 'lodash/last'
-import { resetResults, fetchResults }  from '../../data/modules/results'
+import { resetResults, fetchResults, resetSelectedResult }  from '../../data/modules/results'
 import { storeAge, MAX_AGE, MIN_AGE }  from '../../data/modules/ages'
 import { getAppParam } from '../../utils/appUtils'
+import Translate from 'react-translate-component'
+import { Div } from 'glamorous'
 import './Ages.css'
 
 const ageRanges = [
@@ -79,8 +81,9 @@ class AgesContainer extends Component {
         parseInt(this.props.ages.age_from, 10) === parseInt(r.age_from, 10)
         &&  parseInt(this.props.ages.age_until, 10) === parseInt(r.age_until, 10)
       ))
-      if (!selectedAges.length) selectedAges = [_last(ageRanges)]
-
+      if (!selectedAges.length) {
+        selectedAges = [_last(ageRanges)]
+      }
       this.setState({ selectedAges: selectedAges[0] })
     }
   }
@@ -91,17 +94,26 @@ class AgesContainer extends Component {
       age_from: range[0],
       age_until: range[1]
     }
+    const selectedCategory = this.props.selectedCategories.length ? this.props.selectedCategories : 'term'
     
     this.setState({ selectedAges })
     this.props.storeAge(selectedAges)
-    this.props.resetResults(this.props.selectedCategories)
+    this.props.resetResults(selectedCategory)
     this.props.fetchResults(this.props.term, this.props.selectedCategories, selectedAges, this.props.results.length)
+    this.props.resetSelectedResult()
   }
 
 
   render() {
     return (
       <Flexbox className="AgeContainer" flexBasis="100%" flexWrap="wrap" alignSelf="flex-start">
+      {
+          this.props.ages ? (
+            <Div width="100%">
+              <Translate content="age.title" component="h3"/>
+            </Div>) : 
+            null
+        }
         {ageRanges.map((ageRange) => {
           const className = (
             this.state.selectedAges !== ageRange ? 'AgeItem' : 'AgeItem AgeItem-Active'
@@ -140,7 +152,8 @@ const mapDispatchToProps = dispatch => {
   return {
     storeAge: age => dispatch(storeAge(age)),
     fetchResults: (term, categories, offset) => dispatch(fetchResults(term, categories, offset)),
-    resetResults: (cat) => dispatch(resetResults(cat))
+    resetResults: (cat) => dispatch(resetResults(cat)),
+    resetSelectedResult: () => dispatch(resetSelectedResult())
   }
 }
 

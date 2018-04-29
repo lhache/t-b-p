@@ -16,13 +16,7 @@ export const storeSelectedCategories = selectedCategories => ({
 })
 
 export const initialState = {
-    categories: [
-      { id: '0', name: 'cat1'}, 
-      { id: '12', name: 'cat2'},
-      { id: '24', name: 'cat3'}, 
-      { id: '36', name: 'cat4'}, 
-      { id: '48', name: 'Kosmos'}
-    ],
+    categories: [],
     selectedCategories: []
 }
 
@@ -31,7 +25,7 @@ export const categoriesReducer = (state = initialState, action) => {
     switch (action.type) {
       case STORE_CATEGORIES:
         return Object.assign({}, state, {
-          categories: action.categories
+          categories: state.categories.length ? state.categories : action.categories
         })
       case STORE_SELECTED_CATEGORIES:
         return Object.assign({}, state, {

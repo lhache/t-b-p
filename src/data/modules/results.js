@@ -1,8 +1,11 @@
 import 'isomorphic-fetch'
 import { buildUrl } from '../../utils/appUtils'
-import _concat from 'lodash/concat'
+import _unionWith from 'lodash/unionWith'
+import _isEqual from 'lodash/isEqual'
 import { getCategoryKey } from '../../utils/appUtils'
 import { getLocale } from '../translations/translations'
+import { storeCategories } from './categories'
+import { P } from 'glamorous';
 
 
 export const RESET_RESULTS = 'RESET_RESULTS'
@@ -10,6 +13,7 @@ export const FETCH_RESULTS = 'FETCH_RESULTS'
 export const FETCH_RESULTS_SUCCESS = 'FETCH_RESULTS_SUCCESS'
 export const FETCH_RESULTS_FAILURE = 'FETCH_RESULTS_FAILURE'
 export const SELECT_RESULT = 'SELECT_RESULT'
+export const RESET_SELECTED_RESULT = 'RESET_SELECTED_RESULT'
 
 
 export const initialState = {
@@ -27,24 +31,29 @@ export const resetResults = (categoryKey) => {
   }
 }
 
-export const requestResults = searchedCategories => {
+export const requestResults = (term, categories) => {
   return {
     type: FETCH_RESULTS,
-    searchedCategories
+    term,
+    categories
   }
 }
 
-export const receiveResults = (searchedCategories, json) => {
+export const receiveResults = (term, searchedCategories, ages, results, json, offset) => {
   return {
     type: FETCH_RESULTS_SUCCESS,
+    term,
     searchedCategories,
-    results: json
+    results,
+    ages,
+    offset
   }
 }
 
-export const failedfetchingResults = (category) => {
+export const failedfetchingResults = (term, category) => {
   return {
     type: FETCH_RESULTS_FAILURE,
+    term,
     category
   }
 }
@@ -56,13 +65,20 @@ export const selectResult = id => {
   }
 }
 
+export const resetSelectedResult = () => {
+  return {
+    type: RESET_SELECTED_RESULT
+  }
+}
+
 // reducer
 export const resultsReducer = (state = initialState, action) => {
   switch (action.type) {
     case RESET_RESULTS:
+      const storeCategory = action.categoryKey === 'term' ? 'term' : getCategoryKey(action.categoryKey)
       return Object.assign({}, state, {
         results: Object.assign({}, state.results, {
-          [getCategoryKey(action.categoryKey)]: []
+          [storeCategory]: []
         }),
       })
     case FETCH_RESULTS:
@@ -71,12 +87,39 @@ export const resultsReducer = (state = initialState, action) => {
         hasFailedFetching: false
       })
     case FETCH_RESULTS_SUCCESS:
-      const categoryKey = getCategoryKey(action.searchedCategories)
+      let categoryKey = getCategoryKey(action.searchedCategories)
+
+      if (categoryKey === '') {
+        categoryKey = 'term'
+      }
+
+      // if offset = 0, reset list otherwise stack results
+      // const results = action.offset === 0 ? {
+      //   [categoryKey]: action.results.products
+      // } : Object.assign({}, state.results, {
+      //   [categoryKey]: _unionWith(state.results[categoryKey] || [], action.results.products)
+      // })
+
+      let results 
+
+
+      if (!action.results.products.length) {
+        debugger
+        results = {
+          [categoryKey]: action.results.products
+        }
+      }
+      // for categories & load more results
+      // not for ages
+      else {
+        results = Object.assign({}, state.results, {
+          [categoryKey]: _unionWith(state.results[categoryKey] || [], action.results.products, _isEqual)
+        })
+      }
+
       return Object.assign({}, state, {
         isFetching: false,
-        results: Object.assign({}, state.results, {
-          [categoryKey]: _concat(state.results[categoryKey] || [], action.results)
-        }),
+        results: results,
         hasFailedFetching: false
       })
     case FETCH_RESULTS_FAILURE:
@@ -88,16 +131,20 @@ export const resultsReducer = (state = initialState, action) => {
       return Object.assign({}, state, {
         selectedResult: action.id
       })
+    case RESET_SELECTED_RESULT:
+      return Object.assign({}, state, {
+        selectedResult: null
+      })
     default:
       return state
   }
 }
 
 export const fetchResults = (term, categories, ages, offset = 0) => dispatch => {
-  dispatch(requestResults(categories))
+  dispatch(requestResults(term, categories))
 
   let queryParams = {
-    q: term,
+    q: term || '',
     c: getCategoryKey(categories),
     image_sizes: 'medium',
     offset,
@@ -116,8 +163,12 @@ export const fetchResults = (term, categories, ages, offset = 0) => dispatch => 
     }
   })
     .then(response => response.json())
-    .then(json =>
-      dispatch(receiveResults(categories, json)),
-      error => dispatch(failedfetchingResults(categories))
+    .then(
+      json => {
+        // debugger
+        dispatch(receiveResults(term, categories, ages, json, offset))
+        dispatch(storeCategories(json.categories))
+      },
+      error => dispatch(failedfetchingResults(term, categories))
     )
 }
