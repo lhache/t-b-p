@@ -94,12 +94,12 @@ class AgesContainer extends Component {
       age_from: range[0],
       age_until: range[1]
     }
-    const selectedCategory = this.props.selectedCategories.length ? this.props.selectedCategories : 'term'
+    const selectedCategory = this.props.selectedCategory ? this.props.selectedCategory : 'term'
     
     this.setState({ selectedAges })
     this.props.storeAge(selectedAges)
     this.props.resetResults(selectedCategory)
-    this.props.fetchResults(this.props.term, this.props.selectedCategories, selectedAges, this.props.results.length)
+    this.props.fetchResults(this.props.term, this.props.selectedCategory, selectedAges, this.props.results.length)
     this.props.resetSelectedResult()
   }
 
@@ -142,7 +142,7 @@ AgesContainer.propTypes = {
 const mapStateToProps = state => {
   return {
     term: state.term.term,
-    selectedCategories: state.categories.selectedCategories,
+    selectedCategory: state.categories.selectedCategory,
     ages: state.ages.ages,
     results: state.results.results
   }

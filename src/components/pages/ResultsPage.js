@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import { connect } from 'react-redux'
 import Flexbox from 'flexbox-react'
 import Translate from 'react-translate-component'
 import Results from '../connected/Results'
@@ -13,7 +14,7 @@ import { getAppParam } from '../../utils/appUtils'
 import { Div } from 'glamorous'
 // import './ResultsPage.css'
 
-class ResultsPage extends Component {
+class ResultsPageContainer extends Component {
 
   render() {
     return (
@@ -34,7 +35,7 @@ class ResultsPage extends Component {
           )
         }
         <Div marginTop="20px">
-          <Details />                
+           <Details />
         </Div>
 
         { !isDeviceConsideredMobile() && <ResultsHeadline showPrefixText={ getAppParam('c') } /> }
@@ -45,4 +46,17 @@ class ResultsPage extends Component {
   }
 }
 
-export default ResultsPage;
+const mapStateToProps = state => {
+  return {
+    selectedResult: state.results.selectedResult
+  }
+}
+
+const mapDispatchToProps = dispatch => ({})
+
+const ResultsPage = connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(ResultsPageContainer)
+
+export default ResultsPage

@@ -31,6 +31,8 @@ class LandingPage extends Component {
             </div>
           )
         }
+
+          { !isDeviceConsideredMobile() && <ResultsHeadline showPrefixText={false} /> }
           <Results hideLoadMore={false} />
         <CookieBannerBar />
       </Flexbox>

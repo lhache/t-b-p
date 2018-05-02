@@ -12,7 +12,6 @@ const showMobileSearchForm = (props) => {
       <Flexbox flexBasis="100%" className="SearchInputContainer" order={1}>
         <TagAutocomplete
           term={props.term}
-          selectedCategories={props.selectedCategories}
           fetchOptions={props.fetchOptions}
           onChange={props.onChange}
           onSelectItem={props.onSelect}
@@ -39,7 +38,6 @@ const showDesktopSearchForm = (props) => {
         <Flexbox flexBasis="75%">
           <TagAutocomplete
             term={props.term}
-            selectedCategories={props.selectedCategories}
             fetchOptions={props.fetchOptions}
             onChange={props.onChange}
             onSelectItem={props.onSelect}

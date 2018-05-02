@@ -3,16 +3,24 @@ import _flatMap from 'lodash/flatMap'
 import _join from 'lodash/join'
 import _get from 'lodash/get'
 
-export const getResults = (results, categoriesFromStore) => {
+export const decideWhichCategoryToUse = (hardcodedCategories, selectedCategory) => {
+  return hardcodedCategories ?
+         hardcodedCategories :
+         selectedCategory ?
+         selectedCategory :
+         'term'
+}
+
+export const getResults = (results, categoryFromStore) => {
   const term = getAppParam('q')
   const catsFromUrl = getAppParam('c')
   // debugger
-  if (!catsFromUrl && !categoriesFromStore.length) {
-  // if (term && !catsFromUrl && !categoriesFromStore.length) {
+  // if (!catsFromUrl && !categoryFromStore.length) {
+  if ((term && !catsFromUrl && !categoryFromStore) || categoryFromStore === 'term') {
     return _get(results, 'term')
   }
   else {
-    return _get(results, getCategoryKey(categoriesFromStore))
+    return _get(results, categoryFromStore.name)
   }
 }
 

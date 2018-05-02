@@ -1,6 +1,7 @@
 import 'isomorphic-fetch'
 import { buildUrl } from '../../utils/appUtils'
 import { getLocale } from '../translations/translations'
+import { selectResult } from './results';
 
 export const FETCH_DETAILS = 'FETCH_DETAILS'
 export const FETCH_DETAILS_SUCCESS = 'FETCH_DETAILS_SUCCESS'
@@ -72,8 +73,10 @@ export const fetchDetails = id => dispatch => {
     }
   })
     .then(response => response.json())
-    .then(json =>
-      dispatch(receiveDetails(id, json)),
+    .then(json => {
+        dispatch(receiveDetails(id, json))
+        dispatch(selectResult(id))
+      },      
       error => dispatch(failedfetchingDetails(id))
     )
 }

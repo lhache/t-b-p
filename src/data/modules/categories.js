@@ -10,14 +10,14 @@ export const storeCategories = categories => ({
     type: STORE_CATEGORIES,
     categories: categories
 })
-export const storeSelectedCategories = selectedCategories => ({
+export const storeSelectedCategory = selectedCategory => ({
     type: STORE_SELECTED_CATEGORIES,
-    selectedCategories: selectedCategories
+    selectedCategory: selectedCategory
 })
 
 export const initialState = {
     categories: [],
-    selectedCategories: []
+    selectedCategory: null
 }
 
 // reducer
@@ -29,7 +29,7 @@ export const categoriesReducer = (state = initialState, action) => {
         })
       case STORE_SELECTED_CATEGORIES:
         return Object.assign({}, state, {
-          selectedCategories: action.selectedCategories
+          selectedCategory: action.selectedCategory
         })
       default:
         return state
@@ -37,7 +37,7 @@ export const categoriesReducer = (state = initialState, action) => {
   }
 
 // helper function
-export const getCategoriesByMatchingName = (categories, selectedCategories) => {
-  const filteredCategories = _flatten(selectedCategories.map(selectedCategoryName => categories.filter(category => selectedCategoryName === category.name)))
+export const getCategoriesByMatchingName = (categories, selectedCategory) => {
+  const filteredCategories = _flatten(selectedCategory.map(selectedCategoryName => categories.filter(category => selectedCategoryName === category.name)))
   return filteredCategories
 }

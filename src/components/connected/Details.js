@@ -136,11 +136,10 @@ class DetailsContainer extends Component {
     }
     if(nextProps.selectedResult !== this.props.selectedResult) {
       // it means the resetSelectResult function has been called so we wipe the box out
-      if (!this.props.selectedResult) {
+      if (!this.props.selectedResult || (this.props.selectedResult && nextProps.selectedResult === null)) {
         this.setState({  showDetails: false })
       }
       else {
-        // debugger
         this.setState({  showDetails: true })
         this.setState({showSpinnerInsteadOfImages: true})
         this.props.fetchDetails(nextProps.selectedResult)
@@ -162,10 +161,9 @@ class DetailsContainer extends Component {
 
   render() {
     const { hasFailedFetching } = this.props
+    const selectedResult = this.props.selectedResult
 
-    const id = this.props.id ? this.props.id : getAppParam('id')
-
-    return id? (
+    return selectedResult? (
       <Flexbox>
         {/* { isFetching \&& showLoader(isFetching) } */}
         { hasFailedFetching && showError(hasFailedFetching) }

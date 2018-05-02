@@ -5,7 +5,8 @@
       "search": "Suchen",
       "placeholder": "Was für ein Spielzeug suchst du?",
       "loadingPlaceholder": "Laden...",
-      "noResultsFound": "Keine Resultate gefunden, bitte versuche es mit einem anderen Stichwort."
+      "noResultsFound": "Keine Resultate gefunden, bitte versuche es mit einem anderen Stichwort.",
+      "searchPromptText": "Tippe um die Suche zu starten"
     },
     "results": {
       "headline": "Andere Vorschläge",
@@ -34,7 +35,8 @@
       "allAges": "Alle Altersklassen"
     },
     "categories": {
-      "title": "Kategorien"
+      "title": "Kategorien",
+      "allCategories": "Alle Kategorien"
     }
   },
   "en-US": {
@@ -43,7 +45,8 @@
       "search": "Search",
       "placeholder": "What kind of toys are you looking for?",
       "loadingPlaceholder": "Loading...",
-      "noResultsFound": "No results found, please type in something else."
+      "noResultsFound": "No results found, please type in something else.",
+      "searchPromptText": "Type to search"
     },
     "results": {
       "headline": "Other suggestions",
@@ -72,7 +75,8 @@
       "allAges": "All ages"
     },
     "categories": {
-      "title": "Categories"
+      "title": "Categories",
+      "allCategories": "All Categories"
     }
   }
 }

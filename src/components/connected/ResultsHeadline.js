@@ -9,9 +9,9 @@ import './ResultsHeadline.css'
 
 class ResultsHeadlineContainer extends Component {
   render() {
-    const { showPrefixText, selectedCategories, hardcodedTerms } = this.props
+    const { showPrefixText, selectedCategory, hardcodedTerms } = this.props
 
-    const termsToDisplay = _isEmpty(selectedCategories) ? hardcodedTerms : selectedCategories
+    const termsToDisplay = _isEmpty(selectedCategory) ? hardcodedTerms : selectedCategory
 
     return (
       <Flexbox className="ResultsHeadline" flexBasis="100%">
@@ -27,13 +27,10 @@ class ResultsHeadlineContainer extends Component {
   }
 }
 
-ResultsHeadlineContainer.propTypes = {
-  selectedCategories: PropTypes.array
-}
 
 const mapStateToProps = state => {
   return {
-    selectedCategories: state.categories.selectedCategories
+    selectedCategory: state.categories.selectedCategory
   }
 }
 

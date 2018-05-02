@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux'
 import { withRouter } from 'react-router-dom'
 import PropTypes from 'prop-types'
-import { buildUrl, getCategoryKey } from '../../utils/appUtils'
+import { buildUrl, getCategoryKey, isDeviceConsideredMobile } from '../../utils/appUtils'
 import counterpart from 'counterpart'
 import VirtualizedSelect from 'react-virtualized-select'
 import './TagAutocomplete.css'
@@ -41,7 +41,13 @@ class TagAutocompleteContainer extends Component {
         .then((response) => {
           return response.json()
         })
-        .then((json) => ({ options: json }))
+        .then((json) => {
+          const options = json.map(result => Object.assign({}, result, {
+              name: _truncate(result.name, { length: isDeviceConsideredMobile() ? 35 : 80 } )
+            })
+          )
+          return ({ options })
+        })
   }
 
   // this is when the value of the input changes
@@ -59,28 +65,46 @@ class TagAutocompleteContainer extends Component {
 
     return (
         <VirtualizedSelect
-        async
-        multi={false}
-        name="searchform-tags"
-        loadOptions={this._getOptions}
-        onChange={this._onChange}
-        onInputChange={this._onInputChange}
-        value={this.props.term}
-        placeholder={counterpart('search.placeholder')}
-        loadingPlaceholder={counterpart('search.loadingPlaceholder')}
-        noResultsText={counterpart('search.noResultsFound')}
-        openOnFocus={true}
-        autoBlur={false}
-        onBlurResetsInput={false}
-        autosize={true}
-        maxHeight={1000}
-        optionHeight={40}
-        disabled={this.props.disabled}
-        labelKey="name"
-        valueKey="id"
-        closeOnSelect={false}
-        cache={false}
-      />
+            async
+            multi={false}
+            name="searchform-tags"
+            loadOptions={this._getOptions}
+            onChange={this._onChange}
+            onInputChange={this._onInputChange}
+            value={this.props.term}
+            placeholder={counterpart('search.placeholder')}
+            searchPromptText={counterpart('search.searchPromptText')}
+            loadingPlaceholder={counterpart('search.loadingPlaceholder')}
+            noResultsText={counterpart('search.noResultsFound')}
+            openOnFocus={true}
+            autoBlur={false}
+            onBlurResetsInput={false}
+            autosize={true}
+            maxHeight={1000}
+            optionHeight={40}
+            disabled={this.props.disabled}
+            labelKey="name"
+            valueKey="id"
+            closeOnSelect={false}
+            cache={false}
+            autosize={false}
+            // inputRenderer={ () => {
+            //   debugger
+
+            //   return (
+            //       <input 
+            //           data-hj-whitelist
+            //           role="combobox" 
+            //           aria-expanded="false" 
+            //           aria-owns="" 
+            //           aria-haspopup="false" 
+            //           aria-activedescendant="react-select-2--value" 
+            //           class="Select-input" 
+            //           value={this.props.term}
+            //         />
+            //     )
+            // }}
+        />
     )
   }
 }
@@ -88,13 +112,11 @@ class TagAutocompleteContainer extends Component {
 
 TagAutocompleteContainer.propTypes = {
   term: PropTypes.string.isRequired,
-  selectedCategories: PropTypes.array.isRequired
 }
 
 const mapStateToProps = state => {
   return {
-    term: state.term.term,
-    selectedCategories: state.categories.selectedCategories
+    term: state.term.term
   }
 }
 

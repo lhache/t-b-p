@@ -16,7 +16,7 @@ import _get from 'lodash/get'
 import _find from 'lodash/find'
 import _isEmpty from 'lodash/isEmpty'
 import { trackModalOpen, trackModalClose, trackModalPrevItem, trackModalNextItem } from '../../data/tracking'
-import { getResults } from '../../utils/appUtils'
+import { getResults, decideWhichCategoryToUse } from '../../utils/appUtils'
 import './Results.css'
 
 const getIndexOfResult = (results, lookup) => {
@@ -66,11 +66,11 @@ class ResultsContainer extends Component {
   }
 
   componentDidMount() {
-    const selectedCategories = this.props.hardcodedCategories ?
+    const selectedCategory = this.props.hardcodedCategories ?
       this.props.hardcodedCategories :
-      this.props.selectedCategories
+      this.props.selectedCategory
 
-    this.props.fetchResults(this.props.term, selectedCategories, this.props.age)
+    this.props.fetchResults(this.props.term, selectedCategory, this.props.age)
   }
 
   // don't update when results are the same
@@ -99,8 +99,9 @@ class ResultsContainer extends Component {
   }
 
   _fetchMoreResults() {
-    const results = getResults(this.props.results, getCategoryKey(this.props.selectedCategories)) 
-    this.props.fetchResults(this.props.term, this.props.selectedCategories, this.props.age, results.length)
+    const categories = decideWhichCategoryToUse(this.props.hardcodedCategories, this.props.selectedCategory)
+    const results = getResults(this.props.results, categories) 
+    this.props.fetchResults(this.props.term, this.props.selectedCategory, this.props.age, results.length)
   }
 
   _showProductDetails(id) {
@@ -114,8 +115,8 @@ class ResultsContainer extends Component {
   }
 
   _showNextProductDetails() {
-    const category = this.props.hardcodedCategories ? this.props.hardcodedCategories : this.props.selectedCategories
-    const results = _get(this.props.results, getCategoryKey(category)) 
+    const categories = decideWhichCategoryToUse(this.props.hardcodedCategories, this.props.selectedCategory)
+    const results = getResults(this.props.results, categories) 
     const res = _find(results, { id: this.props.selectedResult})
     let index = results.indexOf(res)
 
@@ -132,8 +133,8 @@ class ResultsContainer extends Component {
   }
 
   _showPrevProductDetails() {
-    const category = this.props.hardcodedCategories ? this.props.hardcodedCategories : this.props.selectedCategories
-    const results = _get(this.props.results, getCategoryKey(category)) 
+    const categories = decideWhichCategoryToUse(this.props.hardcodedCategories, this.props.selectedCategory)
+    const results = getResults(this.props.results, categories) 
     const res = _find(results, { id: this.props.selectedResult})
     let index = results.indexOf(res)
 
@@ -162,24 +163,18 @@ class ResultsContainer extends Component {
       results,
       isFetching,
       hasFailedFetching,
-      selectedCategories,
+      selectedCategory,
       hardcodedCategories,
       selectedResult
     } = this.props
 
-    const resultsCategories = hardcodedCategories ? hardcodedCategories : selectedCategories
+    const resultsCategories = decideWhichCategoryToUse(hardcodedCategories, selectedCategory)
     const displayedResults = getResults(results, resultsCategories) 
-    console.log('hardcodedCategories', hardcodedCategories)
-    console.log('selectedCategories ', selectedCategories  )
-    console.log('resultsCategories', resultsCategories)
-    console.log('results', results)
-    console.log('displayedResults', displayedResults)
 
     if (displayedResults) {
         const hasResults = !!displayedResults.length
         const hasFiniteAmountOfResults = displayedResults.length % 20 === 0
         const trimmedResults = maxItems ? _take(displayedResults, maxItems) : displayedResults
-        // debugger
 
         const selectedResultsIndex = getIndexOfResult(displayedResults, { id: selectedResult})
 
@@ -238,7 +233,7 @@ const mapStateToProps = state => {
     age: state.ages.ages,
     term: state.term.term,
     categories: state.categories.categories,
-    selectedCategories: state.categories.selectedCategories,
+    selectedCategory: state.categories.selectedCategory,
     results: state.results.results,
     isFetching: state.results.isFetching,
     hasFailedFetching: state.results.hasFailedFetching,
