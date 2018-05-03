@@ -38,7 +38,7 @@ class ResultsPageContainer extends Component {
            <Details />
         </Div>
 
-        { !isDeviceConsideredMobile() && <ResultsHeadline showPrefixText={ getAppParam('c') } /> }
+        <ResultsHeadline showPrefixText={ getAppParam('c') } />
         <Results hideLoadMore={false} />
 
       </Flexbox>

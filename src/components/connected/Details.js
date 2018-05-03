@@ -56,8 +56,8 @@ const showMobileDetails = (props, state, track, onImageLoad) => {
 
         <Flexbox marginBottom="10px" flexDirection="column">
           {
-            (!!props.details.description ) && props.details.description.map(d => (
-              <Flexbox  key={Math.random()} margin="5px" dangerouslySetInnerHTML={escapeHTML('-&nbsp;' + d)}></Flexbox>
+            (!!props.details.description ) && props.details.description.map((d, i) => (
+              <Flexbox key={ `description-${ i }`} margin="5px" dangerouslySetInnerHTML={escapeHTML('-&nbsp;' + d)}></Flexbox>
             ))
           }
         </Flexbox>
@@ -92,8 +92,8 @@ const showDesktopDetails = (props, state, track, onImageLoad) => {
           </Flexbox>
           <Flexbox flexBasis="100%" marginBottom="10px" flexDirection="column">
             {
-              (!!props.details.description) && props.details.description.map(d => (
-                <Flexbox key={Math.random()} margin="5px" dangerouslySetInnerHTML={escapeHTML('-&nbsp;' + d)}></Flexbox>
+              (!!props.details.description) && props.details.description.map((d, i) => (
+                <Flexbox key={ `description-${ i }`} margin="5px" dangerouslySetInnerHTML={escapeHTML('-&nbsp;' + d)}></Flexbox>
               ))
             }
           </Flexbox>
@@ -152,7 +152,7 @@ class DetailsContainer extends Component {
   }
 
   _trackClick(event) {
-    trackClickout(this.details.price.displayPrice)
+    trackClickout(this.props.details.price.displayPrice)
   }
 
   _onDetailsImageLoad(e) {

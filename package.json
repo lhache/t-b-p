@@ -12,6 +12,7 @@
     "url": "https://github.com/lhache/t-b-p.git"
   },
   "dependencies": {
+    "@material-ui/icons": "^1.0.0-beta.43",
     "babel-polyfill": "^6.23.0",
     "babel-preset-react": "^6.24.1",
     "counterpart": "^0.18.1",

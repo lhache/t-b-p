@@ -171,6 +171,8 @@ class ResultsContainer extends Component {
     const resultsCategories = decideWhichCategoryToUse(hardcodedCategories, selectedCategory)
     const displayedResults = getResults(results, resultsCategories) 
 
+    // debugger
+
     if (displayedResults) {
         const hasResults = !!displayedResults.length
         const hasFiniteAmountOfResults = displayedResults.length % 20 === 0
