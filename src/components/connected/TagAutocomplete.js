@@ -50,6 +50,15 @@ class TagAutocompleteContainer extends Component {
         })
   }
 
+  _onKeyChange(e) {
+    switch (e.keyCode) {
+      case 13: // ENTER
+          e.preventDefault()
+          this.props.onSubmit(e.target.value)
+          break
+  }
+  }
+
   // this is when the value of the input changes
   _onInputChange(e) {
     e !== "" && this.props.onChange(e)
@@ -70,7 +79,8 @@ class TagAutocompleteContainer extends Component {
             name="searchform-tags"
             loadOptions={this._getOptions}
             onChange={this._onChange}
-            onInputChange={this._onInputChange}
+            onInputChange={ (e) => this._onInputChange(e) }
+            onInputKeyDown={ (e) => this._onKeyChange(e) }
             value={this.props.term}
             placeholder={counterpart('search.placeholder')}
             searchPromptText={counterpart('search.searchPromptText')}
@@ -88,6 +98,7 @@ class TagAutocompleteContainer extends Component {
             closeOnSelect={false}
             cache={false}
             autosize={false}
+            escapeClearsValue={ false }
             // inputRenderer={ () => {
             //   debugger
 

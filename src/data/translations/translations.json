@@ -17,7 +17,7 @@
     },
     "product": {
       "goToDetails": "Zum Produkt",
-      "goToAffShop": "Zum Produkt",
+      "goToAffShop": "Direkt zu Amazon",
       "hoverImage": "Mehr zeigen",
       "nextProduct": "Weiter",
       "prevProduct": "Zurück"
@@ -37,6 +37,12 @@
     "categories": {
       "title": "Kategorien",
       "allCategories": "Alle Kategorien"
+    },
+    "filters": {
+      "title": "Filter"
+    },
+    "navigation": {
+      "goBack": "Zurück"
     }
   },
   "en-US": {
@@ -57,7 +63,7 @@
     },
     "product": {
       "goToDetails": "Go to product",
-      "goToAffShop": "Go to product",
+      "goToAffShop": "Buy on Amazon",
       "hoverImage": "See more",
       "nextProduct": "next",
       "prevProduct": "prev"
@@ -77,6 +83,12 @@
     "categories": {
       "title": "Categories",
       "allCategories": "All Categories"
+    },
+    "filters": {
+      "title": "Filter"
+    },
+    "navigation": {
+      "goBack": "Zurück"
     }
   }
 }

@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { withStyles } from 'material-ui/styles';
+import Translate from 'react-translate-component'
 import Button from 'material-ui/Button';
 import Dialog from 'material-ui/Dialog';
 import List, { ListItem, ListItemText, ListSubheader } from 'material-ui/List';
@@ -58,7 +59,7 @@ class Filter extends React.Component {
       return (
         <div>
             <Button fab color="primary" aria-label="filter" onClick={() => this.handleClickOpen()} style={ styles.button }>
-                <FilterIcon />
+                <Translate content="filters.title" component="p" />
             </Button>
           <Dialog
             fullScreen

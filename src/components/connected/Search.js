@@ -35,7 +35,7 @@ class SearchContainer extends Component {
 
   // on submit, do a general search for a term
   _handleSubmit(term) {
-    this.props.history.push(routeToResultsForTerm(term, this.props.selectedCategory, this.props.ages))
+    this.props.history.push(routeToResultsForTerm(term, null, this.props.ages))
   }
 
   _handleSelectProduct(product) {

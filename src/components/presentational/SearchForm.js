@@ -15,6 +15,7 @@ const showMobileSearchForm = (props) => {
           fetchOptions={props.fetchOptions}
           onChange={props.onChange}
           onSelectItem={props.onSelect}
+          onSubmit={props.onSubmit}
         />
       </Flexbox>
       <Flexbox flexBasis="100%" className="SearchButtonContainer" order={2}>
@@ -41,6 +42,7 @@ const showDesktopSearchForm = (props) => {
             fetchOptions={props.fetchOptions}
             onChange={props.onChange}
             onSelectItem={props.onSelect}
+            onSubmit={props.onSubmit}
           />
         </Flexbox>
         <Flexbox flexBasis="20%">

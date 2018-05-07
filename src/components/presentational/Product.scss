@@ -3,7 +3,6 @@
     background-color: #f2f3f5;
   }
 }
-
 .AppDesktop {
   .ProductName {
     height: 50px;
@@ -21,4 +20,11 @@
 
 .ProductImage {
   width: 90%;
+}
+
+.ProductLinkContainer {
+  span, b, p {
+    text-decoration: none;
+
+  }
 }

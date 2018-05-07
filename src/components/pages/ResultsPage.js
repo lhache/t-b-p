@@ -1,7 +1,6 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import Flexbox from 'flexbox-react'
-import Translate from 'react-translate-component'
 import Results from '../connected/Results'
 import Details from '../connected/Details'
 import Search from '../connected/Search'

@@ -5,9 +5,9 @@ import PropTypes from 'prop-types'
 import Translate from 'react-translate-component'
 import DetailsModal from '../presentational/DetailsModal'
 import { storeTerm }  from '../../data/modules/term'
-import { storeCategories }  from '../../data/modules/categories'
+import { storeSelectedCategory }  from '../../data/modules/categories'
 import { fetchResults, selectResult, resetResults }  from '../../data/modules/results'
-import { getCategoryKey } from '../../utils/appUtils'
+import { getCategoryKey, getAppParam, buildCategoryObjectFromName } from '../../utils/appUtils'
 import Loader from '../presentational/Loader'
 import Product from '../presentational/Product'
 import Flexbox from 'flexbox-react'
@@ -66,11 +66,9 @@ class ResultsContainer extends Component {
   }
 
   componentDidMount() {
-    const selectedCategory = this.props.hardcodedCategories ?
-      this.props.hardcodedCategories :
-      this.props.selectedCategory
-
-    this.props.fetchResults(this.props.term, selectedCategory, this.props.age)
+    const selectedCategory = this.props.hardcodedCategories ? this.props.hardcodedCategories : getAppParam('c') ? buildCategoryObjectFromName(getAppParam('c')) : null
+    this.props.storeSelectedCategory(selectedCategory)
+    this.props.fetchResults(getAppParam('q'), selectedCategory, this.props.age)
   }
 
   // don't update when results are the same
@@ -105,12 +103,12 @@ class ResultsContainer extends Component {
   }
 
   _showProductDetails(id) {
+    debugger
     this.setState({
       modalIsOpen: true,
-      resultIdForDetails: id
+      resultIdForDetails: null
     })
     this.props.selectResult(id)
-    // this.props.resetResults()
     trackModalOpen(id)
   }
 
@@ -225,7 +223,7 @@ ResultsContainer.propTypes = {
   age : PropTypes.object.isRequired,
   results: PropTypes.object.isRequired,
   storeTerm: PropTypes.func.isRequired,
-  storeCategories: PropTypes.func.isRequired,
+  storeSelectedCategory: PropTypes.func.isRequired,
   fetchResults: PropTypes.func.isRequired
 }
 
@@ -248,8 +246,8 @@ const mapDispatchToProps = dispatch => {
     storeTerm: term => {
       dispatch(storeTerm(term))
     },
-    storeCategories: term => {
-      dispatch(storeCategories(term))
+    storeSelectedCategory: term => {
+      dispatch(storeSelectedCategory(term))
     },
     fetchResults: (term, categories, age, offset) => {
       dispatch(fetchResults(term, categories, age, offset))

@@ -43,6 +43,8 @@ export const joinTermToStringWithSymbol = (terms, object, symbol) => _join( _fla
 
 export const getCategoryKey = categories => joinTermToStringWithSymbol(categories, 'name', ',')
 
+export const buildCategoryObjectFromName = name => ({ id: '', name })
+
 // super helpful because category names have & inside, breaking most of query params parsers
 export const parseQueryString = (str = "") => {
   let objURL = {}
