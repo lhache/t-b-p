@@ -6,7 +6,7 @@
       "placeholder": "Was für ein Spielzeug suchst du?",
       "loadingPlaceholder": "Laden...",
       "noResultsFound": "Keine Resultate gefunden, bitte versuche es mit einem anderen Stichwort.",
-      "searchPromptText": "Tippe um die Suche zu starten"
+      "searchPromptText": "Tippe ein Schlagwort ein..."
     },
     "results": {
       "headline": "Andere Vorschläge",

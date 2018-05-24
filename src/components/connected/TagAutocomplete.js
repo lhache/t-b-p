@@ -76,6 +76,7 @@ class TagAutocompleteContainer extends Component {
         <VirtualizedSelect
             async
             multi={false}
+            arrowRenderer={ null }
             name="searchform-tags"
             loadOptions={this._getOptions}
             onChange={this._onChange}
