@@ -7,7 +7,7 @@ import DetailsModal from '../presentational/DetailsModal'
 import { storeTerm }  from '../../data/modules/term'
 import { storeSelectedCategory }  from '../../data/modules/categories'
 import { fetchResults, selectResult, resetResults }  from '../../data/modules/results'
-import { getCategoryKey, getAppParam, buildCategoryObjectFromName } from '../../utils/appUtils'
+import { getCategoryKey, getAppParam, buildCategoryObjectFromName, isDeviceConsideredMobile, isTablet } from '../../utils/appUtils'
 import Loader from '../presentational/Loader'
 import Product from '../presentational/Product'
 import Flexbox from 'flexbox-react'
@@ -17,7 +17,10 @@ import _find from 'lodash/find'
 import _isEmpty from 'lodash/isEmpty'
 import { trackModalOpen, trackModalClose, trackModalPrevItem, trackModalNextItem } from '../../data/tracking'
 import { getResults, decideWhichCategoryToUse } from '../../utils/appUtils'
+import { Flex, Box } from '@ghostgroup/grid-styled'
 import './Results.css'
+import { ThemeProvider } from 'styled-components'
+import styledTheme from '../../design-system/styled-theme'
 
 const getIndexOfResult = (results, lookup) => {
   return results.indexOf(_find(results, lookup))
@@ -34,13 +37,24 @@ const showNoResultsMessage = () => (
 )
 
 const showResults = (results, selectResult) => (
-  <Flexbox maxWidth="100%" flexWrap="wrap">
-      {results.map((result, idx) => (
-        <Flexbox key={Math.random() + result.id} order={idx} className="fadeIn duration-500">
-          <Product product={result} select={selectResult} />
-        </Flexbox>
-      ))}
-  </Flexbox>
+  <ThemeProvider theme={styledTheme}>
+    <Flex flexWrap="wrap" justifyContent="flex-start">
+    {
+        results.map((result, idx) => (
+            <Box
+              key={Math.random() + result.id}
+              className=""
+              px={ 2 }
+              py={ 1 }
+              width={[1, 1/2, 1/3, 1/5]}
+            >
+              <Product product={result} select={selectResult} />
+            </Box>
+        ))
+    }
+    </Flex>
+  </ThemeProvider>
+
 )
 
 const showLoadMore = (fetchMore) => (
@@ -58,7 +72,7 @@ class ResultsContainer extends Component {
     this.state = {
       modalIsOpen: false
     }
-    this._closeDetails = this._closeDetails.bind(this) 
+    this._closeDetails = this._closeDetails.bind(this)
     this._fetchMoreResults = this._fetchMoreResults.bind(this)
     this._showProductDetails = this._showProductDetails.bind(this)
     this._showNextProductDetails = this._showNextProductDetails.bind(this)
@@ -98,7 +112,7 @@ class ResultsContainer extends Component {
 
   _fetchMoreResults() {
     const categories = decideWhichCategoryToUse(this.props.hardcodedCategories, this.props.selectedCategory)
-    const results = getResults(this.props.results, categories) 
+    const results = getResults(this.props.results, categories)
     this.props.fetchResults(this.props.term, this.props.selectedCategory, this.props.age, results.length)
   }
 
@@ -114,7 +128,7 @@ class ResultsContainer extends Component {
 
   _showNextProductDetails() {
     const categories = decideWhichCategoryToUse(this.props.hardcodedCategories, this.props.selectedCategory)
-    const results = getResults(this.props.results, categories) 
+    const results = getResults(this.props.results, categories)
     const res = _find(results, { id: this.props.selectedResult})
     let index = results.indexOf(res)
 
@@ -132,7 +146,7 @@ class ResultsContainer extends Component {
 
   _showPrevProductDetails() {
     const categories = decideWhichCategoryToUse(this.props.hardcodedCategories, this.props.selectedCategory)
-    const results = getResults(this.props.results, categories) 
+    const results = getResults(this.props.results, categories)
     const res = _find(results, { id: this.props.selectedResult})
     let index = results.indexOf(res)
 
@@ -167,7 +181,7 @@ class ResultsContainer extends Component {
     } = this.props
 
     const resultsCategories = decideWhichCategoryToUse(hardcodedCategories, selectedCategory)
-    const displayedResults = getResults(results, resultsCategories) 
+    const displayedResults = getResults(results, resultsCategories)
 
     // debugger
 

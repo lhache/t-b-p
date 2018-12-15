@@ -15,10 +15,10 @@ class ResultsHeadlineContainer extends Component {
 
     return (
       <Flexbox className="ResultsHeadline" flexBasis="100%">
-        { showPrefixText ?
-            <Translate content="results.headline" component="h3" /> :
-            <b className="ResultsHeadlineTermCollection">
-              <Translate content="results.headlinePrefix" component="h3" /> 
+        { showPrefixText
+          ? <Translate content="results.headline" component="h3" />
+          : <b className="ResultsHeadlineTermCollection">
+              <Translate content="results.headlinePrefix" component="h3" />
               {/* { (!_isEmpty(termsToDisplay)) && decodeURIComponent(joinTermToStringWithSymbol(termsToDisplay, 'name', ' - ')) } */}
             </b>
         }

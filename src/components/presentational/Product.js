@@ -15,7 +15,7 @@ import './Product.css'
 const showMobileProduct = (props, select) => {
   const { product } = props
   return (
-      <Flexbox flexBasis="100%" flexWrap="wrap" padding="10px" onClick={ () => select(product.id) }>
+      <Flexbox flexBasis="100%" flexWrap="wrap" onClick={ () => select(product.id) }>
           <Flexbox flexBasis="40%" justifyContent="center">
             <ProductImage images={product.imageUrls} size="medium" hover={false} />
           </Flexbox>
@@ -45,7 +45,7 @@ const showMobileProduct = (props, select) => {
 const showDesktopProduct = (props, select) => {
   const { product } = props
   return (
-      <Flexbox flexBasis="100%" flexWrap="wrap" maxWidth="170px" padding="10px" marginBottom="10px">
+      <Flexbox flexBasis="100%" flexWrap="wrap" maxWidth="170px" marginBottom="10px">
           <Flexbox flexBasis="100%" justifyContent="center" onClick={select} >
             <ProductImage images={product.imageUrls} size="medium" hover={true}/>
           </Flexbox>
@@ -78,13 +78,13 @@ class Product extends React.Component {
 
   _routeToProduct(id) {
     const url = `/${getShortenedLocale()}${detailsUrl}/?id=${id}`
-    
+
     this.props.history.push(url)
   }
 
   render() {
     return (
-      <Flexbox flexBasis="100%" justifyContent="center" className="Product">
+      <Flexbox flexBasis="100%" justifyContent="center" className="Product" padding="10px" >
         {isDeviceConsideredMobile() ?
           showMobileProduct(this.props, (id) => this._routeToProduct(id) ) :
           showDesktopProduct(this.props, this._select)

@@ -1,24 +1,28 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { withStyles } from 'material-ui/styles';
+import { withStyles } from '@material-ui/core/styles';
 import Translate from 'react-translate-component'
-import Button from 'material-ui/Button';
-import Dialog from 'material-ui/Dialog';
-import List, { ListItem, ListItemText, ListSubheader } from 'material-ui/List';
-import Divider from 'material-ui/Divider';
-import AppBar from 'material-ui/AppBar';
-import Toolbar from 'material-ui/Toolbar';
-import IconButton from 'material-ui/IconButton';
-import Typography from 'material-ui/Typography';
-import CloseIcon from 'material-ui-icons/Close';
-import Slide from 'material-ui/transitions/Slide';
-import FilterIcon from 'material-ui-icons/FilterList'
+import Button from '@material-ui/core/Button';
+import Dialog from '@material-ui/core/Dialog';
+import List from '@material-ui/core/List';
+import ListItem from '@material-ui/core/ListItem';
+import Divider from '@material-ui/core/Divider';
+import AppBar from '@material-ui/core/AppBar';
+import Toolbar from '@material-ui/core/Toolbar';
+import IconButton from '@material-ui/core/IconButton';
+import Typography from '@material-ui/core/Typography';
+import CloseIcon from '@material-ui/icons/Close';
+import CheckIcon from '@material-ui/icons/Check';
+import Slide from '@material-ui/core/Slide';
+import FilterIcon from '@material-ui/icons/FilterList';
+import Fab from '@material-ui/core/Fab';
+import { Flex, Box } from '@ghostgroup/grid-styled'
 
 import Ages from '../connected/Ages'
 import Categories from '../connected/Categories'
 
 const styles = {
-    button: {
+    fab: {
         backgroundColor: '#00cce2',
         position: 'fixed',
         bottom: '12px',
@@ -26,71 +30,74 @@ const styles = {
         zIndex: 10
     },
     appBar: {
-      position: 'relative',
+      position: 'fixed',
+      top: 'auto'
     },
     flex: {
       flex: 1,
     },
   };
-  
-  function Transition(props) {
+
+function Transition(props) {
     return <Slide direction="up" {...props} />;
-  }
+}
 
 class Filter extends React.Component {
 
-    constructor(props) {
-        super(props)
-        this.state = {
-            open: false
-        };
+    state = {
+        open: false
     }
-  
+
     handleClickOpen() {
       this.setState({ open: true });
     };
-  
+
     handleClose() {
       this.setState({ open: false });
     };
-  
+
     render() {
       const { classes } = this.props;
       return (
         <div>
-            <Button fab color="primary" aria-label="filter" onClick={() => this.handleClickOpen()} style={ styles.button }>
+            <Fab color="primary" aria-label="filter" onClick={() => this.handleClickOpen()} style={ styles.fab }>
                 <Translate content="filters.title" component="p" />
-            </Button>
-          <Dialog
-            fullScreen
-            open={this.state.open}
-            onClose={() => this.handleClose()}
-            transition={Transition}
-          >
-            <AppBar className={classes.appBar}>
-              <Toolbar>
-                
-                <Typography type="title" color="inherit" className={classes.flex}>
-                  Filter
-                </Typography>
-                <IconButton color="inherit" onClick={() => this.handleClose()} aria-label="Close">
-                  <CloseIcon />
-                </IconButton>
-              </Toolbar>
-            </AppBar>
-            <List>
-                <ListItem>
-                    <Ages />
-                </ListItem>
-                <Divider />
-                <ListItem>
-                    <Categories />
-                </ListItem>
-            </List>
-          </Dialog>
+            </Fab>
+            <Dialog
+              fullScreen
+              open={this.state.open}
+              onClose={() => this.handleClose()}
+              transition={Transition}
+            >
+              <AppBar className={classes.appBar}>
+                <Toolbar>
+
+                  <Typography type="title" color="inherit" className={classes.flex}>
+                    Filter
+                  </Typography>
+                  <IconButton color="inherit" onClick={() => this.handleClose()} aria-label="Close">
+                    <CloseIcon />
+                  </IconButton>
+                </Toolbar>
+              </AppBar>
+              <Fab color="secondary" aria-label="filter" onClick={() => this.handleClose()} style={ styles.fab }>
+                  <CheckIcon />
+              </Fab>
+              <Box width={ 1 } mt={ 4 }>
+                  <List>
+                      <ListItem>
+                          <Ages />
+                      </ListItem>
+                      <Divider />
+                      <ListItem>
+                          <Categories />
+                      </ListItem>
+                  </List>
+              </Box>
+            </Dialog>
         </div>
       );
     }
   }
-  
+
   export default withStyles(styles)(Filter);

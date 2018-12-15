@@ -34,7 +34,7 @@ const showMobileDetails = (props, state, track, onImageLoad) => {
   ))
 
   return (!props.isFetching && !props.hasFailedFetching) ? (
-  <Flexbox className="DetailsContainer" flexBasis="100%" flexWrap="wrap" minHeight="80vh"> 
+  <Flexbox className="DetailsContainer" flexBasis="100%" flexWrap="wrap" minHeight="80vh">
     <Flexbox className="Details DetailsMobile" flexWrap="wrap" flexDirection="column">
       <Flexbox justifyContent="center">
         <Flexbox>
