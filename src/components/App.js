@@ -7,7 +7,7 @@ import DetailsPage from './pages/DetailsPage'
 import LandingPage from './pages/LandingPage'
 import Flexbox from 'flexbox-react';
 import { isDeviceConsideredMobile } from './../utils/appUtils'
-import { searchUrl, resultsUrl, detailsUrl, landingPageUrl } from './../data/urls'
+import { searchUrl, resultsUrl, detailsUrl, landingPageUrl, prCampaignPageUrl } from './../data/urls'
 import { supportedLanguages, defaultLocale } from '../data/translations/translations'
 import _first from 'lodash/first'
 import _uniq from 'lodash/uniq'
@@ -33,6 +33,9 @@ class App extends Component {
         component: DetailsPage
       },
       { path: '/' + _first(defaultLocale.split('-')) + landingPageUrl,
+        component: LandingPage
+      },
+      { path: '/' + _first(defaultLocale.split('-')) + prCampaignPageUrl,
         component: LandingPage
       }
     ]
