@@ -20,6 +20,8 @@ class ProductImageGallery extends Component {
           lazyLoad={false}
           slideOnThumbnailHover={true}
           onImageLoad={(e) => this.props.onImageLoad(e)}
+          showFullscreenButton={ true }
+          // onClick={ (e) => this.props.routingFunction() }
         />
       </div>
     )

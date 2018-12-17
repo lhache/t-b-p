@@ -75,6 +75,11 @@ export const isDeviceConsideredMobile = () => {
   return !(md.mobile() === null)
 }
 
+export const isTablet = () => {
+  var md = new MobileDetect(window.navigator.userAgent);
+  return !(md.tablet() === null)
+}
+
 // parameters format:
 // var parameters = {
 //   name: "George Washington",

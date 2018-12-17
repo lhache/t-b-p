@@ -87,7 +87,7 @@ export const resultsReducer = (state = initialState, action) => {
       })
     case FETCH_RESULTS_SUCCESS:
       const categoryName = action.selectedCategory ? action.selectedCategory.name : 'term'
-      const results = !action.results.products.length ? 
+      const results = !action.results.products.length ?
           { [categoryName]: action.results.products } :
           Object.assign({}, state.results, {
             [categoryName]: _unionWith(state.results[categoryName] || [], action.results.products, _isEqual)
